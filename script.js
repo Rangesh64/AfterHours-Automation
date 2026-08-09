@@ -1,5 +1,5 @@
 /**
- * AfterHours Automation - Interactive WebGL 3D Engine & RaSH Assistant
+ * AfterHours Automation - Interactive WebGL 3D Engine, RaSH Assistant & Live API Integration
  */
 
 let scene, camera, renderer, coreGroup, coreMesh, waveRing, particleSystem, nodeGroup, connectionLines;
@@ -804,7 +804,7 @@ function initWorkflowAutoplay() {
   observer.observe(workflowSection);
 }
 
-// Login Modal
+// Login Modal with Integrated Live Render API & Fallback
 function initLoginModal() {
   const openBtn = document.getElementById('btn-open-login');
   const closeBtn = document.getElementById('btn-close-modal');
@@ -835,20 +835,12 @@ function initLoginModal() {
   });
 
   if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
+    loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const emailInput = document.getElementById('login-email');
       const passwordInput = document.getElementById('login-password');
       const emailVal = (emailInput.value || '').toLowerCase().trim();
       const passwordVal = (passwordInput.value || '').trim();
-
-      if (!AUTHORIZED_EMAILS.includes(emailVal) || passwordVal !== TEMP_PORTAL_PASSWORD) {
-        if (errorMsg) {
-          errorMsg.textContent = "Access Denied: Invalid authorized email or temporary password.";
-          errorMsg.classList.remove('hidden');
-        }
-        return;
-      }
 
       if (errorMsg) errorMsg.classList.add('hidden');
       if (submitBtn) {
@@ -856,54 +848,62 @@ function initLoginModal() {
         submitBtn.disabled = true;
       }
 
-      setTimeout(() => {
-        localStorage.setItem('afterhours_session', JSON.stringify({
-          email: emailInput.value,
-          authenticated: true,
-          token: 'mock_jwt_session_token_' + Date.now()
-        }));
+      // 1. Try Live Render API Login
+      try {
+        const baseUrl = (typeof API_CONFIG !== 'undefined' && API_CONFIG.BASE_URL) 
+          ? API_CONFIG.BASE_URL 
+          : 'https://afterhours-backend-i9nc.onrender.com/api';
 
-        window.location.href = 'dashboard.html';
-      }, 1000);
+        const res = await fetch(`${baseUrl}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: emailVal, password: passwordVal })
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.token) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user || { email: emailVal }));
+          localStorage.setItem('afterhours_session', JSON.stringify({
+            email: emailVal,
+            authenticated: true,
+            token: data.token
+          }));
+          window.location.href = 'dashboard.html';
+          return;
+        } else if (data.error) {
+          throw new Error(data.error);
+        }
+      } catch (err) {
+        console.warn('[AUTH] Live API login skipped or error:', err.message);
+      }
+
+      // 2. Fallback to Whitelisted Authorized Check for Offline/Mock Mode
+      if (!AUTHORIZED_EMAILS.includes(emailVal) || passwordVal !== TEMP_PORTAL_PASSWORD) {
+        if (errorMsg) {
+          errorMsg.textContent = "Access Denied: Invalid authorized email or password.";
+          errorMsg.classList.remove('hidden');
+        }
+        if (submitBtn) {
+          submitBtn.textContent = 'Login';
+          submitBtn.disabled = false;
+        }
+        return;
+      }
+
+      localStorage.setItem('afterhours_session', JSON.stringify({
+        email: emailVal,
+        authenticated: true,
+        token: 'mock_jwt_session_token_' + Date.now()
+      }));
+
+      window.location.href = 'dashboard.html';
     });
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  initMobileNav();
-  initCursor();
-  initBackToTop();
-  initScrollReveals();
-  init3DTilt();
-  init3D();
-  initLoginModal();
-  initCurrencySelector();
-  initCalculator();
-  initScriptCustomizer();
-  initReactionGame();
-  initRaSHChatbot();
-  initProcessSwitcher();
-  initTimeBanner();
-  initIndustrySelector();
-  initWorkflowAutoplay();
-
-  const stepCards = document.querySelectorAll('.step-card');
-  stepCards.forEach(card => {
-    card.addEventListener('click', () => {
-      userInterrupted = true;
-      if (workflowInterval) clearInterval(workflowInterval);
-      const step = parseInt(card.dataset.step, 10);
-      setWorkflowStage(step, false);
-    });
-  });
-
-  window.addEventListener('wheel', () => {
-    userInterrupted = true;
-  }, { passive: true });
-
-  initDashboardSimulator();
-});
-
+// Landing Page Interactive Simulator
 function initDashboardSimulator() {
   const feed = document.getElementById('activity-feed');
   const activities = [
@@ -942,8 +942,10 @@ function initDashboardSimulator() {
         valCalls.textContent = curC;
       }
 
-      document.getElementById('sim-inbound-text').textContent = `Missed inquiry logged from ${phoneVal}`;
-      document.getElementById('sim-outbound-text').textContent = `"Hi! We missed your inquiry from ${phoneVal}. Tap here to confirm a callback slot: [Link]"`;
+      const simInbound = document.getElementById('sim-inbound-text');
+      const simOutbound = document.getElementById('sim-outbound-text');
+      if (simInbound) simInbound.textContent = `Missed inquiry logged from ${phoneVal}`;
+      if (simOutbound) simOutbound.textContent = `"Hi! We missed your inquiry from ${phoneVal}. Tap here to confirm a callback slot: [Link]"`;
 
       if (coreMesh) {
         coreMesh.material.color.setHex(0x00f0ff);
@@ -959,7 +961,82 @@ function initDashboardSimulator() {
       const newRow = document.createElement('div');
       newRow.className = 'feed-row';
       newRow.innerHTML = `<span>Missed inquiry from ${phoneVal}</span><span style="color:var(--cyan-accent);">Just now</span>`;
-      feed.prepend(newRow);
+      if (feed) feed.prepend(newRow);
     });
   }
 }
+
+// Live Dashboard Metrics Fetcher for dashboard.html
+async function initLiveDashboard() {
+  const isDashboard = window.location.pathname.includes('dashboard.html');
+  if (!isDashboard) return;
+
+  const session = JSON.parse(localStorage.getItem('afterhours_session') || '{}');
+  const token = localStorage.getItem('token') || session.token;
+
+  try {
+    const baseUrl = (typeof API_CONFIG !== 'undefined' && API_CONFIG.BASE_URL) 
+      ? API_CONFIG.BASE_URL 
+      : 'https://afterhours-backend-i9nc.onrender.com/api';
+
+    const response = await fetch(`${baseUrl}/dashboard/data`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token || ''}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) return;
+
+    const data = await response.json();
+    console.log('[LIVE DASHBOARD DATA]', data);
+
+    if (data) {
+      const valLeads = document.getElementById('val-leads') || document.querySelector('[data-metric="total-leads"]');
+      const valCalls = document.getElementById('val-calls') || document.querySelector('[data-metric="active-calls"]');
+      
+      if (valLeads && data.totalLeads !== undefined) valLeads.textContent = data.totalLeads;
+      if (valCalls && data.activeIntercepts !== undefined) valCalls.textContent = data.activeIntercepts;
+    }
+  } catch (err) {
+    console.error('[LIVE DASHBOARD ERROR]', err);
+  }
+}
+
+// Initialize Application Modules
+document.addEventListener('DOMContentLoaded', () => {
+  initMobileNav();
+  initCursor();
+  initBackToTop();
+  initScrollReveals();
+  init3DTilt();
+  init3D();
+  initLoginModal();
+  initCurrencySelector();
+  initCalculator();
+  initScriptCustomizer();
+  initReactionGame();
+  initRaSHChatbot();
+  initProcessSwitcher();
+  initTimeBanner();
+  initIndustrySelector();
+  initWorkflowAutoplay();
+
+  const stepCards = document.querySelectorAll('.step-card');
+  stepCards.forEach(card => {
+    card.addEventListener('click', () => {
+      userInterrupted = true;
+      if (workflowInterval) clearInterval(workflowInterval);
+      const step = parseInt(card.dataset.step, 10);
+      setWorkflowStage(step, false);
+    });
+  });
+
+  window.addEventListener('wheel', () => {
+    userInterrupted = true;
+  }, { passive: true });
+
+  initDashboardSimulator();
+  initLiveDashboard();
+});
