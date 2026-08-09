@@ -31,6 +31,8 @@ html {
   background-color: var(--bg-dark);
   color: var(--text-primary);
   font-family: var(--font-main);
+  /* Ensures ideal mobile overview scale preventing heavy initial zoom */
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -1046,7 +1048,7 @@ section { position: relative; z-index: 2; background: transparent; }
 }
 
 .s-label { display: block; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px; }
-.s-val { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; }
+.s-val { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; white-space: nowrap; }
 
 /* Calculator Section */
 .calculator-section { padding: 120px 8%; }
@@ -1127,6 +1129,7 @@ input[type=range] {
   font-weight: 700;
   color: var(--cyan-accent);
   margin-bottom: 12px;
+  white-space: nowrap;
 }
 
 .result-subtext {
@@ -1717,11 +1720,14 @@ footer { text-align: center; padding: 48px 8%; color: var(--text-muted); font-si
 .footer-link-highlight { color: var(--cyan-accent); text-decoration: none; font-weight: 600; transition: color 0.3s; }
 .footer-link-highlight:hover { color: #ffffff; text-decoration: underline; }
 
-/* Dedicated Luxury Mobile Refinements (Zero Impact on Desktop) */
+/* STRICT HORIZONTAL DESKTOP FIDELITY FOR MOBILE */
 @media (max-width: 900px) {
   * { cursor: auto !important; }
   .cursor-dot, .cursor-ring { display: none; }
+  
+  /* Navbar & Hamburger */
   .navbar { padding: 16px 5%; }
+  .mobile-menu-btn { display: flex; }
   
   .nav-links {
     position: fixed;
@@ -1745,28 +1751,85 @@ footer { text-align: center; padding: 48px 8%; color: var(--text-muted); font-si
     opacity: 1;
     pointer-events: auto;
   }
-  .mobile-menu-btn { display: flex; }
 
-  /* Typography & Spacing Fixes for Mobile */
-  h1 { font-size: clamp(2.3rem, 7vw, 3.2rem) !important; letter-spacing: -1px !important; }
-  .section-header h2 { font-size: clamp(1.8rem, 5vw, 2.4rem) !important; }
-  .hero-subtext { font-size: 1rem !important; }
+  /* FORCING LANDSCAPE HORIZONTAL GRIDS ON MOBILE AS REQUESTED */
+  .customizer-shell {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+    padding: 20px !important;
+  }
   
-  /* Prevent Any Layout Collisions & Overlaps */
-  .customizer-shell, .calc-grid, .dash-main-split, .ind-preview-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
-  .game-top-bar { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .switcher-nav-row { flex-direction: column; }
-  
-  /* Metric numbers scale gracefully inside boxes */
-  .s-val { font-size: 1.5rem !important; word-break: break-all; }
-  .result-amount { font-size: 2.2rem !important; }
-  
-  /* Dashboard Executive Table & Cards Landscape Structure Maintained */
-  .dashboard-wrapper { flex-direction: column; margin-top: 75px; }
-  .luxury-sidebar { width: 100%; padding: 16px; flex-direction: row; flex-wrap: wrap; gap: 6px; justify-content: center; }
-  .luxury-sidebar .sidebar-menu { flex-direction: row; flex-wrap: wrap; justify-content: center; }
-  .luxury-footer-card { display: none; }
-  .ai-chat-window { width: 300px; right: 0; }
+  .calc-grid {
+    grid-template-columns: 3fr 2fr !important;
+    gap: 20px !important;
+  }
+
+  .dash-main-split {
+    grid-template-columns: 3fr 2fr !important;
+    gap: 16px !important;
+  }
+
+  .card-grid, .why-grid-3d {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  /* Compact Horizontal Scaling for Speed Test Stopwatch & Metric Boxes */
+  .game-top-bar {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+  .game-timer {
+    font-size: 1.4rem !important;
+  }
+
+  /* Process Switcher Horizontal Metrics Row */
+  .switcher-metrics-row {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 10px !important;
+  }
+  .s-val {
+    font-size: 1.15rem !important;
+    white-space: nowrap !important;
+  }
+
+  /* Calculator Result Safe Bounds */
+  .result-amount {
+    font-size: 1.6rem !important;
+    white-space: nowrap !important;
+  }
+
+  /* Dashboard Client Portal Horizontal Layout */
+  .dashboard-wrapper {
+    flex-direction: row !important;
+    margin-top: 80px;
+  }
+  .luxury-sidebar {
+    width: 210px !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+  .luxury-sidebar .sidebar-menu {
+    flex-direction: column !important;
+  }
+  .luxury-footer-card {
+    display: block !important;
+  }
+  .dash-main-content {
+    padding: 24px 3% !important;
+  }
+  .dash-metrics {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* 3D CTA Container Form */
+  .cta-card {
+    padding: 40px 20px !important;
+  }
+  .cta-card h2 {
+    font-size: 2.2rem !important;
+  }
 }
 
 @media prefers-reduced-motion: reduce {
