@@ -927,7 +927,7 @@ function initDashboardSimulator() {
   
   if (btnSim && phoneInput) {
     btnSim.addEventListener('click', () => {
-      const phoneVal = phoneInput.value.trim() || '+1 (555) 019-2831';
+      const phoneVal = phoneInput.value.txt || phoneInput.value.trim() || '+1 (555) 019-2831';
       
       const valLeads = document.getElementById('val-leads');
       const valCalls = document.getElementById('val-calls');
