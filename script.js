@@ -9,7 +9,8 @@ let scrollY = 0;
 let lastScrollY = 0;
 let targetVelocity = 0;
 let smoothVelocity = 0;
-let autoCycleTimer = null;
+let workflowInterval = null;
+let workflowStarted = false;
 let userInterrupted = false;
 
 // Currency Rates & Symbols relative to USD
@@ -27,6 +28,23 @@ const AUTHORIZED_EMAILS = [
 ];
 const TEMP_PORTAL_PASSWORD = "after hours 2026";
 
+// Mobile Navigation Toggle
+function initMobileNav() {
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const navMenu = document.getElementById('nav-links-menu');
+  if (!toggleBtn || !navMenu) return;
+
+  toggleBtn.addEventListener('click', () => {
+    navMenu.classList.toggle('mobile-active');
+  });
+
+  navMenu.querySelectorAll('a, button').forEach(link => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('mobile-active');
+    });
+  });
+}
+
 // Time-of-Day Live Contextual Banner Logic
 function initTimeBanner() {
   const banner = document.getElementById('time-banner');
@@ -42,7 +60,7 @@ function initTimeBanner() {
     text.textContent = `It is currently ${formatAMPM(new Date())}. Your office may be closed, but AfterHours RaSH is active recovering leads.`;
   } else {
     if (icon) icon.textContent = "⚡";
-    text.textContent = `Peak call volume hours active (${formatAMPM(new Date())}). AfterHours RaSH intercepts overflow call drops in under 7 seconds.`;
+    text.textContent = `Peak outreach hours active (${formatAMPM(new Date())}). AfterHours RaSH intercepts overflow lead drops in under 7 seconds.`;
   }
 }
 
@@ -90,7 +108,7 @@ function recalculateRevenue() {
   const rate = currencyRates[activeCurrency] || 1;
   const convertedDealVal = Math.round(baseUsdVal * rate);
 
-  if (dispCalls) dispCalls.textContent = `${calls} Calls`;
+  if (dispCalls) dispCalls.textContent = `${calls} Inquiries`;
   if (dispValue) dispValue.textContent = `${activeSymbol}${convertedDealVal.toLocaleString()}`;
 
   const monthlyLeak = Math.round((calls * 4) * convertedDealVal * 0.5);
@@ -133,10 +151,10 @@ function initScriptCustomizer() {
   if (!bizInput || !scriptText) return;
 
   const toneScripts = {
-    friendly: (name) => `"Hi there! Thanks for calling ${name}. We missed your call, but we'd love to help! Tap here to pick a time or send us a quick note: [Booking Link]"`,
+    friendly: (name) => `"Hi there! Thanks for reaching out to ${name}. We missed your inquiry, but we'd love to help! Tap here to pick a time or send us a quick note: [Booking Link]"`,
     executive: (name) => `"Thank you for contacting ${name}. An account executive is unavailable. Please select a priority callback window here: [Booking Link]"`,
-    urgent: (name) => `"⚡ VIP Intercept: ${name} received your call. For immediate emergency dispatch or priority intake, tap here now: [Booking Link]"`,
-    luxury: (name) => `"Greetings from ${name}. We apologize for missing your call. Allow us to reserve a private consultation for you: [Booking Link]"`
+    urgent: (name) => `"⚡ VIP Intercept: ${name} received your inquiry. For immediate emergency dispatch or priority intake, tap here now: [Booking Link]"`,
+    luxury: (name) => `"Greetings from ${name}. We apologize for missing your inquiry. Allow us to reserve a private consultation for you: [Booking Link]"`
   };
 
   let currentTone = 'friendly';
@@ -211,7 +229,7 @@ function initReactionGame() {
   });
 }
 
-// RaSH Max-Level Conversational Intelligence with Dynamic Sarcasm & Humor
+// RaSH Chatbot
 function initRaSHChatbot() {
   const toggleBtn = document.getElementById('ai-chat-toggle');
   const closeBtn = document.getElementById('ai-chat-close');
@@ -263,23 +281,21 @@ function initRaSHChatbot() {
 
       let reply = "";
 
-      // Max-level intelligent natural language matching with wit, humor, and sarcasm
       if (query.includes('speed') || query.includes('time') || query.includes('fast') || query.includes('latency') || query.includes('seconds')) {
-        reply = "Under 7 seconds flat. That's faster than your coffee maker can even think about brewing. While your competitors are still letting phones ring into the void, I'm already high-fiving your new leads on WhatsApp.";
+        reply = "Under 7 seconds flat. That's faster than your coffee maker can even think about brewing. While your competitors are still letting inquiries ring into the void, I'm already high-fiving your new leads on WhatsApp.";
       } else if (query.includes('crm') || query.includes('salesforce') || query.includes('hubspot') || query.includes('gohighlevel') || query.includes('integrate') || query.includes('webhook')) {
         reply = "We plug right into Salesforce, HubSpot, GoHighLevel, and custom Webhooks. No manual data entry, no spreadsheets—just clean, automated pipeline harmony.";
       } else if (query.includes('price') || query.includes('cost') || query.includes('demo') || query.includes('plan') || query.includes('pricing') || query.includes('tier')) {
-        reply = "Our pricing scales smoothly with your call volume. But honestly, losing just *one* client to a missed call probably costs more than our entire platform. Let's get you booked for a private demo via our email button!";
+        reply = "Our pricing scales smoothly with your outreach volume. But honestly, losing just *one* client to an unanswered inquiry probably costs more than our entire platform. Let's get you booked for a private demo via our email button!";
       } else if (query.includes('weekend') || query.includes('after hours') || query.includes('night') || query.includes('hours') || query.includes('closed')) {
-        reply = "While you're sleeping, eating pizza, or binge-watching shows, I'm working 24/7/365. Because leads don't care about operating hours—and neither do I.";
+        reply = "While you're sleeping, eating pizza, or binge-watching shows, I'm working 24/7/365. Because prospects don't care about operating hours—and neither do I.";
       } else if (query.includes('joke') || query.includes('funny') || query.includes('laugh')) {
-        reply = "Why don't missed calls ever get promoted? Because they always get left hanging. 😂 Bad jokes aside, my lead recovery rate is no laughing matter—it's pure conversion gold.";
+        reply = "Why don't missed inquiries ever get promoted? Because they always get left hanging. 😂 Bad jokes aside, my lead recovery rate is no laughing matter—it's pure conversion gold.";
       } else if (query.includes('who are you') || query.includes('what are you') || query.includes('your name')) {
-        reply = "I'm RaSH, your hyper-intelligent digital concierge. I turn missed phone calls into paying customers while making it look effortlessly cool.";
+        reply = "I'm RaSH, your hyper-intelligent digital concierge. I turn missed inquiries into paying customers while making it look effortlessly cool.";
       } else if (query.includes('hello') || query.includes('hi') || query.includes('hey')) {
-        reply = "Hey there! Ready to stop letting phone calls slip through your fingers and start printing revenue?";
+        reply = "Hey there! Ready to stop letting prospect inquiries slip through your fingers and start printing revenue?";
       } else {
-        // Dynamic contextual sarcasm and reasoning for completely open-ended or unusual questions
         reply = `That is a fascinating question: "${userText}". Honestly, my neural circuits didn't learn that in school, but I respect the curiosity! If you want to talk business or see how I can save your pipeline from leaking cash, click 'Book a Private Demo' below and let's chat!`;
       }
 
@@ -311,7 +327,7 @@ function initRaSHChatbot() {
   });
 }
 
-// Industry Specific Selector Logic
+// Industry Selector Logic
 function initIndustrySelector() {
   const tabs = document.querySelectorAll('.ind-tab');
   const badge = document.getElementById('ind-badge');
@@ -327,34 +343,34 @@ function initIndustrySelector() {
     dental: {
       badge: "DENTAL & HEALTHCARE PROTOCOL",
       title: "Emergency & Consultation Immediate Recovery",
-      desc: "When a patient calls with urgent toothache pain or emergency consultation inquiries after hours, AfterHours sends an instant WhatsApp triage link and automated morning appointment booking calendar.",
+      desc: "When a patient reaches out with urgent inquiries after hours, AfterHours sends an instant WhatsApp triage link and automated morning appointment booking calendar.",
       rec: "$18,400",
-      cond: "Unreturned call detected between 6:00 PM - 8:00 AM or during weekend closures.",
-      msg: `"Hi! We noticed we missed your call at Apex Dental. If this is an urgent inquiry or you need to schedule a consultation, tap here to pick an immediate slot: [Link]"`
+      cond: "Unreturned outreach detected between 6:00 PM - 8:00 AM or during weekend closures.",
+      msg: `"Hi! We noticed your inquiry at Apex Dental. If this is an urgent consultation or appointment request, tap here to pick an immediate slot: [Link]"`
     },
     hvac: {
       badge: "HVAC & HOME SERVICES MESH",
       title: "Breakdown & Dispatch Immediate Scheduling",
       desc: "AC unit breakdown or plumbing leak at night? Intercept panicked homeowners instantly before they call the next contractor on Google Search.",
       rec: "$24,200",
-      cond: "Dropped phone call on main dispatch line during peak weather emergency surges.",
-      msg: `"Hi! Thanks for calling Apex Climate Services. Need emergency AC repair or a technician visit? Tap here to confirm your address & dispatch slot: [Link]"`
+      cond: "Dropped inquiry on main dispatch line during peak weather emergency surges.",
+      msg: `"Hi! Thanks for reaching out to Apex Climate Services. Need emergency repair or a technician visit? Tap here to confirm your address & dispatch slot: [Link]"`
     },
     banquet: {
       badge: "BANQUET & EVENT VENUE ROUTER",
       title: "High-Value Event Date & Intake Reservation",
-      desc: "Wedding planners and corporate venue shoppers call multiple halls simultaneously. Lock in date inquiries within 7 seconds before competing venues reply.",
+      desc: "Wedding planners and corporate venue shoppers reach out to multiple halls simultaneously. Lock in date inquiries within 7 seconds before competing venues reply.",
       rec: "$42,000",
       cond: "Inbound inquiry missed during ongoing evening wedding banquets or weekend galas.",
-      msg: `"Greetings from Grand Palace Banquets! We missed your call regarding hall availability. Tap to download our luxury brochure & reserve a tour date: [Link]"`
+      msg: `"Greetings from Grand Palace Banquets! We missed your inquiry regarding hall availability. Tap to download our luxury brochure & reserve a tour date: [Link]"`
     },
     realestate: {
       badge: "REAL ESTATE & LEGAL VAULT",
       title: "Property Viewing & Consultation Intake",
       desc: "High-net-worth buyers expect instant answers. Automatically dispatch virtual property walkthroughs and calendar scheduling links directly inside WhatsApp.",
       rec: "$35,000",
-      cond: "Unanswered listing phone call outside standard firm operating hours.",
-      msg: `"Hi! Thanks for calling Prime Realty. To view property floor plans or schedule a private walkthrough, tap to select your preferred time: [Link]"`
+      cond: "Unanswered listing inquiry outside standard firm operating hours.",
+      msg: `"Hi! Thanks for reaching out to Prime Realty. To view property floor plans or schedule a private walkthrough, tap to select your preferred time: [Link]"`
     }
   };
 
@@ -418,7 +434,7 @@ function initBackToTop() {
   });
 }
 
-// Intersection Observer for Smooth Scroll Reveals with Dynamic Staggering
+// Intersection Observer for Smooth Scroll Reveals
 function initScrollReveals() {
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
 
@@ -479,7 +495,7 @@ function animateCounter(element) {
   requestAnimationFrame(updateCount);
 }
 
-// Interactive Process Switcher Logic
+// Process Switcher
 function initProcessSwitcher() {
   const tabBefore = document.getElementById('tab-before');
   const tabAfter = document.getElementById('tab-after');
@@ -498,7 +514,7 @@ function initProcessSwitcher() {
 
     if (switchBadge) switchBadge.textContent = "TRADITIONAL MANUAL LOSS";
     if (switchTitle) switchTitle.textContent = "High Delay & Customer Churn";
-    if (switchDesc) switchDesc.textContent = "Caller drops → Wait 12+ hours for manual staff callback → Prospect already contacted competitor → Deal lost permanently.";
+    if (switchDesc) switchDesc.textContent = "Inquiry drops → Wait 12+ hours for manual staff callback → Prospect already contacted competitor → Deal lost permanently.";
     if (valTime) { valTime.textContent = "> 12 Hours"; valTime.className = "s-val text-red"; }
     if (valRate) { valRate.textContent = "12.4%"; valRate.className = "s-val text-red"; }
     if (valLeak) { valLeak.textContent = "87.6%"; valLeak.className = "s-val text-red"; }
@@ -510,7 +526,7 @@ function initProcessSwitcher() {
 
     if (switchBadge) switchBadge.textContent = "AFTERHOURS RECOVERY PIPELINE";
     if (switchTitle) switchTitle.textContent = "Sub-10 Second Multi-Channel Intercept";
-    if (switchDesc) switchDesc.textContent = "Caller drops → Trigger fires in 800ms → Personalized WhatsApp & booking calendar sent → Appointment confirmed & synced to CRM.";
+    if (switchDesc) switchDesc.textContent = "Inquiry drops → Trigger fires in 800ms → Personalized WhatsApp & booking calendar sent → Appointment confirmed & synced to CRM.";
     if (valTime) { valTime.textContent = "< 7s"; valTime.className = "s-val text-cyan"; }
     if (valRate) { valRate.textContent = "98.4%"; valRate.className = "s-val text-cyan"; }
     if (valLeak) { valLeak.textContent = "0%"; valLeak.className = "s-val text-emerald"; }
@@ -729,7 +745,7 @@ function animate() {
   }
 }
 
-// Stage Switcher & Viewport Scroll Presenter
+// Stage Switcher
 function setWorkflowStage(stageNum, autoScroll = false) {
   targetStage = stageNum;
   const stageColors = [0x3b82f6, 0xf43f5e, 0xa855f7, 0x00f0ff, 0x10b981];
@@ -757,25 +773,38 @@ function setWorkflowStage(stageNum, autoScroll = false) {
   });
 
   if (autoScroll) {
-    const targetCard = document.getElementById(`step-node-${stageNum}`);
-    if (targetCard) {
-      targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    targetStage = stageNum;
   }
 }
 
-// Automated Viewport Presentation Loop
-function startAutomatedPresentation() {
+// Non-intrusive Workflow Sequence triggered ONLY when section is in view
+function initWorkflowAutoplay() {
+  const workflowSection = document.getElementById('workflow');
+  if (!workflowSection) return;
+
   let currentStep = 1;
 
-  autoCycleTimer = setInterval(() => {
-    if (userInterrupted) return;
-    currentStep = (currentStep % 5) + 1;
-    setWorkflowStage(currentStep, true);
-  }, 2500);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !workflowStarted && !userInterrupted) {
+        workflowStarted = true;
+        workflowInterval = setInterval(() => {
+          if (userInterrupted) return;
+          currentStep = (currentStep % 5) + 1;
+          setWorkflowStage(currentStep, false);
+        }, 2800);
+      } else if (!entry.isIntersecting && workflowInterval) {
+        clearInterval(workflowInterval);
+        workflowInterval = null;
+        workflowStarted = false;
+      }
+    });
+  }, { threshold: 0.3 });
+
+  observer.observe(workflowSection);
 }
 
-// Interactive Client Portal Login Modal Logic with Whitelist & Temporary Password Verification
+// Login Modal
 function initLoginModal() {
   const openBtn = document.getElementById('btn-open-login');
   const closeBtn = document.getElementById('btn-close-modal');
@@ -841,6 +870,7 @@ function initLoginModal() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initMobileNav();
   initCursor();
   initBackToTop();
   initScrollReveals();
@@ -855,12 +885,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initProcessSwitcher();
   initTimeBanner();
   initIndustrySelector();
+  initWorkflowAutoplay();
 
   const stepCards = document.querySelectorAll('.step-card');
   stepCards.forEach(card => {
     card.addEventListener('click', () => {
       userInterrupted = true;
-      if (autoCycleTimer) clearInterval(autoCycleTimer);
+      if (workflowInterval) clearInterval(workflowInterval);
       const step = parseInt(card.dataset.step, 10);
       setWorkflowStage(step, false);
     });
@@ -870,14 +901,13 @@ document.addEventListener('DOMContentLoaded', () => {
     userInterrupted = true;
   }, { passive: true });
 
-  startAutomatedPresentation();
   initDashboardSimulator();
 });
 
 function initDashboardSimulator() {
   const feed = document.getElementById('activity-feed');
   const activities = [
-    { time: 'Just now', text: 'Missed Call from +1 (555) 019-2831' },
+    { time: 'Just now', text: 'Missed inquiry from +1 (555) 019-2831' },
     { time: '2s ago', text: 'WhatsApp intro message dispatched' },
     { time: '14s ago', text: 'Lead booked consultation slot' },
     { time: '1m ago', text: 'Synced lead entry to Salesforce CRM' }
@@ -912,8 +942,8 @@ function initDashboardSimulator() {
         valCalls.textContent = curC;
       }
 
-      document.getElementById('sim-inbound-text').textContent = `Missed Call logged from ${phoneVal}`;
-      document.getElementById('sim-outbound-text').textContent = `"Hi! We missed your call from ${phoneVal}. Tap here to confirm a callback slot: [Link]"`;
+      document.getElementById('sim-inbound-text').textContent = `Missed inquiry logged from ${phoneVal}`;
+      document.getElementById('sim-outbound-text').textContent = `"Hi! We missed your inquiry from ${phoneVal}. Tap here to confirm a callback slot: [Link]"`;
 
       if (coreMesh) {
         coreMesh.material.color.setHex(0x00f0ff);
@@ -928,7 +958,7 @@ function initDashboardSimulator() {
 
       const newRow = document.createElement('div');
       newRow.className = 'feed-row';
-      newRow.innerHTML = `<span>Missed Call from ${phoneVal}</span><span style="color:var(--cyan-accent);">Just now</span>`;
+      newRow.innerHTML = `<span>Missed inquiry from ${phoneVal}</span><span style="color:var(--cyan-accent);">Just now</span>`;
       feed.prepend(newRow);
     });
   }
