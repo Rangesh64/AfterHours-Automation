@@ -1634,7 +1634,7 @@ input[type=range] {
 .sub-val { font-size: 0.95rem; color: #21150c; font-weight: 600; }
 
 .luxury-panel {
-  background: rgba(255, 254, 250, 0.92);
+  background: rgba(255, 255, 255, 0.98);
   border: 1px solid rgba(140, 83, 25, 0.12);
   box-shadow: 0 8px 32px rgba(44, 26, 14, 0.03);
   padding: 28px;
@@ -1706,7 +1706,7 @@ input[type=range] {
 }
 
 .luxury-integ {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(140, 83, 25, 0.18);
   padding: 22px 24px;
   border-radius: 16px;
@@ -1725,26 +1725,26 @@ footer { text-align: center; padding: 48px 8%; color: var(--text-muted); font-si
 .footer-link-highlight { color: var(--cyan-accent); text-decoration: none; font-weight: 600; transition: color 0.3s; }
 .footer-link-highlight:hover { color: #ffffff; text-decoration: underline; }
 
-/* FULL 100% FLUID RESPONSIVE EXPANSION ACROSS PHONE & TABLET */
+/* ABSOLUTE FULL-WIDTH FLUID 100% HORIZONTAL DESKTOP FIDELITY FOR MOBILE */
 @media (max-width: 900px) {
   * { cursor: auto !important; }
   .cursor-dot, .cursor-ring { display: none; }
   
-  /* Navbar & Hamburger & Padding Expansion */
-  .navbar { padding: 16px 4% !important; }
+  /* Navbar & Hamburger */
+  .navbar { padding: 14px 4% !important; }
   .mobile-menu-btn { display: flex; }
   
   .nav-links {
     position: fixed;
-    top: 72px;
+    top: 68px;
     left: 0;
     width: 100%;
     background: rgba(2, 4, 10, 0.98);
     backdrop-filter: blur(20px);
     flex-direction: column;
-    padding: 24px 20px;
+    padding: 20px;
     border-bottom: 1px solid rgba(0, 240, 255, 0.25);
-    gap: 14px;
+    gap: 12px;
     transform: translateY(-130%);
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1757,87 +1757,109 @@ footer { text-align: center; padding: 48px 8%; color: var(--text-muted); font-si
     pointer-events: auto;
   }
 
-  /* Expand Container Shells to 100% Width to Eliminate Empty Right Gap */
+  /* FORCING ALL WRAPPERS TO 100% FLUID SCREEN SPAN WITH INTELIGENT PADDING */
   .workflow-layout, .industry-shell, .customizer-shell, .game-card, .switcher-shell, .calc-card, .card-grid, .why-grid-3d, .dashboard-shell, .pricing-placeholder-card, .cta-card {
     max-width: 100% !important;
     width: 100% !important;
-    padding-left: 16px !important;
-    padding-right: 16px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
 
-  /* Horizontal Grids Fit Cleanly with Fluid Widths */
+  /* FLUID HORIZONTAL SCALING FOR ALL DESKTOP GRIDS ON MOBILE */
   .customizer-shell {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 16px !important;
+    grid-template-columns: 1.1fr 0.9fr !important;
+    gap: 12px !important;
+    padding: 18px !important;
   }
   
   .calc-grid {
     grid-template-columns: 1.2fr 0.8fr !important;
-    gap: 16px !important;
+    gap: 14px !important;
   }
 
   .dash-main-split {
-    grid-template-columns: 1fr !important;
-    gap: 20px !important;
+    grid-template-columns: 1.2fr 0.8fr !important;
+    gap: 12px !important;
   }
 
   .card-grid, .why-grid-3d {
-    grid-template-columns: 1fr !important;
-    gap: 16px !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
   }
 
-  /* Speed Test Stopwatch & Timer Spacing Fix */
+  /* COMPACT SCALED TYPOGRAPHY TO FIT DESKTOP SHAPE WITHOUT OVERFLOW */
+  h1 { font-size: 2.4rem !important; letter-spacing: -1px !important; }
+  .section-header h2 { font-size: 1.7rem !important; }
+  
+  .glass-card {
+    padding: 20px 16px !important;
+  }
+  .glass-card h3 {
+    font-size: 1.1rem !important;
+  }
+  .glass-card p {
+    font-size: 0.84rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Speed Test Stopwatch Spacing & Sizing */
   .game-top-bar {
     flex-direction: row !important;
     justify-content: space-between !important;
     align-items: center !important;
-    gap: 10px !important;
   }
   .game-timer {
-    font-size: 1.5rem !important;
+    font-size: 1.3rem !important;
   }
 
-  /* Process Switcher & Calculator Scaling */
+  /* Process Switcher Horizontal Metrics */
   .switcher-metrics-row {
     grid-template-columns: repeat(3, 1fr) !important;
-    gap: 8px !important;
+    gap: 6px !important;
   }
   .s-val {
-    font-size: 1.1rem !important;
-    white-space: nowrap !important;
-  }
-  .result-amount {
-    font-size: 1.8rem !important;
+    font-size: 1rem !important;
     white-space: nowrap !important;
   }
 
-  /* Executive Dashboard Full Responsive Layout */
+  /* Calculator Result Safe Bounds */
+  .result-amount {
+    font-size: 1.5rem !important;
+    white-space: nowrap !important;
+  }
+
+  /* Executive Dashboard Horizontal Alignment on Mobile */
   .dashboard-wrapper {
-    flex-direction: column !important;
+    flex-direction: row !important;
     margin-top: 75px;
   }
   .luxury-sidebar {
-    width: 100% !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    padding: 14px !important;
+    width: 190px !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    padding: 12px !important;
   }
   .luxury-sidebar .sidebar-menu {
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
+    flex-direction: column !important;
   }
   .luxury-footer-card {
-    display: none !important;
+    display: block !important;
   }
   .dash-main-content {
-    padding: 24px 4% !important;
+    padding: 20px 3% !important;
   }
   .dash-metrics {
     grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* CTA Box */
+  .cta-card {
+    padding: 36px 18px !important;
+  }
+  .cta-card h2 {
+    font-size: 2rem !important;
   }
 }
 
