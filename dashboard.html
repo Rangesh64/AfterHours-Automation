@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AfterHours Automation | Executive Client Console</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Google Fonts: Playfair Display for Serif Elegance & Plus Jakarta Sans for UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-body luxury-marble-bg">
+
+  <!-- Subtle Gold Ambient Highlight -->
+  <div class="glow-orb luxury-gold-orb"></div>
+
+  <!-- Royal Header -->
+  <header class="navbar luxury-dash-nav">
+    <div class="logo">
+      <svg class="logo-knot-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="luxury-knot-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#21150c" />
+            <stop offset="50%" stop-color="#8c5319" />
+            <stop offset="100%" stop-color="#c59b27" />
+          </linearGradient>
+        </defs>
+        <path d="M 30 50 C 30 32, 45 32, 50 50 C 55 68, 70 68, 70 50 C 70 32, 55 32, 50 50 C 45 68, 30 68, 30 50 Z" 
+              stroke="url(#luxury-knot-grad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="50" cy="50" r="4" fill="#c59b27" />
+      </svg>
+      <span class="logo-text luxury-brand-text">AFTERHOURS <span class="bronze-accent">EXECUTIVE</span></span>
+    </div>
+
+    <!-- User Controls with Expanded Spacing -->
+    <div class="dash-user-controls">
+      <div class="luxury-session-badge">
+        <span class="bronze-dot"></span>
+        <span id="user-display-email" class="luxury-email">admin@enterprise.com</span>
+      </div>
+      <button id="btn-logout" class="btn btn-luxury-outline btn-sm">Sign Out</button>
+    </div>
+  </header>
+
+  <div class="dashboard-wrapper">
+    <!-- Executive Sidebar -->
+    <aside class="dash-sidebar luxury-sidebar">
+      <nav class="sidebar-menu">
+        <a href="#overview" class="sidebar-item active"><span class="nav-icon">⚡</span> Executive Overview</a>
+        <a href="#logs" class="sidebar-item"><span class="nav-icon">📞</span> Intercepted Calls</a>
+        <a href="#whatsapp" class="sidebar-item"><span class="nav-icon">💬</span> WhatsApp Logs</a>
+        <a href="#email" class="sidebar-item"><span class="nav-icon">✉️</span> Email Sequences</a>
+        <a href="#subscription" class="sidebar-item"><span class="nav-icon">💎</span> Manage Subscription</a>
+        <a href="#integrations" class="sidebar-item"><span class="nav-icon">⚙️</span> Mesh Connectors</a>
+      </nav>
+      
+      <div class="sidebar-footer-card luxury-footer-card">
+        <span class="luxury-badge">ENTERPRISE TIER</span>
+        <p>242 Days Remaining</p>
+      </div>
+    </aside>
+
+    <!-- Main Content Workspace -->
+    <main class="dash-main-content">
+      <div class="dash-header-row">
+        <div>
+          <span class="luxury-tag">PRIVATE EXECUTIVE CONSOLE</span>
+          <h2 class="luxury-title">Autonomous Lead Portfolio</h2>
+        </div>
+        <div class="status-chip-luxury">
+          <span class="live-dot-bronze"></span> SYSTEM STATUS: ACTIVE
+        </div>
+      </div>
+
+      <!-- Metric Tiles Grid -->
+      <div class="dash-metrics">
+        <div class="metric-card luxury-card">
+          <span class="m-label">Leads Recovered</span>
+          <span class="m-value text-espresso count-up" data-value="142">0</span>
+          <span class="m-sub text-bronze">▲ +18.4% Monthly Yield</span>
+        </div>
+        <div class="metric-card luxury-card">
+          <span class="m-label">Calls Intercepted</span>
+          <span class="m-value count-up" data-value="189">0</span>
+          <span class="m-sub text-espresso">100% Sub-8s Latency</span>
+        </div>
+        <div class="metric-card luxury-card">
+          <span class="m-label">WhatsApp Dispatched</span>
+          <span class="m-value count-up" data-value="176">0</span>
+          <span class="m-sub text-bronze">98.2% Direct Engagement</span>
+        </div>
+        <div class="metric-card luxury-card">
+          <span class="m-label">Pipeline Value Protected</span>
+          <span class="m-value text-espresso count-up" data-value="28400" data-prefix="$" data-decimals="0">$0</span>
+          <span class="m-sub text-bronze">Estimated Portfolio Revenue</span>
+        </div>
+      </div>
+
+      <!-- Single, Clean, Prominent Subscription & Tier Oversight Card -->
+      <div class="dash-panel luxury-panel subscription-panel" id="subscription">
+        <div class="panel-header-flex">
+          <div>
+            <h4 class="luxury-panel-title-large">Subscription &amp; Tier Oversight</h4>
+            <p class="sub-card-desc">Active Allocation: <strong class="text-espresso">Enterprise Unlimited Mesh</strong></p>
+          </div>
+          <button class="btn btn-luxury-outline btn-sm" onclick="alert('Redirecting to secure billing portal...');">Manage Plan &amp; Invoices</button>
+        </div>
+        <div class="sub-details-grid">
+          <div class="sub-stat">
+            <span class="sub-label">Billing Cycle</span>
+            <strong class="sub-val">Annual Enterprise</strong>
+          </div>
+          <div class="sub-stat">
+            <span class="sub-label">Time Remaining</span>
+            <strong class="sub-val text-bronze">242 Days Remaining</strong>
+          </div>
+          <div class="sub-stat">
+            <span class="sub-label">Next Renewal Date</span>
+            <strong class="sub-val">April 12, 2027</strong>
+          </div>
+          <div class="sub-stat">
+            <span class="sub-label">Active Capacity</span>
+            <strong class="sub-val">Unlimited Telephony Routes</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Activity Split -->
+      <div class="dash-main-split">
+        <!-- Live Call Stream Table -->
+        <div class="dash-panel luxury-panel">
+          <div class="panel-header-flex">
+            <h4 class="luxury-panel-title">Recent Intercept Log</h4>
+            <span class="hud-code-luxury">GATEWAY: TELEPHONY_EAST</span>
+          </div>
+          <div class="table-container">
+            <table class="dash-table luxury-table">
+              <thead>
+                <tr>
+                  <th>Caller ID</th>
+                  <th>Intercept Time</th>
+                  <th>Dispatched Channels</th>
+                  <th>Outcome</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>+1 (555) 019-2831</strong></td>
+                  <td>2 mins ago</td>
+                  <td>WhatsApp + Email</td>
+                  <td><span class="status-pill state-secured-luxury">RECOVERED</span></td>
+                </tr>
+                <tr>
+                  <td><strong>+1 (555) 847-1092</strong></td>
+                  <td>14 mins ago</td>
+                  <td>WhatsApp</td>
+                  <td><span class="status-pill state-sent-luxury">BOOKING SENT</span></td>
+                </tr>
+                <tr>
+                  <td><strong>+1 (555) 302-8811</strong></td>
+                  <td>1 hour ago</td>
+                  <td>WhatsApp + Email</td>
+                  <td><span class="status-pill state-secured-luxury">RECOVERED</span></td>
+                </tr>
+                <tr>
+                  <td><strong>+1 (555) 621-0044</strong></td>
+                  <td>3 hours ago</td>
+                  <td>Email</td>
+                  <td><span class="status-pill state-active-luxury">PROCESSING</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Integration Connectors with Generous Executive Spacing -->
+        <div class="dash-panel luxury-panel" id="integrations">
+          <div class="panel-header-flex">
+            <h4 class="luxury-panel-title">Integration Connectors</h4>
+            <span class="hud-code-luxury">ENCRYPTION: AES-256</span>
+          </div>
+          <div class="integration-list">
+            <div class="integ-item luxury-integ">
+              <div class="integ-info">
+                <strong class="text-espresso">Telephony Listener Mesh</strong>
+                <span>Carrier Sub-Second Gateway</span>
+              </div>
+              <span class="status-pill state-secured-luxury">ACTIVE</span>
+            </div>
+            <div class="integ-item luxury-integ">
+              <div class="integ-info">
+                <strong class="text-espresso">WhatsApp Business API</strong>
+                <span>Direct Interactive Message Bridge</span>
+              </div>
+              <span class="status-pill state-secured-luxury">ACTIVE</span>
+            </div>
+            <div class="integ-item luxury-integ">
+              <div class="integ-info">
+                <strong class="text-espresso">Salesforce / HubSpot CRM</strong>
+                <span>Real-Time Webhook Pipeline</span>
+              </div>
+              <span class="status-pill state-secured-luxury">SYNC ON</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sessionData = JSON.parse(localStorage.getItem('afterhours_session') || '{}');
+      const emailDisplay = document.getElementById('user-display-email');
+      
+      const allowedEmails = [
+        "rangeshmishra9@gmail.com",
+        "mahmiasubham@gmail.com",
+        "afterhoursautomation714@gmail.com"
+      ];
+
+      if (!sessionData.authenticated || !allowedEmails.includes((sessionData.email || '').toLowerCase().trim())) {
+        alert("Access Denied. Unauthorized session.");
+        localStorage.removeItem('afterhours_session');
+        window.location.href = 'index.html';
+        return;
+      }
+
+      if (sessionData && sessionData.email) {
+        emailDisplay.textContent = sessionData.email;
+      }
+
+      document.getElementById('btn-logout').addEventListener('click', () => {
+        localStorage.removeItem('afterhours_session');
+        window.location.href = 'index.html';
+      });
+
+      const counters = document.querySelectorAll('.count-up');
+      counters.forEach(counter => {
+        const target = parseFloat(counter.dataset.value);
+        const prefix = counter.dataset.prefix || '';
+        const suffix = counter.dataset.suffix || '';
+        const decimals = parseInt(counter.dataset.decimals || '0', 10);
+        const duration = 1800;
+        const startTime = performance.now();
+
+        function updateCount(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const easeProgress = 1 - Math.pow(1 - progress, 4);
+          const currentValue = (easeProgress * target).toFixed(decimals);
+
+          counter.innerHTML = `${prefix}${currentValue}${suffix}`;
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCount);
+          } else {
+            counter.innerHTML = `${prefix}${target.toFixed(decimals)}${suffix}`;
+          }
+        }
+
+        requestAnimationFrame(updateCount);
+      });
+    });
+  </script>
+</body>
+</html>

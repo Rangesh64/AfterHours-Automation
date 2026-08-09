@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AfterHours Automation | Autonomous AI Lead Recovery Platform</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <!-- Custom Inertia Cursor -->
+  <div id="cursor-dot" class="cursor-dot"></div>
+  <div id="cursor-ring" class="cursor-ring"></div>
+
+  <!-- Ambient Depth Glows -->
+  <div class="glow-orb glow-cobalt"></div>
+  <div class="glow-orb glow-cyan"></div>
+  <div class="glow-orb glow-indigo"></div>
+
+  <!-- Restored Back To Top Button -->
+  <button id="btn-back-to-top" class="back-to-top-btn" aria-label="Back to top">
+    <span class="btn-arrow">↑</span>
+  </button>
+
+  <!-- WebGL 3D Canvas Background Viewport -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <!-- WebGL Fallback Banner -->
+  <div id="webgl-fallback" class="fallback-banner hidden">
+    <span>⚡ WebGL high-performance mode fallback active.</span>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="navbar">
+    <div class="logo">
+      <!-- Interwoven Thread Knot SVG Logo -->
+      <svg class="logo-knot-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="knot-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00f0ff" />
+            <stop offset="50%" stop-color="#3b82f6" />
+            <stop offset="100%" stop-color="#a855f7" />
+          </linearGradient>
+          <filter id="knot-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>
+        <path d="M 30 50 C 30 32, 45 32, 50 50 C 55 68, 70 68, 70 50 C 70 32, 55 32, 50 50 C 45 68, 30 68, 30 50 Z" 
+              stroke="url(#knot-grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#knot-glow)" />
+        <circle cx="50" cy="50" r="4" fill="#00f0ff" />
+      </svg>
+      <span class="logo-text shimmer-text">AFTERHOURS AUTOMATION</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#workflow" class="nav-item">Workflow</a>
+      <a href="#industry" class="nav-item">Industries</a>
+      <a href="#customizer" class="nav-item">Script Studio</a>
+      <a href="#game" class="nav-item">Speed Test</a>
+      <a href="#capabilities" class="nav-item">Capabilities</a>
+      <a href="#dashboard" class="nav-item">Console</a>
+      <!-- Plans & Pricing Button -->
+      <a href="#pricing" class="btn btn-outline nav-btn btn-pricing-3d">
+        <span class="pulse-indicator-small"></span> Plans & Pricing
+      </a>
+      <button id="btn-open-login" class="btn btn-outline nav-btn login-nav-btn">
+        <span class="lock-icon">🔒</span> Client Portal
+      </button>
+      <a href="mailto:afterhoursautomation714@gmail.com?subject=Private%20Demo%20Request%20-%20AfterHours%20Automation&body=Hi%20AfterHours%20Team,%0A%0AI%20am%20interested%20in%20learning%20more%20about%20your%20autonomous%20lead%20recovery%20platform%20and%20how%20it%20can%20integrate%20with%20my%20business.%0A%0APlease%20let%20me%20know%20your%20availability%20for%20a%20private%20demo.%0A%0AMy%20Details:%0A-%20Name:%20%0A-%20Company:%20%0A-%20Phone%20Number:%20%0A-%20Estimated%20Monthly%20Call%20Volume:%20%0A%0ALooking%20forward%20to%20connecting!" class="btn btn-primary nav-btn">Book Demo</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero">
+      <div class="hero-content reveal-on-scroll">
+        <div class="hero-badge">
+          <span class="pulse-indicator"></span> 24/7 Autonomous Lead Protocol
+        </div>
+        
+        <!-- Contextual Time-of-Day Glass Banner -->
+        <div class="time-banner" id="time-banner">
+          <span class="time-icon" id="time-icon">🌙</span>
+          <span class="time-text" id="time-text">Checking local system clock telemetry...</span>
+        </div>
+
+        <h1 class="shimmer-text">Make every moment <span class="gradient-text">matter.</span></h1>
+        <p class="hero-subtext">
+          Never let a missed call become a missed opportunity. AfterHours Automation intercepts unanswered phone calls instantly, firing automated WhatsApp and Email follow-ups before leads turn to competitors.
+        </p>
+        <div class="hero-actions">
+          <a href="#workflow" class="btn btn-shimmer-trigger magnetic-btn">Explore System</a>
+          <a href="mailto:afterhoursautomation714@gmail.com?subject=Private%20Demo%20Request%20-%20AfterHours%20Automation&body=Hi%20AfterHours%20Team,%0A%0AI%20am%20interested%20in%20learning%20more%20about%20your%20autonomous%20lead%20recovery%20platform%20and%20how%20it%20can%20integrate%20with%20my%20business.%0A%0APlease%20let%20me%20know%20your%20availability%20for%20a%20private%20demo.%0A%0AMy%20Details:%0A-%20Name:%20%0A-%20Company:%20%0A-%20Phone%20Number:%20%0A-%20Estimated%20Monthly%20Call%20Volume:%20%0A%0ALooking%20forward%20to%20connecting!" class="btn btn-demo-hero magnetic-btn">Book Private Demo</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKFLOW SECTION -->
+    <section class="workflow-section" id="workflow">
+      <div class="section-header reveal-on-scroll">
+        <div class="header-status-line">
+          <span class="section-tag">Live Autonomous Sequence</span>
+          <span class="auto-play-indicator"><span class="mini-pulse"></span> AUTO VIEWPORT PRESENTATION</span>
+        </div>
+        <h2 class="shimmer-text">Automated Lead Recovery Sequence</h2>
+        <p>Watch the screen automatically scroll through each stage step-by-step in real time, or click any stage to take manual control.</p>
+      </div>
+
+      <div class="workflow-layout reveal-on-scroll">
+        <div class="workflow-rail">
+          <div class="rail-track"><div class="rail-fill" id="rail-fill"></div></div>
+
+          <div class="step-card tilt-card active" data-step="1" id="step-node-1">
+            <div class="step-top">
+              <span class="step-id">01</span>
+              <span class="status-pill state-incoming">CALL_INBOUND</span>
+            </div>
+            <h3>Incoming Call Event</h3>
+            <p>A high-intent prospect calls outside operating hours or during peak queue congestion.</p>
+            <div class="step-hud">
+              <span>Telemetry: Telephony Gateway</span>
+              <span class="hud-highlight">Latency: 7 seconds</span>
+            </div>
+          </div>
+
+          <div class="step-card tilt-card" data-step="2" id="step-node-2">
+            <div class="step-top">
+              <span class="step-id">02</span>
+              <span class="status-pill state-missed">MISSED_DETECTED</span>
+            </div>
+            <h3>Missed Call Captured</h3>
+            <p>Automated trigger listener isolates dropped call event and logs caller ID within 800ms.</p>
+            <div class="step-hud">
+              <span>Trigger: Sub-Second Queue</span>
+              <span class="hud-highlight">Status: UNANSWERED</span>
+            </div>
+          </div>
+
+          <div class="step-card tilt-card" data-step="3" id="step-node-3">
+            <div class="step-top">
+              <span class="step-id">03</span>
+              <span class="status-pill state-active">CORE_ENGAGED</span>
+            </div>
+            <h3>Automation Core Activated</h3>
+            <p>Intelligent routing engine evaluates lead attributes and selects optimal multi-channel paths.</p>
+            <div class="step-hud">
+              <span>AI Engine: Context Router</span>
+              <span class="hud-highlight">State: EXECUTING</span>
+            </div>
+          </div>
+
+          <div class="step-card tilt-card" data-step="4" id="step-node-4">
+            <div class="step-top">
+              <span class="step-id">04</span>
+              <span class="status-pill state-sent">MULTI_DISPATCH</span>
+            </div>
+            <h3>WhatsApp & Email Follow-Up</h3>
+            <p>Hyper-personalized WhatsApp message and calendar booking link delivered in under 10 seconds.</p>
+            <div class="step-hud">
+              <span>Channels: WhatsApp + Email</span>
+              <span class="hud-highlight">Delivery: 100%</span>
+            </div>
+          </div>
+
+          <div class="step-card tilt-card" data-step="5" id="step-node-5">
+            <div class="step-top">
+              <span class="step-id">05</span>
+              <span class="status-pill state-secured">CRM_RECOVERED</span>
+            </div>
+            <h3>Lead Secured & Synced</h3>
+            <p>Customer confirms appointment or inquiry. Lead profile is created and updated in your CRM.</p>
+            <div class="step-hud">
+              <span>CRM State: Created & Assigned</span>
+              <span class="hud-highlight">Outcome: CONVERTED</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INDUSTRY SPECIFIC USE-CASE SELECTOR -->
+    <section class="industry-section" id="industry">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">Tailored Industry Execution</span>
+        <h2 class="shimmer-text">Customized Autonomous Flows for Your Business</h2>
+        <p>Select your vertical to preview specialized trigger logic, response dialogs, and conversion metrics.</p>
+      </div>
+
+      <div class="industry-shell reveal-on-scroll">
+        <div class="industry-tabs">
+          <button class="ind-tab active" data-ind="dental">🦷 Dental & Healthcare</button>
+          <button class="ind-tab" data-ind="hvac">❄️ HVAC & AC Services</button>
+          <button class="ind-tab" data-ind="banquet">🏰 Banquet & Event Venues</button>
+          <button class="ind-tab" data-ind="realestate">⚖️ Real Estate & Legal</button>
+        </div>
+
+        <div class="industry-display-card tilt-card" id="ind-card">
+          <div class="ind-header-row">
+            <div>
+              <span class="ind-badge" id="ind-badge">DENTAL & HEALTHCARE PROTOCOL</span>
+              <h3 id="ind-title">Emergency & Consultation Immediate Recovery</h3>
+            </div>
+            <div class="ind-stat-badge">
+              <span class="s-label">Est. Monthly Recovery</span>
+              <strong class="s-val text-cyan" id="ind-rec">$18,400</strong>
+            </div>
+          </div>
+
+          <p class="ind-desc" id="ind-desc">
+            When a patient calls with urgent toothache pain or emergency consultation inquiries after hours, AfterHours sends an instant WhatsApp triage link and automated morning appointment booking calendar.
+          </p>
+
+          <div class="ind-preview-grid">
+            <div class="ind-box">
+              <span class="ind-box-label">Automated Trigger Condition</span>
+              <p id="ind-cond">Unreturned call detected between 6:00 PM - 8:00 AM or during weekend closures.</p>
+            </div>
+            <div class="ind-box ind-whatsapp-box">
+              <span class="ind-box-label">Dispatched WhatsApp Preview</span>
+              <p id="ind-msg">"Hi! We noticed we missed your call at Apex Dental. If this is an urgent inquiry or you need to schedule a consultation, tap here to pick an immediate slot: [Link]"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHATSAPP SCRIPT CUSTOMIZER -->
+    <section class="customizer-section" id="customizer">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">Interactive Messaging Studio</span>
+        <h2 class="shimmer-text">Live WhatsApp Script & Tone Studio</h2>
+        <p>Type your business name and toggle tone presets to see how your automated recovery text will look on a customer's device.</p>
+      </div>
+
+      <div class="customizer-shell tilt-card reveal-on-scroll">
+        <div class="customizer-controls">
+          <div class="cust-group">
+            <label for="cust-biz-name">Your Company / Practice Name</label>
+            <input type="text" id="cust-biz-name" value="Apex Enterprises" placeholder="e.g. Apex Dental or Metro HVAC" />
+          </div>
+
+          <div class="cust-group">
+            <label>Select Automation Tone</label>
+            <div class="tone-pills">
+              <button class="tone-btn active" data-tone="friendly">😊 Friendly</button>
+              <button class="tone-btn" data-tone="executive">💼 Executive</button>
+              <button class="tone-btn" data-tone="urgent">⚡ Urgent / VIP</button>
+              <button class="tone-btn" data-tone="luxury">👑 Luxury</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone-mockup">
+          <div class="phone-header">
+            <div class="phone-avatar">AH</div>
+            <div class="phone-contact">
+              <strong id="phone-contact-name">Apex Enterprises AI</strong>
+              <span>● Online & Dispatched</span>
+            </div>
+          </div>
+          <div class="phone-body">
+            <div class="chat-bubble ai-bubble">
+              <p id="whatsapp-script-text">"Hi there! Thanks for calling Apex Enterprises. We missed your call, but we're ready to assist. Tap here to pick a consultation time or ask a question: [Booking Link]"</p>
+              <span class="chat-timestamp">Just now • Delivered ✔✔</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HUMAN VS AI SPEED GAME -->
+    <section class="game-section" id="game">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">Response Speed Benchmark</span>
+        <h2 class="shimmer-text">Human vs. AI Reaction Speed Test</h2>
+        <p>Click "Trigger Missed Call" and type a response to test your manual team's speed against AfterHours' 7-second benchmark.</p>
+      </div>
+
+      <div class="game-card tilt-card reveal-on-scroll">
+        <div class="game-top-bar">
+          <button id="btn-start-game" class="btn btn-shimmer-trigger btn-sm">⚡ Trigger Missed Call</button>
+          <div class="game-timer" id="game-timer-display">0.00s</div>
+        </div>
+
+        <div class="game-workspace">
+          <textarea id="game-input" placeholder="Click 'Trigger Missed Call' above to start the clock, then type your reply here..." disabled></textarea>
+          <button id="btn-submit-game" class="btn btn-secondary btn-sm" disabled>Send Manual Reply</button>
+        </div>
+
+        <div class="game-results hidden" id="game-results-box">
+          <div class="res-block">
+            <span class="r-label">Your Manual Speed</span>
+            <strong class="r-val text-red" id="res-human-time">0.00s</strong>
+          </div>
+          <div class="res-block">
+            <span class="r-label">AfterHours RaSH Speed</span>
+            <strong class="r-val text-cyan">6.80s</strong>
+          </div>
+          <div class="res-block">
+            <span class="r-label">Estimated Lead Loss Risk</span>
+            <strong class="r-val text-red" id="res-loss-pct">85% Risk</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BEFORE VS AFTER PROCESS SWITCHER -->
+    <section class="process-switcher-section" id="compare">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">Interactive Comparison</span>
+        <h2 class="shimmer-text">Traditional Response vs. AfterHours Autonomous Recovery</h2>
+        <p>Toggle between the old manual process and our autonomous pipeline to see the conversion gap.</p>
+      </div>
+
+      <div class="switcher-shell reveal-on-scroll">
+        <div class="switcher-nav-row">
+          <button id="tab-before" class="switcher-tab">Traditional Loss Flow</button>
+          <button id="tab-after" class="switcher-tab active">AfterHours Autonomous Flow</button>
+        </div>
+
+        <div class="switcher-content-card tilt-card" id="switcher-card">
+          <div class="switcher-badge" id="switch-badge">AFTERHOURS RECOVERY PIPELINE</div>
+          <h3 id="switch-title">Sub-10 Second Multi-Channel Intercept</h3>
+          <p id="switch-desc">Caller drops → Trigger fires in 800ms → Personalized WhatsApp & booking calendar sent → Appointment confirmed & synced to CRM.</p>
+          
+          <div class="switcher-metrics-row">
+            <div class="s-metric">
+              <span class="s-label">Avg. Latency</span>
+              <span class="s-val text-cyan" id="s-val-time">&lt; 7s</span>
+            </div>
+            <div class="s-metric">
+              <span class="s-label">Recovery Rate</span>
+              <span class="s-val text-cyan" id="s-val-rate">98.4%</span>
+            </div>
+            <div class="s-metric">
+              <span class="s-label">Competitor Leakage</span>
+              <span class="s-val text-emerald" id="s-val-leak">0%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MULTI-CURRENCY CALCULATOR -->
+    <section class="calculator-section" id="calc">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">Interactive Financial Telemetry</span>
+        <h2 class="shimmer-text">Calculate Your Monthly Lost Revenue</h2>
+        <p>Select your operational currency ($ USD, € EUR, or ₹ INR) and adjust sliders to estimate monthly call leakage.</p>
+      </div>
+
+      <div class="calc-card tilt-card reveal-on-scroll">
+        <div class="currency-toggle-row">
+          <button class="curr-btn active" data-curr="USD" data-symbol="$">$ USD</button>
+          <button class="curr-btn" data-curr="EUR" data-symbol="€">€ EUR</button>
+          <button class="curr-btn" data-curr="INR" data-symbol="₹">₹ INR</button>
+        </div>
+
+        <div class="calc-grid">
+          <div class="calc-inputs">
+            <div class="range-group">
+              <div class="range-header">
+                <label for="range-calls">Unanswered Calls Per Week</label>
+                <span class="range-val-badge" id="disp-calls">15 Calls</span>
+              </div>
+              <input type="range" id="range-calls" min="5" max="100" value="15" step="5" />
+            </div>
+
+            <div class="range-group">
+              <div class="range-header">
+                <label for="range-value">Average Customer / Deal Value</label>
+                <span class="range-val-badge" id="disp-value">$500</span>
+              </div>
+              <input type="range" id="range-value" min="100" max="5000" value="500" step="100" />
+            </div>
+          </div>
+
+          <div class="calc-result-box">
+            <span class="result-label">Estimated Monthly Revenue Leaking</span>
+            <div class="result-amount count-up" id="calc-result-val" data-value="15000" data-prefix="$" data-decimals="0">$15,000</div>
+            <span class="result-subtext">Based on average 50% recovery of high-intent missed calls.</span>
+            <a href="#contact" class="btn btn-shimmer-trigger btn-sm calc-cta-btn">Plug This Leak Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPABILITIES SECTION -->
+    <section class="capabilities-section" id="capabilities">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">Platform Architecture</span>
+        <h2 class="shimmer-text">Engineered for Zero Lead Leakage</h2>
+        <p>A continuous, highly available automation infrastructure operating 24 hours a day, 365 days a year.</p>
+      </div>
+
+      <div class="card-grid">
+        <div class="glass-card tilt-card cap-card-3d reveal-on-scroll" data-glow="cobalt">
+          <div class="card-glow"></div>
+          <div class="card-top-bar">
+            <span class="card-icon">📞</span>
+            <span class="card-tech-tag">SUB-10S TRIGGER</span>
+          </div>
+          <h3>Missed-Call Follow-Up</h3>
+          <p>Instant sub-10 second trigger intercepts unreturned phone calls and initiates conversation automatically.</p>
+          <div class="card-status-bar">
+            <span class="mini-dot cyan"></span> Protocol: Telephony Mesh Active
+          </div>
+        </div>
+
+        <div class="glass-card tilt-card cap-card-3d reveal-on-scroll" data-glow="cyan">
+          <div class="card-glow"></div>
+          <div class="card-top-bar">
+            <span class="card-icon">💬</span>
+            <span class="card-tech-tag">DIRECT API</span>
+          </div>
+          <h3>WhatsApp Automation</h3>
+          <p>Deliver rich, interactive WhatsApp dialogs, instant booking calendars, and FAQs directly inside chat.</p>
+          <div class="card-status-bar">
+            <span class="mini-dot cyan"></span> Protocol: WhatsApp Business Matrix
+          </div>
+        </div>
+
+        <div class="glass-card tilt-card cap-card-3d reveal-on-scroll" data-glow="indigo">
+          <div class="card-glow"></div>
+          <div class="card-top-bar">
+            <span class="card-icon">✉️</span>
+            <span class="card-tech-tag">SMTP ENGINE</span>
+          </div>
+          <h3>Email Automation</h3>
+          <p>Dispatch high-deliverability branded introductory sequences, intake questionnaires, and scheduling links.</p>
+          <div class="card-status-bar">
+            <span class="mini-dot indigo"></span> Protocol: Automated Email Engine
+          </div>
+        </div>
+
+        <div class="glass-card tilt-card cap-card-3d reveal-on-scroll" data-glow="cobalt">
+          <div class="card-glow"></div>
+          <div class="card-top-bar">
+            <span class="card-icon">🔄</span>
+            <span class="card-tech-tag">SYNC BRIDGE</span>
+          </div>
+          <h3>CRM-Ready Lead Handling</h3>
+          <p>Native connectors for Salesforce, HubSpot, GoHighLevel, and custom Webhooks. Zero manual entry.</p>
+          <div class="card-status-bar">
+            <span class="mini-dot cyan"></span> Protocol: Real-Time Webhook Pipeline
+          </div>
+        </div>
+
+        <div class="glass-card tilt-card cap-card-3d reveal-on-scroll" data-glow="violet">
+          <div class="card-glow"></div>
+          <div class="card-top-bar">
+            <span class="card-icon">🧠</span>
+            <span class="card-tech-tag">NEURAL INTENT</span>
+          </div>
+          <h3>AI-Assisted Workflows</h3>
+          <p>Contextual AI models analyze incoming lead replies to summarize intent and generate smart suggestions.</p>
+          <div class="card-status-bar">
+            <span class="mini-dot violet"></span> Protocol: Neural NLP Evaluator
+          </div>
+        </div>
+
+        <div class="glass-card tilt-card cap-card-3d reveal-on-scroll" data-glow="emerald">
+          <div class="card-glow"></div>
+          <div class="card-top-bar">
+            <span class="card-icon">🛡️</span>
+            <span class="card-tech-tag">AES-256 VAULT</span>
+          </div>
+          <h3>Enterprise Compliance</h3>
+          <p>Bank-grade encryption, privacy controls, and explicit opt-out handling engineered into every flow.</p>
+          <div class="card-status-bar">
+            <span class="mini-dot emerald"></span> Protocol: Zero-Trust Security Mesh
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPACT SECTION UPGRADED TO 3D GLASS TILT GRID -->
+    <section class="why-section" id="why">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">Measurable Business Impact</span>
+        <h2 class="shimmer-text">Why Top Teams Choose AfterHours</h2>
+        <p>When leads call, every minute of delay reduces conversion rate by 390%. We eliminate response lag completely.</p>
+      </div>
+
+      <div class="why-grid-3d">
+        <div class="glass-card tilt-card reveal-on-scroll" data-glow="cobalt">
+          <div class="card-top-bar">
+            <span class="card-icon">⚡</span>
+            <span class="card-tech-tag">INSTANT INTENT</span>
+          </div>
+          <h3>Instant Response Speed</h3>
+          <p>Reach prospects within seconds while buying intent is at its highest point, bypassing competitor lag entirely.</p>
+        </div>
+
+        <div class="glass-card tilt-card reveal-on-scroll" data-glow="cyan">
+          <div class="card-top-bar">
+            <span class="card-icon">🛡️</span>
+            <span class="card-tech-tag">LEAD RETENTION</span>
+          </div>
+          <h3>Fewer Lost Leads</h3>
+          <p>Reclaim up to 60% of after-hours opportunities that usually slip away into competitor hands.</p>
+        </div>
+
+        <div class="glass-card tilt-card reveal-on-scroll" data-glow="indigo">
+          <div class="card-top-bar">
+            <span class="card-icon">👑</span>
+            <span class="card-tech-tag">BRAND AUTHORITY</span>
+          </div>
+          <h3>Professional Perception</h3>
+          <p>Give callers immediate certainty that their inquiry is being handled with executive-level precision.</p>
+        </div>
+
+        <div class="glass-card tilt-card reveal-on-scroll" data-glow="violet">
+          <div class="card-top-bar">
+            <span class="card-icon">🔄</span>
+            <span class="card-tech-tag">24/7 MESH</span>
+          </div>
+          <h3>Always-On Reliability</h3>
+          <p>Constant 365-day operation with zero additional support headcount or manual overhead.</p>
+        </div>
+
+        <!-- 3 Core Statistics Cards in the 3D Grid -->
+        <div class="glass-card tilt-card reveal-on-scroll stat-glass-card" data-glow="cyan">
+          <span class="stat-number count-up" data-value="8" data-prefix="&lt; " data-suffix="s">&lt; 0s</span>
+          <span class="stat-label">Average Response Time</span>
+        </div>
+
+        <div class="glass-card tilt-card reveal-on-scroll stat-glass-card" data-glow="emerald">
+          <span class="stat-number count-up" data-value="98.4" data-decimals="1" data-suffix="%">0.0%</span>
+          <span class="stat-label">Lead Acknowledgment Rate</span>
+        </div>
+
+        <div class="glass-card tilt-card reveal-on-scroll stat-glass-card" data-glow="indigo">
+          <span class="stat-number count-up" data-value="3.4" data-decimals="1" data-suffix="x">0.0x</span>
+          <span class="stat-label">Conversion Rate Multiplication</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD CONSOLE & SIMULATOR -->
+    <section class="dashboard-section" id="dashboard">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">Control Console</span>
+        <h2 class="shimmer-text">Unified Command Center</h2>
+        <p>Live telemetry oversight monitoring automated triggers, communication conduits, and CRM status.</p>
+      </div>
+
+      <div class="dashboard-shell reveal-on-scroll">
+        <div class="dash-bar">
+          <div class="dash-status">
+            <span class="status-dot"></span> System Mesh: <strong class="text-cyan">ONLINE & MONITORED</strong>
+          </div>
+          <div class="dash-mode" id="console-mode-tag">Environment: Demo Engine (Simulated)</div>
+        </div>
+
+        <div class="dash-metrics">
+          <div class="metric-card">
+            <span class="m-label">Leads Recovered</span>
+            <span class="m-value count-up" id="val-leads" data-value="142">0</span>
+          </div>
+          <div class="metric-card">
+            <span class="m-label">Calls Processed</span>
+            <span class="m-value count-up" id="val-calls" data-value="189">0</span>
+          </div>
+          <div class="metric-card">
+            <span class="m-label">WhatsApp Dispatched</span>
+            <span class="m-value count-up" id="val-whatsapp" data-value="176">0</span>
+          </div>
+          <div class="metric-card">
+            <span class="m-label">Emails Delivered</span>
+            <span class="m-value count-up" id="val-emails" data-value="158">0</span>
+          </div>
+        </div>
+
+        <div class="dash-main-split">
+          <div class="dash-panel">
+            <h4>Live Automation Activity Feed</h4>
+            <div class="activity-feed" id="activity-feed">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <div class="dash-panel">
+            <h4>Live Interactive Trigger Simulator</h4>
+            <div class="sim-form-box">
+              <label class="sim-label" for="sim-phone">Test Missed Call Trigger</label>
+              <div class="sim-input-row">
+                <input type="text" id="sim-phone" value="+1 (555) 019-2831" placeholder="Enter Phone Number..." />
+                <button class="btn btn-shimmer-trigger btn-sm" id="btn-trigger-sim">Test Trigger</button>
+              </div>
+            </div>
+            
+            <div class="ai-console">
+              <div class="ai-msg msg-in">
+                <span class="msg-type">Simulated Caller Activity</span>
+                <p id="sim-inbound-text">Missed call received outside operating hours.</p>
+              </div>
+              <div class="ai-msg msg-ai">
+                <span class="msg-type type-ai">RaSH Automated Follow-Up</span>
+                <p id="sim-outbound-text">"Hi! Thanks for calling AfterHours Automation. We missed your call, but we are here to help. Tap to book a private consultation: [Booking Link]"</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANS & PRICING CONTAINER -->
+    <section class="pricing-section" id="pricing">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">Scalable Investment Tiers</span>
+        <h2 class="shimmer-text">Plans & Pricing Tiers</h2>
+        <p>Choose the operational scale that fits your monthly call volume. Custom pricing tiers will be configured here.</p>
+      </div>
+
+      <div class="pricing-placeholder-card tilt-card reveal-on-scroll">
+        <div class="pricing-placeholder-inner">
+          <span class="pricing-tag-gold">TIER CONFIGURATION READY</span>
+          <h3>Custom Subscription Matrices</h3>
+          <p>Monthly, Quarterly, and Annual plans will load dynamically upon tier release.</p>
+          <a href="#contact" class="btn btn-shimmer-trigger btn-sm">Request Early Access Pricing</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3D GLASS TILT FINAL CTA SECTION -->
+    <section class="cta-section" id="contact">
+      <div class="cta-card tilt-card reveal-on-scroll">
+        <h2 class="shimmer-text">Let’s make after hours count.</h2>
+        <p>Stop leaving unreturned calls to chance. Upgrade your business with autonomous lead recovery today.</p>
+        <div class="cta-actions">
+          <a href="mailto:afterhoursautomation714@gmail.com?subject=Private%20Demo%20Request%20-%20AfterHours%20Automation&body=Hi%20AfterHours%20Team,%0A%0AI%20am%20interested%20in%20learning%20more%20about%20your%20autonomous%20lead%20recovery%20platform%20and%20how%20it%20can%20integrate%20with%20my%20business.%0A%0APlease%20let%20me%20know%20your%20availability%20for%20a%20private%20demo.%0A%0AMy%20Details:%0A-%20Name:%20%0A-%20Company:%20%0A-%20Phone%20Number:%20%0A-%20Estimated%20Monthly%20Call%20Volume:%20%0A%0ALooking%20forward%20to%20connecting!" class="btn btn-primary btn-lg magnetic-btn">Book a Private Demo</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- RaSH CHATBOT WIDGET -->
+  <div id="ai-chat-widget" class="ai-chat-widget">
+    <button id="ai-chat-toggle" class="ai-chat-toggle" aria-label="Open RaSH Assistant">
+      <svg class="rash-btn-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="rash-knot-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00f0ff" />
+            <stop offset="50%" stop-color="#3b82f6" />
+            <stop offset="100%" stop-color="#a855f7" />
+          </linearGradient>
+        </defs>
+        <path d="M 30 50 C 30 32, 45 32, 50 50 C 55 68, 70 68, 70 50 C 70 32, 55 32, 50 50 C 45 68, 30 68, 30 50 Z" 
+              stroke="url(#rash-knot-grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="50" cy="50" r="4" fill="#00f0ff" />
+      </svg>
+      <span class="toggle-text">RaSH</span>
+      <span class="toggle-pulse"></span>
+    </button>
+
+    <div id="ai-chat-window" class="ai-chat-window hidden">
+      <div class="chat-window-header">
+        <div class="bot-info">
+          <span class="mini-pulse cyan"></span>
+          <strong>RaSH Assistant</strong>
+        </div>
+        <button id="ai-chat-close" class="chat-close-btn">×</button>
+      </div>
+
+      <div class="chat-window-body" id="chat-msg-container">
+        <div class="bot-chat-msg">
+          <span class="bot-tag">RaSH</span>
+          <p>Hello! I am RaSH, your hyper-intelligent 24/7 lead recovery guide. Ask me anything, test my limits, or chat with me about how we conquer missed calls!</p>
+        </div>
+      </div>
+
+      <div class="chat-prompt-chips">
+        <button class="chip-btn" data-query="How fast is the WhatsApp reply?">⚡ Response Time?</button>
+        <button class="chip-btn" data-query="What CRMs do you integrate with?">🔄 CRM Connectors?</button>
+        <button class="chip-btn" data-query="How do I view pricing and book a demo?">💰 Demo & Pricing?</button>
+      </div>
+
+      <div class="chat-window-input">
+        <input type="text" id="chat-user-input" placeholder="Ask RaSH anything..." />
+        <button id="chat-send-btn" class="chat-send-btn">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLASSMORPHIC CLIENT PORTAL LOGIN MODAL -->
+  <div id="login-modal" class="modal-backdrop hidden">
+    <div class="modal-card tilt-card">
+      <button id="btn-close-modal" class="modal-close-btn" aria-label="Close modal">×</button>
+      
+      <div class="modal-header">
+        <span class="modal-badge">CLIENT AUTHENTICATION</span>
+        <h3>Access Command Console</h3>
+        <p>Enter your authorized enterprise credentials and temporary password to unlock live telemetry metrics.</p>
+      </div>
+
+      <form id="login-form" onsubmit="return false;">
+        <div class="form-group">
+          <label for="login-email">Authorized Work Email</label>
+          <input type="email" id="login-email" placeholder="name@company.com" required />
+        </div>
+
+        <div class="form-group">
+          <label for="login-password">Portal Password</label>
+          <input type="password" id="login-password" placeholder="••••••••••••" required />
+        </div>
+
+        <div class="form-options">
+          <label class="remember-me">
+            <input type="checkbox" checked /> Remember session
+          </label>
+          <a href="#" onclick="alert('Password reset instructions sent to registered account administrator.'); return false;" class="forgot-link">Forgot password?</a>
+        </div>
+
+        <button type="submit" id="btn-submit-login" class="btn btn-shimmer-trigger modal-submit-btn">
+          Authenticate & Launch
+        </button>
+
+        <div id="login-error-msg" class="login-error-text hidden"></div>
+
+        <div class="modal-footer-note">
+          <span class="mini-dot cyan"></span> SSL AES-256 Encrypted Session Bridge
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-credit">Engineered with precision by <a href="https://www.linkedin.com/in/rangesh-mishra-281557408?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener" class="footer-link-highlight">Rangesh</a> &amp; <a href="https://www.linkedin.com/in/shubham-mahmia-44875826a?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener" class="footer-link-highlight">Shubham</a>.</p>
+      <p>&copy; 2026 AfterHours Automation Inc. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="api-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
