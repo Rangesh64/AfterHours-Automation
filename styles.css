@@ -31,7 +31,6 @@ html {
   background-color: var(--bg-dark);
   color: var(--text-primary);
   font-family: var(--font-main);
-  /* Ensures ideal mobile overview scale preventing heavy initial zoom */
   -webkit-text-size-adjust: 100%;
 }
 
@@ -198,6 +197,7 @@ body {
   font-size: 0.9rem;
   font-weight: 500;
   transition: color 0.3s;
+  text-align: center;
 }
 
 .nav-links a:hover { color: var(--text-primary); }
@@ -208,6 +208,7 @@ body {
   gap: 6px;
   border-color: rgba(255, 255, 255, 0.15);
   color: var(--text-primary);
+  justify-content: center;
 }
 
 .login-nav-btn:hover {
@@ -252,6 +253,7 @@ body {
   overflow: hidden;
   cursor: pointer;
   white-space: nowrap;
+  text-align: center;
 }
 
 .btn-primary {
@@ -282,6 +284,9 @@ body {
   color: var(--cyan-accent);
   padding: 8px 22px;
   background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-outline:hover {
@@ -1048,7 +1053,7 @@ section { position: relative; z-index: 2; background: transparent; }
 }
 
 .s-label { display: block; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px; }
-.s-val { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; white-space: nowrap; }
+.s-val { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; }
 
 /* Calculator Section */
 .calculator-section { padding: 120px 8%; }
@@ -1129,7 +1134,6 @@ input[type=range] {
   font-weight: 700;
   color: var(--cyan-accent);
   margin-bottom: 12px;
-  white-space: nowrap;
 }
 
 .result-subtext {
