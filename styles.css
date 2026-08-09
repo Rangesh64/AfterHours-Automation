@@ -37,6 +37,7 @@ body {
   overflow-x: hidden;
   position: relative;
   background-color: var(--bg-dark);
+  min-height: 100vh;
 }
 
 /* 3D WebGL Canvas Background Viewport */
@@ -212,6 +213,28 @@ body {
   color: var(--cyan-accent);
 }
 
+/* Mobile Hamburger Toggle Button */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 200;
+}
+
+.mobile-menu-btn span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--cyan-accent);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
 /* Buttons & Interactive Styling */
 .btn {
   display: inline-block;
@@ -225,6 +248,7 @@ body {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .btn-primary {
@@ -349,7 +373,7 @@ h1 {
   flex-wrap: wrap;
 }
 
-/* Main Layout Sections with Clean Padding */
+/* Main Layout Sections */
 main { position: relative; z-index: 2; }
 section { position: relative; z-index: 2; background: transparent; }
 
@@ -475,7 +499,7 @@ section { position: relative; z-index: 2; background: transparent; }
 
 .hud-highlight { color: var(--text-primary); font-weight: 600; }
 
-/* ROYAL RaSH CHATBOT WIDGET FLOATING ABOVE BACK TO TOP */
+/* ROYAL RaSH CHATBOT WIDGET */
 .ai-chat-widget {
   position: fixed;
   bottom: 95px;
@@ -613,7 +637,7 @@ section { position: relative; z-index: 2; background: transparent; }
   cursor: pointer;
 }
 
-/* Floating Back To Top Button Positioned Cleanly Below RaSH Widget */
+/* Back To Top Button */
 .back-to-top-btn {
   position: fixed;
   bottom: 28px;
@@ -1179,7 +1203,7 @@ input[type=range] {
 .mini-dot.violet { background: var(--violet-accent); box-shadow: 0 0 6px var(--violet-accent); }
 .mini-dot.emerald { background: var(--emerald-accent); box-shadow: 0 0 6px var(--emerald-accent); }
 
-/* Upgraded 3D Glass Tilt Grid for Why Top Teams Choose */
+/* Why Section */
 .why-section { padding: 120px 8%; }
 
 .why-grid-3d {
@@ -1295,7 +1319,7 @@ input[type=range] {
 .ai-msg { background: rgba(255, 255, 255, 0.04); padding: 14px; border-radius: 10px; }
 .msg-ai { border-left: 3px solid var(--cyan-accent); }
 
-/* Spacious Pricing Section Card */
+/* Pricing Section */
 .pricing-section { padding: 120px 8%; }
 
 .pricing-placeholder-card {
@@ -1342,7 +1366,7 @@ input[type=range] {
   margin-bottom: 12px;
 }
 
-/* 3D Glass Tilt CTA Section */
+/* CTA Section */
 .cta-section { padding: 120px 8%; text-align: center; }
 
 .cta-card {
@@ -1359,7 +1383,7 @@ input[type=range] {
 .cta-card h2 { font-family: var(--font-heading); font-size: 3.2rem; margin-bottom: 20px; letter-spacing: -1px; }
 .cta-card p { color: var(--text-muted); font-size: 1.15rem; margin-bottom: 40px; }
 
-/* Glassmorphic Client Portal Login Modal */
+/* Modal */
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -1442,18 +1466,19 @@ input[type=range] {
 
 .modal-footer-note { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; }
 
-/* MARBLE & BRONZE CLIENT PORTAL STYLING (dashboard.html) */
-.dash-user-controls { display: flex; align-items: center; gap: 24px; }
-.luxury-email { font-weight: 500; color: #21150c; padding: 0 4px; }
-
-.luxury-marble-bg {
-  background-color: #fdfbf7;
+/* EXECUTIVE DASHBOARD (dashboard.html) */
+.dashboard-body.luxury-marble-bg {
+  background-color: #fdfbf7 !important;
   background-image: 
     radial-gradient(at 0% 0%, rgba(220, 210, 198, 0.2) 0px, transparent 50%),
     radial-gradient(at 100% 100%, rgba(197, 155, 39, 0.05) 0px, transparent 50%),
-    linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(248,244,236,0.85) 100%);
+    linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(248,244,236,0.85) 100%) !important;
   color: #21150c;
+  min-height: 100vh;
 }
+
+.dash-user-controls { display: flex; align-items: center; gap: 24px; }
+.luxury-email { font-weight: 500; color: #21150c; padding: 0 4px; }
 
 .luxury-gold-orb {
   background: #c59b27;
@@ -1463,7 +1488,7 @@ input[type=range] {
 }
 
 .luxury-dash-nav {
-  background: rgba(253, 251, 247, 0.94);
+  background: rgba(253, 251, 247, 0.94) !important;
   border-bottom: 1px solid rgba(140, 83, 25, 0.12);
   backdrop-filter: blur(16px);
 }
@@ -1505,7 +1530,7 @@ input[type=range] {
 
 .btn-luxury-outline:hover { background: #8c5319; color: #ffffff; }
 
-.dashboard-wrapper { display: flex; min-height: calc(100vh - 90px); margin-top: 90px; }
+.dashboard-wrapper { display: flex; min-height: calc(100vh - 90px); margin-top: 90px; width: 100%; }
 
 .luxury-sidebar {
   width: 260px;
@@ -1550,7 +1575,7 @@ input[type=range] {
 
 .luxury-footer-card p { font-size: 0.75rem; color: #7a5c43; margin-top: 8px; }
 
-.dash-main-content { flex: 1; padding: 40px 6%; }
+.dash-main-content { flex: 1; padding: 40px 6%; width: 100%; overflow-x: hidden; }
 .dash-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
 
 .luxury-tag { font-size: 0.75rem; letter-spacing: 2px; color: #8c5319; font-weight: 700; }
@@ -1594,22 +1619,9 @@ input[type=range] {
   border-top: 1px solid rgba(140, 83, 25, 0.1);
 }
 
-.sub-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.sub-label {
-  font-size: 0.78rem;
-  color: #7a5c43;
-}
-
-.sub-val {
-  font-size: 0.95rem;
-  color: #21150c;
-  font-weight: 600;
-}
+.sub-stat { display: flex; flex-direction: column; gap: 4px; }
+.sub-label { font-size: 0.78rem; color: #7a5c43; }
+.sub-val { font-size: 0.95rem; color: #21150c; font-weight: 600; }
 
 .luxury-panel {
   background: rgba(255, 254, 250, 0.92);
@@ -1694,15 +1706,8 @@ input[type=range] {
   box-shadow: 0 4px 15px rgba(44, 26, 14, 0.02);
 }
 
-.integ-info strong {
-  display: block;
-  font-size: 0.9rem;
-}
-
-.integ-info span {
-  font-size: 0.78rem;
-  color: #7a5c43;
-}
+.integ-info strong { display: block; font-size: 0.9rem; }
+.integ-info span { font-size: 0.78rem; color: #7a5c43; }
 
 /* Footer Credits */
 footer { text-align: center; padding: 48px 8%; color: var(--text-muted); font-size: 0.88rem; border-top: 1px solid var(--border-glass); }
@@ -1710,18 +1715,42 @@ footer { text-align: center; padding: 48px 8%; color: var(--text-muted); font-si
 .footer-link-highlight { color: var(--cyan-accent); text-decoration: none; font-weight: 600; transition: color 0.3s; }
 .footer-link-highlight:hover { color: #ffffff; text-decoration: underline; }
 
+/* Mobile Media Queries */
 @media (max-width: 900px) {
   * { cursor: auto !important; }
   .cursor-dot, .cursor-ring { display: none; }
-  h1 { font-size: 3rem; }
-  .why-grid-3d, .dash-main-split, .calc-grid, .ind-preview-grid, .customizer-shell { grid-template-columns: 1fr; }
   .navbar { padding: 18px 5%; }
-  .nav-links { display: none; }
+  .nav-links {
+    position: fixed;
+    top: 75px;
+    left: 0;
+    width: 100%;
+    background: rgba(2, 4, 10, 0.96);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    padding: 24px 20px;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+    gap: 16px;
+    transform: translateY(-120%);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 199;
+  }
+  .nav-links.mobile-active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .mobile-menu-btn { display: flex; }
+  .customizer-shell, .calc-grid, .dash-main-split, .ind-preview-grid { grid-template-columns: 1fr; }
   .back-to-top-btn { bottom: 20px; right: 20px; width: 44px; height: 44px; }
   .ai-chat-widget { bottom: 85px; right: 20px; }
   .modal-card { padding: 28px 24px; }
-  .dashboard-wrapper { flex-direction: column; }
-  .luxury-sidebar { width: 100%; }
+  .dashboard-wrapper { flex-direction: column; margin-top: 80px; }
+  .luxury-sidebar { width: 100%; padding: 20px; flex-direction: row; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .luxury-sidebar .sidebar-menu { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+  .luxury-footer-card { display: none; }
   .ai-chat-window { width: 300px; right: 0; }
 }
 
