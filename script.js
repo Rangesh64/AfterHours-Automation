@@ -854,7 +854,7 @@ function initLoginModal() {
           ? API_CONFIG.BASE_URL 
           : 'https://afterhours-backend-i9nc.onrender.com/api';
 
-        const res = await fetch(`${baseUrl}/login`, {
+        const res = await fetch(`${baseUrl}/auth/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: emailVal, password: passwordVal })
