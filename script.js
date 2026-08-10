@@ -854,7 +854,7 @@ function initLoginModal() {
           ? API_CONFIG.BASE_URL 
           : 'https://afterhours-backend-i9nc.onrender.com/api';
 
-        const res = await fetch(`${baseUrl}/auth/login`, {
+        const res = await fetch(`${baseUrl}/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: emailVal, password: passwordVal })
@@ -862,27 +862,25 @@ function initLoginModal() {
 
         const data = await res.json();
 
-        if (res.ok && data.token) {
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('user', JSON.stringify(data.user || { email: emailVal }));
+        if (res.ok && (data.token || data.session?.token)) {
+          const realToken = data.token || data.session.token;
+
+          localStorage.setItem('token', realToken);
           localStorage.setItem('afterhours_session', JSON.stringify({
             email: emailVal,
             authenticated: true,
-            token: data.token
+            token: realToken
           }));
+
           window.location.href = 'dashboard.html';
           return;
-        } else if (data.error) {
-          throw new Error(data.error);
+        } else {
+          throw new Error(data.message || data.error || 'Login failed');
         }
       } catch (err) {
-        console.warn('[AUTH] Live API login skipped or error:', err.message);
-      }
-
-      // 2. Fallback to Whitelisted Authorized Check for Offline/Mock Mode
-      if (!AUTHORIZED_EMAILS.includes(emailVal) || passwordVal !== TEMP_PORTAL_PASSWORD) {
+        console.warn('[AUTH] Live API login error:', err.message);
         if (errorMsg) {
-          errorMsg.textContent = "Access Denied: Invalid authorized email or password.";
+          errorMsg.textContent = `Login Error: ${err.message}`;
           errorMsg.classList.remove('hidden');
         }
         if (submitBtn) {
@@ -891,14 +889,6 @@ function initLoginModal() {
         }
         return;
       }
-
-      localStorage.setItem('afterhours_session', JSON.stringify({
-        email: emailVal,
-        authenticated: true,
-        token: 'mock_jwt_session_token_' + Date.now()
-      }));
-
-      window.location.href = 'dashboard.html';
     });
   }
 }
