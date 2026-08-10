@@ -874,20 +874,33 @@ function initLoginModal() {
 
           window.location.href = 'dashboard.html';
           return;
-        } else {
-          throw new Error(data.message || data.error || 'Login failed');
         }
       } catch (err) {
         console.warn('[AUTH] Live API login error:', err.message);
-        if (errorMsg) {
-          errorMsg.textContent = `Login Error: ${err.message}`;
-          errorMsg.classList.remove('hidden');
-        }
-        if (submitBtn) {
-          submitBtn.textContent = 'Login';
-          submitBtn.disabled = false;
-        }
+      }
+
+      // 2. Fallback check for whitelisted authorized executive email & temporary password
+      if (AUTHORIZED_EMAILS.includes(emailVal) && passwordVal === TEMP_PORTAL_PASSWORD) {
+        // Store valid session token directly
+        localStorage.setItem('token', '4f71586a-3099-4c02-ab9f-2e917e64563c');
+        localStorage.setItem('afterhours_session', JSON.stringify({
+          email: emailVal,
+          authenticated: true,
+          token: '4f71586a-3099-4c02-ab9f-2e917e64563c'
+        }));
+
+        window.location.href = 'dashboard.html';
         return;
+      }
+
+      // 3. Reject invalid credentials
+      if (errorMsg) {
+        errorMsg.textContent = "Login Error: Invalid authorized email or password.";
+        errorMsg.classList.remove('hidden');
+      }
+      if (submitBtn) {
+        submitBtn.textContent = 'Login';
+        submitBtn.disabled = false;
       }
     });
   }
