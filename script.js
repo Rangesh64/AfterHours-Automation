@@ -905,8 +905,11 @@ function initLoginModal() {
   }
 }
 
-// Landing Page Interactive Simulator
+// Landing Page Interactive Simulator (runs only on landing page)
 function initDashboardSimulator() {
+  const isDashboard = window.location.pathname.includes('dashboard.html');
+  if (isDashboard) return;
+
   const feed = document.getElementById('activity-feed');
   const activities = [
     { time: 'Just now', text: 'Missed inquiry from +1 (555) 019-2831' },
@@ -995,23 +998,29 @@ async function initLiveDashboard() {
     console.log('[LIVE DASHBOARD DATA]', data);
 
     if (data) {
-      const valLeads = document.getElementById('val-leads') || document.querySelector('[data-metric="total-leads"]');
-      const valCalls = document.getElementById('val-calls') || document.querySelector('[data-metric="active-calls"]');
-      
-      // Calculate totals based on backend array lengths
+      const cards = document.querySelectorAll('.metric-card');
       const totalLeadsCount = Array.isArray(data.leads) ? data.leads.length : (data.totalLeads || 0);
       const activeCallsCount = Array.isArray(data.logs) ? data.logs.length : (data.activeIntercepts || 0);
 
-      if (valLeads) valLeads.textContent = totalLeadsCount;
-      if (valCalls) valCalls.textContent = activeCallsCount;
+      // Card 1: Leads Recovered
+      if (cards[1]) {
+        const valEl = cards[1].querySelector('h2, h3, div, p, span');
+        if (valEl) valEl.childNodes[0].textContent = totalLeadsCount + " ";
+      }
 
-      // Populate activity feed if elements exist
-      const feed = document.getElementById('activity-feed');
+      // Card 2: Inquiries Intercepted
+      if (cards[2]) {
+        const valEl = cards[2].querySelector('h2, h3, div, p, span');
+        if (valEl) valEl.childNodes[0].textContent = activeCallsCount + " ";
+      }
+
+      // Activity Feed Table update
+      const feed = document.getElementById('activity-feed') || document.querySelector('.activity-log, .feed-container, .luxury-card-feed');
       if (feed && Array.isArray(data.logs) && data.logs.length > 0) {
         feed.innerHTML = data.logs.map(log => `
-          <div class="feed-row">
-            <span>${log.action || log.message || log.details || 'System Activity'}</span>
-            <span style="color:var(--text-muted);">${log.created_at ? new Date(log.created_at).toLocaleTimeString() : 'Recent'}</span>
+          <div class="feed-row" style="display:flex; justify-content:space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <span>${log.action || log.message || log.details || 'Inquiry Logged'}</span>
+            <span style="color:var(--text-muted, #888);">${log.created_at ? new Date(log.created_at).toLocaleTimeString() : 'Recent'}</span>
           </div>
         `).join('');
       }
