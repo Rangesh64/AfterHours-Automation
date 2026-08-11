@@ -1003,18 +1003,24 @@ async function initLiveDashboard() {
       const activeCallsCount = Array.isArray(data.logs) ? data.logs.length : (data.activeIntercepts || 0);
 
       // Card 1: Leads Recovered
-      if (cards[1]) {
-        const valEl = cards[1].querySelector('h2, h3, div, p, span');
-        if (valEl) valEl.childNodes[0].textContent = totalLeadsCount + " ";
+      if (cards[0]) {
+        const valEl = cards[0].querySelector('.count-up, h2, h3, div') || cards[0];
+        if (valEl) valEl.innerHTML = `${totalLeadsCount} <span style="font-size: 0.8rem; color: var(--emerald-accent, #10b981);">Live Sync</span>`;
       }
 
       // Card 2: Inquiries Intercepted
-      if (cards[2]) {
-        const valEl = cards[2].querySelector('h2, h3, div, p, span');
-        if (valEl) valEl.childNodes[0].textContent = activeCallsCount + " ";
+      if (cards[1]) {
+        const valEl = cards[1].querySelector('.count-up, h2, h3, div') || cards[1];
+        if (valEl) valEl.innerHTML = `${activeCallsCount} <span style="font-size: 0.8rem; color: var(--cyan-accent, #00f0ff);">100% Sub-8s</span>`;
       }
 
-      // Activity Feed Table update
+      // Card 3: Direct Engagement
+      if (cards[2]) {
+        const valEl = cards[2].querySelector('.count-up, h2, h3, div') || cards[2];
+        if (valEl) valEl.innerHTML = `${activeCallsCount} <span style="font-size: 0.8rem; color: var(--cyan-accent, #00f0ff);">Direct Engagement</span>`;
+      }
+
+      // Activity Feed Table
       const feed = document.getElementById('activity-feed') || document.querySelector('.activity-log, .feed-container, .luxury-card-feed');
       if (feed && Array.isArray(data.logs) && data.logs.length > 0) {
         feed.innerHTML = data.logs.map(log => `
