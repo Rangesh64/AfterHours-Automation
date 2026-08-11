@@ -881,7 +881,6 @@ function initLoginModal() {
 
       // 2. Fallback check for whitelisted authorized executive email & temporary password
       if (AUTHORIZED_EMAILS.includes(emailVal) && passwordVal === TEMP_PORTAL_PASSWORD) {
-        // Store valid session token directly
         localStorage.setItem('token', '4f71586a-3099-4c02-ab9f-2e917e64563c');
         localStorage.setItem('afterhours_session', JSON.stringify({
           email: emailVal,
@@ -999,8 +998,23 @@ async function initLiveDashboard() {
       const valLeads = document.getElementById('val-leads') || document.querySelector('[data-metric="total-leads"]');
       const valCalls = document.getElementById('val-calls') || document.querySelector('[data-metric="active-calls"]');
       
-      if (valLeads && data.totalLeads !== undefined) valLeads.textContent = data.totalLeads;
-      if (valCalls && data.activeIntercepts !== undefined) valCalls.textContent = data.activeIntercepts;
+      // Calculate totals based on backend array lengths
+      const totalLeadsCount = Array.isArray(data.leads) ? data.leads.length : (data.totalLeads || 0);
+      const activeCallsCount = Array.isArray(data.logs) ? data.logs.length : (data.activeIntercepts || 0);
+
+      if (valLeads) valLeads.textContent = totalLeadsCount;
+      if (valCalls) valCalls.textContent = activeCallsCount;
+
+      // Populate activity feed if elements exist
+      const feed = document.getElementById('activity-feed');
+      if (feed && Array.isArray(data.logs) && data.logs.length > 0) {
+        feed.innerHTML = data.logs.map(log => `
+          <div class="feed-row">
+            <span>${log.action || log.message || log.details || 'System Activity'}</span>
+            <span style="color:var(--text-muted);">${log.created_at ? new Date(log.created_at).toLocaleTimeString() : 'Recent'}</span>
+          </div>
+        `).join('');
+      }
     }
   } catch (err) {
     console.error('[LIVE DASHBOARD ERROR]', err);
