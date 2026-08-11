@@ -466,10 +466,12 @@ function initScrollReveals() {
 
 // Smooth Dynamic Counter Animation
 function animateCounter(element) {
-  if (element.dataset.started) return;
+  if (element.dataset.started === "true") return;
   element.dataset.started = "true";
 
   const target = parseFloat(element.dataset.value);
+  if (isNaN(target)) return;
+
   const prefix = element.dataset.prefix || '';
   const suffix = element.dataset.suffix || '';
   const decimals = parseInt(element.dataset.decimals || '0', 10);
@@ -1002,23 +1004,26 @@ async function initLiveDashboard() {
       const totalLeadsCount = Array.isArray(data.leads) ? data.leads.length : (data.totalLeads || 0);
       const activeCallsCount = Array.isArray(data.logs) ? data.logs.length : (data.activeIntercepts || 0);
 
-      // Card 1: Leads Recovered
-      if (cards[0]) {
-        const valEl = cards[0].querySelector('.count-up, h2, h3, div') || cards[0];
-        if (valEl) valEl.innerHTML = `${totalLeadsCount} <span style="font-size: 0.8rem; color: var(--emerald-accent, #10b981);">Live Sync</span>`;
-      }
+      // Helper function to force counter dataset & HTML update
+      const updateCardCount = (card, value) => {
+        if (!card) return;
+        const countEl = card.querySelector('.count-up') || card.querySelector('h2, h3, .metric-value, div');
+        if (countEl) {
+          countEl.dataset.value = value;
+          countEl.dataset.started = "false";
+          countEl.textContent = value;
+          animateCounter(countEl);
+        }
+      };
 
-      // Card 2: Inquiries Intercepted
-      if (cards[1]) {
-        const valEl = cards[1].querySelector('.count-up, h2, h3, div') || cards[1];
-        if (valEl) valEl.innerHTML = `${activeCallsCount} <span style="font-size: 0.8rem; color: var(--cyan-accent, #00f0ff);">100% Sub-8s</span>`;
-      }
+      // Card 0: Leads Recovered
+      updateCardCount(cards[0], totalLeadsCount);
 
-      // Card 3: Direct Engagement
-      if (cards[2]) {
-        const valEl = cards[2].querySelector('.count-up, h2, h3, div') || cards[2];
-        if (valEl) valEl.innerHTML = `${activeCallsCount} <span style="font-size: 0.8rem; color: var(--cyan-accent, #00f0ff);">Direct Engagement</span>`;
-      }
+      // Card 1: Inquiries Intercepted
+      updateCardCount(cards[1], activeCallsCount);
+
+      // Card 2: WhatsApp Dispatched
+      updateCardCount(cards[2], activeCallsCount);
 
       // Activity Feed Table
       const feed = document.getElementById('activity-feed') || document.querySelector('.activity-log, .feed-container, .luxury-card-feed');
