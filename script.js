@@ -1025,6 +1025,20 @@ async function initLiveDashboard() {
       // Card 2: WhatsApp Dispatched
       updateCardCount(cards[2], activeCallsCount);
 
+      // Card 3: Pipeline Value Protected (Set to $0)
+      if (cards[3]) {
+        const pipelineValEl = cards[3].querySelector('.count-up') || cards[3].querySelector('h2, h3, .metric-value, div');
+        if (pipelineValEl) {
+          const livePipelineValue = 0;
+
+          pipelineValEl.dataset.prefix = "$";
+          pipelineValEl.dataset.value = livePipelineValue;
+          pipelineValEl.dataset.started = "false";
+          pipelineValEl.textContent = "$" + livePipelineValue;
+          animateCounter(pipelineValEl);
+        }
+      }
+
       // Activity Feed Table
       const feed = document.getElementById('activity-feed') || document.querySelector('.activity-log, .feed-container, .luxury-card-feed');
       if (feed && Array.isArray(data.logs) && data.logs.length > 0) {
