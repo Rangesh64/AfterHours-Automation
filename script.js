@@ -1484,17 +1484,21 @@ async function initLiveDashboard() {
     if (data) {
       // Dynamic Subscription Tiers Update
       if (data.subscription) {
-        const planElem = document.querySelector('[data-sub-plan]') || document.getElementById('sub-plan');
-        const cycleElem = document.querySelector('[data-sub-cycle]') || document.getElementById('sub-cycle');
-        const daysElem = document.querySelector('[data-sub-days]') || document.getElementById('sub-days');
-        const renewalElem = document.querySelector('[data-sub-renewal]') || document.getElementById('sub-renewal');
-        const capacityElem = document.querySelector('[data-sub-capacity]') || document.getElementById('sub-capacity');
+        const planEl = document.getElementById('sub-plan') || document.querySelector('[data-sub-plan]');
+        const cycleEl = document.getElementById('sub-cycle') || document.querySelector('[data-sub-cycle]');
+        const daysEl = document.getElementById('sub-days') || document.querySelector('[data-sub-days]');
+        const renewalEl = document.getElementById('sub-renewal') || document.querySelector('[data-sub-renewal]');
+        const capacityEl = document.getElementById('sub-capacity') || document.querySelector('[data-sub-capacity]');
+        const sidebarBadgeEl = document.getElementById('sub-sidebar-badge');
+        const sidebarDaysEl = document.getElementById('sub-sidebar-days');
 
-        if (planElem) planElem.innerText = data.subscription.plan_name;
-        if (cycleElem) cycleElem.innerText = data.subscription.billing_cycle;
-        if (daysElem) daysElem.innerText = `${data.subscription.days_remaining} Days Remaining`;
-        if (renewalElem) renewalElem.innerText = data.subscription.renewal_date;
-        if (capacityElem) capacityElem.innerText = data.subscription.capacity;
+        if (planEl) planEl.textContent = data.subscription.plan_name;
+        if (cycleEl) cycleEl.textContent = data.subscription.billing_cycle;
+        if (daysEl) daysEl.textContent = `${data.subscription.days_remaining} Days Remaining`;
+        if (renewalEl) renewalEl.textContent = data.subscription.renewal_date;
+        if (capacityEl) capacityEl.textContent = data.subscription.capacity;
+        if (sidebarBadgeEl) sidebarBadgeEl.textContent = data.subscription.plan_name;
+        if (sidebarDaysEl) sidebarDaysEl.textContent = `${data.subscription.days_remaining} Days Remaining`;
       }
 
       const cards = document.querySelectorAll('.metric-card');
