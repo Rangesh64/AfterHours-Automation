@@ -28,6 +28,47 @@ const AUTHORIZED_EMAILS = [
 ];
 const TEMP_PORTAL_PASSWORD = "after hours 2026";
 
+// Desktop Smart Mailto Handler (Gmail Web Compose Fallback for Desktop)
+function initMailtoFallback() {
+  const mailtoLinks = document.querySelectorAll('a[href^="mailto:"]');
+  if (!mailtoLinks.length) return;
+
+  mailtoLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (!isMobile) {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        
+        // Parse email address
+        const emailMatch = href.match(/^mailto:([^?]+)/);
+        const email = emailMatch ? emailMatch[1] : 'afterhoursautomation714@gmail.com';
+        
+        // Parse URL search parameters safely
+        let subject = "Private Demo Request - AfterHours Automation";
+        let body = "Hi AfterHours Team,\n\nI am interested in learning more about your 24/7 Voice AI Receptionist.";
+        
+        if (href.includes('?')) {
+          const queryString = href.split('?')[1];
+          const urlParams = new URLSearchParams(queryString);
+          if (urlParams.has('subject')) subject = urlParams.get('subject');
+          if (urlParams.has('body')) body = urlParams.get('body');
+        }
+
+        // Construct direct Gmail Web Compose URL
+        const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        // Open Gmail Web Compose in a new tab for seamless desktop delivery
+        window.open(gmailComposeUrl, '_blank');
+
+        // Fallback attempt to invoke native mail application
+        setTimeout(() => {
+          window.location.href = href;
+        }, 300);
+      }
+    });
+  });
+}
+
 // Mobile Navigation Toggle
 function initMobileNav() {
   const toggleBtn = document.getElementById('mobile-menu-toggle');
@@ -158,7 +199,6 @@ function initSpeechToCRMSimulator() {
         idx++;
         typingTimeout = setTimeout(typeChar, 18);
       } else {
-        // Highlight & fill CRM fields
         if (valName) valName.textContent = data.crm.name;
         if (valService) valService.textContent = data.crm.service;
         if (valAddress) valAddress.textContent = data.crm.address;
@@ -462,7 +502,7 @@ function initAudioVoicePlayer() {
       
       populateVoices();
       
-      // Explicit Female Voice Target Logic
+      // Explicit Female Voice Target Logic across Windows, Mac & Mobile
       const femaleVoice = availableVoices.find(v => 
         (v.lang.startsWith('en')) && (
           v.name.toLowerCase().includes('female') || 
@@ -480,7 +520,6 @@ function initAudioVoicePlayer() {
         utterance.voice = femaleVoice;
       }
       
-      // Pitch boost ensures clean, warm female vocal range across desktop browsers
       utterance.pitch = 1.25; 
       utterance.rate = 0.95;
 
@@ -1503,6 +1542,7 @@ document.addEventListener('DOMContentLoaded', () => {
   init3DTilt();
   init3D();
   initLoginModal();
+  initMailtoFallback();
   initActivityRibbon();
   initSpeechToCRMSimulator();
   initExitIntentModal();
