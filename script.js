@@ -74,9 +74,10 @@ function formatAMPM(date) {
   return hours + ':' + minutes + ' ' + ampm;
 }
 
-// 3-Currency Selector Logic ($ / € / ₹)
+// 3-Currency Selector Logic ($ / € / ₹) with Updated Default Values
 function initCurrencySelector() {
   const currBtns = document.querySelectorAll('.curr-btn');
+  const valueRange = document.getElementById('range-value');
   if (!currBtns.length) return;
 
   currBtns.forEach(btn => {
@@ -86,6 +87,13 @@ function initCurrencySelector() {
 
       activeCurrency = btn.dataset.curr;
       activeSymbol = btn.dataset.symbol;
+
+      // Reset default base deal values on currency switch
+      if (valueRange) {
+        if (activeCurrency === 'USD') valueRange.value = 50;
+        else if (activeCurrency === 'EUR') valueRange.value = 50;
+        else if (activeCurrency === 'INR') valueRange.value = 1000;
+      }
 
       recalculateRevenue();
     });
@@ -103,15 +111,12 @@ function recalculateRevenue() {
   if (!callsRange || !valueRange || !resultVal) return;
 
   const calls = parseInt(callsRange.value, 10);
-  const baseUsdVal = parseInt(valueRange.value, 10);
-
-  const rate = currencyRates[activeCurrency] || 1;
-  const convertedDealVal = Math.round(baseUsdVal * rate);
+  const dealVal = parseInt(valueRange.value, 10);
 
   if (dispCalls) dispCalls.textContent = `${calls} Calls`;
-  if (dispValue) dispValue.textContent = `${activeSymbol}${convertedDealVal.toLocaleString()}`;
+  if (dispValue) dispValue.textContent = `${activeSymbol}${dealVal.toLocaleString()}`;
 
-  const monthlyLeak = Math.round((calls * 4) * convertedDealVal * 0.5);
+  const monthlyLeak = Math.round((calls * 4) * dealVal * 0.5);
 
   resultVal.dataset.value = monthlyLeak;
   resultVal.dataset.prefix = activeSymbol;
@@ -122,6 +127,10 @@ function recalculateRevenue() {
 function initCalculator() {
   const callsRange = document.getElementById('range-calls');
   const valueRange = document.getElementById('range-value');
+  const btnCallsDown = document.getElementById('btn-calls-down');
+  const btnCallsUp = document.getElementById('btn-calls-up');
+  const btnValueDown = document.getElementById('btn-value-down');
+  const btnValueUp = document.getElementById('btn-value-up');
 
   if (!callsRange || !valueRange) return;
 
@@ -139,6 +148,34 @@ function initCalculator() {
 
   callsRange.addEventListener('input', requestSmoothRecalc);
   valueRange.addEventListener('input', requestSmoothRecalc);
+
+  // Incremental Stepper Controls (+1/-1 for calls, +$50/+€50/+₹1,000 for deal value)
+  if (btnCallsDown) {
+    btnCallsDown.addEventListener('click', () => {
+      callsRange.value = Math.max(parseInt(callsRange.value, 10) - 1, parseInt(callsRange.min, 10));
+      recalculateRevenue();
+    });
+  }
+  if (btnCallsUp) {
+    btnCallsUp.addEventListener('click', () => {
+      callsRange.value = Math.min(parseInt(callsRange.value, 10) + 1, parseInt(callsRange.max, 10));
+      recalculateRevenue();
+    });
+  }
+  if (btnValueDown) {
+    btnValueDown.addEventListener('click', () => {
+      const step = activeCurrency === 'INR' ? 500 : 10;
+      valueRange.value = Math.max(parseInt(valueRange.value, 10) - step, parseInt(valueRange.min, 10));
+      recalculateRevenue();
+    });
+  }
+  if (btnValueUp) {
+    btnValueUp.addEventListener('click', () => {
+      const step = activeCurrency === 'INR' ? 500 : 10;
+      valueRange.value = Math.min(parseInt(valueRange.value, 10) + step, parseInt(valueRange.max, 10));
+      recalculateRevenue();
+    });
+  }
 }
 
 // Client-Side Revenue Loss Audit Modal Exporter
@@ -152,7 +189,7 @@ function initRevenueAuditExporter() {
 
   openBtn.addEventListener('click', () => {
     const resultValEl = document.getElementById('calc-result-val');
-    const monthlyLeak = parseInt(resultValEl ? (resultValEl.dataset.value || '15000') : '15000', 10);
+    const monthlyLeak = parseInt(resultValEl ? (resultValEl.dataset.value || '1500') : '1500', 10);
     const yearlyLeak = monthlyLeak * 12;
     const fiveYearLeak = yearlyLeak * 5;
     const recoverableYield = Math.round(yearlyLeak * 0.85);
@@ -185,7 +222,7 @@ function initRevenueAuditExporter() {
   }
 }
 
-// Client-Side Audio Voice Sample Player (Uses browser Web Speech API & audio synthesis)
+// Client-Side Audio Voice Sample Player (Fixed Synthesis Completion & Timing Synchronization)
 function initAudioVoicePlayer() {
   const playBtn = document.getElementById('btn-play-voice-sample');
   const playIcon = document.getElementById('play-icon');
@@ -198,15 +235,12 @@ function initAudioVoicePlayer() {
 
   const samples = {
     dental: {
-      duration: 8,
       transcript: `"Hi! Thanks for calling Apex Dental. I can get you scheduled for an emergency appointment tomorrow morning at 9:00 AM. Shall I lock that in for you?"`
     },
     hvac: {
-      duration: 10,
       transcript: `"Hello! Thanks for reaching Apex Climate Services. Is your AC completely down? I can dispatch an emergency technician to your address at 8:30 AM."`
     },
     banquet: {
-      duration: 9,
       transcript: `"Greetings from Grand Palace Banquets! I can confirm hall availability for your preferred date and text you our luxury brochure right now."`
     }
   };
@@ -214,7 +248,8 @@ function initAudioVoicePlayer() {
   let currentSampleKey = 'dental';
   let isPlaying = false;
   let progressInterval = null;
-  let currentTime = 0;
+  let startTime = 0;
+  let estimatedDuration = 8;
 
   samplePills.forEach(pill => {
     pill.addEventListener('click', () => {
@@ -226,7 +261,11 @@ function initAudioVoicePlayer() {
       
       const sample = samples[currentSampleKey] || samples.dental;
       if (transcriptText) transcriptText.textContent = sample.transcript;
-      if (timerText) timerText.textContent = `0:00 / 0:0${sample.duration}`;
+      
+      // Calculate duration dynamically based on word count (~3 words/sec)
+      const words = sample.transcript.split(' ').length;
+      estimatedDuration = Math.max(Math.round(words / 2.8), 6);
+      if (timerText) timerText.textContent = `0:00 / 0:${estimatedDuration < 10 ? '0' + estimatedDuration : estimatedDuration}`;
     });
   });
 
@@ -236,7 +275,7 @@ function initAudioVoicePlayer() {
     if (progressInterval) clearInterval(progressInterval);
     if (playIcon) playIcon.textContent = "▶";
     if (progressBar) progressBar.style.width = "0%";
-    currentTime = 0;
+    if (timerText) timerText.textContent = `0:00 / 0:${estimatedDuration < 10 ? '0' + estimatedDuration : estimatedDuration}`;
   }
 
   playBtn.addEventListener('click', () => {
@@ -246,31 +285,49 @@ function initAudioVoicePlayer() {
     }
 
     const sample = samples[currentSampleKey] || samples.dental;
+    const words = sample.transcript.split(' ').length;
+    estimatedDuration = Math.max(Math.round(words / 2.8), 6);
+
     isPlaying = true;
     if (playIcon) playIcon.textContent = "⏹";
+    startTime = performance.now();
 
-    // Client-side synthesis trigger
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(sample.transcript.replace(/"/g, ''));
-      utterance.rate = 1.0;
+      const textToSpeak = sample.transcript.replace(/"/g, '');
+      const utterance = new SpeechSynthesisUtterance(textToSpeak);
+      
+      utterance.rate = 0.95;
       utterance.pitch = 1.0;
+
+      utterance.onend = () => {
+        stopAudio();
+      };
+
+      utterance.onerror = () => {
+        stopAudio();
+      };
+
       window.speechSynthesis.speak(utterance);
     }
 
-    const totalDur = sample.duration;
     progressInterval = setInterval(() => {
-      currentTime += 0.2;
-      const pct = Math.min((currentTime / totalDur) * 100, 100);
+      const elapsedSecs = (performance.now() - startTime) / 1000;
+      const pct = Math.min((elapsedSecs / estimatedDuration) * 100, 100);
+      
       if (progressBar) progressBar.style.width = `${pct}%`;
       
-      const secs = Math.floor(currentTime);
-      if (timerText) timerText.textContent = `0:0${secs} / 0:0${totalDur}`;
+      const secs = Math.floor(elapsedSecs);
+      if (timerText) {
+        const formatSecs = secs < 10 ? '0' + secs : secs;
+        const formatDur = estimatedDuration < 10 ? '0' + estimatedDuration : estimatedDuration;
+        timerText.textContent = `0:${formatSecs} / 0:${formatDur}`;
+      }
 
-      if (currentTime >= totalDur) {
+      if (elapsedSecs >= estimatedDuration + 0.5) {
         stopAudio();
       }
-    }, 200);
+    }, 100);
   });
 }
 
