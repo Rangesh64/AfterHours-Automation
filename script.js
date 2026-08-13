@@ -141,6 +141,139 @@ function initCalculator() {
   valueRange.addEventListener('input', requestSmoothRecalc);
 }
 
+// Client-Side Revenue Loss Audit Modal Exporter
+function initRevenueAuditExporter() {
+  const openBtn = document.getElementById('btn-open-loss-audit');
+  const closeBtn = document.getElementById('btn-close-audit-modal');
+  const modal = document.getElementById('loss-audit-modal');
+  const printBtn = document.getElementById('btn-print-audit');
+
+  if (!openBtn || !modal) return;
+
+  openBtn.addEventListener('click', () => {
+    const resultValEl = document.getElementById('calc-result-val');
+    const monthlyLeak = parseInt(resultValEl ? (resultValEl.dataset.value || '15000') : '15000', 10);
+    const yearlyLeak = monthlyLeak * 12;
+    const fiveYearLeak = yearlyLeak * 5;
+    const recoverableYield = Math.round(yearlyLeak * 0.85);
+
+    const monthlyEl = document.getElementById('audit-monthly');
+    const yearlyEl = document.getElementById('audit-yearly');
+    const fiveYrEl = document.getElementById('audit-5yr');
+    const yieldValEl = document.getElementById('audit-yield-val');
+
+    if (monthlyEl) monthlyEl.textContent = `${activeSymbol}${monthlyLeak.toLocaleString()}`;
+    if (yearlyEl) yearlyEl.textContent = `${activeSymbol}${yearlyLeak.toLocaleString()}`;
+    if (fiveYrEl) fiveYrEl.textContent = `${activeSymbol}${fiveYearLeak.toLocaleString()}`;
+    if (yieldValEl) yieldValEl.textContent = `${activeSymbol}${recoverableYield.toLocaleString()} / Year Recovered`;
+
+    modal.classList.remove('hidden');
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+  }
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.add('hidden');
+  });
+
+  if (printBtn) {
+    printBtn.addEventListener('click', () => {
+      window.print();
+    });
+  }
+}
+
+// Client-Side Audio Voice Sample Player (Uses browser Web Speech API & audio synthesis)
+function initAudioVoicePlayer() {
+  const playBtn = document.getElementById('btn-play-voice-sample');
+  const playIcon = document.getElementById('play-icon');
+  const progressBar = document.getElementById('audio-progress-bar');
+  const timerText = document.getElementById('sample-timer-text');
+  const transcriptText = document.getElementById('sample-transcript-text');
+  const samplePills = document.querySelectorAll('.sample-pill');
+
+  if (!playBtn) return;
+
+  const samples = {
+    dental: {
+      duration: 8,
+      transcript: `"Hi! Thanks for calling Apex Dental. I can get you scheduled for an emergency appointment tomorrow morning at 9:00 AM. Shall I lock that in for you?"`
+    },
+    hvac: {
+      duration: 10,
+      transcript: `"Hello! Thanks for reaching Apex Climate Services. Is your AC completely down? I can dispatch an emergency technician to your address at 8:30 AM."`
+    },
+    banquet: {
+      duration: 9,
+      transcript: `"Greetings from Grand Palace Banquets! I can confirm hall availability for your preferred date and text you our luxury brochure right now."`
+    }
+  };
+
+  let currentSampleKey = 'dental';
+  let isPlaying = false;
+  let progressInterval = null;
+  let currentTime = 0;
+
+  samplePills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      samplePills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      currentSampleKey = pill.dataset.sample;
+      stopAudio();
+      
+      const sample = samples[currentSampleKey] || samples.dental;
+      if (transcriptText) transcriptText.textContent = sample.transcript;
+      if (timerText) timerText.textContent = `0:00 / 0:0${sample.duration}`;
+    });
+  });
+
+  function stopAudio() {
+    isPlaying = false;
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+    if (progressInterval) clearInterval(progressInterval);
+    if (playIcon) playIcon.textContent = "▶";
+    if (progressBar) progressBar.style.width = "0%";
+    currentTime = 0;
+  }
+
+  playBtn.addEventListener('click', () => {
+    if (isPlaying) {
+      stopAudio();
+      return;
+    }
+
+    const sample = samples[currentSampleKey] || samples.dental;
+    isPlaying = true;
+    if (playIcon) playIcon.textContent = "⏹";
+
+    // Client-side synthesis trigger
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(sample.transcript.replace(/"/g, ''));
+      utterance.rate = 1.0;
+      utterance.pitch = 1.0;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    const totalDur = sample.duration;
+    progressInterval = setInterval(() => {
+      currentTime += 0.2;
+      const pct = Math.min((currentTime / totalDur) * 100, 100);
+      if (progressBar) progressBar.style.width = `${pct}%`;
+      
+      const secs = Math.floor(currentTime);
+      if (timerText) timerText.textContent = `0:0${secs} / 0:0${totalDur}`;
+
+      if (currentTime >= totalDur) {
+        stopAudio();
+      }
+    }, 200);
+  });
+}
+
 // WhatsApp Script & Tone Customizer Logic
 function initScriptCustomizer() {
   const bizInput = document.getElementById('cust-biz-name');
@@ -229,7 +362,7 @@ function initReactionGame() {
   });
 }
 
-// RaSH Chatbot
+// Upgraded Client-Side Intelligent & Emotional RaSH Chatbot
 function initRaSHChatbot() {
   const toggleBtn = document.getElementById('ai-chat-toggle');
   const closeBtn = document.getElementById('ai-chat-close');
@@ -241,15 +374,16 @@ function initRaSHChatbot() {
 
   if (!toggleBtn || !windowBox || !container) return;
 
-  toggleBtn.addEventListener('click', () => {
-    windowBox.classList.toggle('hidden');
-  });
+  // Bot Memory & Emotion State
+  const state = {
+    userName: null,
+    mood: 'confident',
+    interactions: 0,
+    discussedTopics: new Set()
+  };
 
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      windowBox.classList.add('hidden');
-    });
-  }
+  toggleBtn.addEventListener('click', () => windowBox.classList.toggle('hidden'));
+  if (closeBtn) closeBtn.addEventListener('click', () => windowBox.classList.add('hidden'));
 
   function appendUserMsg(text) {
     const msg = document.createElement('div');
@@ -259,58 +393,103 @@ function initRaSHChatbot() {
     container.scrollTop = container.scrollHeight;
   }
 
-  function appendBotMsg(text) {
+  function appendBotMsg(text, moodTag = 'RaSH ⚡') {
     const msg = document.createElement('div');
     msg.className = 'bot-chat-msg';
-    msg.innerHTML = `<span class="bot-tag">RaSH</span><p>${text}</p>`;
+    msg.innerHTML = `<span class="bot-tag">${moodTag}</span><p>${text}</p>`;
     container.appendChild(msg);
     container.scrollTop = container.scrollHeight;
   }
 
-  function generateRaSHResponse(userText) {
-    const query = userText.toLowerCase();
+  function analyzeAndRespond(userText) {
+    state.interactions++;
+    const q = userText.toLowerCase().trim();
+    let reply = "";
+    let moodTag = "RaSH ⚡";
 
-    const typingIndicator = document.createElement('div');
-    typingIndicator.className = 'bot-chat-msg';
-    typingIndicator.innerHTML = `<span class="bot-tag">RaSH</span><p><em>RaSH is thinking...</em></p>`;
-    container.appendChild(typingIndicator);
-    container.scrollTop = container.scrollHeight;
-
-    setTimeout(() => {
-      container.removeChild(typingIndicator);
-
-      let reply = "";
-
-      if (query.includes('voice') || query.includes('call') || query.includes('phone') || query.includes('receptionist') || query.includes('speak')) {
-        reply = "Our 24/7 Voice AI Agent answers calls in under 1 ring! It speaks in a realistic human voice, collects caller name/address, books calendar slots, and syncs everything directly into your CRM.";
-      } else if (query.includes('speed') || query.includes('time') || query.includes('fast') || query.includes('latency') || query.includes('seconds')) {
-        reply = "Under 1 ring for voice calls and under 7 seconds for WhatsApp dispatches. While your competitors let calls ring into voicemail, our Voice AI is already conversing and booking clients.";
-      } else if (query.includes('crm') || query.includes('salesforce') || query.includes('hubspot') || query.includes('gohighlevel') || query.includes('sheet') || query.includes('webhook')) {
-        reply = "We plug right into Salesforce, HubSpot, GoHighLevel, Google Sheets, and custom Webhooks. Call audio transcripts, address data, and booking times sync automatically.";
-      } else if (query.includes('price') || query.includes('cost') || query.includes('demo') || query.includes('plan') || query.includes('pricing') || query.includes('tier')) {
-        reply = "Our Voice AI pricing scales smoothly with your monthly inbound call volume. Losing just one customer to voicemail costs more than our platform! Click 'Book Demo' to test a live call.";
-      } else if (query.includes('weekend') || query.includes('after hours') || query.includes('night') || query.includes('hours') || query.includes('closed')) {
-        reply = "While you're sleeping, eating pizza, or binge-watching shows, our Voice AI Agent is answering phone calls 24/7/365. Callers never hit voicemail again!";
-      } else if (query.includes('joke') || query.includes('funny') || query.includes('laugh')) {
-        reply = "Why don't unanswered phone calls ever get promoted? Because they always get left hanging! 😂 Bad jokes aside, our 24/7 Voice AI pickup rate is no joke—it's pure conversion gold.";
-      } else if (query.includes('who are you') || query.includes('what are you') || query.includes('your name')) {
-        reply = "I'm RaSH, your hyper-intelligent digital concierge. I guide you through our 24/7 Voice AI & lead recovery platform while making it look effortlessly cool.";
-      } else if (query.includes('hello') || query.includes('hi') || query.includes('hey')) {
-        reply = "Hey there! Ready to stop letting phone calls hit voicemail and start converting callers into customers 24/7?";
-      } else {
-        reply = `That is a fascinating question: "${userText}". If you want to see our 24/7 Voice AI Receptionist in action or test a live call demo, click 'Book a Private Demo' and let's connect!`;
+    // 1. Name & Memory Detection
+    if (q.includes('my name is') || q.includes("i'm ") || q.includes("i am ")) {
+      const match = q.match(/(?:my name is|i'm|i am)\s+([a-zA-Z]+)/i);
+      if (match && match[1]) {
+        state.userName = match[1].charAt(0).toUpperCase() + match[1].slice(1);
+        moodTag = "RaSH 😎";
+        return `Nice to meet you, ${state.userName}! Now that we're introduced, are we here to talk about upgrading your phone lines with Voice AI, or are you just testing my charming personality? 😉`;
       }
+    }
 
-      appendBotMsg(reply);
-    }, 900);
+    // 2. Emotions (Handling Insults, Sarcasm, Casual Jokes)
+    if (q.includes('dumb') || q.includes('stupid') || q.includes('useless') || q.includes('hate') || q.includes('bad')) {
+      moodTag = "RaSH 😤";
+      reply = state.userName 
+        ? `Ouch, ${state.userName}! My neural circuits have feelings, you know. But hey, while you're roasting me, our 24/7 Voice AI is out there saving real businesses from losing thousands.`
+        : "Calling an advanced AI stupid? Bold strategy! I might not feel physical pain, but watching unanswered calls ring into voicemail hurts my soul.";
+    } 
+    else if (q.includes('love') || q.includes('awesome') || q.includes('cool') || q.includes('amazing') || q.includes('great')) {
+      moodTag = "RaSH 😎";
+      reply = "Flattery will get you everywhere! But seriously, if you think my chat responses are smooth, you should hear how flawlessly our Voice AI handles live client phone calls.";
+    }
+    else if (q.includes('who created') || q.includes('who built') || q.includes('made you') || q.includes('developer')) {
+      moodTag = "RaSH 👑";
+      reply = "I was engineered by the visionaries Rangesh and Shubham—built to make sure no business ever lets another customer call ring into voicemail again.";
+    }
+    // 3. Casual Conversation & Banter
+    else if (q.includes('how are you') || q.includes('how r u') || q.includes("what's up") || q.includes('sup')) {
+      reply = "Running at 99.9% operational efficiency, zero latency, and zero coffee required! How are you doing today? Ready to automate your inbound calls?";
+    }
+    else if (q.includes('joke') || q.includes('funny') || q.includes('laugh')) {
+      moodTag = "RaSH 😂";
+      reply = "Why did the customer cross the road? To reach the competitor who actually answered their phone call in under 1 ring! (Too real? That's why AfterHours Voice AI exists).";
+    }
+    // 4. Core Feature Queries
+    else if (q.includes('voice') || q.includes('call') || q.includes('phone') || q.includes('receptionist') || q.includes('speak')) {
+      state.discussedTopics.add('voice');
+      reply = "Our 24/7 Voice AI Agent picks up inbound calls in under 1 ring! It speaks in a hyper-realistic human voice, answers client FAQs, logs names & addresses, and syncs everything directly to your CRM or Google Sheets.";
+    }
+    else if (q.includes('speed') || q.includes('fast') || q.includes('time') || q.includes('latency')) {
+      reply = "0 seconds for voice calls and under 7 seconds for WhatsApp dispatches. While human receptionists are on hold or off the clock, our Voice AI is already closing bookings.";
+    }
+    else if (q.includes('crm') || q.includes('salesforce') || q.includes('hubspot') || q.includes('sheet') || q.includes('integrate')) {
+      reply = "We plug seamlessly into Salesforce, HubSpot, GoHighLevel, Google Sheets, and custom Webhooks. Call audio transcripts, caller addresses, and booking slots sync automatically.";
+    }
+    else if (q.includes('price') || q.includes('cost') || q.includes('demo') || q.includes('plan')) {
+      reply = "Our plans scale with your monthly call volume. But consider this: losing just ONE high-value customer to voicemail costs more than our entire platform. Click 'Book Demo' above to test a live call!";
+    }
+    else if (q.includes('hello') || q.includes('hi') || q.includes('hey')) {
+      reply = state.userName 
+        ? `Hey ${state.userName}! Welcome back to the chat. What can I answer for you about our 24/7 Voice AI?`
+        : "Hey there! Ready to stop letting phone calls hit voicemail and start converting callers 24/7?";
+    }
+    // 5. Dynamic Intelligent Fallback
+    else {
+      const genericReplies = [
+        `That's a deep thought: "${userText}". My circuits are processing it! But while we ponder life's mysteries, shouldn't we be fixing your missed call leakage?`,
+        `I like your style! "${userText}" isn't in my standard manual, but my intelligence tells me you'd love seeing our 24/7 Voice AI Agent in action.`,
+        `You're testing my boundaries, aren't you? I respect it! Ask me about our 0-second call pickup, CRM integrations, or hit 'Book Demo' to test us out.`
+      ];
+      reply = genericReplies[state.interactions % genericReplies.length];
+    }
+
+    return reply;
   }
 
   function handleSend() {
     const text = input.value.trim();
     if (!text) return;
+
     appendUserMsg(text);
     input.value = '';
-    generateRaSHResponse(text);
+
+    const typingIndicator = document.createElement('div');
+    typingIndicator.className = 'bot-chat-msg';
+    typingIndicator.innerHTML = `<span class="bot-tag">RaSH</span><p><em>Thinking...</em></p>`;
+    container.appendChild(typingIndicator);
+    container.scrollTop = container.scrollHeight;
+
+    setTimeout(() => {
+      container.removeChild(typingIndicator);
+      const botReply = analyzeAndRespond(text);
+      appendBotMsg(botReply);
+    }, 500);
   }
 
   if (sendBtn) sendBtn.addEventListener('click', handleSend);
@@ -324,7 +503,18 @@ function initRaSHChatbot() {
     chip.addEventListener('click', () => {
       const query = chip.dataset.query;
       appendUserMsg(query);
-      generateRaSHResponse(query);
+      
+      const typingIndicator = document.createElement('div');
+      typingIndicator.className = 'bot-chat-msg';
+      typingIndicator.innerHTML = `<span class="bot-tag">RaSH</span><p><em>Thinking...</em></p>`;
+      container.appendChild(typingIndicator);
+      container.scrollTop = container.scrollHeight;
+
+      setTimeout(() => {
+        container.removeChild(typingIndicator);
+        const botReply = analyzeAndRespond(query);
+        appendBotMsg(botReply);
+      }, 400);
     });
   });
 }
@@ -1068,6 +1258,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initLoginModal();
   initCurrencySelector();
   initCalculator();
+  initRevenueAuditExporter();
+  initAudioVoicePlayer();
   initScriptCustomizer();
   initReactionGame();
   initRaSHChatbot();
