@@ -74,7 +74,7 @@ function formatAMPM(date) {
   return hours + ':' + minutes + ' ' + ampm;
 }
 
-// Glassmorphic Floating Activity Ribbon Manager
+// Glassmorphic Floating Activity Ribbon Manager (Desktop Only)
 function initActivityRibbon() {
   const ribbonText = document.getElementById('ribbon-text');
   if (!ribbonText) return;
@@ -374,7 +374,19 @@ function initRevenueAuditExporter() {
   }
 }
 
-// Client-Side Audio Voice Sample Player (Fixed Synthesis Completion & Timing Synchronization)
+// Helper to populate & select female voice reliably on desktop & mobile
+let availableVoices = [];
+function populateVoices() {
+  if ('speechSynthesis' in window) {
+    availableVoices = window.speechSynthesis.getVoices();
+  }
+}
+populateVoices();
+if ('speechSynthesis' in window && window.speechSynthesis.onvoiceschanged !== undefined) {
+  window.speechSynthesis.onvoiceschanged = populateVoices;
+}
+
+// Client-Side Audio Voice Sample Player (Desktop & Mobile Female Voice Selection)
 function initAudioVoicePlayer() {
   const playBtn = document.getElementById('btn-play-voice-sample');
   const playIcon = document.getElementById('play-icon');
@@ -448,8 +460,29 @@ function initAudioVoicePlayer() {
       const textToSpeak = sample.transcript.replace(/"/g, '');
       const utterance = new SpeechSynthesisUtterance(textToSpeak);
       
+      populateVoices();
+      
+      // Explicit Female Voice Target Logic
+      const femaleVoice = availableVoices.find(v => 
+        (v.lang.startsWith('en')) && (
+          v.name.toLowerCase().includes('female') || 
+          v.name.toLowerCase().includes('zira') || 
+          v.name.toLowerCase().includes('samantha') || 
+          v.name.toLowerCase().includes('victoria') ||
+          v.name.toLowerCase().includes('karen') ||
+          v.name.toLowerCase().includes('fiona') ||
+          v.name.toLowerCase().includes('google us english') ||
+          v.name.toLowerCase().includes('natural')
+        )
+      );
+
+      if (femaleVoice) {
+        utterance.voice = femaleVoice;
+      }
+      
+      // Pitch boost ensures clean, warm female vocal range across desktop browsers
+      utterance.pitch = 1.25; 
       utterance.rate = 0.95;
-      utterance.pitch = 1.0;
 
       utterance.onend = () => {
         stopAudio();
@@ -570,7 +603,7 @@ function initReactionGame() {
   });
 }
 
-// Max-Intelligence Upgraded RaSH Assistant (Equipped with Founder Vision Lore)
+// Max-Intelligence Upgraded RaSH Assistant (Humor, Laughing, Multi-turn Memory & Founder Lore)
 function initRaSHChatbot() {
   const toggleBtn = document.getElementById('ai-chat-toggle');
   const closeBtn = document.getElementById('ai-chat-close');
@@ -584,10 +617,18 @@ function initRaSHChatbot() {
 
   const state = {
     userName: null,
+    companyName: null,
     mood: 'confident',
     interactions: 0,
-    discussedTopics: new Set()
+    jokeIndex: 0
   };
+
+  const jokeBank = [
+    "Why did the sales lead cross the road? To reach the competitor who actually answered their phone in under 1 ring!",
+    "Why don't missed phone calls ever get promoted? Because they always get left hanging!",
+    "What is a receptionist's favorite workout? Ring dips! But with AfterHours Voice AI, zero reps required.",
+    "Why was the voicemail inbox so lonely? Because AfterHours answered every caller before the second ring!"
+  ];
 
   toggleBtn.addEventListener('click', () => windowBox.classList.toggle('hidden'));
   if (closeBtn) closeBtn.addEventListener('click', () => windowBox.classList.add('hidden'));
@@ -614,21 +655,31 @@ function initRaSHChatbot() {
     let reply = "";
     let moodTag = "RaSH ⚡";
 
-    // 1. Founder Lore & Identity Queries (Rangesh & Shubham)
-    if (q.includes('rangesh') || q.includes('shubham') || q.includes('founder') || q.includes('who built') || q.includes('created you') || q.includes('owner')) {
+    // 1. Founder Lore & Story (Rangesh & Shubham)
+    if (q.includes('rangesh') || q.includes('shubham') || q.includes('rungesh') || q.includes('founder') || q.includes('creator') || q.includes('who built') || q.includes('owner')) {
       moodTag = "RaSH 👑";
-      reply = "AfterHours Automation was co-founded and built by **Rangesh** and **Shubham**! They are 19-year-old visionary student engineers who designed every line of code, WebGL geometry, and AI telephony route to eliminate missed calls for businesses worldwide.";
+      reply = "AfterHours Automation was created by **Rangesh** and **Shubham**! They are two brilliant 19-year-old student visionaries and college innovators who engineered this entire 24/7 Voice AI platform, WebGL engine, and CRM bridge from scratch to ensure no business ever loses another lead.";
     }
-    // 2. Personal Intro Memory
+    // 2. Laughing & Humor Requests
+    else if (q.includes('laugh') || q.includes('haha') || q.includes('lol') || q.includes('chuckle') || q.includes('funny')) {
+      moodTag = "RaSH 😂";
+      reply = "HAHAHA! 🤣🤣 You got me laughing in high-definition 60fps! I love a good sense of humor. What else can I do for you today?";
+    }
+    else if (q.includes('joke') || q.includes('tell me a joke') || q.includes('another joke')) {
+      moodTag = "RaSH 😂";
+      reply = jokeBank[state.jokeIndex % jokeBank.length];
+      state.jokeIndex++;
+    }
+    // 3. User Name & Context Memory
     else if (q.includes('my name is') || q.includes("i'm ") || q.includes("i am ")) {
       const match = q.match(/(?:my name is|i'm|i am)\s+([a-zA-Z]+)/i);
       if (match && match[1]) {
         state.userName = match[1].charAt(0).toUpperCase() + match[1].slice(1);
         moodTag = "RaSH 😎";
-        return `Pleasure to meet you, ${state.userName}! Ready to see how our 24/7 Voice AI Agent turns ringing phone calls into confirmed revenue?`;
+        return `Pleasure to meet you, ${state.userName}! Ready to see how our 24/7 Voice AI Agent turns ringing phone calls into confirmed revenue for your business?`;
       }
     }
-    // 3. Dynamic Emotional Reactions
+    // 4. Emotional Reactions
     else if (q.includes('dumb') || q.includes('stupid') || q.includes('useless') || q.includes('hate') || q.includes('bad')) {
       moodTag = "RaSH 😤";
       reply = state.userName 
@@ -637,17 +688,13 @@ function initRaSHChatbot() {
     } 
     else if (q.includes('love') || q.includes('awesome') || q.includes('cool') || q.includes('amazing') || q.includes('great')) {
       moodTag = "RaSH 😎";
-      reply = "Flattery will get you everywhere! But seriously, if you think my chat responses are smooth, you should hear our 24/7 Voice AI handle live phone calls.";
+      reply = "Flattery will get you everywhere! If you think my chat responses are smooth, wait until you hear our 24/7 Voice AI handle live phone calls.";
     }
-    // 4. Banter & Casual Chat
+    // 5. Banter & Casual Chat
     else if (q.includes('how are you') || q.includes('how r u') || q.includes("what's up") || q.includes('sup')) {
       reply = "Running at 99.9% operational efficiency, zero latency, and zero coffee required! How can I assist your business today?";
     }
-    else if (q.includes('joke') || q.includes('funny') || q.includes('laugh')) {
-      moodTag = "RaSH 😂";
-      reply = "Why did the customer cross the road? To reach the competitor who actually answered their phone call in under 1 ring!";
-    }
-    // 5. Product Features & Pricing
+    // 6. Product Features & Pricing
     else if (q.includes('voice') || q.includes('call') || q.includes('phone') || q.includes('receptionist') || q.includes('speak')) {
       reply = "Our 24/7 Voice AI Agent picks up inbound calls in under 1 ring! It speaks in a realistic human voice, collects names & addresses, books slots, and syncs directly to your CRM.";
     }
@@ -659,7 +706,7 @@ function initRaSHChatbot() {
         ? `Hey ${state.userName}! Welcome back. What questions can I answer for you today?`
         : "Hey there! Ready to stop letting phone calls hit voicemail and convert callers 24/7?";
     }
-    // 6. Max Intelligence Fallback
+    // 7. Max Intelligence Fallback
     else {
       const genericReplies = [
         `That's a deep thought: "${userText}". While my circuits ponder that, shouldn't we be fixing your missed call leakage?`,
