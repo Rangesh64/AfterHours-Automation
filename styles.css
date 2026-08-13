@@ -1997,6 +1997,44 @@ input[type=range] {
   min-height: 100vh;
 }
 
+/* In-Page Multi-Tab View Styles */
+.tab-view {
+  display: none;
+  animation: fadeInView 0.35s ease-in-out forwards;
+}
+
+.tab-view.active-view {
+  display: block;
+}
+
+@keyframes fadeInView {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sidebar-menu .sidebar-item.active {
+  background: rgba(197, 155, 39, 0.15) !important;
+  border-left: 3px solid #c59b27 !important;
+  color: #c59b27 !important;
+  font-weight: 600 !important;
+}
+
+.action-btn-pill {
+  background: rgba(197, 155, 39, 0.1);
+  border: 1px solid rgba(197, 155, 39, 0.3);
+  color: #c59b27;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-btn-pill:hover {
+  background: rgba(197, 155, 39, 0.25);
+  color: #fff;
+}
+
 .dash-user-controls { display: flex; align-items: center; gap: 24px; }
 .luxury-email { font-weight: 500; color: #21150c; padding: 0 4px; }
 
