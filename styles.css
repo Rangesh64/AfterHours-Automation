@@ -156,6 +156,35 @@ body {
 }
 .hidden { display: none !important; }
 
+/* FLOATING GLASSMORPHIC ACTIVITY RIBBON */
+.activity-ribbon {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  z-index: 1400;
+  background: rgba(8, 15, 32, 0.88);
+  border: 1px solid var(--border-glass);
+  box-shadow: 0 8px 32px rgba(0, 240, 255, 0.18);
+  backdrop-filter: blur(16px);
+  padding: 10px 20px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  transition: all 0.4s ease;
+}
+
+.ribbon-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--cyan-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--cyan-accent);
+  animation: pulse 1.8s infinite;
+}
+
 /* Navigation Navbar */
 .navbar {
   display: flex;
@@ -725,12 +754,89 @@ section { position: relative; z-index: 2; background: transparent; width: 100%; 
   border-left: 2px solid var(--cyan-accent);
 }
 
-.voice-subtext {
-  display: block;
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  margin-bottom: 12px;
+/* SPEECH TO CRM PARSER SIMULATOR */
+.crm-parser-wrapper {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
+
+.parser-pills-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.parser-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  padding: 8px 16px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.parser-pill.active {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--cyan-accent);
+  color: var(--cyan-accent);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+.parser-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.parser-panel {
+  background: rgba(2, 4, 10, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.panel-tag-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 8px;
+}
+
+.parser-transcript-text {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  font-style: italic;
+  min-height: 100px;
+}
+
+.crm-fields-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.crm-field-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+}
+
+.f-label { color: var(--text-muted); }
 
 /* CALCULATOR STEPPER BUTTONS */
 .stepper-badge-wrap {
@@ -766,6 +872,89 @@ section { position: relative; z-index: 2; background: transparent; width: 100%; 
   background: var(--cyan-accent);
   color: #02040a;
 }
+
+/* INTERACTIVE FAQS ACCORDION SECTION STYLING */
+.faq-section { padding: 120px 8%; }
+
+.faq-accordion {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-glass);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faq-card.open {
+  border-color: var(--cyan-accent);
+  box-shadow: 0 8px 30px rgba(0, 240, 255, 0.15);
+}
+
+.faq-question-btn {
+  width: 100%;
+  padding: 22px 28px;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.faq-icon {
+  font-size: 1.4rem;
+  color: var(--cyan-accent);
+  transition: transform 0.3s;
+}
+
+.faq-card.open .faq-icon {
+  transform: rotate(45deg);
+}
+
+.faq-answer-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s;
+  padding: 0 28px;
+}
+
+.faq-card.open .faq-answer-panel {
+  max-height: 200px;
+  padding: 0 28px 24px 28px;
+}
+
+.faq-answer-panel p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* EXIT-INTENT MODAL */
+.exit-modal-card {
+  max-width: 480px !important;
+  text-align: center;
+}
+
+.exit-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.exit-cta-btn { width: 100%; }
 
 /* REVENUE LOSS AUDIT MODAL */
 .audit-modal-card {
@@ -2070,7 +2259,7 @@ footer {
   .hero { padding: 100px 4% 60px 4% !important; }
   section { padding: 50px 4% !important; }
   
-  .workflow-layout, .industry-shell, .customizer-shell, .game-card, .switcher-shell, .calc-card, .card-grid, .why-grid-3d, .dashboard-shell, .pricing-placeholder-card, .cta-card, .voice-card-container {
+  .workflow-layout, .industry-shell, .customizer-shell, .game-card, .switcher-shell, .calc-card, .card-grid, .why-grid-3d, .dashboard-shell, .pricing-placeholder-card, .cta-card, .voice-card-container, .faq-accordion {
     max-width: 100vw !important;
     width: 100% !important;
     padding-left: 10px !important;
@@ -2079,9 +2268,26 @@ footer {
     margin-right: 0 !important;
   }
 
-  .voice-grid {
+  .voice-grid, .parser-grid {
     grid-template-columns: 1fr !important;
     gap: 20px !important;
+  }
+
+  .activity-ribbon {
+    bottom: 15px !important;
+    left: 15px !important;
+    font-size: 0.65rem !important;
+    padding: 6px 14px !important;
+    max-width: calc(100vw - 30px);
+  }
+
+  .faq-question-btn {
+    font-size: 0.85rem !important;
+    padding: 16px !important;
+  }
+  
+  .faq-answer-panel {
+    font-size: 0.7rem !important;
   }
   
   .navbar { padding: 12px 4% !important; }
