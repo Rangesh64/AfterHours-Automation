@@ -583,20 +583,21 @@ section { position: relative; z-index: 2; background: transparent; width: 100%; 
   font-weight: 700;
 }
 
-.voice-mic-icon { font-size: 3rem; margin: 20px 0; }
+.voice-mic-icon { font-size: 3rem; margin: 16px 0; }
 
 .voice-equalizer {
   display: flex;
   justify-content: center;
   align-items: flex-end;
   gap: 6px;
-  height: 45px;
-  margin-bottom: 20px;
+  height: 40px;
+  margin-bottom: 16px;
 }
 
 .eq-bar {
   width: 6px;
   border-radius: 3px;
+  transition: height 0.2s ease;
 }
 
 .eq-1 { background: var(--cyan-accent); height: 60%; animation: pulse 1.2s infinite ease-in-out; }
@@ -606,14 +607,179 @@ section { position: relative; z-index: 2; background: transparent; width: 100%; 
 .eq-5 { background: var(--emerald-accent); height: 70%; animation: pulse 1.1s infinite ease-in-out; }
 .eq-6 { background: var(--cobalt-light); height: 50%; animation: pulse 1.3s infinite ease-in-out; }
 
+/* INTERACTIVE AUDIO VOICE SAMPLE PLAYER */
+.voice-audio-player {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.audio-player-label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  color: var(--cyan-accent);
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.sample-selector-pills {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.sample-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.sample-pill.active {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--cyan-accent);
+  color: var(--cyan-accent);
+}
+
+.audio-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.audio-play-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--cyan-accent);
+  color: #02040a;
+  border: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.audio-play-btn:hover { transform: scale(1.1); }
+
+.audio-waveform-progress {
+  flex: 1;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.audio-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--cobalt-light), var(--cyan-accent));
+  transition: width 0.1s linear;
+}
+
+.audio-time-display {
+  position: absolute;
+  right: 0;
+  top: -18px;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.sample-transcript-box {
+  font-size: 0.78rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+  font-style: italic;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border-left: 2px solid var(--cyan-accent);
+}
+
 .voice-subtext {
   display: block;
   font-size: 0.82rem;
   color: var(--text-muted);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
-.voice-cta-btn { width: 100%; }
+/* REVENUE LOSS AUDIT MODAL */
+.audit-modal-card {
+  max-width: 520px !important;
+}
+
+.audit-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.audit-stat-box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.a-label { display: block; font-size: 0.7rem; color: var(--text-muted); margin-bottom: 4px; }
+.a-val { font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; }
+
+.audit-breakdown-bar-box {
+  background: rgba(2, 4, 10, 0.6);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  padding: 16px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+}
+
+.a-sublabel { font-size: 0.8rem; color: var(--text-primary); display: block; margin-bottom: 8px; }
+
+.audit-progress-track {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.audit-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan-accent), var(--emerald-accent));
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.audit-yield-text {
+  font-size: 0.85rem;
+  color: var(--emerald-accent);
+  font-weight: 700;
+  display: block;
+  text-align: right;
+}
+
+.audit-modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
 
 /* ROYAL RaSH CHATBOT WIDGET */
 .ai-chat-widget {
