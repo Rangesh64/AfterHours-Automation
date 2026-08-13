@@ -31,7 +31,6 @@ html, body {
   background-color: var(--bg-dark);
   color: var(--text-primary);
   font-family: var(--font-main);
-  /* The absolute fix for horizontal right-side empty space */
   overflow-x: hidden;
   width: 100%;
   max-width: 100vw;
@@ -43,7 +42,7 @@ body {
   min-height: 100vh;
 }
 
-/* Global Color Utilities - Forced to override any conflicts */
+/* Global Color Utilities */
 .text-cyan { color: var(--cyan-accent) !important; }
 .text-emerald { color: var(--emerald-accent) !important; }
 .text-red { color: var(--red-accent) !important; }
@@ -182,7 +181,6 @@ body {
   gap: 12px;
 }
 
-/* INCREASED LOGO SIZE FOR DESKTOP AS REQUESTED */
 .logo-knot-svg {
   width: 48px;
   height: 48px;
@@ -210,7 +208,6 @@ body {
 
 .nav-links a:hover { color: var(--text-primary); }
 
-/* PERFECTLY CENTERED NAVIGATION BUTTONS */
 .btn-outline.nav-btn {
   display: inline-flex;
   align-items: center;
@@ -519,6 +516,104 @@ section { position: relative; z-index: 2; background: transparent; width: 100%; 
 }
 
 .hud-highlight { color: var(--text-primary); font-weight: 600; }
+
+/* 24/7 VOICE AI SHOWCASE STYLING */
+.voice-section { padding: 120px 8%; }
+
+.voice-card-container {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 48px;
+  border-color: var(--cyan-accent);
+  box-shadow: 0 0 40px rgba(0, 240, 255, 0.2);
+}
+
+.voice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.voice-badge {
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.voice-card-title {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  font-family: var(--font-heading);
+}
+
+.voice-card-desc {
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-size: 0.98rem;
+  margin-bottom: 24px;
+}
+
+.voice-feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.voice-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.voice-check { color: var(--cyan-accent); font-weight: bold; }
+
+.voice-telemetry-box {
+  background: rgba(2, 4, 10, 0.8);
+  border: 1px solid var(--border-glass);
+  border-radius: 24px;
+  padding: 32px;
+  text-align: center;
+}
+
+.voice-telemetry-tag {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: var(--cyan-accent);
+  font-weight: 700;
+}
+
+.voice-mic-icon { font-size: 3rem; margin: 20px 0; }
+
+.voice-equalizer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 6px;
+  height: 45px;
+  margin-bottom: 20px;
+}
+
+.eq-bar {
+  width: 6px;
+  border-radius: 3px;
+}
+
+.eq-1 { background: var(--cyan-accent); height: 60%; animation: pulse 1.2s infinite ease-in-out; }
+.eq-2 { background: var(--cobalt-light); height: 90%; animation: pulse 0.8s infinite ease-in-out; }
+.eq-3 { background: var(--violet-accent); height: 40%; animation: pulse 1.5s infinite ease-in-out; }
+.eq-4 { background: var(--cyan-accent); height: 100%; animation: pulse 0.9s infinite ease-in-out; }
+.eq-5 { background: var(--emerald-accent); height: 70%; animation: pulse 1.1s infinite ease-in-out; }
+.eq-6 { background: var(--cobalt-light); height: 50%; animation: pulse 1.3s infinite ease-in-out; }
+
+.voice-subtext {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.voice-cta-btn { width: 100%; }
 
 /* ROYAL RaSH CHATBOT WIDGET */
 .ai-chat-widget {
@@ -1488,10 +1583,7 @@ input[type=range] {
 
 .modal-footer-note { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.75rem; color: var(--text-muted); margin-top: 12px; }
 
-/* -------------------------------------------------------------------------
-   EXECUTIVE DASHBOARD (dashboard.html) 
-   (RESTORED DESKTOP CODE)
-   ------------------------------------------------------------------------- */
+/* EXECUTIVE DASHBOARD (dashboard.html) */
 .dashboard-body.luxury-marble-bg {
   background-color: #fdfbf7 !important;
   background-image: 
@@ -1733,9 +1825,7 @@ input[type=range] {
 .integ-info strong { display: block; font-size: 0.9rem; }
 .integ-info span { font-size: 0.78rem; color: #7a5c43; }
 
-/* -------------------------------------------------------------------------
-   RESTORED CENTERED FOOTER DESIGN
-   ------------------------------------------------------------------------- */
+/* FOOTER */
 footer { 
   text-align: center; 
   padding: 48px 8%; 
@@ -1758,18 +1848,15 @@ footer {
 .footer-link-highlight { color: var(--cyan-accent); text-decoration: none; font-weight: 600; transition: color 0.3s; }
 .footer-link-highlight:hover { color: #ffffff; text-decoration: underline; }
 
-/* -------------------------------------------------------------------------
-   DEDICATED EXTREME-MOBILE SCALING (No Desktop Changes)
-   ------------------------------------------------------------------------- */
+/* DEDICATED EXTREME-MOBILE SCALING (PRESERVES DESKTOP COMPLETELY) */
 @media (max-width: 900px) {
   * { cursor: auto !important; }
   .cursor-dot, .cursor-ring { display: none; }
   
-  /* Reset All Layout Margins to Hug the Phone Screen Tightly */
   .hero { padding: 100px 4% 60px 4% !important; }
   section { padding: 50px 4% !important; }
   
-  .workflow-layout, .industry-shell, .customizer-shell, .game-card, .switcher-shell, .calc-card, .card-grid, .why-grid-3d, .dashboard-shell, .pricing-placeholder-card, .cta-card {
+  .workflow-layout, .industry-shell, .customizer-shell, .game-card, .switcher-shell, .calc-card, .card-grid, .why-grid-3d, .dashboard-shell, .pricing-placeholder-card, .cta-card, .voice-card-container {
     max-width: 100vw !important;
     width: 100% !important;
     padding-left: 10px !important;
@@ -1777,8 +1864,12 @@ footer {
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
+
+  .voice-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
   
-  /* Navbar & Hamburger */
   .navbar { padding: 12px 4% !important; }
   .logo-knot-svg { width: 32px !important; height: 32px !important; }
   .logo-text { font-size: 1rem !important; }
@@ -1807,11 +1898,10 @@ footer {
     pointer-events: auto;
   }
 
-  /* MASSIVELY REDUCED GLOBAL TYPOGRAPHY FOR BREATHING ROOM */
+  /* REDUCED MOBILE TYPOGRAPHY FOR BREATHING ROOM */
   h1 { font-size: 1.4rem !important; letter-spacing: -0.5px !important; margin-bottom: 10px !important; line-height: 1.2 !important; }
   .hero-subtext { font-size: 0.75rem !important; margin-bottom: 16px !important; }
   
-  /* FIXED: Time Banner Font Size Downscaled */
   .time-banner { 
     font-size: 0.6rem !important; 
     padding: 4px 8px !important; 
@@ -1829,14 +1919,12 @@ footer {
   .card-icon { font-size: 1rem !important; }
   .card-status-bar { font-size: 0.5rem !important; padding-top: 6px !important; }
 
-  /* Workflow Panel Adjustments */
   .step-card { padding: 12px !important; border-radius: 12px !important;}
   .step-id { font-size: 0.9rem !important; }
   .step-card h3 { font-size: 0.8rem !important; }
   .step-card p { font-size: 0.6rem !important; margin-bottom: 6px !important; }
   .step-hud { font-size: 0.55rem !important; }
 
-  /* Industry Panel Shrink */
   .industry-display-card { padding: 12px !important; border-radius: 12px !important; }
   .ind-display-card h3 { font-size: 0.9rem !important; }
   .ind-desc { font-size: 0.65rem !important; margin-bottom: 12px !important; }
@@ -1846,7 +1934,6 @@ footer {
   .ind-box-label { font-size: 0.55rem !important; }
   .ind-tab { font-size: 0.65rem !important; padding: 6px 10px !important; }
 
-  /* Interactive Messaging Studio */
   .customizer-shell {
     grid-template-columns: 1fr 1fr !important;
     gap: 10px !important;
@@ -1859,7 +1946,6 @@ footer {
   .phone-avatar { width: 20px !important; height: 20px !important; font-size: 0.55rem !important; }
   .tone-btn { font-size: 0.55rem !important; padding: 4px 8px !important; }
 
-  /* CALCULATOR - STACKED EXACTLY AS REQUESTED WITHIN THE 3D GRID */
   .calc-card { padding: 16px !important; }
   .calc-grid {
     display: flex !important;
@@ -1870,7 +1956,6 @@ footer {
   .result-amount { font-size: 1.4rem !important; margin-bottom: 4px !important; }
   .calc-result-box { padding: 16px !important; }
 
-  /* Architecture & Why Sections (2 Columns, Tiny Text) */
   .card-grid, .why-grid-3d {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 6px !important;
@@ -1879,7 +1964,6 @@ footer {
   .stat-glass-card .stat-number { font-size: 1.1rem !important; margin-bottom: 4px !important; }
   .stat-glass-card .stat-label { font-size: 0.55rem !important; line-height: 1.2 !important; }
 
-  /* Speed Test Stopwatch Rectangular Sizing Fix */
   .game-card { padding: 12px !important; }
   .game-top-bar {
     flex-direction: row !important;
@@ -1893,7 +1977,6 @@ footer {
   .r-val { font-size: 0.75rem !important; }
   .game-workspace textarea { font-size: 0.65rem !important; height: 50px !important; padding: 8px !important; }
 
-  /* Process Switcher Horizontal Metrics & EMERGENCY RED TEXT RESTORED */
   .switcher-content-card { padding: 12px !important; border-radius: 12px !important; }
   .switcher-nav-row { flex-direction: row !important; gap: 6px !important; }
   .switcher-tab { min-width: 0 !important; padding: 8px !important; font-size: 0.6rem !important; }
@@ -1904,10 +1987,8 @@ footer {
   .s-label { font-size: 0.55rem !important; }
   .s-val { font-size: 0.8rem !important; white-space: nowrap !important; }
   
-  /* Guarantee Red Text applies correctly on Mobile */
   .s-val.text-red { color: #f43f5e !important; }
 
-  /* Control Console Clean Up */
   .dashboard-shell { padding: 12px !important; }
   .dash-panel { padding: 10px !important; border-radius: 10px !important; }
   .dash-panel h4 { font-size: 0.65rem !important; margin-bottom: 8px !important; }
@@ -1919,7 +2000,6 @@ footer {
   .dash-main-split { display: flex !important; flex-direction: column !important; gap: 10px !important; }
   .activity-feed .feed-row { font-size: 0.55rem !important; padding: 4px !important; }
   
-  /* Simulator Input Row Strict Confinement */
   .sim-label { font-size: 0.55rem !important; }
   .sim-input-row { display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; gap: 4px !important; align-items: center !important; }
   .sim-input-row input { flex: 1 !important; width: 100% !important; min-width: 0 !important; font-size: 0.55rem !important; padding: 6px !important; }
@@ -1928,7 +2008,6 @@ footer {
   .ai-console p { font-size: 0.55rem !important; }
   .ai-msg { padding: 6px !important; }
 
-  /* CTA & Pricing Box */
   .pricing-placeholder-card { padding: 20px 12px !important; border-radius: 12px !important;}
   .pricing-placeholder-card h3 { font-size: 0.9rem !important; }
   .pricing-placeholder-card p { font-size: 0.65rem !important; }
@@ -1936,23 +2015,17 @@ footer {
   .cta-card h2 { font-size: 1.1rem !important; line-height: 1.2 !important; margin-bottom: 10px !important;}
   .cta-card p { font-size: 0.65rem !important; margin-bottom: 16px !important; }
   
-  /* Buttons shrunk */
   .btn-sm { font-size: 0.55rem !important; padding: 4px 8px !important; }
   .btn { font-size: 0.65rem !important; padding: 8px 14px !important; }
 
-  /* -------------------------------------------------------------
-     CLIENT PORTAL DASHBOARD (dashboard.html) MOBILE FIXES 
-     ------------------------------------------------------------- */
-  
   .dashboard-wrapper { 
     flex-direction: column !important; 
-    margin-top: 110px !important; /* Pushed down so it NEVER overlaps the header */
+    margin-top: 110px !important;
   }
   
-  /* HEADER RESTORED: Ensured Sign Out & Email are visible */
   .luxury-dash-nav { 
     padding: 14px 4% !important; 
-    flex-direction: column !important; /* Stacks logo and user controls */
+    flex-direction: column !important;
     align-items: flex-start !important;
     justify-content: center !important;
     gap: 12px !important;
@@ -1961,7 +2034,7 @@ footer {
     display: flex !important; 
     flex-direction: row !important; 
     width: 100% !important;
-    justify-content: flex-start !important; /* Aligns email and button to the left */
+    justify-content: flex-start !important;
     gap: 12px !important; 
     align-items: center !important; 
   }
@@ -1972,10 +2045,9 @@ footer {
   .btn-luxury-outline { 
     padding: 6px 12px !important; 
     font-size: 0.6rem !important; 
-    width: auto !important; /* ensures sign-out button isn't cut off */
+    width: auto !important;
   }
 
-  /* Sidebar Horizontal Buttons */
   .luxury-sidebar { 
     width: 100% !important; 
     flex-direction: row !important; 
@@ -1997,7 +2069,6 @@ footer {
   }
   .luxury-footer-card { display: none !important; }
   
-  /* Main Dashboard Header (Autonomous Lead Portfolio) */
   .dash-main-content { padding: 16px 4% !important; }
   .dash-header-row { 
     flex-direction: column !important; 
@@ -2009,14 +2080,11 @@ footer {
   .luxury-tag { font-size: 0.55rem !important; display: block !important; margin-bottom: 4px !important; }
   .status-chip-luxury { font-size: 0.55rem !important; padding: 4px 10px !important; }
   
-  /* Metric Cards */
   .luxury-card { padding: 12px !important; border-radius: 10px !important; }
   .m-sub { font-size: 0.55rem !important; }
   
-  /* Subscription Panel / "Manage Plan & Invoice" Box Fitting */
   .luxury-panel { padding: 14px !important; border-radius: 12px !important; margin-bottom: 16px !important; }
   
-  /* Fixes Manage Plan button wrap/cutoff */
   #subscription .panel-header-flex { 
     flex-direction: column !important; 
     align-items: flex-start !important; 
@@ -2036,7 +2104,6 @@ footer {
   .sub-label { font-size: 0.55rem !important; }
   .sub-val { font-size: 0.65rem !important; }
   
-  /* Table & Log Info */
   .panel-header-flex { 
     flex-direction: row !important; 
     flex-wrap: wrap !important; 
@@ -2046,7 +2113,6 @@ footer {
   }
   .luxury-panel-title { font-size: 0.85rem !important; margin-bottom: 0 !important; }
   
-  /* Technical Information completely minimized */
   .hud-code-luxury { 
     font-size: 0.4rem !important; 
     display: inline-block !important; 
@@ -2064,10 +2130,8 @@ footer {
   .integ-info strong { font-size: 0.75rem !important; }
   .integ-info span { font-size: 0.6rem !important; }
 
-  /* Footer Padding to keep RaSH widget from blocking text */
   footer { padding: 30px 5% 120px 5% !important; }
   
-  /* Slightly Shrink RaSH Widget for Phone */
   .ai-chat-widget {
     bottom: 20px !important;
     right: 15px !important;
