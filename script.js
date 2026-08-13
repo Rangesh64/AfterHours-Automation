@@ -1502,8 +1502,12 @@ async function initLiveDashboard() {
       }
 
       const cards = document.querySelectorAll('.metric-card');
-      const totalLeadsCount = Array.isArray(data.leads) ? data.leads.length : (data.totalLeads || 0);
-      const activeCallsCount = Array.isArray(data.logs) ? data.logs.length : (data.activeIntercepts || 0);
+      const interceptsList = (Array.isArray(data.recentIntercepts) && data.recentIntercepts.length > 0)
+        ? data.recentIntercepts
+        : (Array.isArray(data.logs) && data.logs.length > 0 ? data.logs : []);
+
+      const totalLeadsCount = Array.isArray(data.leads) ? data.leads.length : (data.totalLeads || interceptsList.length || 0);
+      const activeCallsCount = interceptsList.length || data.activeIntercepts || 0;
 
       // Helper function to force counter dataset & HTML update
       const updateCardCount = (card, value) => {
@@ -1540,19 +1544,36 @@ async function initLiveDashboard() {
         }
       }
 
-      // Activity Feed Table
+      // Dynamic Recent Intercept Log Table Rendering (dashboard.html)
+      const logTbody = document.getElementById('intercept-log-tbody');
+      if (logTbody && interceptsList.length > 0) {
+        logTbody.innerHTML = interceptsList.map(log => {
+          let pillClass = 'state-secured-luxury';
+          const outcome = (log.outcome || log.status || 'RECOVERED').toUpperCase();
+          if (outcome.includes('BOOKING') || outcome.includes('SENT')) pillClass = 'state-sent-luxury';
+          if (outcome.includes('PROCESS') || outcome.includes('ACTIVE')) pillClass = 'state-active-luxury';
+
+          const timeDisplay = log.created_at 
+            ? new Date(log.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
+            : (log.intercept_time || 'Just now');
+
+          return `
+            <tr>
+              <td><strong>${log.contact || log.lead_contact || log.user_email || '+1 (555) 000-0000'}</strong></td>
+              <td>${timeDisplay}</td>
+              <td>${log.channels || 'WhatsApp + Email'}</td>
+              <td><span class="status-pill ${pillClass}">${outcome}</span></td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // Activity Feed Table Fallback
       const feed = document.getElementById('activity-feed') || document.querySelector('.activity-log, .feed-container, .luxury-card-feed');
-      if (feed && Array.isArray(data.logs) && data.logs.length > 0) {
-        feed.innerHTML = data.logs.map(log => `
+      if (feed && interceptsList.length > 0) {
+        feed.innerHTML = interceptsList.map(log => `
           <div class="feed-row" style="display:flex; justify-content:space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <span>${log.action || log.message || log.details || 'Inquiry Logged'}</span>
-            <span style="color:var(--text-muted, #888);">${log.created_at ? new Date(log.created_at).toLocaleTimeString() : 'Recent'}</span>
-          </div>
-        `).join('');
-      } else if (feed && Array.isArray(data.recentIntercepts) && data.recentIntercepts.length > 0) {
-        feed.innerHTML = data.recentIntercepts.map(log => `
-          <div class="feed-row" style="display:flex; justify-content:space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <span>${log.outcome || log.channels || 'Inquiry Logged'}</span>
+            <span>${log.action || log.message || log.outcome || log.channels || 'Inquiry Logged'}</span>
             <span style="color:var(--text-muted, #888);">${log.created_at ? new Date(log.created_at).toLocaleTimeString() : 'Recent'}</span>
           </div>
         `).join('');
