@@ -190,7 +190,7 @@
       </div>
     </section>
 
-    <!-- 24/7 VOICE AI SHOWCASE SECTION WITH AUDIO SAMPLE PLAYER -->
+    <!-- 24/7 VOICE AI SHOWCASE SECTION -->
     <section class="voice-section" id="voice-ai">
       <div class="section-header reveal-on-scroll">
         <span class="section-tag">Next-Gen Voice Telephony</span>
@@ -224,9 +224,17 @@
                 <span class="voice-check">✔</span> <strong>Automatic WhatsApp Confirmation Dispatched</strong>
               </div>
             </div>
+
+            <!-- Dedicated Color-Loop Button to Request Voice Demo Mailto -->
+            <div class="more-voice-samples-box">
+              <a href="mailto:afterhoursautomation714@gmail.com?subject=Private%20Demo%20Request%20-%20Listen%20to%20More%20Voice%20AI%20Samples&body=Hi%20AfterHours%20Team,%0A%0AI%20would%20like%20to%20listen%20to%20more%20live%20Voice%20AI%20samples%20and%20request%20a%20live%20call%20demo%20for%20our%20company's%20specific%20needs.%0A%0APlease%20contact%20me%20with%20available%20slots.%0A%0AMy%20Details:%0A-%20Name:%20%0A-%20Company:%20%0A-%20Phone%20Number:%20" 
+                 class="btn btn-shimmer-trigger btn-sm more-samples-btn">
+                🎙️ Listen to More Voice AI Samples &amp; Book Demo
+              </a>
+            </div>
           </div>
 
-          <!-- Animated Telemetry & Interactive Audio Sample Player -->
+          <!-- Animated Audio Telemetry Visualizer & Voice Sample Player -->
           <div class="voice-telemetry-box">
             <span class="voice-telemetry-tag">LIVE VOICE TELEMETRY ENGINE</span>
             <div class="voice-mic-icon">🎙️</div>
@@ -432,12 +440,12 @@
       </div>
     </section>
 
-    <!-- MULTI-CURRENCY CALCULATOR & REVENUE LOSS EXPORTER -->
+    <!-- MULTI-CURRENCY CALCULATOR WITH INCREMENTAL STEPPER BUTTONS -->
     <section class="calculator-section" id="calc">
       <div class="section-header reveal-on-scroll">
         <span class="section-tag">Interactive Financial Telemetry</span>
         <h2 class="shimmer-text">Calculate Your Monthly Lost Revenue</h2>
-        <p>Select your operational currency ($ USD, € EUR, or ₹ INR) and adjust sliders to estimate monthly revenue leakage from unreturned calls.</p>
+        <p>Select your operational currency ($ USD, € EUR, or ₹ INR) and adjust sliders or use stepper buttons to estimate monthly revenue leakage.</p>
       </div>
 
       <div class="calc-card tilt-card reveal-on-scroll">
@@ -449,26 +457,40 @@
 
         <div class="calc-grid">
           <div class="calc-inputs">
+            <!-- Unanswered Calls Input Group with Stepper -->
             <div class="range-group">
               <div class="range-header">
                 <label for="range-calls">Unanswered Calls Per Week</label>
-                <span class="range-val-badge" id="disp-calls">15 Calls</span>
+                <div class="stepper-badge-wrap">
+                  <span class="range-val-badge" id="disp-calls">15 Calls</span>
+                  <div class="stepper-btn-group">
+                    <button type="button" class="stepper-btn" id="btn-calls-down" aria-label="Decrease calls">▼</button>
+                    <button type="button" class="stepper-btn" id="btn-calls-up" aria-label="Increase calls">▲</button>
+                  </div>
+                </div>
               </div>
-              <input type="range" id="range-calls" min="5" max="100" value="15" step="5" />
+              <input type="range" id="range-calls" min="1" max="100" value="15" step="1" />
             </div>
 
+            <!-- Deal Value Input Group with Stepper -->
             <div class="range-group">
               <div class="range-header">
                 <label for="range-value">Average Customer / Deal Value</label>
-                <span class="range-val-badge" id="disp-value">$500</span>
+                <div class="stepper-badge-wrap">
+                  <span class="range-val-badge" id="disp-value">$50</span>
+                  <div class="stepper-btn-group">
+                    <button type="button" class="stepper-btn" id="btn-value-down" aria-label="Decrease value">▼</button>
+                    <button type="button" class="stepper-btn" id="btn-value-up" aria-label="Increase value">▲</button>
+                  </div>
+                </div>
               </div>
-              <input type="range" id="range-value" min="100" max="5000" value="500" step="100" />
+              <input type="range" id="range-value" min="10" max="5000" value="50" step="10" />
             </div>
           </div>
 
           <div class="calc-result-box">
             <span class="result-label">Estimated Monthly Revenue Leaking</span>
-            <div class="result-amount count-up" id="calc-result-val" data-value="15000" data-prefix="$" data-decimals="0">$15,000</div>
+            <div class="result-amount count-up" id="calc-result-val" data-value="1500" data-prefix="$" data-decimals="0">$1,500</div>
             <span class="result-subtext">Based on average 50% recovery of high-intent missed calls.</span>
             <button id="btn-open-loss-audit" class="btn btn-shimmer-trigger btn-sm calc-cta-btn">Export Loss Audit Report</button>
           </div>
@@ -831,15 +853,15 @@
         <div class="audit-summary-grid">
           <div class="audit-stat-box">
             <span class="a-label">Monthly Leakage</span>
-            <strong class="a-val text-red" id="audit-monthly">$15,000</strong>
+            <strong class="a-val text-red" id="audit-monthly">$1,500</strong>
           </div>
           <div class="audit-stat-box">
             <span class="a-label">Annual Projected Loss</span>
-            <strong class="a-val text-red" id="audit-yearly">$180,000</strong>
+            <strong class="a-val text-red" id="audit-yearly">$18,000</strong>
           </div>
           <div class="audit-stat-box">
             <span class="a-label">5-Year Cumulative Leak</span>
-            <strong class="a-val text-red" id="audit-5yr">$900,000</strong>
+            <strong class="a-val text-red" id="audit-5yr">$90,000</strong>
           </div>
         </div>
 
@@ -848,7 +870,7 @@
           <div class="audit-progress-track">
             <div class="audit-progress-fill" id="audit-yield-fill" style="width: 85%;"></div>
           </div>
-          <span class="audit-yield-text" id="audit-yield-val">$153,000 / Year Recovered</span>
+          <span class="audit-yield-text" id="audit-yield-val">$15,300 / Year Recovered</span>
         </div>
       </div>
 
