@@ -57,10 +57,10 @@ function initTimeBanner() {
 
   if (currentHour >= 18 || currentHour < 8) {
     if (icon) icon.textContent = "🌙";
-    text.textContent = `It is currently ${formatAMPM(new Date())}. Your office may be closed, but AfterHours RaSH is active recovering leads.`;
+    text.textContent = `It is currently ${formatAMPM(new Date())}. Your office may be closed, but AfterHours Voice AI is active answering calls.`;
   } else {
     if (icon) icon.textContent = "⚡";
-    text.textContent = `Peak outreach hours active (${formatAMPM(new Date())}). AfterHours RaSH intercepts overflow lead drops in under 7 seconds.`;
+    text.textContent = `Peak outreach hours active (${formatAMPM(new Date())}). AfterHours Voice AI answers inbound calls in under 1 ring.`;
   }
 }
 
@@ -108,7 +108,7 @@ function recalculateRevenue() {
   const rate = currencyRates[activeCurrency] || 1;
   const convertedDealVal = Math.round(baseUsdVal * rate);
 
-  if (dispCalls) dispCalls.textContent = `${calls} Inquiries`;
+  if (dispCalls) dispCalls.textContent = `${calls} Calls`;
   if (dispValue) dispValue.textContent = `${activeSymbol}${convertedDealVal.toLocaleString()}`;
 
   const monthlyLeak = Math.round((calls * 4) * convertedDealVal * 0.5);
@@ -151,10 +151,10 @@ function initScriptCustomizer() {
   if (!bizInput || !scriptText) return;
 
   const toneScripts = {
-    friendly: (name) => `"Hi there! Thanks for reaching out to ${name}. We missed your inquiry, but we'd love to help! Tap here to pick a time or send us a quick note: [Booking Link]"`,
-    executive: (name) => `"Thank you for contacting ${name}. An account executive is unavailable. Please select a priority callback window here: [Booking Link]"`,
-    urgent: (name) => `"⚡ VIP Intercept: ${name} received your inquiry. For immediate emergency dispatch or priority intake, tap here now: [Booking Link]"`,
-    luxury: (name) => `"Greetings from ${name}. We apologize for missing your inquiry. Allow us to reserve a private consultation for you: [Booking Link]"`
+    friendly: (name) => `"Hi there! Thanks for speaking with ${name}. Your appointment details and booking summary have been confirmed. Tap here to view your calendar entry: [Booking Link]"`,
+    executive: (name) => `"Thank you for contacting ${name}. Your voice call intake has been logged. Please review your scheduled appointment window here: [Booking Link]"`,
+    urgent: (name) => `"⚡ VIP Dispatch: ${name} logged your voice call. Emergency technician / priority slot confirmed. Tap to review: [Booking Link]"`,
+    luxury: (name) => `"Greetings from ${name}. Thank you for speaking with our Voice Concierge. Allow us to present your private consultation confirmation: [Booking Link]"`
   };
 
   let currentTone = 'friendly';
@@ -281,22 +281,24 @@ function initRaSHChatbot() {
 
       let reply = "";
 
-      if (query.includes('speed') || query.includes('time') || query.includes('fast') || query.includes('latency') || query.includes('seconds')) {
-        reply = "Under 7 seconds flat. That's faster than your coffee maker can even think about brewing. While your competitors are still letting inquiries ring into the void, I'm already high-fiving your new leads on WhatsApp.";
-      } else if (query.includes('crm') || query.includes('salesforce') || query.includes('hubspot') || query.includes('gohighlevel') || query.includes('integrate') || query.includes('webhook')) {
-        reply = "We plug right into Salesforce, HubSpot, GoHighLevel, and custom Webhooks. No manual data entry, no spreadsheets—just clean, automated pipeline harmony.";
+      if (query.includes('voice') || query.includes('call') || query.includes('phone') || query.includes('receptionist') || query.includes('speak')) {
+        reply = "Our 24/7 Voice AI Agent answers calls in under 1 ring! It speaks in a realistic human voice, collects caller name/address, books calendar slots, and syncs everything directly into your CRM.";
+      } else if (query.includes('speed') || query.includes('time') || query.includes('fast') || query.includes('latency') || query.includes('seconds')) {
+        reply = "Under 1 ring for voice calls and under 7 seconds for WhatsApp dispatches. While your competitors let calls ring into voicemail, our Voice AI is already conversing and booking clients.";
+      } else if (query.includes('crm') || query.includes('salesforce') || query.includes('hubspot') || query.includes('gohighlevel') || query.includes('sheet') || query.includes('webhook')) {
+        reply = "We plug right into Salesforce, HubSpot, GoHighLevel, Google Sheets, and custom Webhooks. Call audio transcripts, address data, and booking times sync automatically.";
       } else if (query.includes('price') || query.includes('cost') || query.includes('demo') || query.includes('plan') || query.includes('pricing') || query.includes('tier')) {
-        reply = "Our pricing scales smoothly with your outreach volume. But honestly, losing just *one* client to an unanswered inquiry probably costs more than our entire platform. Let's get you booked for a private demo via our email button!";
+        reply = "Our Voice AI pricing scales smoothly with your monthly inbound call volume. Losing just one customer to voicemail costs more than our platform! Click 'Book Demo' to test a live call.";
       } else if (query.includes('weekend') || query.includes('after hours') || query.includes('night') || query.includes('hours') || query.includes('closed')) {
-        reply = "While you're sleeping, eating pizza, or binge-watching shows, I'm working 24/7/365. Because prospects don't care about operating hours—and neither do I.";
+        reply = "While you're sleeping, eating pizza, or binge-watching shows, our Voice AI Agent is answering phone calls 24/7/365. Callers never hit voicemail again!";
       } else if (query.includes('joke') || query.includes('funny') || query.includes('laugh')) {
-        reply = "Why don't missed inquiries ever get promoted? Because they always get left hanging. 😂 Bad jokes aside, my lead recovery rate is no laughing matter—it's pure conversion gold.";
+        reply = "Why don't unanswered phone calls ever get promoted? Because they always get left hanging! 😂 Bad jokes aside, our 24/7 Voice AI pickup rate is no joke—it's pure conversion gold.";
       } else if (query.includes('who are you') || query.includes('what are you') || query.includes('your name')) {
-        reply = "I'm RaSH, your hyper-intelligent digital concierge. I turn missed inquiries into paying customers while making it look effortlessly cool.";
+        reply = "I'm RaSH, your hyper-intelligent digital concierge. I guide you through our 24/7 Voice AI & lead recovery platform while making it look effortlessly cool.";
       } else if (query.includes('hello') || query.includes('hi') || query.includes('hey')) {
-        reply = "Hey there! Ready to stop letting prospect inquiries slip through your fingers and start printing revenue?";
+        reply = "Hey there! Ready to stop letting phone calls hit voicemail and start converting callers into customers 24/7?";
       } else {
-        reply = `That is a fascinating question: "${userText}". Honestly, my neural circuits didn't learn that in school, but I respect the curiosity! If you want to talk business or see how I can save your pipeline from leaking cash, click 'Book a Private Demo' below and let's chat!`;
+        reply = `That is a fascinating question: "${userText}". If you want to see our 24/7 Voice AI Receptionist in action or test a live call demo, click 'Book a Private Demo' and let's connect!`;
       }
 
       appendBotMsg(reply);
@@ -343,34 +345,34 @@ function initIndustrySelector() {
     dental: {
       badge: "DENTAL & HEALTHCARE PROTOCOL",
       title: "Emergency & Consultation Immediate Recovery",
-      desc: "When a patient reaches out with urgent inquiries after hours, AfterHours sends an instant WhatsApp triage link and automated morning appointment booking calendar.",
+      desc: "When a patient calls with urgent inquiries after hours, AfterHours AI Voice answers immediately, collects symptom details, books morning consultations, and dispatches a WhatsApp booking link.",
       rec: "$18,400",
-      cond: "Unreturned outreach detected between 6:00 PM - 8:00 AM or during weekend closures.",
-      msg: `"Hi! We noticed your inquiry at Apex Dental. If this is an urgent consultation or appointment request, tap here to pick an immediate slot: [Link]"`
+      cond: "Inbound call picked up in < 1 ring between 6:00 PM - 8:00 AM or weekend closures.",
+      msg: `"Hi! Thanks for speaking with Apex Dental AI. Your emergency appointment slot is reserved for tomorrow at 9:00 AM. Location Pin: [Link]"`
     },
     hvac: {
       badge: "HVAC & HOME SERVICES MESH",
       title: "Breakdown & Dispatch Immediate Scheduling",
-      desc: "AC unit breakdown or plumbing leak at night? Intercept panicked homeowners instantly before they call the next contractor on Google Search.",
+      desc: "AC unit breakdown at night? Voice AI answers panicked homeowners instantly, collects home address & breakdown type, and schedules an emergency technician slot.",
       rec: "$24,200",
-      cond: "Dropped inquiry on main dispatch line during peak weather emergency surges.",
-      msg: `"Hi! Thanks for reaching out to Apex Climate Services. Need emergency repair or a technician visit? Tap here to confirm your address & dispatch slot: [Link]"`
+      cond: "Inbound call answered on main line during peak emergency night surges.",
+      msg: `"Hi! Thanks for calling Apex Climate Services. Your emergency repair dispatch slot is confirmed for 8:30 AM. Address logged: [Address]"`
     },
     banquet: {
       badge: "BANQUET & EVENT VENUE ROUTER",
       title: "High-Value Event Date & Intake Reservation",
-      desc: "Wedding planners and corporate venue shoppers reach out to multiple halls simultaneously. Lock in date inquiries within 7 seconds before competing venues reply.",
+      desc: "Wedding planners and event shoppers call multiple halls. Voice AI answers immediately, takes guest count & preferred date, and emails event brochure instantly.",
       rec: "$42,000",
-      cond: "Inbound inquiry missed during ongoing evening wedding banquets or weekend galas.",
-      msg: `"Greetings from Grand Palace Banquets! We missed your inquiry regarding hall availability. Tap to download our luxury brochure & reserve a tour date: [Link]"`
+      cond: "Inbound call answered instantly during evening wedding banquets or weekend galas.",
+      msg: `"Greetings from Grand Palace Banquets! Thank you for calling. Your hall viewing tour is reserved for Saturday at 2:00 PM: [Brochure Link]"`
     },
     realestate: {
       badge: "REAL ESTATE & LEGAL VAULT",
       title: "Property Viewing & Consultation Intake",
-      desc: "High-net-worth buyers expect instant answers. Automatically dispatch virtual property walkthroughs and calendar scheduling links directly inside WhatsApp.",
+      desc: "High-net-worth buyers expect instant call answers. Voice AI collects property inquiries, answers listing questions, and sends virtual walkthrough links.",
       rec: "$35,000",
-      cond: "Unanswered listing inquiry outside standard firm operating hours.",
-      msg: `"Hi! Thanks for reaching out to Prime Realty. To view property floor plans or schedule a private walkthrough, tap to select your preferred time: [Link]"`
+      cond: "Inbound call picked up instantly outside standard firm operating hours.",
+      msg: `"Hi! Thanks for speaking with Prime Realty. Your private property walkthrough appointment has been confirmed: [Calendar Link]"`
     }
   };
 
@@ -516,7 +518,7 @@ function initProcessSwitcher() {
 
     if (switchBadge) switchBadge.textContent = "TRADITIONAL MANUAL LOSS";
     if (switchTitle) switchTitle.textContent = "High Delay & Customer Churn";
-    if (switchDesc) switchDesc.textContent = "Inquiry drops → Wait 12+ hours for manual staff callback → Prospect already contacted competitor → Deal lost permanently.";
+    if (switchDesc) switchDesc.textContent = "Inbound call rings → Hits voicemail → Wait 12+ hours for staff callback → Caller already booked competitor → Deal lost permanently.";
     if (valTime) { valTime.textContent = "> 12 Hours"; valTime.className = "s-val text-red"; }
     if (valRate) { valRate.textContent = "12.4%"; valRate.className = "s-val text-red"; }
     if (valLeak) { valLeak.textContent = "87.6%"; valLeak.className = "s-val text-red"; }
@@ -527,10 +529,10 @@ function initProcessSwitcher() {
     tabBefore.classList.remove('active');
 
     if (switchBadge) switchBadge.textContent = "AFTERHOURS RECOVERY PIPELINE";
-    if (switchTitle) switchTitle.textContent = "Sub-10 Second Multi-Channel Intercept";
-    if (switchDesc) switchDesc.textContent = "Inquiry drops → Trigger fires in 800ms → Personalized WhatsApp & booking calendar sent → Appointment confirmed & synced to CRM.";
-    if (valTime) { valTime.textContent = "< 7s"; valTime.className = "s-val text-cyan"; }
-    if (valRate) { valRate.textContent = "98.4%"; valRate.className = "s-val text-cyan"; }
+    if (switchTitle) switchTitle.textContent = "0-Second Voice AI Call Answer & Direct Sync";
+    if (switchDesc) switchDesc.textContent = "Inbound call rings → Voice AI answers instantly → Collects caller name, address, and service need → WhatsApp confirmation sent & booked to CRM.";
+    if (valTime) { valTime.textContent = "< 1s"; valTime.className = "s-val text-cyan"; }
+    if (valRate) { valRate.textContent = "100%"; valRate.className = "s-val text-cyan"; }
     if (valLeak) { valLeak.textContent = "0%"; valLeak.className = "s-val text-emerald"; }
   });
 }
@@ -914,9 +916,9 @@ function initDashboardSimulator() {
 
   const feed = document.getElementById('activity-feed');
   const activities = [
-    { time: 'Just now', text: 'Missed inquiry from +1 (555) 019-2831' },
-    { time: '2s ago', text: 'WhatsApp intro message dispatched' },
-    { time: '14s ago', text: 'Lead booked consultation slot' },
+    { time: 'Just now', text: 'Inbound call answered by Voice AI from +1 (555) 019-2831' },
+    { time: '2s ago', text: 'Caller intake details & address logged' },
+    { time: '14s ago', text: 'WhatsApp appointment confirmation dispatched' },
     { time: '1m ago', text: 'Synced lead entry to Salesforce CRM' }
   ];
 
@@ -951,8 +953,8 @@ function initDashboardSimulator() {
 
       const simInbound = document.getElementById('sim-inbound-text');
       const simOutbound = document.getElementById('sim-outbound-text');
-      if (simInbound) simInbound.textContent = `Missed inquiry logged from ${phoneVal}`;
-      if (simOutbound) simOutbound.textContent = `"Hi! We missed your inquiry from ${phoneVal}. Tap here to confirm a callback slot: [Link]"`;
+      if (simInbound) simInbound.textContent = `Inbound call received from ${phoneVal}`;
+      if (simOutbound) simOutbound.textContent = `"Hello! Thanks for calling Apex Enterprises. I am your 24/7 AI Receptionist. I can answer your questions and book a consultation for you right now."`;
 
       if (coreMesh) {
         coreMesh.material.color.setHex(0x00f0ff);
@@ -967,7 +969,7 @@ function initDashboardSimulator() {
 
       const newRow = document.createElement('div');
       newRow.className = 'feed-row';
-      newRow.innerHTML = `<span>Missed inquiry from ${phoneVal}</span><span style="color:var(--cyan-accent);">Just now</span>`;
+      newRow.innerHTML = `<span>Inbound call answered from ${phoneVal}</span><span style="color:var(--cyan-accent);">Just now</span>`;
       if (feed) feed.prepend(newRow);
     });
   }
