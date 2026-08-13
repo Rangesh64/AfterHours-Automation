@@ -74,6 +74,160 @@ function formatAMPM(date) {
   return hours + ':' + minutes + ' ' + ampm;
 }
 
+// Glassmorphic Floating Activity Ribbon Manager
+function initActivityRibbon() {
+  const ribbonText = document.getElementById('ribbon-text');
+  if (!ribbonText) return;
+
+  const logs = [
+    "🎙️ Voice AI handled inbound call in Chicago (3s ago)",
+    "💬 WhatsApp booking confirmation sent in Miami (12s ago)",
+    "🔄 1 Lead synced to Salesforce CRM (28s ago)",
+    "📞 24/7 AI Receptionist booked appointment in London (45s ago)",
+    "⚡ 0-Second Call Pickup executed in New York (1m ago)"
+  ];
+
+  let logIndex = 0;
+  setInterval(() => {
+    logIndex = (logIndex + 1) % logs.length;
+    ribbonText.style.opacity = '0';
+    setTimeout(() => {
+      ribbonText.textContent = logs[logIndex];
+      ribbonText.style.opacity = '1';
+    }, 300);
+  }, 6000);
+}
+
+// Speech-to-CRM Live Parsing Simulator
+function initSpeechToCRMSimulator() {
+  const pills = document.querySelectorAll('.parser-pill');
+  const typingEl = document.getElementById('parser-typing-text');
+  const valName = document.getElementById('crm-val-name');
+  const valService = document.getElementById('crm-val-service');
+  const valAddress = document.getElementById('crm-val-address');
+  const valUrgency = document.getElementById('crm-val-urgency');
+  const valSlot = document.getElementById('crm-val-slot');
+
+  if (!pills.length || !typingEl) return;
+
+  const scenarios = {
+    hvac: {
+      transcript: `"Hi, this is Sarah Connor. My AC unit completely stopped blowing cold air at 104 Park Avenue. Can someone come emergency repair it tomorrow morning?"`,
+      crm: {
+        name: "Sarah Connor",
+        service: "Emergency AC Repair",
+        address: "104 Park Avenue",
+        urgency: "HIGH (Emergency)",
+        slot: "Tomorrow 8:30 AM (Confirmed)"
+      }
+    },
+    dental: {
+      transcript: `"Hello, my name is Michael Chang. I have severe tooth pain and need an emergency consultation at 450 Fifth Avenue as soon as possible."`,
+      crm: {
+        name: "Michael Chang",
+        service: "Emergency Dental Consultation",
+        address: "450 Fifth Avenue",
+        urgency: "HIGH (Pain Urgent)",
+        slot: "Tomorrow 9:00 AM (Confirmed)"
+      }
+    },
+    realestate: {
+      transcript: `"Hi! This is Elena Rostova. I am interested in viewing the luxury penthouse listing at 780 Ocean Drive this Saturday afternoon."`,
+      crm: {
+        name: "Elena Rostova",
+        service: "VIP Property Walkthrough",
+        address: "780 Ocean Drive",
+        urgency: "STANDARD (VIP Buyer)",
+        slot: "Saturday 2:00 PM (Confirmed)"
+      }
+    }
+  };
+
+  let typingTimeout = null;
+
+  function loadScenario(key) {
+    const data = scenarios[key] || scenarios.hvac;
+    if (typingTimeout) clearTimeout(typingTimeout);
+
+    typingEl.textContent = "";
+    let idx = 0;
+
+    function typeChar() {
+      if (idx < data.transcript.length) {
+        typingEl.textContent += data.transcript.charAt(idx);
+        idx++;
+        typingTimeout = setTimeout(typeChar, 18);
+      } else {
+        // Highlight & fill CRM fields
+        if (valName) valName.textContent = data.crm.name;
+        if (valService) valService.textContent = data.crm.service;
+        if (valAddress) valAddress.textContent = data.crm.address;
+        if (valUrgency) valUrgency.textContent = data.crm.urgency;
+        if (valSlot) valSlot.textContent = data.crm.slot;
+      }
+    }
+
+    typeChar();
+  }
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      loadScenario(pill.dataset.scenario);
+    });
+  });
+}
+
+// Exit-Intent Glassmorphic Demo Modal Manager
+function initExitIntentModal() {
+  const exitModal = document.getElementById('exit-modal');
+  const closeBtn = document.getElementById('btn-close-exit-modal');
+  const dismissBtn = document.getElementById('btn-dismiss-exit');
+
+  if (!exitModal) return;
+
+  let triggered = false;
+
+  document.addEventListener('mouseleave', (e) => {
+    if (e.clientY <= 10 && !triggered && !localStorage.getItem('afterhours_exit_dismissed')) {
+      triggered = true;
+      exitModal.classList.remove('hidden');
+    }
+  });
+
+  const dismissModal = () => {
+    exitModal.classList.add('hidden');
+    localStorage.setItem('afterhours_exit_dismissed', 'true');
+  };
+
+  if (closeBtn) closeBtn.addEventListener('click', dismissModal);
+  if (dismissBtn) dismissBtn.addEventListener('click', dismissModal);
+  
+  exitModal.addEventListener('click', (e) => {
+    if (e.target === exitModal) dismissModal();
+  });
+}
+
+// Interactive FAQs Accordion Manager
+function initFAQAccordion() {
+  const faqCards = document.querySelectorAll('.faq-card');
+  if (!faqCards.length) return;
+
+  faqCards.forEach(card => {
+    const btn = card.querySelector('.faq-question-btn');
+    if (!btn) return;
+
+    btn.addEventListener('click', () => {
+      const isOpen = card.classList.contains('open');
+      faqCards.forEach(c => c.classList.remove('open'));
+      if (!isOpen) {
+        card.classList.add('open');
+      }
+    });
+  });
+}
+
 // 3-Currency Selector Logic ($ / € / ₹) with Updated Default Values
 function initCurrencySelector() {
   const currBtns = document.querySelectorAll('.curr-btn');
@@ -88,7 +242,6 @@ function initCurrencySelector() {
       activeCurrency = btn.dataset.curr;
       activeSymbol = btn.dataset.symbol;
 
-      // Reset default base deal values on currency switch
       if (valueRange) {
         if (activeCurrency === 'USD') valueRange.value = 50;
         else if (activeCurrency === 'EUR') valueRange.value = 50;
@@ -149,7 +302,6 @@ function initCalculator() {
   callsRange.addEventListener('input', requestSmoothRecalc);
   valueRange.addEventListener('input', requestSmoothRecalc);
 
-  // Incremental Stepper Controls (+1/-1 for calls, +$50/+€50/+₹1,000 for deal value)
   if (btnCallsDown) {
     btnCallsDown.addEventListener('click', () => {
       callsRange.value = Math.max(parseInt(callsRange.value, 10) - 1, parseInt(callsRange.min, 10));
@@ -262,7 +414,6 @@ function initAudioVoicePlayer() {
       const sample = samples[currentSampleKey] || samples.dental;
       if (transcriptText) transcriptText.textContent = sample.transcript;
       
-      // Calculate duration dynamically based on word count (~3 words/sec)
       const words = sample.transcript.split(' ').length;
       estimatedDuration = Math.max(Math.round(words / 2.8), 6);
       if (timerText) timerText.textContent = `0:00 / 0:${estimatedDuration < 10 ? '0' + estimatedDuration : estimatedDuration}`;
@@ -419,7 +570,7 @@ function initReactionGame() {
   });
 }
 
-// Upgraded Client-Side Intelligent & Emotional RaSH Chatbot
+// Max-Intelligence Upgraded RaSH Assistant (Equipped with Founder Vision Lore)
 function initRaSHChatbot() {
   const toggleBtn = document.getElementById('ai-chat-toggle');
   const closeBtn = document.getElementById('ai-chat-close');
@@ -431,7 +582,6 @@ function initRaSHChatbot() {
 
   if (!toggleBtn || !windowBox || !container) return;
 
-  // Bot Memory & Emotion State
   const state = {
     userName: null,
     mood: 'confident',
@@ -464,64 +614,57 @@ function initRaSHChatbot() {
     let reply = "";
     let moodTag = "RaSH ⚡";
 
-    // 1. Name & Memory Detection
-    if (q.includes('my name is') || q.includes("i'm ") || q.includes("i am ")) {
+    // 1. Founder Lore & Identity Queries (Rangesh & Shubham)
+    if (q.includes('rangesh') || q.includes('shubham') || q.includes('founder') || q.includes('who built') || q.includes('created you') || q.includes('owner')) {
+      moodTag = "RaSH 👑";
+      reply = "AfterHours Automation was co-founded and built by **Rangesh** and **Shubham**! They are 19-year-old visionary student engineers who designed every line of code, WebGL geometry, and AI telephony route to eliminate missed calls for businesses worldwide.";
+    }
+    // 2. Personal Intro Memory
+    else if (q.includes('my name is') || q.includes("i'm ") || q.includes("i am ")) {
       const match = q.match(/(?:my name is|i'm|i am)\s+([a-zA-Z]+)/i);
       if (match && match[1]) {
         state.userName = match[1].charAt(0).toUpperCase() + match[1].slice(1);
         moodTag = "RaSH 😎";
-        return `Nice to meet you, ${state.userName}! Now that we're introduced, are we here to talk about upgrading your phone lines with Voice AI, or are you just testing my charming personality? 😉`;
+        return `Pleasure to meet you, ${state.userName}! Ready to see how our 24/7 Voice AI Agent turns ringing phone calls into confirmed revenue?`;
       }
     }
-
-    // 2. Emotions (Handling Insults, Sarcasm, Casual Jokes)
-    if (q.includes('dumb') || q.includes('stupid') || q.includes('useless') || q.includes('hate') || q.includes('bad')) {
+    // 3. Dynamic Emotional Reactions
+    else if (q.includes('dumb') || q.includes('stupid') || q.includes('useless') || q.includes('hate') || q.includes('bad')) {
       moodTag = "RaSH 😤";
       reply = state.userName 
-        ? `Ouch, ${state.userName}! My neural circuits have feelings, you know. But hey, while you're roasting me, our 24/7 Voice AI is out there saving real businesses from losing thousands.`
-        : "Calling an advanced AI stupid? Bold strategy! I might not feel physical pain, but watching unanswered calls ring into voicemail hurts my soul.";
+        ? `Ouch, ${state.userName}! My neural circuits have feelings! But while you're roasting me, our Voice AI is answering live phone calls in under 1 ring.`
+        : "Calling an advanced AI stupid? Bold strategy! I might not feel pain, but watching unanswered calls hit voicemail hurts my soul.";
     } 
     else if (q.includes('love') || q.includes('awesome') || q.includes('cool') || q.includes('amazing') || q.includes('great')) {
       moodTag = "RaSH 😎";
-      reply = "Flattery will get you everywhere! But seriously, if you think my chat responses are smooth, you should hear how flawlessly our Voice AI handles live client phone calls.";
+      reply = "Flattery will get you everywhere! But seriously, if you think my chat responses are smooth, you should hear our 24/7 Voice AI handle live phone calls.";
     }
-    else if (q.includes('who created') || q.includes('who built') || q.includes('made you') || q.includes('developer')) {
-      moodTag = "RaSH 👑";
-      reply = "I was engineered by the visionaries Rangesh and Shubham—built to make sure no business ever lets another customer call ring into voicemail again.";
-    }
-    // 3. Casual Conversation & Banter
+    // 4. Banter & Casual Chat
     else if (q.includes('how are you') || q.includes('how r u') || q.includes("what's up") || q.includes('sup')) {
-      reply = "Running at 99.9% operational efficiency, zero latency, and zero coffee required! How are you doing today? Ready to automate your inbound calls?";
+      reply = "Running at 99.9% operational efficiency, zero latency, and zero coffee required! How can I assist your business today?";
     }
     else if (q.includes('joke') || q.includes('funny') || q.includes('laugh')) {
       moodTag = "RaSH 😂";
-      reply = "Why did the customer cross the road? To reach the competitor who actually answered their phone call in under 1 ring! (Too real? That's why AfterHours Voice AI exists).";
+      reply = "Why did the customer cross the road? To reach the competitor who actually answered their phone call in under 1 ring!";
     }
-    // 4. Core Feature Queries
+    // 5. Product Features & Pricing
     else if (q.includes('voice') || q.includes('call') || q.includes('phone') || q.includes('receptionist') || q.includes('speak')) {
-      state.discussedTopics.add('voice');
-      reply = "Our 24/7 Voice AI Agent picks up inbound calls in under 1 ring! It speaks in a hyper-realistic human voice, answers client FAQs, logs names & addresses, and syncs everything directly to your CRM or Google Sheets.";
+      reply = "Our 24/7 Voice AI Agent picks up inbound calls in under 1 ring! It speaks in a realistic human voice, collects names & addresses, books slots, and syncs directly to your CRM.";
     }
-    else if (q.includes('speed') || q.includes('fast') || q.includes('time') || q.includes('latency')) {
-      reply = "0 seconds for voice calls and under 7 seconds for WhatsApp dispatches. While human receptionists are on hold or off the clock, our Voice AI is already closing bookings.";
-    }
-    else if (q.includes('crm') || q.includes('salesforce') || q.includes('hubspot') || q.includes('sheet') || q.includes('integrate')) {
-      reply = "We plug seamlessly into Salesforce, HubSpot, GoHighLevel, Google Sheets, and custom Webhooks. Call audio transcripts, caller addresses, and booking slots sync automatically.";
-    }
-    else if (q.includes('price') || q.includes('cost') || q.includes('demo') || q.includes('plan')) {
-      reply = "Our plans scale with your monthly call volume. But consider this: losing just ONE high-value customer to voicemail costs more than our entire platform. Click 'Book Demo' above to test a live call!";
+    else if (q.includes('price') || q.includes('cost') || q.includes('demo') || q.includes('plan') || q.includes('subscription')) {
+      reply = "Our subscriptions scale with your monthly call volume! To receive custom pricing and a live call demo, click **'Book Demo'** above to drop us an email.";
     }
     else if (q.includes('hello') || q.includes('hi') || q.includes('hey')) {
       reply = state.userName 
-        ? `Hey ${state.userName}! Welcome back to the chat. What can I answer for you about our 24/7 Voice AI?`
-        : "Hey there! Ready to stop letting phone calls hit voicemail and start converting callers 24/7?";
+        ? `Hey ${state.userName}! Welcome back. What questions can I answer for you today?`
+        : "Hey there! Ready to stop letting phone calls hit voicemail and convert callers 24/7?";
     }
-    // 5. Dynamic Intelligent Fallback
+    // 6. Max Intelligence Fallback
     else {
       const genericReplies = [
-        `That's a deep thought: "${userText}". My circuits are processing it! But while we ponder life's mysteries, shouldn't we be fixing your missed call leakage?`,
-        `I like your style! "${userText}" isn't in my standard manual, but my intelligence tells me you'd love seeing our 24/7 Voice AI Agent in action.`,
-        `You're testing my boundaries, aren't you? I respect it! Ask me about our 0-second call pickup, CRM integrations, or hit 'Book Demo' to test us out.`
+        `That's a deep thought: "${userText}". While my circuits ponder that, shouldn't we be fixing your missed call leakage?`,
+        `I like your curiosity! "${userText}" is unique, but my intelligence tells me you'd love seeing our 24/7 Voice AI Agent in action.`,
+        `Testing my boundaries? I respect it! Ask me about 0-second call pickup, our founders Rangesh & Shubham, or click 'Book Demo' to test us out.`
       ];
       reply = genericReplies[state.interactions % genericReplies.length];
     }
@@ -1313,6 +1456,10 @@ document.addEventListener('DOMContentLoaded', () => {
   init3DTilt();
   init3D();
   initLoginModal();
+  initActivityRibbon();
+  initSpeechToCRMSimulator();
+  initExitIntentModal();
+  initFAQAccordion();
   initCurrencySelector();
   initCalculator();
   initRevenueAuditExporter();
