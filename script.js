@@ -1546,26 +1546,37 @@ async function initLiveDashboard() {
 
       // Dynamic Recent Intercept Log Table Rendering (dashboard.html)
       const logTbody = document.getElementById('intercept-log-tbody');
-      if (logTbody && interceptsList.length > 0) {
-        logTbody.innerHTML = interceptsList.map(log => {
-          let pillClass = 'state-secured-luxury';
-          const outcome = (log.outcome || log.status || 'RECOVERED').toUpperCase();
-          if (outcome.includes('BOOKING') || outcome.includes('SENT')) pillClass = 'state-sent-luxury';
-          if (outcome.includes('PROCESS') || outcome.includes('ACTIVE')) pillClass = 'state-active-luxury';
+      if (logTbody) {
+        if (interceptsList.length > 0) {
+          logTbody.innerHTML = interceptsList.map(log => {
+            let pillClass = 'state-secured-luxury';
+            const outcome = (log.outcome || log.status || 'RECOVERED').toUpperCase();
+            if (outcome.includes('BOOKING') || outcome.includes('SENT')) pillClass = 'state-sent-luxury';
+            if (outcome.includes('PROCESS') || outcome.includes('ACTIVE')) pillClass = 'state-active-luxury';
 
-          const timeDisplay = log.created_at 
-            ? new Date(log.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
-            : (log.intercept_time || 'Just now');
+            const timeDisplay = log.created_at 
+              ? new Date(log.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
+              : (log.intercept_time || 'Just now');
 
-          return `
+            return `
+              <tr>
+                <td><strong>${log.contact || log.lead_contact || log.user_email || '+1 (555) 000-0000'}</strong></td>
+                <td>${timeDisplay}</td>
+                <td>${log.channels || 'WhatsApp + Email'}</td>
+                <td><span class="status-pill ${pillClass}">${outcome}</span></td>
+              </tr>
+            `;
+          }).join('');
+        } else {
+          // Clean zero-state when database has no activity logs yet for this user
+          logTbody.innerHTML = `
             <tr>
-              <td><strong>${log.contact || log.lead_contact || log.user_email || '+1 (555) 000-0000'}</strong></td>
-              <td>${timeDisplay}</td>
-              <td>${log.channels || 'WhatsApp + Email'}</td>
-              <td><span class="status-pill ${pillClass}">${outcome}</span></td>
+              <td colspan="4" style="text-align: center; color: #888; padding: 20px;">
+                <em>No intercept logs recorded yet for this session.</em>
+              </td>
             </tr>
           `;
-        }).join('');
+        }
       }
 
       // Activity Feed Table Fallback
