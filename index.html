@@ -190,7 +190,7 @@
       </div>
     </section>
 
-    <!-- 24/7 VOICE AI SHOWCASE SECTION -->
+    <!-- 24/7 VOICE AI SHOWCASE SECTION WITH AUDIO SAMPLE PLAYER -->
     <section class="voice-section" id="voice-ai">
       <div class="section-header reveal-on-scroll">
         <span class="section-tag">Next-Gen Voice Telephony</span>
@@ -226,13 +226,13 @@
             </div>
           </div>
 
-          <!-- Animated Audio Telemetry Visualizer Box -->
+          <!-- Animated Telemetry & Interactive Audio Sample Player -->
           <div class="voice-telemetry-box">
             <span class="voice-telemetry-tag">LIVE VOICE TELEMETRY ENGINE</span>
             <div class="voice-mic-icon">🎙️</div>
             
             <!-- Animated Equalizer Bars Effect -->
-            <div class="voice-equalizer">
+            <div class="voice-equalizer" id="voice-equalizer-bars">
               <span class="eq-bar eq-1"></span>
               <span class="eq-bar eq-2"></span>
               <span class="eq-bar eq-3"></span>
@@ -241,8 +241,29 @@
               <span class="eq-bar eq-6"></span>
             </div>
 
+            <!-- Client-Side Interactive Voice Sample Player -->
+            <div class="voice-audio-player">
+              <span class="audio-player-label">PREVIEW VOICE AI SAMPLES</span>
+              <div class="sample-selector-pills">
+                <button class="sample-pill active" data-sample="dental">🦷 Dental</button>
+                <button class="sample-pill" data-sample="hvac">❄️ HVAC</button>
+                <button class="sample-pill" data-sample="banquet">🏰 Event</button>
+              </div>
+              <div class="audio-controls-row">
+                <button id="btn-play-voice-sample" class="audio-play-btn" aria-label="Play Voice Demo">
+                  <span id="play-icon">▶</span>
+                </button>
+                <div class="audio-waveform-progress">
+                  <div id="audio-progress-bar" class="audio-progress-fill"></div>
+                  <span id="sample-timer-text" class="audio-time-display">0:00 / 0:08</span>
+                </div>
+              </div>
+              <p id="sample-transcript-text" class="sample-transcript-box">
+                "Hi! Thanks for calling Apex Dental. I can get you scheduled for an emergency appointment tomorrow morning at 9:00 AM. Shall I lock that in for you?"
+              </p>
+            </div>
+
             <span class="voice-subtext">Latency: &lt; 600ms • Naturalness Rating: 99.4%</span>
-            <a href="mailto:afterhoursautomation714@gmail.com?subject=Live%20AI%20Voice%20Test%20Request" class="btn btn-shimmer-trigger btn-sm voice-cta-btn">Test AI Voice Agent</a>
           </div>
         </div>
       </div>
@@ -411,7 +432,7 @@
       </div>
     </section>
 
-    <!-- MULTI-CURRENCY CALCULATOR -->
+    <!-- MULTI-CURRENCY CALCULATOR & REVENUE LOSS EXPORTER -->
     <section class="calculator-section" id="calc">
       <div class="section-header reveal-on-scroll">
         <span class="section-tag">Interactive Financial Telemetry</span>
@@ -449,7 +470,7 @@
             <span class="result-label">Estimated Monthly Revenue Leaking</span>
             <div class="result-amount count-up" id="calc-result-val" data-value="15000" data-prefix="$" data-decimals="0">$15,000</div>
             <span class="result-subtext">Based on average 50% recovery of high-intent missed calls.</span>
-            <a href="#contact" class="btn btn-shimmer-trigger btn-sm calc-cta-btn">Plug This Leak Now</a>
+            <button id="btn-open-loss-audit" class="btn btn-shimmer-trigger btn-sm calc-cta-btn">Export Loss Audit Report</button>
           </div>
         </div>
       </div>
@@ -792,6 +813,49 @@
           <span class="mini-dot cyan"></span> SSL AES-256 Encrypted Session Bridge
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- ON-SCREEN REVENUE LOSS AUDIT MODAL -->
+  <div id="loss-audit-modal" class="modal-backdrop hidden">
+    <div class="modal-card tilt-card audit-modal-card">
+      <button id="btn-close-audit-modal" class="modal-close-btn" aria-label="Close modal">×</button>
+      
+      <div class="modal-header">
+        <span class="modal-badge">FINANCIAL TELEMETRY AUDIT</span>
+        <h3>Executive Revenue Loss Audit</h3>
+        <p>Real-time projection generated from your operational inquiry volume.</p>
+      </div>
+
+      <div class="audit-report-body" id="audit-report-content">
+        <div class="audit-summary-grid">
+          <div class="audit-stat-box">
+            <span class="a-label">Monthly Leakage</span>
+            <strong class="a-val text-red" id="audit-monthly">$15,000</strong>
+          </div>
+          <div class="audit-stat-box">
+            <span class="a-label">Annual Projected Loss</span>
+            <strong class="a-val text-red" id="audit-yearly">$180,000</strong>
+          </div>
+          <div class="audit-stat-box">
+            <span class="a-label">5-Year Cumulative Leak</span>
+            <strong class="a-val text-red" id="audit-5yr">$900,000</strong>
+          </div>
+        </div>
+
+        <div class="audit-breakdown-bar-box">
+          <span class="a-sublabel">Recoverable Pipeline Potential with Voice AI (85% Yield):</span>
+          <div class="audit-progress-track">
+            <div class="audit-progress-fill" id="audit-yield-fill" style="width: 85%;"></div>
+          </div>
+          <span class="audit-yield-text" id="audit-yield-val">$153,000 / Year Recovered</span>
+        </div>
+      </div>
+
+      <div class="audit-modal-actions">
+        <button id="btn-print-audit" class="btn btn-secondary btn-sm">🖨️ Print / Save PDF Audit</button>
+        <a href="#contact" class="btn btn-shimmer-trigger btn-sm" onclick="document.getElementById('loss-audit-modal').classList.add('hidden');">Lock In Recovery Plan</a>
+      </div>
     </div>
   </div>
 
