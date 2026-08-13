@@ -156,7 +156,7 @@ body {
 }
 .hidden { display: none !important; }
 
-/* FLOATING GLASSMORPHIC ACTIVITY RIBBON */
+/* FLOATING GLASSMORPHIC ACTIVITY RIBBON (DESKTOP ONLY) */
 .activity-ribbon {
   position: fixed;
   bottom: 28px;
@@ -2256,6 +2256,10 @@ footer {
   * { cursor: auto !important; }
   .cursor-dot, .cursor-ring { display: none; }
   
+  .desktop-only-ribbon {
+    display: none !important;
+  }
+
   .hero { padding: 100px 4% 60px 4% !important; }
   section { padding: 50px 4% !important; }
   
@@ -2271,14 +2275,6 @@ footer {
   .voice-grid, .parser-grid {
     grid-template-columns: 1fr !important;
     gap: 20px !important;
-  }
-
-  .activity-ribbon {
-    bottom: 15px !important;
-    left: 15px !important;
-    font-size: 0.65rem !important;
-    padding: 6px 14px !important;
-    max-width: calc(100vw - 30px);
   }
 
   .faq-question-btn {
