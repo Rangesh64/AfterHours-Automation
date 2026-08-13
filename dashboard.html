@@ -56,8 +56,8 @@
       </nav>
       
       <div class="sidebar-footer-card luxury-footer-card">
-        <span class="luxury-badge">ENTERPRISE TIER</span>
-        <p>242 Days Remaining</p>
+        <span class="luxury-badge" id="sub-sidebar-badge">ENTERPRISE TIER</span>
+        <p id="sub-sidebar-days">242 Days Remaining</p>
       </div>
     </aside>
 
@@ -102,26 +102,26 @@
         <div class="panel-header-flex">
           <div>
             <h4 class="luxury-panel-title-large">Subscription &amp; Tier Oversight</h4>
-            <p class="sub-card-desc">Active Allocation: <strong class="text-espresso">Enterprise Unlimited Mesh</strong></p>
+            <p class="sub-card-desc">Active Allocation: <strong class="text-espresso" id="sub-plan">Enterprise Unlimited Mesh</strong></p>
           </div>
           <button class="btn btn-luxury-outline btn-sm" onclick="alert('Redirecting to secure billing portal...');">Manage Plan &amp; Invoices</button>
         </div>
         <div class="sub-details-grid">
           <div class="sub-stat">
             <span class="sub-label">Billing Cycle</span>
-            <strong class="sub-val">Annual Enterprise</strong>
+            <strong class="sub-val" id="sub-cycle">Annual Enterprise</strong>
           </div>
           <div class="sub-stat">
             <span class="sub-label">Time Remaining</span>
-            <strong class="sub-val text-bronze">242 Days Remaining</strong>
+            <strong class="sub-val text-bronze" id="sub-days">242 Days Remaining</strong>
           </div>
           <div class="sub-stat">
             <span class="sub-label">Next Renewal Date</span>
-            <strong class="sub-val">April 12, 2027</strong>
+            <strong class="sub-val" id="sub-renewal">April 12, 2027</strong>
           </div>
           <div class="sub-stat">
             <span class="sub-label">Active Capacity</span>
-            <strong class="sub-val">Unlimited Multi-Channel Routes</strong>
+            <strong class="sub-val" id="sub-capacity">Unlimited Multi-Channel Routes</strong>
           </div>
         </div>
       </div>
