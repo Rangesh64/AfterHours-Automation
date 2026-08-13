@@ -1346,6 +1346,7 @@ function initLoginModal() {
           const realToken = data.token || data.session.token;
 
           localStorage.setItem('token', realToken);
+          localStorage.setItem('userEmail', emailVal);
           localStorage.setItem('afterhours_session', JSON.stringify({
             email: emailVal,
             authenticated: true,
@@ -1362,6 +1363,7 @@ function initLoginModal() {
       // 2. Fallback check for whitelisted authorized executive email & temporary password
       if (AUTHORIZED_EMAILS.includes(emailVal) && passwordVal === TEMP_PORTAL_PASSWORD) {
         localStorage.setItem('token', '4f71586a-3099-4c02-ab9f-2e917e64563c');
+        localStorage.setItem('userEmail', emailVal);
         localStorage.setItem('afterhours_session', JSON.stringify({
           email: emailVal,
           authenticated: true,
@@ -1458,6 +1460,7 @@ async function initLiveDashboard() {
 
   const session = JSON.parse(localStorage.getItem('afterhours_session') || '{}');
   const token = localStorage.getItem('token') || session.token;
+  const userEmail = localStorage.getItem('userEmail') || session.email || 'rangeshmishra9@gmail.com';
 
   try {
     const baseUrl = (typeof API_CONFIG !== 'undefined' && API_CONFIG.BASE_URL) 
@@ -1468,7 +1471,8 @@ async function initLiveDashboard() {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token || ''}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'x-user-email': userEmail
       }
     });
 
@@ -1478,6 +1482,21 @@ async function initLiveDashboard() {
     console.log('[LIVE DASHBOARD DATA]', data);
 
     if (data) {
+      // Dynamic Subscription Tiers Update
+      if (data.subscription) {
+        const planElem = document.querySelector('[data-sub-plan]') || document.getElementById('sub-plan');
+        const cycleElem = document.querySelector('[data-sub-cycle]') || document.getElementById('sub-cycle');
+        const daysElem = document.querySelector('[data-sub-days]') || document.getElementById('sub-days');
+        const renewalElem = document.querySelector('[data-sub-renewal]') || document.getElementById('sub-renewal');
+        const capacityElem = document.querySelector('[data-sub-capacity]') || document.getElementById('sub-capacity');
+
+        if (planElem) planElem.innerText = data.subscription.plan_name;
+        if (cycleElem) cycleElem.innerText = data.subscription.billing_cycle;
+        if (daysElem) daysElem.innerText = `${data.subscription.days_remaining} Days Remaining`;
+        if (renewalElem) renewalElem.innerText = data.subscription.renewal_date;
+        if (capacityElem) capacityElem.innerText = data.subscription.capacity;
+      }
+
       const cards = document.querySelectorAll('.metric-card');
       const totalLeadsCount = Array.isArray(data.leads) ? data.leads.length : (data.totalLeads || 0);
       const activeCallsCount = Array.isArray(data.logs) ? data.logs.length : (data.activeIntercepts || 0);
@@ -1523,6 +1542,13 @@ async function initLiveDashboard() {
         feed.innerHTML = data.logs.map(log => `
           <div class="feed-row" style="display:flex; justify-content:space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
             <span>${log.action || log.message || log.details || 'Inquiry Logged'}</span>
+            <span style="color:var(--text-muted, #888);">${log.created_at ? new Date(log.created_at).toLocaleTimeString() : 'Recent'}</span>
+          </div>
+        `).join('');
+      } else if (feed && Array.isArray(data.recentIntercepts) && data.recentIntercepts.length > 0) {
+        feed.innerHTML = data.recentIntercepts.map(log => `
+          <div class="feed-row" style="display:flex; justify-content:space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <span>${log.outcome || log.channels || 'Inquiry Logged'}</span>
             <span style="color:var(--text-muted, #888);">${log.created_at ? new Date(log.created_at).toLocaleTimeString() : 'Recent'}</span>
           </div>
         `).join('');
