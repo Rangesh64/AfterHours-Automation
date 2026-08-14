@@ -27,20 +27,6 @@
       border-left: 3px solid #c59b27;
       color: #c59b27 !important;
     }
-    .action-btn-pill {
-      background: rgba(197, 155, 39, 0.1);
-      border: 1px solid rgba(197, 155, 39, 0.3);
-      color: #c59b27;
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .action-btn-pill:hover {
-      background: rgba(197, 155, 39, 0.25);
-      color: #fff;
-    }
   </style>
 </head>
 <body class="dashboard-body luxury-marble-bg">
@@ -209,7 +195,6 @@
                   <th>Call Summary / Intake</th>
                   <th>Time Intercepted</th>
                   <th>Call Status</th>
-                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -219,7 +204,6 @@
                   <td>Requested emergency AC repair service for tomorrow morning.</td>
                   <td>12 mins ago</td>
                   <td><span class="status-pill state-secured-luxury">BOOKED</span></td>
-                  <td><button class="action-btn-pill" onclick="alert('Playing Call Audio Recording...')">▶ Play Audio</button></td>
                 </tr>
                 <tr>
                   <td><strong>+1 (555) 876-1122</strong></td>
@@ -227,7 +211,6 @@
                   <td>Inquired about dental emergency slot; booked 9:00 AM.</td>
                   <td>45 mins ago</td>
                   <td><span class="status-pill state-secured-luxury">CONFIRMED</span></td>
-                  <td><button class="action-btn-pill" onclick="alert('Playing Call Audio Recording...')">▶ Play Audio</button></td>
                 </tr>
                 <tr>
                   <td><strong>+1 (555) 901-4433</strong></td>
@@ -235,7 +218,6 @@
                   <td>Asked for banquet hall tour dates & luxury pricing PDF.</td>
                   <td>2 hours ago</td>
                   <td><span class="status-pill state-sent-luxury">INFO SENT</span></td>
-                  <td><button class="action-btn-pill" onclick="alert('Playing Call Audio Recording...')">▶ Play Audio</button></td>
                 </tr>
               </tbody>
             </table>
@@ -259,32 +241,28 @@
                 <tr>
                   <th>Recipient Phone</th>
                   <th>Message Template Dispatched</th>
-                  <th>Delivery Status</th>
-                  <th>Dispatch Time</th>
-                  <th>Interactive Action</th>
+                  <th>Initial Dispatch Time</th>
+                  <th>Last Message Time</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td><strong>+1 (555) 234-8901</strong></td>
                   <td>"Appointment Booking Confirmation & Location Pin"</td>
-                  <td><span class="status-pill state-secured-luxury">READ</span></td>
                   <td>11 mins ago</td>
-                  <td>Calendar Clicked</td>
+                  <td>2 mins ago</td>
                 </tr>
                 <tr>
                   <td><strong>+1 (555) 876-1122</strong></td>
                   <td>"Emergency Consultation Slot Reserved - Apex Dental"</td>
-                  <td><span class="status-pill state-secured-luxury">DELIVERED</span></td>
                   <td>44 mins ago</td>
-                  <td>Awaiting Click</td>
+                  <td>15 mins ago</td>
                 </tr>
                 <tr>
                   <td><strong>+1 (555) 901-4433</strong></td>
                   <td>"Grand Palace Banquets Digital Brochure & Viewing Tour"</td>
-                  <td><span class="status-pill state-sent-luxury">SENT</span></td>
                   <td>2 hours ago</td>
-                  <td>Brochure Opened</td>
+                  <td>1 hour ago</td>
                 </tr>
               </tbody>
             </table>
@@ -308,32 +286,28 @@
                 <tr>
                   <th>Recipient Email</th>
                   <th>Sequence Subject</th>
-                  <th>Status</th>
+                  <th>Sequence Type</th>
                   <th>Time Dispatched</th>
-                  <th>Open Rate</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td><strong>sarah.connor@domain.com</strong></td>
                   <td>Your Emergency Repair Ticket & Technician Dispatch</td>
-                  <td><span class="status-pill state-secured-luxury">OPENED</span></td>
+                  <td><span class="status-pill state-secured-luxury">Confirmation Mail</span></td>
                   <td>10 mins ago</td>
-                  <td>Opened (2x)</td>
                 </tr>
                 <tr>
                   <td><strong>m.chang@healthmail.com</strong></td>
                   <td>Emergency Dental Appointment Confirmation - Tomorrow 9:00 AM</td>
-                  <td><span class="status-pill state-secured-luxury">OPENED</span></td>
+                  <td><span class="status-pill state-sent-luxury">Rescheduling Mail</span></td>
                   <td>42 mins ago</td>
-                  <td>Opened (1x)</td>
                 </tr>
                 <tr>
                   <td><strong>elena.rostova@vipbuyers.com</strong></td>
                   <td>VIP Penthouse Private Walkthrough Confirmation</td>
-                  <td><span class="status-pill state-sent-luxury">DELIVERED</span></td>
+                  <td><span class="status-pill state-active-luxury">Informational Mail</span></td>
                   <td>1 hour ago</td>
-                  <td>Delivered</td>
                 </tr>
               </tbody>
             </table>
