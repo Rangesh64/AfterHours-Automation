@@ -33,7 +33,7 @@
 
   <!-- WebGL Fallback Banner -->
   <div id="webgl-fallback" class="fallback-banner hidden">
-    <span>⚡ Visual rendering mode active.</span>
+    <span>⚡ High-performance visual mode active.</span>
   </div>
 
   <!-- Floating Glassmorphic Activity Ribbon (Desktop Only) -->
@@ -45,6 +45,7 @@
   <!-- Header Navigation -->
   <header class="navbar">
     <div class="logo">
+      <!-- Prominent Enlarged Interwoven Knot SVG Logo -->
       <svg class="logo-knot-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="knot-grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -78,10 +79,10 @@
       <a href="#capabilities" class="nav-item">Capabilities</a>
       <a href="#faq" class="nav-item">FAQs</a>
       <a href="#dashboard" class="nav-item">Console</a>
-      <a href="#pricing" class="btn btn-shimmer-trigger nav-btn btn-pricing-3d">
+      <a href="#pricing" class="btn btn-outline nav-btn btn-pricing-3d">
         <span class="pulse-indicator-small"></span> Plans & Pricing
       </a>
-      <button id="btn-open-login" class="btn btn-shimmer-trigger nav-btn login-nav-btn">
+      <button id="btn-open-login" class="btn btn-outline nav-btn login-nav-btn">
         <span class="lock-icon">🔒</span> Client Portal
       </button>
       <a href="mailto:afterhoursautomation714@gmail.com?subject=Private%20Demo%20Request%20-%20AfterHours%20Automation&body=Hi%20AfterHours%20Team,%0A%0AI%20am%20interested%20in%20learning%20more%20about%20your%2024/7%20Voice%20AI%20Receptionist%20and%20autonomous%20lead%20recovery%20platform.%0A%0AMy%20Details:%0A-%20Name:%20%0A-%20Company:%20%0A-%20Phone%20Number:%20%0A-%20Estimated%20Monthly%20Inbound%20Call%20Volume:%20%0A%0ALooking%20forward%20to%20connecting!" class="btn btn-primary nav-btn">Book Demo</a>
@@ -108,7 +109,7 @@
         </p>
         <div class="hero-actions">
           <a href="#voice-ai" class="btn btn-shimmer-trigger magnetic-btn">Experience Voice AI</a>
-          <button id="btn-trigger-live-call-sim" class="btn btn-demo-hero magnetic-btn">📞 Simulate Live Phone Call</button>
+          <a href="mailto:afterhoursautomation714@gmail.com?subject=Private%20Demo%20Request%20-%20AfterHours%20Voice%20AI&body=Hi%20AfterHours%20Team,%0A%0AI%20am%20interested%20in%20testing%20your%2024/7%20AI%20Voice%20Receptionist%20for%20my%20business.%0A%0APlease%20let%20me%20know%20your%20availability%20for%20a%20private%20demo.%0A%0AMy%20Details:%0A-%20Name:%20%0A-%20Company:%20%0A-%20Phone%20Number:%20%0A-%20Estimated%20Monthly%20Call%20Volume:%20%0A%0ALooking%20forward%20to%20connecting!" class="btn btn-demo-hero magnetic-btn">Book Live Call Demo</a>
         </div>
       </div>
     </section>
@@ -136,7 +137,7 @@
             <h3>24/7 Instant Call Pickup</h3>
             <p>Inbound phone call is answered in under 1 ring by our realistic, conversational AI Voice Agent.</p>
             <div class="step-hud">
-              <span>Channel: Inbound Phone</span>
+              <span>Channel: Live Voice Call</span>
               <span class="hud-highlight">Answer Time: &lt; 1 Second</span>
             </div>
           </div>
@@ -149,7 +150,7 @@
             <h3>Natural Voice Dialog & Intake</h3>
             <p>The AI Agent engages in fluent conversation, takes caller name, service needs, address, and booking preferences.</p>
             <div class="step-hud">
-              <span>Voice Engine: Natural Human Tone</span>
+              <span>Voice Engine: Realistic Speech Flow</span>
               <span class="hud-highlight">Response Speed: Instant</span>
             </div>
           </div>
@@ -162,8 +163,8 @@
             <h3>Appointment Locked & Logged</h3>
             <p>Inquiry details and appointment timestamps are structured automatically with zero human error.</p>
             <div class="step-hud">
-              <span>Data Intake: Verified Structured Fields</span>
-              <span class="hud-highlight">Accuracy: 100%</span>
+              <span>Data Process: Intelligent Intake</span>
+              <span class="hud-highlight">Accuracy: 100% Verified</span>
             </div>
           </div>
 
@@ -188,7 +189,7 @@
             <h3>Synced to CRM & Spreadsheets</h3>
             <p>Lead contact card, address details, call recording, and scheduled booking sync automatically into your CRM.</p>
             <div class="step-hud">
-              <span>Status: Calendar Booked & Synced</span>
+              <span>CRM Status: Booked & Synced</span>
               <span class="hud-highlight">Outcome: CONVERTED</span>
             </div>
           </div>
@@ -244,9 +245,13 @@
             <span class="voice-telemetry-tag">LIVE VOICE AGENT PLAYER</span>
             <div class="voice-mic-icon">🎙️</div>
             
-            <!-- Neon Live Waveform Canvas Visualizer -->
-            <div class="waveform-canvas-container">
-              <canvas id="voice-wave-canvas" width="280" height="40"></canvas>
+            <div class="voice-equalizer" id="voice-equalizer-bars">
+              <span class="eq-bar eq-1"></span>
+              <span class="eq-bar eq-2"></span>
+              <span class="eq-bar eq-3"></span>
+              <span class="eq-bar eq-4"></span>
+              <span class="eq-bar eq-5"></span>
+              <span class="eq-bar eq-6"></span>
             </div>
 
             <div class="voice-audio-player">
@@ -257,7 +262,7 @@
                 <button class="sample-pill" data-sample="banquet">🏰 Event</button>
               </div>
               <div class="audio-controls-row">
-                <button id="btn-play-voice-sample" class="audio-play-btn btn-shimmer-trigger" aria-label="Play Voice Demo">
+                <button id="btn-play-voice-sample" class="audio-play-btn" aria-label="Play Voice Demo">
                   <span id="play-icon">▶</span>
                 </button>
                 <div class="audio-waveform-progress">
@@ -266,7 +271,7 @@
                 </div>
               </div>
               <p id="sample-transcript-text" class="sample-transcript-box">
-                "Hi! Thanks for calling Rash Enterprises. I can get you scheduled for an emergency consultation tomorrow morning at 9:00 AM. Shall I lock that in for you?"
+                "Hi! Thanks for calling Apex Dental. I can get you scheduled for an emergency appointment tomorrow morning at 9:00 AM. Shall I lock that in for you?"
               </p>
             </div>
 
@@ -371,7 +376,7 @@
             </div>
             <div class="ind-box ind-whatsapp-box">
               <span class="ind-box-label">Dispatched WhatsApp Preview</span>
-              <p id="ind-msg">"Hi! Thanks for speaking with Rash Enterprises AI. Your emergency appointment slot is reserved for tomorrow at 9:00 AM. Location Pin: [Link]"</p>
+              <p id="ind-msg">"Hi! Thanks for speaking with Apex Dental AI. Your emergency appointment slot is reserved for tomorrow at 9:00 AM. Location Pin: [Link]"</p>
             </div>
           </div>
         </div>
@@ -390,7 +395,7 @@
         <div class="customizer-controls">
           <div class="cust-group">
             <label for="cust-biz-name">Your Company / Practice Name</label>
-            <input type="text" id="cust-biz-name" value="Rash Enterprises" placeholder="e.g. Rash Enterprises" />
+            <input type="text" id="cust-biz-name" value="Apex Enterprises" placeholder="e.g. Apex Dental or Metro HVAC" />
           </div>
 
           <div class="cust-group">
@@ -402,26 +407,19 @@
               <button class="tone-btn" data-tone="luxury">👑 Luxury</button>
             </div>
           </div>
-
-          <div class="copy-script-row">
-            <button id="btn-copy-script" class="btn btn-shimmer-trigger btn-sm copy-snippet-btn">
-              📋 Copy VIP Script Template
-            </button>
-            <span id="copy-status-text" class="copy-status-msg hidden">Copied to Clipboard! ✔</span>
-          </div>
         </div>
 
         <div class="phone-mockup">
           <div class="phone-header">
-            <div class="phone-avatar">RE</div>
+            <div class="phone-avatar">AH</div>
             <div class="phone-contact">
-              <strong id="phone-contact-name">Rash Enterprises AI</strong>
+              <strong id="phone-contact-name">Apex Enterprises AI</strong>
               <span>● Online & Dispatched</span>
             </div>
           </div>
           <div class="phone-body">
             <div class="chat-bubble ai-bubble">
-              <p id="whatsapp-script-text">"Hi there! Thanks for speaking with Rash Enterprises. Your appointment details and booking summary have been confirmed. Tap here to view your calendar entry: [Booking Link]"</p>
+              <p id="whatsapp-script-text">"Hi there! Thanks for speaking with Apex Enterprises. Your appointment details and booking summary have been confirmed. Tap here to view your calendar entry: [Booking Link]"</p>
               <span class="chat-timestamp">Just now • Delivered ✔✔</span>
             </div>
           </div>
@@ -445,7 +443,7 @@
 
         <div class="game-workspace">
           <textarea id="game-input" placeholder="Click 'Trigger Inbound Call' above to start the clock, then type your manual intake reply here..." disabled></textarea>
-          <button id="btn-submit-game" class="btn btn-shimmer-trigger btn-sm" disabled>Send Manual Reply</button>
+          <button id="btn-submit-game" class="btn btn-secondary btn-sm" disabled>Send Manual Reply</button>
         </div>
 
         <div class="game-results hidden" id="game-results-box">
@@ -502,7 +500,7 @@
       </div>
     </section>
 
-    <!-- CALCULATOR (Max Range Expanded to 15000) -->
+    <!-- MULTI-CURRENCY CALCULATOR -->
     <section class="calculator-section" id="calc">
       <div class="section-header reveal-on-scroll">
         <span class="section-tag">Interactive Revenue Calculator</span>
@@ -544,7 +542,7 @@
                   </div>
                 </div>
               </div>
-              <input type="range" id="range-value" min="10" max="15000" value="50" step="10" />
+              <input type="range" id="range-value" min="10" max="5000" value="50" step="10" />
             </div>
           </div>
 
@@ -567,7 +565,8 @@
       </div>
 
       <div class="card-grid">
-        <div class="glass-card tilt-card reveal-on-scroll">
+        <div class="glass-card tilt-card cap-card-3d reveal-on-scroll" data-glow="cobalt">
+          <div class="card-glow"></div>
           <div class="card-top-bar">
             <span class="card-icon">🎙️</span>
             <span class="card-tech-tag">24/7 VOICE AI</span>
@@ -579,7 +578,8 @@
           </div>
         </div>
 
-        <div class="glass-card tilt-card reveal-on-scroll">
+        <div class="glass-card tilt-card cap-card-3d reveal-on-scroll" data-glow="cyan">
+          <div class="card-glow"></div>
           <div class="card-top-bar">
             <span class="card-icon">💬</span>
             <span class="card-tech-tag">DIRECT API</span>
@@ -591,7 +591,8 @@
           </div>
         </div>
 
-        <div class="glass-card tilt-card reveal-on-scroll">
+        <div class="glass-card tilt-card cap-card-3d reveal-on-scroll" data-glow="indigo">
+          <div class="card-glow"></div>
           <div class="card-top-bar">
             <span class="card-icon">✉️</span>
             <span class="card-tech-tag">DIRECT EMAIL</span>
@@ -603,7 +604,8 @@
           </div>
         </div>
 
-        <div class="glass-card tilt-card reveal-on-scroll">
+        <div class="glass-card tilt-card cap-card-3d reveal-on-scroll" data-glow="cobalt">
+          <div class="card-glow"></div>
           <div class="card-top-bar">
             <span class="card-icon">🔄</span>
             <span class="card-tech-tag">CRM SYNC</span>
@@ -615,7 +617,8 @@
           </div>
         </div>
 
-        <div class="glass-card tilt-card reveal-on-scroll">
+        <div class="glass-card tilt-card cap-card-3d reveal-on-scroll" data-glow="violet">
+          <div class="card-glow"></div>
           <div class="card-top-bar">
             <span class="card-icon">🧠</span>
             <span class="card-tech-tag">SMART WORKFLOWS</span>
@@ -627,7 +630,8 @@
           </div>
         </div>
 
-        <div class="glass-card tilt-card reveal-on-scroll">
+        <div class="glass-card tilt-card cap-card-3d reveal-on-scroll" data-glow="emerald">
+          <div class="card-glow"></div>
           <div class="card-top-bar">
             <span class="card-icon">🛡️</span>
             <span class="card-tech-tag">DATA PRIVACY</span>
@@ -641,7 +645,7 @@
       </div>
     </section>
 
-    <!-- FAQS ACCORDION SECTION -->
+    <!-- INTERACTIVE FAQS ACCORDION SECTION -->
     <section class="faq-section" id="faq">
       <div class="section-header reveal-on-scroll">
         <span class="section-tag">Knowledge Base</span>
@@ -701,7 +705,7 @@
       </div>
 
       <div class="why-grid-3d">
-        <div class="glass-card tilt-card reveal-on-scroll">
+        <div class="glass-card tilt-card reveal-on-scroll" data-glow="cobalt">
           <div class="card-top-bar">
             <span class="card-icon">⚡</span>
             <span class="card-tech-tag">INSTANT INTENT</span>
@@ -710,7 +714,7 @@
           <p>Answer prospects in under 1 ring while buying intent is at its highest point, bypassing competitor voicemail entirely.</p>
         </div>
 
-        <div class="glass-card tilt-card reveal-on-scroll">
+        <div class="glass-card tilt-card reveal-on-scroll" data-glow="cyan">
           <div class="card-top-bar">
             <span class="card-icon">🛡️</span>
             <span class="card-tech-tag">LEAD RETENTION</span>
@@ -719,7 +723,7 @@
           <p>Reclaim after-hours calls that usually slip away into competitor hands.</p>
         </div>
 
-        <div class="glass-card tilt-card reveal-on-scroll">
+        <div class="glass-card tilt-card reveal-on-scroll" data-glow="indigo">
           <div class="card-top-bar">
             <span class="card-icon">👑</span>
             <span class="card-tech-tag">BRAND AUTHORITY</span>
@@ -728,7 +732,7 @@
           <p>Give callers immediate certainty that their inquiry is being handled with executive-level voice precision.</p>
         </div>
 
-        <div class="glass-card tilt-card reveal-on-scroll">
+        <div class="glass-card tilt-card reveal-on-scroll" data-glow="violet">
           <div class="card-top-bar">
             <span class="card-icon">🔄</span>
             <span class="card-tech-tag">24/7 OPERATION</span>
@@ -737,17 +741,17 @@
           <p>Constant 365-day operation with zero additional support headcount or manual receptionist overhead.</p>
         </div>
 
-        <div class="glass-card tilt-card reveal-on-scroll stat-glass-card">
+        <div class="glass-card tilt-card reveal-on-scroll stat-glass-card" data-glow="cyan">
           <span class="stat-number count-up" data-value="1" data-prefix="&lt; " data-suffix="s">&lt; 0s</span>
           <span class="stat-label">Average Call Pickup Time</span>
         </div>
 
-        <div class="glass-card tilt-card reveal-on-scroll stat-glass-card">
+        <div class="glass-card tilt-card reveal-on-scroll stat-glass-card" data-glow="emerald">
           <span class="stat-number count-up" data-value="100" data-decimals="0" data-suffix="%">0%</span>
           <span class="stat-label">Inbound Call Handling Rate</span>
         </div>
 
-        <div class="glass-card tilt-card reveal-on-scroll stat-glass-card">
+        <div class="glass-card tilt-card reveal-on-scroll stat-glass-card" data-glow="indigo">
           <span class="stat-number count-up" data-value="3.8" data-decimals="1" data-suffix="x">0.0x</span>
           <span class="stat-label">Conversion Rate Multiplication</span>
         </div>
@@ -812,7 +816,7 @@
               </div>
               <div class="ai-msg msg-ai">
                 <span class="msg-type type-ai">Voice AI Agent Response</span>
-                <p id="sim-outbound-text">"Hello! Thanks for calling Rash Enterprises. I am your 24/7 AI Receptionist. I can answer your questions and book a consultation for you right now."</p>
+                <p id="sim-outbound-text">"Hello! Thanks for calling Apex Enterprises. I am your 24/7 AI Receptionist. I can answer your questions and book a consultation for you right now."</p>
               </div>
             </div>
           </div>
@@ -838,7 +842,7 @@
       </div>
     </section>
 
-    <!-- FINAL CTA SECTION (Strictly Isolated & Unaltered) -->
+    <!-- FINAL CTA SECTION -->
     <section class="cta-section" id="contact">
       <div class="cta-card tilt-card reveal-on-scroll">
         <h2 class="shimmer-text">Let’s make every call count.</h2>
@@ -849,36 +853,6 @@
       </div>
     </section>
   </main>
-
-  <!-- LIVE PHONE RING & ANSWER SIMULATOR MODAL -->
-  <div id="phone-sim-modal" class="modal-backdrop hidden">
-    <div class="modal-card tilt-card live-call-sim-card">
-      <button id="btn-close-phone-sim" class="modal-close-btn" aria-label="Close modal">×</button>
-      
-      <div class="phone-sim-header">
-        <span class="modal-badge">LIVE CALL TELEMETRY</span>
-        <div class="phone-sim-avatar">RE</div>
-        <h3 id="phone-sim-caller-name">Inbound Call From Prospect</h3>
-        <p id="phone-sim-status" class="phone-ringing-text">🔔 Incoming Call (+1 555-019-2831)...</p>
-      </div>
-
-      <div class="phone-sim-dialog-box hidden" id="phone-sim-dialog">
-        <div class="sim-dialog-bubble">
-          <span class="sim-speaker">Voice AI Concierge:</span>
-          <p id="phone-sim-speech">"Hello! Thanks for calling Rash Enterprises. I am your 24/7 AI Receptionist. I can answer your questions and book a consultation right now."</p>
-        </div>
-      </div>
-
-      <div class="phone-sim-actions" id="phone-sim-action-row">
-        <button id="btn-accept-call" class="btn btn-shimmer-trigger call-action-btn accept-call-btn">
-          📞 Answer Call (AI Engine)
-        </button>
-        <button id="btn-decline-call" class="btn btn-secondary call-action-btn decline-call-btn">
-          ✕ End Call
-        </button>
-      </div>
-    </div>
-  </div>
 
   <!-- RaSH CHATBOT WIDGET -->
   <div id="ai-chat-widget" class="ai-chat-widget">
@@ -911,7 +885,7 @@
       <div class="chat-window-body" id="chat-msg-container">
         <div class="bot-chat-msg">
           <span class="bot-tag">RaSH ⚡</span>
-          <p>Hello! I am RaSH, your 24/7 lead recovery guide for Rash Enterprises. Ask me about our 24/7 Voice AI Agent, roast my circuits, ask for a joke, or chat with me about saving missed calls!</p>
+          <p>Hello! I am RaSH, your 24/7 lead recovery guide. Ask me about our 24/7 Voice AI Agent, roast my circuits, ask for a joke, or chat with me about saving missed calls!</p>
         </div>
       </div>
 
@@ -1031,7 +1005,6 @@
     </div>
   </div>
 
-  <!-- FOOTER (Engineered by Rangesh & Shubham Restored) -->
   <footer>
     <div class="footer-inner">
       <p class="footer-credit">Engineered with precision by <a href="https://www.linkedin.com/in/rangesh-mishra-281557408" target="_blank" rel="noopener" class="footer-link-highlight">Rangesh</a> &amp; <a href="https://www.linkedin.com/in/shubham-mahmia-44875826a" target="_blank" rel="noopener" class="footer-link-highlight">Shubham</a>.</p>
