@@ -489,7 +489,7 @@ function stopAnimatedWaveform() {
   drawStaticWave();
 }
 
-// Audio Voice Player with Waveform Link
+// Audio Voice Player with Motto "Rash Enterprises"
 function initAudioVoicePlayer() {
   const playBtn = document.getElementById('btn-play-voice-sample');
   const playIcon = document.getElementById('play-icon');
@@ -502,13 +502,13 @@ function initAudioVoicePlayer() {
 
   const samples = {
     dental: {
-      transcript: `"Hi! Thanks for calling Apex Dental. I can get you scheduled for an emergency appointment tomorrow morning at 9:00 AM. Shall I lock that in for you?"`
+      transcript: `"Hi! Thanks for calling Rash Enterprises. I can get you scheduled for an emergency consultation tomorrow morning at 9:00 AM. Shall I lock that in for you?"`
     },
     hvac: {
-      transcript: `"Hello! Thanks for reaching Apex Climate Services. Is your AC completely down? I can dispatch an emergency technician to your address at 8:30 AM."`
+      transcript: `"Hello! Thanks for reaching Rash Enterprises. Is your AC completely down? I can dispatch an emergency technician to your address at 8:30 AM."`
     },
     banquet: {
-      transcript: `"Greetings from Grand Palace Banquets! I can confirm hall availability for your preferred date and text you our luxury brochure right now."`
+      transcript: `"Greetings from Rash Enterprises! I can confirm hall availability for your preferred date and text you our brochure right now."`
     }
   };
 
@@ -613,7 +613,7 @@ function initAudioVoicePlayer() {
   });
 }
 
-// Live Phone Ring Simulator Modal Manager
+// Live Phone Ring Simulator with Motto "Rash Enterprises"
 function initLivePhoneSimulator() {
   const triggerBtn = document.getElementById('btn-trigger-live-call-sim');
   const modal = document.getElementById('phone-sim-modal');
@@ -653,7 +653,7 @@ function initLivePhoneSimulator() {
       }
       if (dialogBox) dialogBox.classList.remove('hidden');
 
-      const greeting = "Hello! Thanks for calling Apex Enterprises. I am your 24/7 AI Receptionist. I can answer your questions, log your details, and book your appointment right now.";
+      const greeting = "Hello! Thanks for calling Rash Enterprises. I am your 24/7 AI Receptionist. I can answer your questions, log your details, and book your appointment right now.";
       if (speechText) speechText.textContent = `"${greeting}"`;
 
       if ('speechSynthesis' in window) {
@@ -709,7 +709,7 @@ function initScriptCustomizer() {
   let currentTone = 'friendly';
 
   function updateScript() {
-    const bizName = bizInput.value.trim() || 'Apex Enterprises';
+    const bizName = bizInput.value.trim() || 'Rash Enterprises';
     if (nameDisplay) nameDisplay.textContent = `${bizName} AI`;
     
     const generator = toneScripts[currentTone] || toneScripts['friendly'];
@@ -778,9 +778,7 @@ function initReactionGame() {
   });
 }
 
-// ============================================================================
-// MAX-INTELLIGENCE RaSH ASSISTANT ENGINE
-// ============================================================================
+// RaSH Chatbot Engine
 function initRaSHChatbot() {
   const toggleBtn = document.getElementById('ai-chat-toggle');
   const closeBtn = document.getElementById('ai-chat-close');
@@ -800,11 +798,10 @@ function initRaSHChatbot() {
   };
 
   const dynamicJokes = [
-    "Why did the sales lead cross the road? To reach the competitor who actually answered their call in under 1 ring!",
+    "Why did the sales lead cross the road? To reach Rash Enterprises who actually answered their call in under 1 ring!",
     "Why don't missed phone calls ever get promoted? Because they always get left hanging!",
     "What is an answering service's favorite workout? Ring dips! But with AfterHours Voice AI, zero reps required.",
-    "Why was the voicemail inbox so lonely? Because AfterHours answered every caller before the second ring!",
-    "Why did the dentist hire AfterHours Voice AI? Because he wanted to fill cavities, not fill out missed call slips!"
+    "Why was the voicemail inbox so lonely? Because Rash Enterprises answered every caller before the second ring!"
   ];
 
   toggleBtn.addEventListener('click', () => windowBox.classList.toggle('hidden'));
@@ -843,7 +840,7 @@ function initRaSHChatbot() {
     if (q.includes('founder') || q.includes('who made') || q.includes('who built') || q.includes('rangesh') || q.includes('shubham') || q.includes('creator') || q.includes('owner')) {
       return {
         tag: "RaSH 👑",
-        text: "AfterHours Automation was engineered by **Rangesh** and **Shubham**! They are two visionary 19-year-old innovators who built this entire autonomous Voice AI system, 3D WebGL architecture, and CRM bridge from scratch to ensure zero business leads ever hit voicemail."
+        text: "AfterHours Automation and Rash Enterprises were engineered by **Rangesh** and **Shubham**! They built this entire autonomous Voice AI system, 3D WebGL architecture, and CRM bridge to ensure zero business leads ever hit voicemail."
       };
     }
 
@@ -867,15 +864,8 @@ function initRaSHChatbot() {
       return {
         tag: "RaSH 😤",
         text: memory.userName 
-          ? `Ouch, ${memory.userName}! My circuits have feelings! But while you're roasting me, our Voice AI is answering inbound calls and booking calendar revenue in under 1 ring.`
+          ? `Ouch, ${memory.userName}! My circuits have feelings! But while you're roasting me, our Voice AI is answering inbound calls for Rash Enterprises in under 1 ring.`
           : "Calling an autonomous AI stupid? Bold strategy! While you test my emotional resilience, our Voice AI is busy closing appointments for real businesses."
-      };
-    }
-
-    if (q.includes('marry me') || q.includes('love you') || q.includes('you are amazing') || q.includes('awesome')) {
-      return {
-        tag: "RaSH 💖",
-        text: "Flattery will get you everywhere! I'm flattered, but I'm happily married to zero-latency call routing and 100% lead recovery. Want to see how smooth our voice agent sounds on phone lines?"
       };
     }
 
@@ -894,38 +884,23 @@ function initRaSHChatbot() {
     }
 
     if (q.includes('how it works') || q.includes('pickup') || q.includes('voice') || q.includes('latency') || q.includes('call')) {
-      const nicheMention = memory.businessType ? `tailored specifically for **${memory.businessType}**` : "for your business";
       return {
         tag: "RaSH 🎙️",
-        text: `Our Voice AI answers calls in under 1 ring, speaks in an ultra-realistic human tone, verifies caller name, phone & address, books the slot, and dispatches an instant WhatsApp confirmation ${nicheMention}.`
+        text: `Our Voice AI answers calls in under 1 ring, speaks in an ultra-realistic human tone, verifies caller name, phone & address, books the slot, and dispatches an instant WhatsApp confirmation for your business.`
       };
     }
 
-    if (q.includes('whatsapp') || q.includes('email') || q.includes('sms')) {
-      return {
-        tag: "RaSH 💬",
-        text: "Every caller immediately gets a structured WhatsApp & Email summary with their confirmed booking slot, address confirmation, and Google Maps pin—completely automated!"
-      };
-    }
-
-    if (q.includes('crm') || q.includes('salesforce') || q.includes('hubspot') || q.includes('sheets') || q.includes('integrate')) {
-      return {
-        tag: "RaSH 🔄",
-        text: "We sync directly into Salesforce, HubSpot, GoHighLevel, Jobber, Housecall Pro, and Google Sheets in real time. Zero manual data entry required."
-      };
-    }
-
-    if (q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('good morning') || q.includes('good evening')) {
+    if (q.includes('hello') || q.includes('hi') || q.includes('hey')) {
       const greetingName = memory.userName ? ` ${memory.userName}` : "";
       return {
         tag: "RaSH ⚡",
-        text: `Hey${greetingName}! Welcome to AfterHours Automation. Ready to eliminate missed calls and capture 100% of after-hours revenue?`
+        text: `Hey${greetingName}! Welcome to Rash Enterprises & AfterHours Automation. Ready to eliminate missed calls and capture 100% of after-hours revenue?`
       };
     }
 
     const fallbackList = [
       `"${rawText}" is a great point! While my neural engine analyzes that, how many missed calls does your business experience each week?`,
-      `I hear you! Whether it's complex call triage or booking appointments, our Voice AI handles it 24/7. Want to test a simulated call above?`,
+      `I hear you! Whether it's complex call triage or booking appointments, Rash Enterprises handles it 24/7. Want to test a simulated call above?`,
       `Interesting question! Ask me about 0-second call answers, our founders Rangesh & Shubham, or click 'Book Demo' to test our live voice line.`
     ];
 
@@ -1005,7 +980,7 @@ function initIndustrySelector() {
       desc: "When a patient calls with urgent inquiries after hours, AfterHours AI Voice answers immediately, collects symptom details, books morning consultations, and dispatches a WhatsApp booking link.",
       rec: "$18,400",
       cond: "Inbound call picked up in < 1 ring between 6:00 PM - 8:00 AM or weekend closures.",
-      msg: `"Hi! Thanks for speaking with Apex Dental AI. Your emergency appointment slot is reserved for tomorrow at 9:00 AM. Location Pin: [Link]"`
+      msg: `"Hi! Thanks for speaking with Rash Enterprises AI. Your emergency appointment slot is reserved for tomorrow at 9:00 AM. Location Pin: [Link]"`
     },
     hvac: {
       badge: "HVAC & HOME SERVICES",
@@ -1013,7 +988,7 @@ function initIndustrySelector() {
       desc: "AC unit breakdown at night? Voice AI answers panicked homeowners instantly, collects home address & breakdown type, and schedules an emergency technician slot.",
       rec: "$24,200",
       cond: "Inbound call answered on main line during peak emergency night surges.",
-      msg: `"Hi! Thanks for calling Apex Climate Services. Your emergency repair dispatch slot is confirmed for 8:30 AM. Address logged: [Address]"`
+      msg: `"Hi! Thanks for calling Rash Enterprises. Your emergency repair dispatch slot is confirmed for 8:30 AM. Address logged: [Address]"`
     },
     banquet: {
       badge: "BANQUET & EVENT VENUES",
@@ -1021,7 +996,7 @@ function initIndustrySelector() {
       desc: "Wedding planners and event shoppers call multiple halls. Voice AI answers immediately, takes guest count & preferred date, and emails event brochure instantly.",
       rec: "$42,000",
       cond: "Inbound call answered instantly during evening wedding banquets or weekend galas.",
-      msg: `"Greetings from Grand Palace Banquets! Thank you for calling. Your hall viewing tour is reserved for Saturday at 2:00 PM: [Brochure Link]"`
+      msg: `"Greetings from Rash Enterprises! Thank you for calling. Your hall viewing tour is reserved for Saturday at 2:00 PM: [Brochure Link]"`
     },
     realestate: {
       badge: "REAL ESTATE & LEGAL",
@@ -1029,7 +1004,7 @@ function initIndustrySelector() {
       desc: "High-net-worth buyers expect instant call answers. Voice AI collects property inquiries, answers listing questions, and sends virtual walkthrough links.",
       rec: "$35,000",
       cond: "Inbound call picked up instantly outside standard firm operating hours.",
-      msg: `"Hi! Thanks for speaking with Prime Realty. Your private property walkthrough appointment has been confirmed: [Calendar Link]"`
+      msg: `"Hi! Thanks for speaking with Rash Enterprises. Your private property walkthrough appointment has been confirmed: [Calendar Link]"`
     }
   };
 
@@ -1097,27 +1072,18 @@ function initBackToTop() {
 function initScrollReveals() {
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
 
-  document.querySelectorAll('.card-grid, .why-grid-3d').forEach(grid => {
-    const children = grid.querySelectorAll('.reveal-on-scroll');
-    children.forEach((child, index) => {
-      child.style.setProperty('--stagger-index', index);
-    });
-  });
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('is-visible');
-        
         const counters = entry.target.querySelectorAll('.count-up');
         counters.forEach(counter => animateCounter(counter));
-        
         observer.unobserve(entry.target);
       }
     });
   }, {
-    threshold: 0.12,
-    rootMargin: "0px 0px -40px 0px"
+    threshold: 0.1,
+    rootMargin: "0px 0px -20px 0px"
   });
 
   revealElements.forEach(el => observer.observe(el));
@@ -1288,7 +1254,7 @@ function init3D() {
     connectionLines = new THREE.LineSegments(lineGeo, lineMat);
     scene.add(connectionLines);
 
-    const particleCount = isMobile ? 300 : 1200;
+    const particleCount = isMobile ? 250 : 1200;
     const particleGeo = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particleCount * 3);
 
@@ -1466,7 +1432,7 @@ function initWorkflowAutoplay() {
   observer.observe(workflowSection);
 }
 
-// Login Modal
+// Client Portal Login Modal & Session Verifier
 function initLoginModal() {
   const openBtn = document.getElementById('btn-open-login');
   const closeBtn = document.getElementById('btn-close-modal');
@@ -1510,7 +1476,7 @@ function initLoginModal() {
         submitBtn.disabled = true;
       }
 
-      // Live Render API Call
+      // Live Render Backend API
       try {
         const baseUrl = (typeof API_CONFIG !== 'undefined' && API_CONFIG.BASE_URL) 
           ? API_CONFIG.BASE_URL 
@@ -1613,7 +1579,7 @@ function initDashboardSimulator() {
       const simInbound = document.getElementById('sim-inbound-text');
       const simOutbound = document.getElementById('sim-outbound-text');
       if (simInbound) simInbound.textContent = `Inbound call received from ${phoneVal}`;
-      if (simOutbound) simOutbound.textContent = `"Hello! Thanks for calling Apex Enterprises. I am your 24/7 AI Receptionist. I can answer your questions and book a consultation for you right now."`;
+      if (simOutbound) simOutbound.textContent = `"Hello! Thanks for calling Rash Enterprises. I am your 24/7 AI Receptionist. I can answer your questions and book a consultation for you right now."`;
 
       if (coreMesh) {
         coreMesh.material.color.setHex(0x00f0ff);
