@@ -33,7 +33,7 @@
 
   <!-- WebGL Fallback Banner -->
   <div id="webgl-fallback" class="fallback-banner hidden">
-    <span>⚡ High-performance visual mode active.</span>
+    <span>⚡ Visual rendering mode active.</span>
   </div>
 
   <!-- Floating Glassmorphic Activity Ribbon (Desktop Only) -->
@@ -45,7 +45,6 @@
   <!-- Header Navigation -->
   <header class="navbar">
     <div class="logo">
-      <!-- Prominent Enlarged Interwoven Knot SVG Logo -->
       <svg class="logo-knot-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="knot-grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -79,10 +78,10 @@
       <a href="#capabilities" class="nav-item">Capabilities</a>
       <a href="#faq" class="nav-item">FAQs</a>
       <a href="#dashboard" class="nav-item">Console</a>
-      <a href="#pricing" class="btn btn-outline nav-btn btn-pricing-3d">
+      <a href="#pricing" class="btn btn-shimmer-trigger nav-btn btn-pricing-3d">
         <span class="pulse-indicator-small"></span> Plans & Pricing
       </a>
-      <button id="btn-open-login" class="btn btn-outline nav-btn login-nav-btn">
+      <button id="btn-open-login" class="btn btn-shimmer-trigger nav-btn login-nav-btn">
         <span class="lock-icon">🔒</span> Client Portal
       </button>
       <a href="mailto:afterhoursautomation714@gmail.com?subject=Private%20Demo%20Request%20-%20AfterHours%20Automation&body=Hi%20AfterHours%20Team,%0A%0AI%20am%20interested%20in%20learning%20more%20about%20your%2024/7%20Voice%20AI%20Receptionist%20and%20autonomous%20lead%20recovery%20platform.%0A%0AMy%20Details:%0A-%20Name:%20%0A-%20Company:%20%0A-%20Phone%20Number:%20%0A-%20Estimated%20Monthly%20Inbound%20Call%20Volume:%20%0A%0ALooking%20forward%20to%20connecting!" class="btn btn-primary nav-btn">Book Demo</a>
@@ -97,7 +96,6 @@
           <span class="pulse-indicator"></span> 24/7 Autonomous Voice AI & Lead Recovery
         </div>
         
-        <!-- Contextual Time-of-Day Glass Banner -->
         <div class="time-banner" id="time-banner">
           <span class="time-icon" id="time-icon">🌙</span>
           <span class="time-text" id="time-text">Checking local system clock...</span>
@@ -109,7 +107,7 @@
         </p>
         <div class="hero-actions">
           <a href="#voice-ai" class="btn btn-shimmer-trigger magnetic-btn">Experience Voice AI</a>
-          <a href="mailto:afterhoursautomation714@gmail.com?subject=Private%20Demo%20Request%20-%20AfterHours%20Voice%20AI&body=Hi%20AfterHours%20Team,%0A%0AI%20am%20interested%20in%20testing%20your%2024/7%20AI%20Voice%20Receptionist%20for%20my%20business.%0A%0APlease%20let%20me%20know%20your%20availability%20for%20a%20private%20demo.%0A%0AMy%20Details:%0A-%20Name:%20%0A-%20Company:%20%0A-%20Phone%20Number:%20%0A-%20Estimated%20Monthly%20Call%20Volume:%20%0A%0ALooking%20forward%20to%20connecting!" class="btn btn-demo-hero magnetic-btn">Book Live Call Demo</a>
+          <button id="btn-trigger-live-call-sim" class="btn btn-demo-hero magnetic-btn">📞 Simulate Live Phone Call</button>
         </div>
       </div>
     </section>
@@ -137,7 +135,7 @@
             <h3>24/7 Instant Call Pickup</h3>
             <p>Inbound phone call is answered in under 1 ring by our realistic, conversational AI Voice Agent.</p>
             <div class="step-hud">
-              <span>Channel: Live Voice Call</span>
+              <span>Channel: Inbound Phone</span>
               <span class="hud-highlight">Answer Time: &lt; 1 Second</span>
             </div>
           </div>
@@ -150,7 +148,7 @@
             <h3>Natural Voice Dialog & Intake</h3>
             <p>The AI Agent engages in fluent conversation, takes caller name, service needs, address, and booking preferences.</p>
             <div class="step-hud">
-              <span>Voice Engine: Realistic Speech Flow</span>
+              <span>Voice Engine: Natural Human Tone</span>
               <span class="hud-highlight">Response Speed: Instant</span>
             </div>
           </div>
@@ -163,8 +161,8 @@
             <h3>Appointment Locked & Logged</h3>
             <p>Inquiry details and appointment timestamps are structured automatically with zero human error.</p>
             <div class="step-hud">
-              <span>Data Process: Intelligent Intake</span>
-              <span class="hud-highlight">Accuracy: 100% Verified</span>
+              <span>Data Intake: Verified Structured Fields</span>
+              <span class="hud-highlight">Accuracy: 100%</span>
             </div>
           </div>
 
@@ -189,7 +187,7 @@
             <h3>Synced to CRM & Spreadsheets</h3>
             <p>Lead contact card, address details, call recording, and scheduled booking sync automatically into your CRM.</p>
             <div class="step-hud">
-              <span>CRM Status: Booked & Synced</span>
+              <span>Status: Calendar Booked & Synced</span>
               <span class="hud-highlight">Outcome: CONVERTED</span>
             </div>
           </div>
@@ -245,13 +243,9 @@
             <span class="voice-telemetry-tag">LIVE VOICE AGENT PLAYER</span>
             <div class="voice-mic-icon">🎙️</div>
             
-            <div class="voice-equalizer" id="voice-equalizer-bars">
-              <span class="eq-bar eq-1"></span>
-              <span class="eq-bar eq-2"></span>
-              <span class="eq-bar eq-3"></span>
-              <span class="eq-bar eq-4"></span>
-              <span class="eq-bar eq-5"></span>
-              <span class="eq-bar eq-6"></span>
+            <!-- Neon Live Waveform Canvas Visualizer -->
+            <div class="waveform-canvas-container">
+              <canvas id="voice-wave-canvas" width="280" height="40"></canvas>
             </div>
 
             <div class="voice-audio-player">
@@ -262,7 +256,7 @@
                 <button class="sample-pill" data-sample="banquet">🏰 Event</button>
               </div>
               <div class="audio-controls-row">
-                <button id="btn-play-voice-sample" class="audio-play-btn" aria-label="Play Voice Demo">
+                <button id="btn-play-voice-sample" class="audio-play-btn btn-shimmer-trigger" aria-label="Play Voice Demo">
                   <span id="play-icon">▶</span>
                 </button>
                 <div class="audio-waveform-progress">
@@ -407,6 +401,14 @@
               <button class="tone-btn" data-tone="luxury">👑 Luxury</button>
             </div>
           </div>
+
+          <!-- 1-Click VIP Copy to Clipboard Button -->
+          <div class="copy-script-row">
+            <button id="btn-copy-script" class="btn btn-shimmer-trigger btn-sm copy-snippet-btn">
+              📋 Copy VIP Script Template
+            </button>
+            <span id="copy-status-text" class="copy-status-msg hidden">Copied to Clipboard! ✔</span>
+          </div>
         </div>
 
         <div class="phone-mockup">
@@ -443,7 +445,7 @@
 
         <div class="game-workspace">
           <textarea id="game-input" placeholder="Click 'Trigger Inbound Call' above to start the clock, then type your manual intake reply here..." disabled></textarea>
-          <button id="btn-submit-game" class="btn btn-secondary btn-sm" disabled>Send Manual Reply</button>
+          <button id="btn-submit-game" class="btn btn-shimmer-trigger btn-sm" disabled>Send Manual Reply</button>
         </div>
 
         <div class="game-results hidden" id="game-results-box">
@@ -500,7 +502,7 @@
       </div>
     </section>
 
-    <!-- MULTI-CURRENCY CALCULATOR -->
+    <!-- CALCULATOR -->
     <section class="calculator-section" id="calc">
       <div class="section-header reveal-on-scroll">
         <span class="section-tag">Interactive Revenue Calculator</span>
@@ -645,7 +647,7 @@
       </div>
     </section>
 
-    <!-- INTERACTIVE FAQS ACCORDION SECTION -->
+    <!-- FAQS ACCORDION SECTION -->
     <section class="faq-section" id="faq">
       <div class="section-header reveal-on-scroll">
         <span class="section-tag">Knowledge Base</span>
@@ -854,6 +856,36 @@
     </section>
   </main>
 
+  <!-- LIVE PHONE RING & ANSWER SIMULATOR MODAL -->
+  <div id="phone-sim-modal" class="modal-backdrop hidden">
+    <div class="modal-card tilt-card live-call-sim-card">
+      <button id="btn-close-phone-sim" class="modal-close-btn" aria-label="Close modal">×</button>
+      
+      <div class="phone-sim-header">
+        <span class="modal-badge">LIVE CALL TELEMETRY</span>
+        <div class="phone-sim-avatar">AH</div>
+        <h3 id="phone-sim-caller-name">Inbound Call From Prospect</h3>
+        <p id="phone-sim-status" class="phone-ringing-text">🔔 Incoming Call (+1 555-019-2831)...</p>
+      </div>
+
+      <div class="phone-sim-dialog-box hidden" id="phone-sim-dialog">
+        <div class="sim-dialog-bubble">
+          <span class="sim-speaker">Voice AI Concierge:</span>
+          <p id="phone-sim-speech">"Hello! Thanks for calling. I am your 24/7 Voice AI Receptionist. I can answer your questions and book a consultation right now."</p>
+        </div>
+      </div>
+
+      <div class="phone-sim-actions" id="phone-sim-action-row">
+        <button id="btn-accept-call" class="btn btn-shimmer-trigger call-action-btn accept-call-btn">
+          📞 Answer Call (AI Engine)
+        </button>
+        <button id="btn-decline-call" class="btn btn-secondary call-action-btn decline-call-btn">
+          ✕ End Call
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- RaSH CHATBOT WIDGET -->
   <div id="ai-chat-widget" class="ai-chat-widget">
     <button id="ai-chat-toggle" class="ai-chat-toggle" aria-label="Open RaSH Assistant">
@@ -890,14 +922,14 @@
       </div>
 
       <div class="chat-prompt-chips">
-        <button class="chip-btn" data-query="Who are the founders of AfterHours?">👑 Founders?</button>
-        <button class="chip-btn" data-query="How does the 24/7 Voice AI pickup calls?">🎙️ Voice AI Agent?</button>
-        <button class="chip-btn" data-query="Tell me a joke">😂 Tell a Joke</button>
+        <button class="chip-btn btn-shimmer-trigger" data-query="Who are the founders of AfterHours?">👑 Founders?</button>
+        <button class="chip-btn btn-shimmer-trigger" data-query="How does the 24/7 Voice AI pickup calls?">🎙️ Voice AI Agent?</button>
+        <button class="chip-btn btn-shimmer-trigger" data-query="Tell me a joke">😂 Tell a Joke</button>
       </div>
 
       <div class="chat-window-input">
         <input type="text" id="chat-user-input" placeholder="Chat with RaSH or ask a question..." />
-        <button id="chat-send-btn" class="chat-send-btn">Send</button>
+        <button id="chat-send-btn" class="chat-send-btn btn-shimmer-trigger">Send</button>
       </div>
     </div>
   </div>
