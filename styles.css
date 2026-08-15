@@ -1,39 +1,54 @@
 /* ==========================================================================
-   AFTERHOURS AUTOMATION - COMPLETE UNIFIED STYLESHEET
-   Targets: index.html (Main Marketing Platform) & dashboard.html (Executive Console)
+   AFTERHOURS AUTOMATION - UNIFIED MASTER STYLESHEET
+   Supports: index.html (Main Site) & dashboard.html (Executive Console)
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. GLOBAL VARIABLES & DESIGN TOKENS
+   1. ROOT VARIABLES & DESIGN TOKENS
    -------------------------------------------------------------------------- */
 :root {
+  /* Dark Cyber Matrix (index.html) */
   --bg-dark: #02040a;
   --card-bg: rgba(8, 15, 32, 0.75);
+  --card-bg-hover: rgba(12, 22, 48, 0.85);
   --border-glass: rgba(59, 130, 246, 0.22);
   --border-glow: rgba(0, 240, 255, 0.45);
   
+  /* Primary & Accent Spectrum */
   --cobalt-primary: #2563eb;
   --cobalt-light: #3b82f6;
+  --cobalt-dark: #1d4ed8;
   --cyan-accent: #00f0ff;
+  --cyan-glow: rgba(0, 240, 255, 0.35);
   --indigo-accent: #6366f1;
   --violet-accent: #a855f7;
   --emerald-accent: #10b981;
   --red-accent: #f43f5e;
   --gold-accent: #fbbf24;
   
+  /* Neutral Typography */
   --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
   --text-muted: #94a3b8;
+  --text-dark: #02040a;
   
-  --font-main: 'Plus Jakarta Sans', sans-serif;
-  --font-heading: 'Space Grotesk', sans-serif;
-  --font-luxury: 'Playfair Display', serif;
+  /* Typography Families */
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-luxury: 'Playfair Display', Georgia, serif;
 
+  /* Executive Marble Theme Variables (dashboard.html) */
   --luxury-bg: #fdfbf7;
+  --luxury-bg-secondary: #f4eee1;
   --luxury-espresso: #21150c;
+  --luxury-espresso-light: #3d2817;
   --luxury-bronze: #8c5319;
+  --luxury-bronze-light: #a76623;
   --luxury-gold: #c59b27;
+  --luxury-gold-glow: rgba(197, 155, 39, 0.25);
   --luxury-card-bg: rgba(255, 254, 250, 0.94);
   --luxury-border: rgba(140, 83, 25, 0.14);
+  --luxury-border-strong: rgba(140, 83, 25, 0.28);
 }
 
 /* --------------------------------------------------------------------------
@@ -50,6 +65,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  background-color: var(--bg-dark);
 }
 
 body {
@@ -60,10 +76,27 @@ body {
   background-color: var(--bg-dark);
   color: var(--text-primary);
   font-family: var(--font-main);
+  line-height: 1.5;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
 }
 
 /* --------------------------------------------------------------------------
@@ -122,7 +155,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   5. WEBGL CANVAS & AMBIENT DEPTH GLOWS
+   5. WEBGL CANVAS & AMBIENT DEPTH GLOW ORBS
    -------------------------------------------------------------------------- */
 #webgl-canvas {
   position: fixed;
@@ -185,7 +218,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   6. KEYFRAME ANIMATIONS & TEXT LOOPS
+   6. KEYFRAME ANIMATIONS
    -------------------------------------------------------------------------- */
 .shimmer-text {
   background: linear-gradient(90deg, #ffffff 0%, var(--cyan-accent) 30%, var(--cobalt-light) 65%, #ffffff 100%);
@@ -215,7 +248,7 @@ body {
 }
 
 .btn-shimmer-trigger:hover {
-  transform: translateY(-2px) scale(1.04);
+  transform: translateY(-2px) scale(1.03);
   box-shadow: 0 8px 30px rgba(0, 240, 255, 0.6);
 }
 
@@ -244,23 +277,19 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   7. SCROLL REVEAL INTERSECTION STYLES
+   7. SCROLL REVEAL UTILITIES
    -------------------------------------------------------------------------- */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(60px) scale(0.95);
-  filter: blur(6px);
-  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 1s cubic-bezier(0.22, 1, 0.36, 1),
-              filter 1s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform, filter;
-  transition-delay: calc(var(--stagger-index, 0) * 0.1s);
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
 
 .reveal-on-scroll.is-visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: blur(0px);
+  transform: translateY(0);
 }
 
 /* --------------------------------------------------------------------------
@@ -361,7 +390,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   9. NAVBAR & PROMINENT HEADER WITH PROPER SPACING
+   9. NAVBAR & PROMINENT HEADER WITH BALANCED SPACING
    -------------------------------------------------------------------------- */
 .navbar {
   display: flex;
@@ -500,6 +529,8 @@ body {
 
 .hero-content {
   max-width: 720px;
+  position: relative;
+  z-index: 3;
 }
 
 .hero-badge {
@@ -529,7 +560,7 @@ body {
   align-items: center;
   gap: 10px;
   padding: 8px 20px;
-  background: rgba(8, 15, 32, 0.8);
+  background: rgba(8, 15, 32, 0.85);
   border: 1px solid rgba(0, 240, 255, 0.25);
   border-radius: 20px;
   font-size: 0.85rem;
@@ -580,6 +611,7 @@ section {
   z-index: 2;
   background: transparent;
   width: 100%;
+  padding: 100px 8%;
 }
 
 .section-header {
@@ -611,12 +643,8 @@ section {
 }
 
 /* --------------------------------------------------------------------------
-   13. WORKFLOW SECTION
+   13. WORKFLOW RAIL & SEQUENCE
    -------------------------------------------------------------------------- */
-.workflow-section {
-  padding: 120px 8%;
-}
-
 .workflow-layout {
   max-width: 860px;
   margin: 0 auto;
@@ -747,10 +775,6 @@ section {
 /* --------------------------------------------------------------------------
    14. VOICE AI SHOWCASE & NEON WAVEFORM
    -------------------------------------------------------------------------- */
-.voice-section {
-  padding: 120px 8%;
-}
-
 .voice-card-container {
   max-width: 920px;
   margin: 0 auto;
@@ -848,28 +872,6 @@ section {
   border-radius: 8px;
   border: 1px solid rgba(0, 240, 255, 0.15);
 }
-
-.voice-equalizer {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 6px;
-  height: 40px;
-  margin-bottom: 16px;
-}
-
-.eq-bar {
-  width: 6px;
-  border-radius: 3px;
-  transition: height 0.2s ease;
-}
-
-.eq-1 { background: var(--cyan-accent); height: 60%; animation: pulse 1.2s infinite ease-in-out; }
-.eq-2 { background: var(--cobalt-light); height: 90%; animation: pulse 0.8s infinite ease-in-out; }
-.eq-3 { background: var(--violet-accent); height: 40%; animation: pulse 1.5s infinite ease-in-out; }
-.eq-4 { background: var(--cyan-accent); height: 100%; animation: pulse 0.9s infinite ease-in-out; }
-.eq-5 { background: var(--emerald-accent); height: 70%; animation: pulse 1.1s infinite ease-in-out; }
-.eq-6 { background: var(--cobalt-light); height: 50%; animation: pulse 1.3s infinite ease-in-out; }
 
 .voice-audio-player {
   background: rgba(255, 255, 255, 0.04);
@@ -977,7 +979,7 @@ section {
 }
 
 /* --------------------------------------------------------------------------
-   15. SPEECH-TO-CRM LIVE PARSER SIMULATOR
+   15. SPEECH-TO-CRM PARSER SIMULATOR
    -------------------------------------------------------------------------- */
 .crm-parser-wrapper {
   margin-top: 40px;
@@ -1067,10 +1069,6 @@ section {
 /* --------------------------------------------------------------------------
    16. INDUSTRY SPECIFIC USE-CASE SECTION
    -------------------------------------------------------------------------- */
-.industry-section {
-  padding: 120px 8%;
-}
-
 .industry-shell {
   max-width: 900px;
   margin: 0 auto;
@@ -1190,12 +1188,8 @@ section {
 }
 
 /* --------------------------------------------------------------------------
-   17. WHATSAPP SCRIPT STUDIO & VIP SCRIPT CLIPBOARD
+   17. WHATSAPP SCRIPT STUDIO & VIP CLIPBOARD SNIPPET
    -------------------------------------------------------------------------- */
-.customizer-section {
-  padding: 120px 8%;
-}
-
 .customizer-shell {
   max-width: 920px;
   margin: 0 auto;
@@ -1327,10 +1321,6 @@ section {
 /* --------------------------------------------------------------------------
    18. SPEED TEST BENCHMARK GAME
    -------------------------------------------------------------------------- */
-.game-section {
-  padding: 120px 8%;
-}
-
 .game-card {
   max-width: 860px;
   margin: 0 auto;
@@ -1399,12 +1389,8 @@ section {
 }
 
 /* --------------------------------------------------------------------------
-   19. PROCESS SWITCHER
+   19. PROCESS COMPARISON SWITCHER
    -------------------------------------------------------------------------- */
-.process-switcher-section {
-  padding: 120px 8%;
-}
-
 .switcher-shell {
   max-width: 860px;
   margin: 0 auto;
@@ -1482,10 +1468,6 @@ section {
 /* --------------------------------------------------------------------------
    20. REVENUE CALCULATOR
    -------------------------------------------------------------------------- */
-.calculator-section {
-  padding: 120px 8%;
-}
-
 .calc-card {
   max-width: 920px;
   margin: 0 auto;
@@ -1635,12 +1617,8 @@ input[type=range] {
 }
 
 /* --------------------------------------------------------------------------
-   21. CAPABILITIES SECTION
+   21. CAPABILITIES PLATFORM TILES
    -------------------------------------------------------------------------- */
-.capabilities-section {
-  padding: 120px 8%;
-}
-
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -1714,33 +1692,14 @@ input[type=range] {
   border-radius: 50%;
 }
 
-.mini-dot.cyan {
-  background: var(--cyan-accent);
-  box-shadow: 0 0 6px var(--cyan-accent);
-}
-
-.mini-dot.indigo {
-  background: var(--indigo-accent);
-  box-shadow: 0 0 6px var(--indigo-accent);
-}
-
-.mini-dot.violet {
-  background: var(--violet-accent);
-  box-shadow: 0 0 6px var(--violet-accent);
-}
-
-.mini-dot.emerald {
-  background: var(--emerald-accent);
-  box-shadow: 0 0 6px var(--emerald-accent);
-}
+.mini-dot.cyan { background: var(--cyan-accent); box-shadow: 0 0 6px var(--cyan-accent); }
+.mini-dot.indigo { background: var(--indigo-accent); box-shadow: 0 0 6px var(--indigo-accent); }
+.mini-dot.violet { background: var(--violet-accent); box-shadow: 0 0 6px var(--violet-accent); }
+.mini-dot.emerald { background: var(--emerald-accent); box-shadow: 0 0 6px var(--emerald-accent); }
 
 /* --------------------------------------------------------------------------
-   22. WHY SECTION & STATS
+   22. WHY SECTION & STATS TILES
    -------------------------------------------------------------------------- */
-.why-section {
-  padding: 120px 8%;
-}
-
 .why-grid-3d {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -1770,12 +1729,8 @@ input[type=range] {
 }
 
 /* --------------------------------------------------------------------------
-   23. DASHBOARD CONSOLE & LANDING SIMULATOR
+   23. DASHBOARD CONSOLE LANDING SIMULATOR
    -------------------------------------------------------------------------- */
-.dashboard-section {
-  padding: 120px 8%;
-}
-
 .dashboard-shell {
   background: var(--card-bg);
   border: 1px solid var(--border-glass);
@@ -1935,12 +1890,8 @@ input[type=range] {
 }
 
 /* --------------------------------------------------------------------------
-   24. PRICING & FINAL CALL TO ACTION
+   24. PRICING & FINAL CTA SECTION
    -------------------------------------------------------------------------- */
-.pricing-section {
-  padding: 120px 8%;
-}
-
 .pricing-placeholder-card {
   max-width: 920px;
   margin: 0 auto;
@@ -1985,11 +1936,6 @@ input[type=range] {
   margin-bottom: 12px;
 }
 
-.cta-section {
-  padding: 120px 8%;
-  text-align: center;
-}
-
 .cta-card {
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(0, 240, 255, 0.12));
   border: 1px solid rgba(0, 240, 255, 0.35);
@@ -2015,7 +1961,7 @@ input[type=range] {
 }
 
 /* --------------------------------------------------------------------------
-   25. MODALS & SIMULATOR OVERLAYS
+   25. MODALS & POPUPS
    -------------------------------------------------------------------------- */
 .modal-backdrop {
   position: fixed;
@@ -2145,7 +2091,7 @@ input[type=range] {
   margin-top: 12px;
 }
 
-/* Interactive Live Phone Ringing Simulator Modal */
+/* Phone Simulator Modal */
 .live-call-sim-card {
   max-width: 440px !important;
   text-align: center;
@@ -2319,10 +2265,6 @@ input[type=range] {
 /* --------------------------------------------------------------------------
    26. FAQ ACCORDION SECTION
    -------------------------------------------------------------------------- */
-.faq-section {
-  padding: 120px 8%;
-}
-
 .faq-accordion {
   max-width: 860px;
   margin: 0 auto;
@@ -3021,7 +2963,7 @@ footer {
 }
 
 /* --------------------------------------------------------------------------
-   31. DEDICATED EXTREME-MOBILE RESPONSIVE MATRIX
+   31. DEDICATED CLEAN MOBILE RESPONSIVE ENGINE
    -------------------------------------------------------------------------- */
 @media (max-width: 900px) {
   * {
@@ -3030,64 +2972,21 @@ footer {
   
   .cursor-dot,
   .cursor-ring {
-    display: none;
+    display: none !important;
   }
   
   .desktop-only-ribbon {
     display: none !important;
   }
 
-  .hero {
-    padding: 100px 4% 60px 4% !important;
-  }
-  
-  section {
-    padding: 50px 4% !important;
-  }
-  
-  .workflow-layout,
-  .industry-shell,
-  .customizer-shell,
-  .game-card,
-  .switcher-shell,
-  .calc-card,
-  .card-grid,
-  .why-grid-3d,
-  .dashboard-shell,
-  .pricing-placeholder-card,
-  .cta-card,
-  .voice-card-container,
-  .faq-accordion {
-    max-width: 100vw !important;
-    width: 100% !important;
-    padding-left: 10px !important;
-    padding-right: 10px !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-
-  .voice-grid,
-  .parser-grid {
-    grid-template-columns: 1fr !important;
-    gap: 20px !important;
-  }
-
-  .faq-question-btn {
-    font-size: 0.85rem !important;
-    padding: 16px !important;
-  }
-  
-  .faq-answer-panel {
-    font-size: 0.7rem !important;
-  }
-  
+  /* Navbar */
   .navbar {
     padding: 12px 4% !important;
   }
   
   .logo-knot-svg {
-    width: 36px !important;
-    height: 36px !important;
+    width: 34px !important;
+    height: 34px !important;
   }
   
   .logo-text {
@@ -3095,21 +2994,21 @@ footer {
   }
   
   .mobile-menu-btn {
-    display: flex;
+    display: flex !important;
   }
   
   .nav-links {
     position: fixed;
-    top: 64px;
+    top: 60px;
     left: 0;
     width: 100%;
     background: rgba(2, 4, 10, 0.98);
     backdrop-filter: blur(20px);
     flex-direction: column;
-    padding: 20px;
+    padding: 24px 20px;
     border-bottom: 1px solid rgba(0, 240, 255, 0.25);
-    gap: 12px;
-    transform: translateY(-130%);
+    gap: 14px;
+    transform: translateY(-140%);
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: none;
@@ -3122,604 +3021,154 @@ footer {
     pointer-events: auto;
   }
 
+  /* Structural Padding */
+  .hero {
+    min-height: auto !important;
+    padding: 90px 4% 40px 4% !important;
+    display: block !important;
+  }
+  
+  section {
+    padding: 40px 4% !important;
+    display: block !important;
+  }
+
+  /* Mobile Hero Clear Typography */
+  .hero-badge {
+    font-size: 0.72rem !important;
+    padding: 4px 12px !important;
+    margin-bottom: 14px !important;
+  }
+  
+  .time-banner {
+    display: flex !important;
+    font-size: 0.65rem !important;
+    padding: 6px 12px !important;
+    margin-bottom: 16px !important;
+    line-height: 1.3 !important;
+  }
+  
   h1 {
-    font-size: 1.4rem !important;
+    font-size: 1.85rem !important;
     letter-spacing: -0.5px !important;
-    margin-bottom: 10px !important;
+    margin-bottom: 12px !important;
     line-height: 1.2 !important;
   }
   
   .hero-subtext {
-    font-size: 0.78rem !important;
-    color: #ffffff !important;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
-    background: rgba(2, 4, 10, 0.55);
-    padding: 10px 14px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    margin-bottom: 16px !important;
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+    color: #e2e8f0 !important;
+    background: rgba(8, 15, 32, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 14px;
+    border-radius: 14px;
+    margin-bottom: 20px !important;
   }
   
-  .time-banner {
-    font-size: 0.6rem !important;
-    padding: 4px 8px !important;
-    line-height: 1.3 !important;
-    text-align: left;
-    white-space: normal;
+  .hero-actions {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+  
+  .hero-actions .btn {
+    width: 100% !important;
+    padding: 12px !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* Section Headers */
+  .section-header {
+    margin-bottom: 30px !important;
+  }
+  
+  .section-tag {
+    font-size: 0.7rem !important;
   }
   
   .section-header h2 {
-    font-size: 1.1rem !important;
-    margin-bottom: 6px !important;
+    font-size: 1.4rem !important;
+    margin-bottom: 8px !important;
     line-height: 1.2 !important;
   }
   
   .section-header p {
-    font-size: 0.65rem !important;
-  }
-  
-  .glass-card {
-    padding: 10px !important;
-    border-radius: 12px !important;
-  }
-  
-  .glass-card h3 {
-    font-size: 0.7rem !important;
-    margin-bottom: 4px !important;
-  }
-  
-  .glass-card p {
-    font-size: 0.55rem !important;
-    line-height: 1.3 !important;
-    margin-bottom: 8px !important;
-  }
-  
-  .card-icon {
-    font-size: 1rem !important;
-  }
-  
-  .card-status-bar {
-    font-size: 0.5rem !important;
-    padding-top: 6px !important;
-  }
-
-  .step-card {
-    padding: 12px !important;
-    border-radius: 12px !important;
-  }
-  
-  .step-id {
-    font-size: 0.9rem !important;
-  }
-  
-  .step-card h3 {
     font-size: 0.8rem !important;
   }
-  
-  .step-card p {
-    font-size: 0.6rem !important;
-    margin-bottom: 6px !important;
-  }
-  
-  .step-hud {
-    font-size: 0.55rem !important;
-  }
 
-  .industry-display-card {
-    padding: 12px !important;
-    border-radius: 12px !important;
-  }
-  
-  .ind-display-card h3 {
-    font-size: 0.9rem !important;
-  }
-  
-  .ind-desc {
-    font-size: 0.65rem !important;
-    margin-bottom: 12px !important;
-  }
-  
+  /* Grids to Single Column */
+  .voice-grid,
+  .parser-grid,
+  .customizer-shell,
+  .calc-grid,
+  .dash-main-split,
   .ind-preview-grid {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 8px !important;
-    padding-top: 8px !important;
-  }
-  
-  .ind-box {
-    padding: 8px !important;
-  }
-  
-  .ind-box p {
-    font-size: 0.55rem !important;
-    line-height: 1.3 !important;
-  }
-  
-  .ind-box-label {
-    font-size: 0.55rem !important;
-  }
-  
-  .ind-tab {
-    font-size: 0.65rem !important;
-    padding: 6px 10px !important;
-  }
-
-  .customizer-shell {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 10px !important;
-    padding: 12px !important;
-  }
-  
-  .cust-group label {
-    font-size: 0.6rem !important;
-    margin-bottom: 4px !important;
-  }
-  
-  .cust-group input {
-    padding: 6px 10px !important;
-    font-size: 0.65rem !important;
-  }
-  
-  .phone-mockup {
-    padding: 8px !important;
-  }
-  
-  .chat-bubble {
-    font-size: 0.55rem !important;
-    padding: 6px !important;
-  }
-  
-  .phone-avatar {
-    width: 20px !important;
-    height: 20px !important;
-    font-size: 0.55rem !important;
-  }
-  
-  .tone-btn {
-    font-size: 0.55rem !important;
-    padding: 4px 8px !important;
-  }
-
-  .calc-card {
-    padding: 16px !important;
-  }
-  
-  .calc-grid {
     display: flex !important;
     flex-direction: column !important;
-    gap: 12px !important;
-  }
-  
-  .calc-inputs {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important;
-    width: 100% !important;
-  }
-  
-  .result-amount {
-    font-size: 1.4rem !important;
-    margin-bottom: 4px !important;
-  }
-  
-  .calc-result-box {
-    padding: 16px !important;
-  }
-  
-  .calc-cta-btn {
-    font-size: 0.55rem !important;
-    padding: 6px 10px !important;
-    width: 100% !important;
+    gap: 16px !important;
   }
 
   .card-grid,
   .why-grid-3d {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 6px !important;
-  }
-  
-  .stat-glass-card {
-    padding: 12px !important;
-  }
-  
-  .stat-glass-card .stat-number {
-    font-size: 1.1rem !important;
-    margin-bottom: 4px !important;
-  }
-  
-  .stat-glass-card .stat-label {
-    font-size: 0.55rem !important;
-    line-height: 1.2 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
   }
 
-  .game-card {
-    padding: 12px !important;
-  }
-  
-  .game-top-bar {
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    gap: 10px !important;
-  }
-  
-  .game-timer {
-    font-size: 1rem !important;
-  }
-  
-  .game-results {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 4px !important;
-  }
-  
-  .r-label {
-    font-size: 0.5rem !important;
-  }
-  
-  .r-val {
-    font-size: 0.75rem !important;
-  }
-  
-  .game-workspace textarea {
-    font-size: 0.65rem !important;
-    height: 50px !important;
-    padding: 8px !important;
-  }
-
-  .switcher-content-card {
-    padding: 12px !important;
-    border-radius: 12px !important;
-  }
-  
-  .switcher-nav-row {
-    flex-direction: row !important;
-    gap: 6px !important;
-  }
-  
-  .switcher-tab {
-    min-width: 0 !important;
-    padding: 8px !important;
-    font-size: 0.6rem !important;
-  }
-  
-  .switcher-metrics-row {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 4px !important;
-  }
-  
-  .s-label {
-    font-size: 0.55rem !important;
-  }
-  
-  .s-val {
-    font-size: 0.8rem !important;
-    white-space: nowrap !important;
-  }
-  
-  .s-val.text-red {
-    color: #f43f5e !important;
-  }
-
-  .dashboard-shell {
-    padding: 12px !important;
-  }
-  
-  .dash-panel {
-    padding: 10px !important;
-    border-radius: 10px !important;
-  }
-  
-  .dash-panel h4 {
-    font-size: 0.65rem !important;
-    margin-bottom: 8px !important;
-  }
-  
-  .dash-metrics {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 6px !important;
-    margin-bottom: 12px !important;
-  }
-  
-  .metric-card {
-    padding: 8px !important;
-    border-radius: 8px !important;
-  }
-  
-  .m-label {
-    font-size: 0.5rem !important;
-    margin-bottom: 2px !important;
-  }
-  
-  .m-value {
-    font-size: 0.9rem !important;
-  }
-  
-  .dash-main-split {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important;
-  }
-  
-  .activity-feed .feed-row {
-    font-size: 0.55rem !important;
-    padding: 4px !important;
-  }
-  
-  .sim-label {
-    font-size: 0.55rem !important;
-  }
-  
-  .sim-input-row {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    gap: 4px !important;
-    align-items: center !important;
-  }
-  
-  .sim-input-row input {
-    flex: 1 !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    font-size: 0.55rem !important;
-    padding: 6px !important;
-  }
-  
-  .sim-input-row button {
-    flex-shrink: 0 !important;
-    padding: 6px 8px !important;
-    font-size: 0.55rem !important;
-  }
-  
-  .ai-console {
-    gap: 6px !important;
-  }
-  
-  .ai-console p {
-    font-size: 0.55rem !important;
-  }
-  
-  .ai-msg {
-    padding: 6px !important;
-  }
-
-  .pricing-placeholder-card {
-    padding: 20px 12px !important;
-    border-radius: 12px !important;
-  }
-  
-  .pricing-placeholder-card h3 {
-    font-size: 0.9rem !important;
-  }
-  
-  .pricing-placeholder-card p {
-    font-size: 0.65rem !important;
-  }
-  
+  /* Cards Padding */
+  .glass-card,
+  .voice-card-container,
+  .step-card,
+  .industry-display-card,
+  .game-card,
+  .switcher-content-card,
+  .calc-card,
+  .dashboard-shell,
+  .pricing-placeholder-card,
   .cta-card {
-    padding: 20px 12px !important;
-    border-radius: 12px !important;
-  }
-  
-  .cta-card h2 {
-    font-size: 1.1rem !important;
-    line-height: 1.2 !important;
-    margin-bottom: 10px !important;
-  }
-  
-  .cta-card p {
-    font-size: 0.65rem !important;
-    margin-bottom: 16px !important;
-  }
-  
-  .btn-sm {
-    font-size: 0.55rem !important;
-    padding: 4px 8px !important;
-  }
-  
-  .btn {
-    font-size: 0.65rem !important;
-    padding: 8px 14px !important;
+    padding: 18px 14px !important;
+    border-radius: 16px !important;
+    width: 100% !important;
   }
 
-  .dashboard-wrapper {
-    flex-direction: column !important;
-    margin-top: 110px !important;
-  }
-  
-  .luxury-dash-nav {
-    padding: 14px 4% !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    justify-content: center !important;
-    gap: 12px !important;
-  }
-  
-  .dash-user-controls {
-    display: flex !important;
-    flex-direction: row !important;
-    width: 100% !important;
-    justify-content: flex-start !important;
-    gap: 12px !important;
-    align-items: center !important;
-  }
-  
-  .luxury-session-badge {
-    padding: 6px 10px !important;
-    font-size: 0.6rem !important;
-  }
-  
-  .btn-luxury-outline {
-    padding: 6px 12px !important;
-    font-size: 0.6rem !important;
-    width: auto !important;
-  }
+  /* Step Workflow */
+  .step-id { font-size: 1rem !important; }
+  .step-card h3 { font-size: 1rem !important; }
+  .step-card p { font-size: 0.8rem !important; margin-bottom: 10px !important; }
+  .step-hud { font-size: 0.7rem !important; }
 
-  .luxury-sidebar {
-    width: 100% !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    padding: 12px !important;
-    border-right: none !important;
-    border-bottom: 1px solid rgba(140, 83, 25, 0.1) !important;
-  }
-  
-  .luxury-sidebar .sidebar-menu {
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    gap: 6px !important;
-  }
-  
-  .luxury-sidebar .sidebar-item {
-    font-size: 0.65rem !important;
-    padding: 6px 10px !important;
-  }
-  
-  .luxury-footer-card {
-    display: none !important;
-  }
-  
-  .dash-main-content {
-    padding: 16px 4% !important;
-  }
-  
-  .dash-header-row {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 10px !important;
-    margin-bottom: 20px !important;
-  }
-  
-  .luxury-title {
-    font-size: 1.1rem !important;
-    margin-bottom: 4px !important;
-    line-height: 1.2 !important;
-  }
-  
-  .luxury-tag {
-    font-size: 0.55rem !important;
-    display: block !important;
-    margin-bottom: 4px !important;
-  }
-  
-  .status-chip-luxury {
-    font-size: 0.55rem !important;
-    padding: 4px 10px !important;
-  }
-  
-  .luxury-card {
-    padding: 12px !important;
-    border-radius: 10px !important;
-  }
-  
-  .m-sub {
-    font-size: 0.55rem !important;
-  }
-  
-  .luxury-panel {
-    padding: 14px !important;
-    border-radius: 12px !important;
-    margin-bottom: 16px !important;
-  }
-  
-  #subscription .panel-header-flex {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 10px !important;
-  }
-  
-  .luxury-panel-title-large {
-    font-size: 0.95rem !important;
-    line-height: 1.2 !important;
-  }
-  
-  .sub-card-desc {
-    font-size: 0.65rem !important;
-    margin-top: 4px !important;
-  }
-  
-  .btn-luxury-outline.btn-sm {
-    font-size: 0.6rem !important;
-    white-space: nowrap !important;
-    padding: 6px 12px !important;
-    width: auto !important;
-  }
-  
-  .sub-details-grid {
+  /* Voice Player & Telemetry */
+  .voice-card-title { font-size: 1.25rem !important; }
+  .voice-card-desc { font-size: 0.82rem !important; }
+  .voice-feature-item { font-size: 0.8rem !important; }
+  .voice-telemetry-box { padding: 16px !important; }
+
+  /* Industry Tabs */
+  .industry-tabs { gap: 6px !important; }
+  .ind-tab { min-width: 100% !important; padding: 10px 14px !important; font-size: 0.8rem !important; }
+  .ind-display-card h3 { font-size: 1.1rem !important; }
+  .ind-desc { font-size: 0.8rem !important; margin-bottom: 16px !important; }
+
+  /* Calculator */
+  .result-amount { font-size: 2rem !important; }
+  .calc-cta-btn { font-size: 0.8rem !important; padding: 10px !important; width: 100% !important; }
+
+  /* Dash Console */
+  .dash-metrics {
     grid-template-columns: 1fr 1fr !important;
     gap: 10px !important;
-    padding-top: 10px !important;
-    margin-top: 10px !important;
   }
-  
-  .sub-label {
-    font-size: 0.55rem !important;
-  }
-  
-  .sub-val {
-    font-size: 0.65rem !important;
-  }
-  
-  .panel-header-flex {
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    align-items: baseline !important;
-    justify-content: space-between !important;
-    gap: 6px !important;
-  }
-  
-  .luxury-panel-title {
-    font-size: 0.85rem !important;
-    margin-bottom: 0 !important;
-  }
+  .m-value { font-size: 1.3rem !important; }
+  .m-label { font-size: 0.72rem !important; }
 
-  .table-container {
-    overflow-x: auto !important;
-  }
-  
-  .luxury-table th,
-  .luxury-table td {
-    padding: 8px 6px !important;
-    font-size: 0.6rem !important;
-  }
-  
-  .status-pill.state-secured-luxury,
-  .status-pill.state-sent-luxury,
-  .status-pill.state-active-luxury {
-    padding: 4px 6px !important;
-    font-size: 0.5rem !important;
-  }
-  
-  .integration-list {
-    gap: 10px !important;
-  }
-  
-  .luxury-integ {
-    padding: 12px !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 6px !important;
-  }
-  
-  .integ-info strong {
-    font-size: 0.75rem !important;
-  }
-  
-  .integ-info span {
-    font-size: 0.6rem !important;
-  }
+  /* CTA */
+  .cta-card h2 { font-size: 1.5rem !important; }
+  .cta-card p { font-size: 0.85rem !important; }
 
-  footer {
-    padding: 30px 5% 120px 5% !important;
-  }
-  
-  .ai-chat-widget {
-    bottom: 20px !important;
-    right: 15px !important;
-    transform: scale(0.85);
-    transform-origin: bottom right;
-  }
+  /* Footer */
+  footer { padding: 30px 4% 110px 4% !important; font-size: 0.75rem !important; }
 }
 
 /* --------------------------------------------------------------------------
