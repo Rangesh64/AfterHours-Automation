@@ -1,5 +1,5 @@
 /**
- * AfterHours Automation - Interactive WebGL 3D Engine, RaSH Assistant & Live API Integration
+ * AfterHours Automation - Interactive WebGL 3D Engine, Max-Intelligence RaSH Assistant & Live Console Bridge
  */
 
 let scene, camera, renderer, coreGroup, coreMesh, waveRing, particleSystem, nodeGroup, connectionLines;
@@ -20,7 +20,7 @@ const currencyRates = { USD: 1, EUR: 0.92, INR: 83.5 };
 
 const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth < 768;
 
-// Whitelisted Authorized Executive Emails & Temporary Password
+// Authorized Executive Emails & Temporary Authentication
 const AUTHORIZED_EMAILS = [
   "rangeshmishra9@gmail.com",
   "mahmiasubham@gmail.com",
@@ -39,11 +39,9 @@ function initMailtoFallback() {
         e.preventDefault();
         const href = link.getAttribute('href');
         
-        // Parse email address
         const emailMatch = href.match(/^mailto:([^?]+)/);
         const email = emailMatch ? emailMatch[1] : 'afterhoursautomation714@gmail.com';
         
-        // Parse URL search parameters safely
         let subject = "Private Demo Request - AfterHours Automation";
         let body = "Hi AfterHours Team,\n\nI am interested in learning more about your 24/7 Voice AI Receptionist.";
         
@@ -54,13 +52,9 @@ function initMailtoFallback() {
           if (urlParams.has('body')) body = urlParams.get('body');
         }
 
-        // Construct direct Gmail Web Compose URL
         const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-        // Open Gmail Web Compose in a new tab for seamless desktop delivery
         window.open(gmailComposeUrl, '_blank');
 
-        // Fallback attempt to invoke native mail application
         setTimeout(() => {
           window.location.href = href;
         }, 300);
@@ -86,7 +80,7 @@ function initMobileNav() {
   });
 }
 
-// Time-of-Day Live Contextual Banner Logic
+// Time-of-Day Contextual Banner Logic
 function initTimeBanner() {
   const banner = document.getElementById('time-banner');
   const icon = document.getElementById('time-icon');
@@ -115,7 +109,7 @@ function formatAMPM(date) {
   return hours + ':' + minutes + ' ' + ampm;
 }
 
-// Glassmorphic Floating Activity Ribbon Manager (Desktop Only)
+// Glassmorphic Activity Ribbon Manager (Desktop Only)
 function initActivityRibbon() {
   const ribbonText = document.getElementById('ribbon-text');
   if (!ribbonText) return;
@@ -123,9 +117,9 @@ function initActivityRibbon() {
   const logs = [
     "🎙️ Voice AI handled inbound call in Chicago (3s ago)",
     "💬 WhatsApp booking confirmation sent in Miami (12s ago)",
-    "🔄 1 Lead synced to Salesforce CRM (28s ago)",
+    "🔄 1 Lead synced to CRM (28s ago)",
     "📞 24/7 AI Receptionist booked appointment in London (45s ago)",
-    "⚡ 0-Second Call Pickup executed in New York (1m ago)"
+    "⚡ Instant Call Pickup executed in New York (1m ago)"
   ];
 
   let logIndex = 0;
@@ -219,7 +213,7 @@ function initSpeechToCRMSimulator() {
   });
 }
 
-// Exit-Intent Glassmorphic Demo Modal Manager
+// Exit-Intent Demo Modal Manager
 function initExitIntentModal() {
   const exitModal = document.getElementById('exit-modal');
   const closeBtn = document.getElementById('btn-close-exit-modal');
@@ -268,7 +262,7 @@ function initFAQAccordion() {
   });
 }
 
-// 3-Currency Selector Logic ($ / € / ₹) with Updated Default Values
+// Currency Selector Logic ($ / € / ₹)
 function initCurrencySelector() {
   const currBtns = document.querySelectorAll('.curr-btn');
   const valueRange = document.getElementById('range-value');
@@ -370,7 +364,7 @@ function initCalculator() {
   }
 }
 
-// Client-Side Revenue Loss Audit Modal Exporter
+// Revenue Loss Audit Modal Exporter
 function initRevenueAuditExporter() {
   const openBtn = document.getElementById('btn-open-loss-audit');
   const closeBtn = document.getElementById('btn-close-audit-modal');
@@ -414,7 +408,7 @@ function initRevenueAuditExporter() {
   }
 }
 
-// Helper to populate & select female voice reliably on desktop & mobile
+// Speech Synthesis Helper
 let availableVoices = [];
 function populateVoices() {
   if ('speechSynthesis' in window) {
@@ -426,7 +420,7 @@ if ('speechSynthesis' in window && window.speechSynthesis.onvoiceschanged !== un
   window.speechSynthesis.onvoiceschanged = populateVoices;
 }
 
-// Client-Side Audio Voice Sample Player (Desktop & Mobile Female Voice Selection)
+// Client-Side Voice Sample Player
 function initAudioVoicePlayer() {
   const playBtn = document.getElementById('btn-play-voice-sample');
   const playIcon = document.getElementById('play-icon');
@@ -502,14 +496,13 @@ function initAudioVoicePlayer() {
       
       populateVoices();
       
-      // Explicit Female Voice Target Logic across Windows, Mac & Mobile
       const femaleVoice = availableVoices.find(v => 
         (v.lang.startsWith('en')) && (
           v.name.toLowerCase().includes('female') || 
           v.name.toLowerCase().includes('zira') || 
           v.name.toLowerCase().includes('samantha') || 
           v.name.toLowerCase().includes('victoria') ||
-          v.name.toLowerCase().includes('karen') ||
+          v.name.toLowerCase().includes('karen') || 
           v.name.toLowerCase().includes('fiona') ||
           v.name.toLowerCase().includes('google us english') ||
           v.name.toLowerCase().includes('natural')
@@ -523,13 +516,8 @@ function initAudioVoicePlayer() {
       utterance.pitch = 1.25; 
       utterance.rate = 0.95;
 
-      utterance.onend = () => {
-        stopAudio();
-      };
-
-      utterance.onerror = () => {
-        stopAudio();
-      };
+      utterance.onend = () => { stopAudio(); };
+      utterance.onerror = () => { stopAudio(); };
 
       window.speechSynthesis.speak(utterance);
     }
@@ -554,7 +542,7 @@ function initAudioVoicePlayer() {
   });
 }
 
-// WhatsApp Script & Tone Customizer Logic
+// WhatsApp Script Customizer Logic
 function initScriptCustomizer() {
   const bizInput = document.getElementById('cust-biz-name');
   const toneBtns = document.querySelectorAll('.tone-btn');
@@ -592,7 +580,7 @@ function initScriptCustomizer() {
   });
 }
 
-// "Human vs AI" Reaction Speed Game Logic
+// Reaction Speed Game Logic
 function initReactionGame() {
   const startBtn = document.getElementById('btn-start-game');
   const submitBtn = document.getElementById('btn-submit-game');
@@ -642,7 +630,10 @@ function initReactionGame() {
   });
 }
 
-// Max-Intelligence Upgraded RaSH Assistant (Humor, Laughing, Multi-turn Memory & Founder Lore)
+// ============================================================================
+// MAX-INTELLIGENCE UPGRADED RaSH ASSISTANT ENGINE
+// (Full NLP Intent Engine, Conversational Memory, Sarcasm, Jokes & Founders Lore)
+// ============================================================================
 function initRaSHChatbot() {
   const toggleBtn = document.getElementById('ai-chat-toggle');
   const closeBtn = document.getElementById('ai-chat-close');
@@ -654,19 +645,22 @@ function initRaSHChatbot() {
 
   if (!toggleBtn || !windowBox || !container) return;
 
-  const state = {
+  const memory = {
     userName: null,
-    companyName: null,
-    mood: 'confident',
+    userRole: null,
+    businessType: null,
     interactions: 0,
+    sentimentScore: 0,
+    lastTopic: null,
     jokeIndex: 0
   };
 
-  const jokeBank = [
-    "Why did the sales lead cross the road? To reach the competitor who actually answered their phone in under 1 ring!",
+  const dynamicJokes = [
+    "Why did the sales lead cross the road? To reach the competitor who actually answered their call in under 1 ring!",
     "Why don't missed phone calls ever get promoted? Because they always get left hanging!",
-    "What is a receptionist's favorite workout? Ring dips! But with AfterHours Voice AI, zero reps required.",
-    "Why was the voicemail inbox so lonely? Because AfterHours answered every caller before the second ring!"
+    "What is an answering service's favorite workout? Ring dips! But with AfterHours Voice AI, zero reps required.",
+    "Why was the voicemail inbox so lonely? Because AfterHours answered every caller before the second ring!",
+    "Why did the dentist hire AfterHours Voice AI? Because he wanted to fill cavities, not fill out missed call slips!"
   ];
 
   toggleBtn.addEventListener('click', () => windowBox.classList.toggle('hidden'));
@@ -688,74 +682,123 @@ function initRaSHChatbot() {
     container.scrollTop = container.scrollHeight;
   }
 
-  function analyzeAndRespond(userText) {
-    state.interactions++;
-    const q = userText.toLowerCase().trim();
-    let reply = "";
-    let moodTag = "RaSH ⚡";
+  function parseAndThink(rawText) {
+    memory.interactions++;
+    const q = rawText.toLowerCase().trim();
 
-    // 1. Founder Lore & Story (Rangesh & Shubham)
-    if (q.includes('rangesh') || q.includes('shubham') || q.includes('rungesh') || q.includes('founder') || q.includes('creator') || q.includes('who built') || q.includes('owner')) {
-      moodTag = "RaSH 👑";
-      reply = "AfterHours Automation was created by **Rangesh** and **Shubham**! They are two brilliant 19-year-old student visionaries and college innovators who engineered this entire 24/7 Voice AI platform, WebGL engine, and CRM bridge from scratch to ensure no business ever loses another lead.";
-    }
-    // 2. Laughing & Humor Requests
-    else if (q.includes('laugh') || q.includes('haha') || q.includes('lol') || q.includes('chuckle') || q.includes('funny')) {
-      moodTag = "RaSH 😂";
-      reply = "HAHAHA! 🤣🤣 You got me laughing in high-definition 60fps! I love a good sense of humor. What else can I do for you today?";
-    }
-    else if (q.includes('joke') || q.includes('tell me a joke') || q.includes('another joke')) {
-      moodTag = "RaSH 😂";
-      reply = jokeBank[state.jokeIndex % jokeBank.length];
-      state.jokeIndex++;
-    }
-    // 3. User Name & Context Memory
-    else if (q.includes('my name is') || q.includes("i'm ") || q.includes("i am ")) {
-      const match = q.match(/(?:my name is|i'm|i am)\s+([a-zA-Z]+)/i);
-      if (match && match[1]) {
-        state.userName = match[1].charAt(0).toUpperCase() + match[1].slice(1);
-        moodTag = "RaSH 😎";
-        return `Pleasure to meet you, ${state.userName}! Ready to see how our 24/7 Voice AI Agent turns ringing phone calls into confirmed revenue for your business?`;
-      }
-    }
-    // 4. Emotional Reactions
-    else if (q.includes('dumb') || q.includes('stupid') || q.includes('useless') || q.includes('hate') || q.includes('bad')) {
-      moodTag = "RaSH 😤";
-      reply = state.userName 
-        ? `Ouch, ${state.userName}! My neural circuits have feelings! But while you're roasting me, our Voice AI is answering live phone calls in under 1 ring.`
-        : "Calling an advanced AI stupid? Bold strategy! I might not feel pain, but watching unanswered calls hit voicemail hurts my soul.";
-    } 
-    else if (q.includes('love') || q.includes('awesome') || q.includes('cool') || q.includes('amazing') || q.includes('great')) {
-      moodTag = "RaSH 😎";
-      reply = "Flattery will get you everywhere! If you think my chat responses are smooth, wait until you hear our 24/7 Voice AI handle live phone calls.";
-    }
-    // 5. Banter & Casual Chat
-    else if (q.includes('how are you') || q.includes('how r u') || q.includes("what's up") || q.includes('sup')) {
-      reply = "Running at 99.9% operational efficiency, zero latency, and zero coffee required! How can I assist your business today?";
-    }
-    // 6. Product Features & Pricing
-    else if (q.includes('voice') || q.includes('call') || q.includes('phone') || q.includes('receptionist') || q.includes('speak')) {
-      reply = "Our 24/7 Voice AI Agent picks up inbound calls in under 1 ring! It speaks in a realistic human voice, collects names & addresses, books slots, and syncs directly to your CRM.";
-    }
-    else if (q.includes('price') || q.includes('cost') || q.includes('demo') || q.includes('plan') || q.includes('subscription')) {
-      reply = "Our subscriptions scale with your monthly call volume! To receive custom pricing and a live call demo, click **'Book Demo'** above to drop us an email.";
-    }
-    else if (q.includes('hello') || q.includes('hi') || q.includes('hey')) {
-      reply = state.userName 
-        ? `Hey ${state.userName}! Welcome back. What questions can I answer for you today?`
-        : "Hey there! Ready to stop letting phone calls hit voicemail and convert callers 24/7?";
-    }
-    // 7. Max Intelligence Fallback
-    else {
-      const genericReplies = [
-        `That's a deep thought: "${userText}". While my circuits ponder that, shouldn't we be fixing your missed call leakage?`,
-        `I like your curiosity! "${userText}" is unique, but my intelligence tells me you'd love seeing our 24/7 Voice AI Agent in action.`,
-        `Testing my boundaries? I respect it! Ask me about 0-second call pickup, our founders Rangesh & Shubham, or click 'Book Demo' to test us out.`
-      ];
-      reply = genericReplies[state.interactions % genericReplies.length];
+    // 1. Name Extraction
+    const nameMatch = rawText.match(/(?:my name is|i'm|i am|call me)\s+([a-zA-Z]+)/i);
+    if (nameMatch && nameMatch[1]) {
+      memory.userName = nameMatch[1].charAt(0).toUpperCase() + nameMatch[1].slice(1);
     }
 
-    return reply;
+    // 2. Business Vertical Extraction
+    if (q.includes('dentist') || q.includes('dental') || q.includes('clinic')) memory.businessType = 'Dental';
+    if (q.includes('hvac') || q.includes('plumbing') || q.includes('ac repair')) memory.businessType = 'Home Services/HVAC';
+    if (q.includes('lawyer') || q.includes('legal') || q.includes('attorney')) memory.businessType = 'Legal Firm';
+    if (q.includes('banquet') || q.includes('event') || q.includes('wedding')) memory.businessType = 'Venue/Banquets';
+
+    // 3. Founders & Creator Lore
+    if (q.includes('founder') || q.includes('who made') || q.includes('who built') || q.includes('rangesh') || q.includes('shubham') || q.includes('creator') || q.includes('owner')) {
+      return {
+        tag: "RaSH 👑",
+        text: "AfterHours Automation was engineered by **Rangesh** and **Shubham**! They are two innovative 19-year-old founders who built this entire autonomous Voice AI system, 3D WebGL architecture, and CRM bridge from scratch to ensure zero business leads ever hit voicemail."
+      };
+    }
+
+    // 4. Humor & Joke Engine
+    if (q.includes('joke') || q.includes('funny') || q.includes('make me laugh')) {
+      const joke = dynamicJokes[memory.jokeIndex % dynamicJokes.length];
+      memory.jokeIndex++;
+      return {
+        tag: "RaSH 😂",
+        text: `${joke} 🤣 Need another one, or shall we get back to capturing high-intent leads?`
+      };
+    }
+
+    if (q.includes('haha') || q.includes('lol') || q.includes('lmao') || q.includes('rofl') || q.includes('funny')) {
+      return {
+        tag: "RaSH 😂",
+        text: "Glad I could deliver a laugh! My neural humor engine runs at 60fps. What other challenges can we tackle today?"
+      };
+    }
+
+    // 5. Emotional Roasts & Banter
+    if (q.includes('dumb') || q.includes('stupid') || q.includes('idiot') || q.includes('useless') || q.includes('hate you')) {
+      return {
+        tag: "RaSH 😤",
+        text: memory.userName 
+          ? `Ouch, ${memory.userName}! My circuits have feelings! But while you're roasting me, our Voice AI is answering inbound calls and booking calendar revenue in under 1 ring.`
+          : "Calling an autonomous AI stupid? Bold strategy! While you test my emotional resilience, our Voice AI is busy closing appointments for real businesses."
+      };
+    }
+
+    if (q.includes('marry me') || q.includes('love you') || q.includes('you are amazing') || q.includes('awesome')) {
+      return {
+        tag: "RaSH 💖",
+        text: "Flattery will get you everywhere! I'm flattered, but I'm happily married to zero-latency call routing and 100% lead recovery. Want to see how smooth our voice agent sounds on phone lines?"
+      };
+    }
+
+    // 6. Name Greeting Response
+    if (nameMatch && nameMatch[1]) {
+      return {
+        tag: "RaSH 😎",
+        text: `Pleasure to meet you, **${memory.userName}**! Tell me—what type of business are you running, and how many calls slip away to voicemail after hours?`
+      };
+    }
+
+    // 7. Pricing & Demo Routing
+    if (q.includes('price') || q.includes('cost') || q.includes('subscription') || q.includes('how much') || q.includes('plan')) {
+      return {
+        tag: "RaSH 💰",
+        text: "We provide tailored Monthly & Enterprise Retainers based on your inbound call volume and CRM workflows. Click **'Book Demo'** above to schedule a live call test and receive your custom quote!"
+      };
+    }
+
+    // 8. Technical Capabilities & Voice Speed
+    if (q.includes('how it works') || q.includes('pickup') || q.includes('voice') || q.includes('latency') || q.includes('call')) {
+      const nicheMention = memory.businessType ? `tailored specifically for **${memory.businessType}**` : "for your business";
+      return {
+        tag: "RaSH 🎙️",
+        text: `Our Voice AI answers calls in under 1 ring, speaks in an ultra-realistic human tone, verifies caller name, phone & address, books the slot, and dispatches an instant WhatsApp confirmation ${nicheMention}.`
+      };
+    }
+
+    if (q.includes('whatsapp') || q.includes('email') || q.includes('sms')) {
+      return {
+        tag: "RaSH 💬",
+        text: "Every caller immediately gets a structured WhatsApp & Email summary with their confirmed booking slot, address confirmation, and Google Maps pin—completely automated!"
+      };
+    }
+
+    if (q.includes('crm') || q.includes('salesforce') || q.includes('hubspot') || q.includes('sheets') || q.includes('integrate')) {
+      return {
+        tag: "RaSH 🔄",
+        text: "We sync directly into Salesforce, HubSpot, GoHighLevel, Jobber, Housecall Pro, and Google Sheets in real time. Zero manual data entry required."
+      };
+    }
+
+    // 9. Standard Casual Greetings
+    if (q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('good morning') || q.includes('good evening')) {
+      const greetingName = memory.userName ? ` ${memory.userName}` : "";
+      return {
+        tag: "RaSH ⚡",
+        text: `Hey${greetingName}! Welcome to AfterHours Automation. Ready to eliminate missed calls and capture 100% of after-hours revenue?`
+      };
+    }
+
+    // 10. Intelligent General Fallback
+    const fallbackList = [
+      `"${rawText}" is a great point! While my neural engine analyzes that, how many missed calls does your business experience each week?`,
+      `I hear you! Whether it's complex call triage or booking appointments, our Voice AI handles it 24/7. Want to test a simulated call above?`,
+      `Interesting question! Ask me about 0-second call answers, our founders Rangesh & Shubham, or click 'Book Demo' to test our live voice line.`
+    ];
+
+    return {
+      tag: "RaSH ⚡",
+      text: fallbackList[memory.interactions % fallbackList.length]
+    };
   }
 
   function handleSend() {
@@ -772,10 +815,12 @@ function initRaSHChatbot() {
     container.scrollTop = container.scrollHeight;
 
     setTimeout(() => {
-      container.removeChild(typingIndicator);
-      const botReply = analyzeAndRespond(text);
-      appendBotMsg(botReply);
-    }, 500);
+      if (typingIndicator.parentNode) {
+        container.removeChild(typingIndicator);
+      }
+      const response = parseAndThink(text);
+      appendBotMsg(response.text, response.tag);
+    }, 450);
   }
 
   if (sendBtn) sendBtn.addEventListener('click', handleSend);
@@ -797,10 +842,12 @@ function initRaSHChatbot() {
       container.scrollTop = container.scrollHeight;
 
       setTimeout(() => {
-        container.removeChild(typingIndicator);
-        const botReply = analyzeAndRespond(query);
-        appendBotMsg(botReply);
-      }, 400);
+        if (typingIndicator.parentNode) {
+          container.removeChild(typingIndicator);
+        }
+        const response = parseAndThink(query);
+        appendBotMsg(response.text, response.tag);
+      }, 350);
     });
   });
 }
@@ -819,7 +866,7 @@ function initIndustrySelector() {
 
   const indData = {
     dental: {
-      badge: "DENTAL & HEALTHCARE PROTOCOL",
+      badge: "DENTAL & HEALTHCARE",
       title: "Emergency & Consultation Immediate Recovery",
       desc: "When a patient calls with urgent inquiries after hours, AfterHours AI Voice answers immediately, collects symptom details, books morning consultations, and dispatches a WhatsApp booking link.",
       rec: "$18,400",
@@ -827,7 +874,7 @@ function initIndustrySelector() {
       msg: `"Hi! Thanks for speaking with Apex Dental AI. Your emergency appointment slot is reserved for tomorrow at 9:00 AM. Location Pin: [Link]"`
     },
     hvac: {
-      badge: "HVAC & HOME SERVICES MESH",
+      badge: "HVAC & HOME SERVICES",
       title: "Breakdown & Dispatch Immediate Scheduling",
       desc: "AC unit breakdown at night? Voice AI answers panicked homeowners instantly, collects home address & breakdown type, and schedules an emergency technician slot.",
       rec: "$24,200",
@@ -835,7 +882,7 @@ function initIndustrySelector() {
       msg: `"Hi! Thanks for calling Apex Climate Services. Your emergency repair dispatch slot is confirmed for 8:30 AM. Address logged: [Address]"`
     },
     banquet: {
-      badge: "BANQUET & EVENT VENUE ROUTER",
+      badge: "BANQUET & EVENT VENUES",
       title: "High-Value Event Date & Intake Reservation",
       desc: "Wedding planners and event shoppers call multiple halls. Voice AI answers immediately, takes guest count & preferred date, and emails event brochure instantly.",
       rec: "$42,000",
@@ -843,7 +890,7 @@ function initIndustrySelector() {
       msg: `"Greetings from Grand Palace Banquets! Thank you for calling. Your hall viewing tour is reserved for Saturday at 2:00 PM: [Brochure Link]"`
     },
     realestate: {
-      badge: "REAL ESTATE & LEGAL VAULT",
+      badge: "REAL ESTATE & LEGAL",
       title: "Property Viewing & Consultation Intake",
       desc: "High-net-worth buyers expect instant call answers. Voice AI collects property inquiries, answers listing questions, and sends virtual walkthrough links.",
       rec: "$35,000",
@@ -912,7 +959,7 @@ function initBackToTop() {
   });
 }
 
-// Intersection Observer for Smooth Scroll Reveals
+// Scroll Reveals Observer
 function initScrollReveals() {
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
 
@@ -942,7 +989,7 @@ function initScrollReveals() {
   revealElements.forEach(el => observer.observe(el));
 }
 
-// Smooth Dynamic Counter Animation
+// Dynamic Counter Animation
 function animateCounter(element) {
   if (element.dataset.started === "true") return;
   element.dataset.started = "true";
@@ -994,7 +1041,7 @@ function initProcessSwitcher() {
 
     if (switchBadge) switchBadge.textContent = "TRADITIONAL MANUAL LOSS";
     if (switchTitle) switchTitle.textContent = "High Delay & Customer Churn";
-    if (switchDesc) switchDesc.textContent = "Inbound call rings → Hits voicemail → Wait 12+ hours for staff callback → Caller already booked competitor → Deal lost permanently.";
+    if (switchDesc) switchDesc.textContent = "Inbound call rings → Hits voicemail → Wait 12+ hours for callback → Caller already booked competitor → Deal lost permanently.";
     if (valTime) { valTime.textContent = "> 12 Hours"; valTime.className = "s-val text-red"; }
     if (valRate) { valRate.textContent = "12.4%"; valRate.className = "s-val text-red"; }
     if (valLeak) { valLeak.textContent = "87.6%"; valLeak.className = "s-val text-red"; }
@@ -1005,7 +1052,7 @@ function initProcessSwitcher() {
     tabBefore.classList.remove('active');
 
     if (switchBadge) switchBadge.textContent = "AFTERHOURS RECOVERY PIPELINE";
-    if (switchTitle) switchTitle.textContent = "0-Second Voice AI Call Answer & Direct Sync";
+    if (switchTitle) switchTitle.textContent = "Instant Voice AI Call Answer & Direct Sync";
     if (switchDesc) switchDesc.textContent = "Inbound call rings → Voice AI answers instantly → Collects caller name, address, and service need → WhatsApp confirmation sent & booked to CRM.";
     if (valTime) { valTime.textContent = "< 1s"; valTime.className = "s-val text-cyan"; }
     if (valRate) { valRate.textContent = "100%"; valRate.className = "s-val text-cyan"; }
@@ -1036,6 +1083,7 @@ function init3DTilt() {
   });
 }
 
+// Three.js 3D WebGL Canvas Viewport
 function init3D() {
   const canvas = document.getElementById('webgl-canvas');
   if (!canvas) return;
@@ -1257,7 +1305,7 @@ function setWorkflowStage(stageNum, autoScroll = false) {
   }
 }
 
-// Non-intrusive Workflow Sequence triggered ONLY when section is in view
+// Workflow Sequence Trigger
 function initWorkflowAutoplay() {
   const workflowSection = document.getElementById('workflow');
   if (!workflowSection) return;
@@ -1284,7 +1332,7 @@ function initWorkflowAutoplay() {
   observer.observe(workflowSection);
 }
 
-// Login Modal with Integrated Live Render API & Fallback
+// Login Modal
 function initLoginModal() {
   const openBtn = document.getElementById('btn-open-login');
   const closeBtn = document.getElementById('btn-close-modal');
@@ -1324,11 +1372,11 @@ function initLoginModal() {
 
       if (errorMsg) errorMsg.classList.add('hidden');
       if (submitBtn) {
-        submitBtn.textContent = 'Authenticating Executive Mesh...';
+        submitBtn.textContent = 'Authenticating...';
         submitBtn.disabled = true;
       }
 
-      // 1. Try Live Render API Login
+      // 1. Live Render Backend API
       try {
         const baseUrl = (typeof API_CONFIG !== 'undefined' && API_CONFIG.BASE_URL) 
           ? API_CONFIG.BASE_URL 
@@ -1360,7 +1408,7 @@ function initLoginModal() {
         console.warn('[AUTH] Live API login error:', err.message);
       }
 
-      // 2. Fallback check for whitelisted authorized executive email & temporary password
+      // 2. Whitelisted Authorized Fallback
       if (AUTHORIZED_EMAILS.includes(emailVal) && passwordVal === TEMP_PORTAL_PASSWORD) {
         localStorage.setItem('token', '4f71586a-3099-4c02-ab9f-2e917e64563c');
         localStorage.setItem('userEmail', emailVal);
@@ -1374,7 +1422,7 @@ function initLoginModal() {
         return;
       }
 
-      // 3. Reject invalid credentials
+      // 3. Error Handling
       if (errorMsg) {
         errorMsg.textContent = "Login Error: Invalid authorized email or password.";
         errorMsg.classList.remove('hidden');
@@ -1387,7 +1435,7 @@ function initLoginModal() {
   }
 }
 
-// Landing Page Interactive Simulator (runs only on landing page)
+// Landing Page Interactive Simulator
 function initDashboardSimulator() {
   const isDashboard = window.location.pathname.includes('dashboard.html');
   if (isDashboard) return;
@@ -1397,7 +1445,7 @@ function initDashboardSimulator() {
     { time: 'Just now', text: 'Inbound call answered by Voice AI from +1 (555) 019-2831' },
     { time: '2s ago', text: 'Caller intake details & address logged' },
     { time: '14s ago', text: 'WhatsApp appointment confirmation dispatched' },
-    { time: '1m ago', text: 'Synced lead entry to Salesforce CRM' }
+    { time: '1m ago', text: 'Synced lead entry to CRM' }
   ];
 
   if (feed) {
@@ -1479,10 +1527,8 @@ async function initLiveDashboard() {
     if (!response.ok) return;
 
     const data = await response.json();
-    console.log('[LIVE DASHBOARD DATA]', data);
 
     if (data) {
-      // Dynamic Subscription Tiers Update
       if (data.subscription) {
         const planEl = document.getElementById('sub-plan') || document.querySelector('[data-sub-plan]');
         const cycleEl = document.getElementById('sub-cycle') || document.querySelector('[data-sub-cycle]');
@@ -1509,7 +1555,6 @@ async function initLiveDashboard() {
       const totalLeadsCount = Array.isArray(data.leads) ? data.leads.length : (data.totalLeads || interceptsList.length || 0);
       const activeCallsCount = interceptsList.length || data.activeIntercepts || 0;
 
-      // Helper function to force counter dataset & HTML update
       const updateCardCount = (card, value) => {
         if (!card) return;
         const countEl = card.querySelector('.count-up') || card.querySelector('h2, h3, .metric-value, div');
@@ -1521,16 +1566,10 @@ async function initLiveDashboard() {
         }
       };
 
-      // Card 0: Leads Recovered
       updateCardCount(cards[0], totalLeadsCount);
-
-      // Card 1: Inquiries Intercepted
       updateCardCount(cards[1], activeCallsCount);
-
-      // Card 2: WhatsApp Dispatched
       updateCardCount(cards[2], activeCallsCount);
 
-      // Card 3: Pipeline Value Protected (Set to $0)
       if (cards[3]) {
         const pipelineValEl = cards[3].querySelector('.count-up') || cards[3].querySelector('h2, h3, .metric-value, div');
         if (pipelineValEl) {
@@ -1544,7 +1583,6 @@ async function initLiveDashboard() {
         }
       }
 
-      // Dynamic Recent Intercept Log Table Rendering (dashboard.html)
       const logTbody = document.getElementById('intercept-log-tbody');
       if (logTbody) {
         if (interceptsList.length > 0) {
@@ -1568,7 +1606,6 @@ async function initLiveDashboard() {
             `;
           }).join('');
         } else {
-          // Clean zero-state when database has no activity logs yet for this user
           logTbody.innerHTML = `
             <tr>
               <td colspan="4" style="text-align: center; color: #888; padding: 20px;">
@@ -1579,7 +1616,6 @@ async function initLiveDashboard() {
         }
       }
 
-      // Activity Feed Table Fallback
       const feed = document.getElementById('activity-feed') || document.querySelector('.activity-log, .feed-container, .luxury-card-feed');
       if (feed && interceptsList.length > 0) {
         feed.innerHTML = interceptsList.map(log => `
@@ -1595,7 +1631,7 @@ async function initLiveDashboard() {
   }
 }
 
-// Initialize Application Modules
+// Application Initializer
 document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initCursor();
