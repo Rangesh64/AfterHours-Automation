@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rash Enterprises & AfterHours | Executive Client Console</title>
+  <title>AfterHours Automation | Executive Client Console</title>
   <link rel="stylesheet" href="styles.css" />
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    /* In-Page Multi-Tab View Styles */
     .tab-view {
       display: none;
       animation: fadeInView 0.35s ease-in-out forwards;
@@ -48,14 +49,14 @@
               stroke="url(#luxury-knot-grad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
         <circle cx="50" cy="50" r="4" fill="#c59b27" />
       </svg>
-      <span class="logo-text luxury-brand-text">RASH ENTERPRISES <span class="bronze-accent">EXECUTIVE</span></span>
+      <span class="logo-text luxury-brand-text">AFTERHOURS <span class="bronze-accent">EXECUTIVE</span></span>
     </div>
 
-    <!-- User Controls -->
+    <!-- User Controls with Expanded Spacing -->
     <div class="dash-user-controls">
       <div class="luxury-session-badge">
         <span class="bronze-dot"></span>
-        <span id="user-display-email" class="luxury-email">admin@rashenterprises.com</span>
+        <span id="user-display-email" class="luxury-email">admin@enterprise.com</span>
       </div>
       <button id="btn-logout" class="btn btn-luxury-outline btn-sm">Sign Out</button>
     </div>
@@ -123,6 +124,7 @@
           <div class="dash-panel luxury-panel">
             <div class="panel-header-flex">
               <h4 class="luxury-panel-title">Recent Intercept Stream</h4>
+              <span class="hud-code-luxury">CHANNEL: LIVE MULTI-ROUTE</span>
             </div>
             <div class="table-container">
               <table class="dash-table luxury-table">
@@ -135,21 +137,22 @@
                   </tr>
                 </thead>
                 <tbody id="intercept-log-tbody">
-                  <!-- Dynamic rows render here -->
+                  <!-- Dynamic Supabase/Backend rows render here -->
                 </tbody>
               </table>
             </div>
           </div>
 
-          <!-- Integration Connectors Preview (Unverified Tags Completely Purged) -->
+          <!-- Integration Connectors Preview -->
           <div class="dash-panel luxury-panel">
             <div class="panel-header-flex">
-              <h4 class="luxury-panel-title">Active Connections</h4>
+              <h4 class="luxury-panel-title">Active Mesh Connections</h4>
+              <span class="hud-code-luxury">SECURITY: VERIFIED BRIDGE</span>
             </div>
             <div class="integration-list">
               <div class="integ-item luxury-integ">
                 <div class="integ-info">
-                  <strong class="text-espresso">Live Voice Answering</strong>
+                  <strong class="text-espresso">Live Voice Listener Gateway</strong>
                   <span>Sub-Second Response Pipeline</span>
                 </div>
                 <span class="status-pill state-secured-luxury">ACTIVE</span>
@@ -157,7 +160,7 @@
               <div class="integ-item luxury-integ">
                 <div class="integ-info">
                   <strong class="text-espresso">WhatsApp Business API</strong>
-                  <span>Direct Confirmation Delivery</span>
+                  <span>Direct Interactive Message Bridge</span>
                 </div>
                 <span class="status-pill state-secured-luxury">ACTIVE</span>
               </div>
@@ -181,6 +184,7 @@
               <h4 class="luxury-panel-title-large">Voice AI Call Intercept Logs</h4>
               <p class="sub-card-desc">Detailed breakdown of inbound calls intercepted and converted by Voice AI.</p>
             </div>
+            <span class="hud-code-luxury">CHANNEL: VOICE_CALL_STREAM</span>
           </div>
           <div class="table-container" style="margin-top: 20px;">
             <table class="dash-table luxury-table">
@@ -197,21 +201,21 @@
                 <tr>
                   <td><strong>+1 (555) 234-8901</strong></td>
                   <td>1m 42s</td>
-                  <td>Requested emergency maintenance service for tomorrow morning.</td>
+                  <td>Requested emergency AC repair service for tomorrow morning.</td>
                   <td>12 mins ago</td>
                   <td><span class="status-pill state-secured-luxury">BOOKED</span></td>
                 </tr>
                 <tr>
                   <td><strong>+1 (555) 876-1122</strong></td>
                   <td>2m 15s</td>
-                  <td>Inquired about consultation slot; booked 9:00 AM.</td>
+                  <td>Inquired about dental emergency slot; booked 9:00 AM.</td>
                   <td>45 mins ago</td>
                   <td><span class="status-pill state-secured-luxury">CONFIRMED</span></td>
                 </tr>
                 <tr>
                   <td><strong>+1 (555) 901-4433</strong></td>
                   <td>0m 58s</td>
-                  <td>Asked for venue tour dates & luxury pricing PDF.</td>
+                  <td>Asked for banquet hall tour dates & luxury pricing PDF.</td>
                   <td>2 hours ago</td>
                   <td><span class="status-pill state-sent-luxury">INFO SENT</span></td>
                 </tr>
@@ -221,7 +225,7 @@
         </div>
       </div>
 
-      <!-- ==================== TAB 3: WHATSAPP LOGS (Unverified Gateway Tags Purged) ==================== -->
+      <!-- ==================== TAB 3: WHATSAPP LOGS ==================== -->
       <div id="view-whatsapp" class="tab-view">
         <div class="dash-panel luxury-panel">
           <div class="panel-header-flex">
@@ -229,6 +233,7 @@
               <h4 class="luxury-panel-title-large">WhatsApp Interactive Dispatch Logs</h4>
               <p class="sub-card-desc">Real-time confirmation dispatches & automated interactive messages sent to callers.</p>
             </div>
+            <span class="hud-code-luxury">GATEWAY: WA_BUSINESS_DIRECT</span>
           </div>
           <div class="table-container" style="margin-top: 20px;">
             <table class="dash-table luxury-table">
@@ -249,7 +254,7 @@
                 </tr>
                 <tr>
                   <td><strong>+1 (555) 876-1122</strong></td>
-                  <td>"Emergency Consultation Slot Reserved - Rash Enterprises"</td>
+                  <td>"Emergency Consultation Slot Reserved - Apex Dental"</td>
                   <td>44 mins ago</td>
                   <td>15 mins ago</td>
                 </tr>
@@ -265,7 +270,7 @@
         </div>
       </div>
 
-      <!-- ==================== TAB 4: EMAIL SEQUENCES (Unverified Server Tags Purged) ==================== -->
+      <!-- ==================== TAB 4: EMAIL SEQUENCES ==================== -->
       <div id="view-email" class="tab-view">
         <div class="dash-panel luxury-panel">
           <div class="panel-header-flex">
@@ -273,6 +278,7 @@
               <h4 class="luxury-panel-title-large">Automated Email Sequence Logs</h4>
               <p class="sub-card-desc">Follow-up confirmations, PDF estimates, and intake summary reports sent to leads.</p>
             </div>
+            <span class="hud-code-luxury">SERVER: EMAIL_AUTOMATION_RELAY</span>
           </div>
           <div class="table-container" style="margin-top: 20px;">
             <table class="dash-table luxury-table">
@@ -287,13 +293,13 @@
               <tbody>
                 <tr>
                   <td><strong>sarah.connor@domain.com</strong></td>
-                  <td>Your Emergency Service Ticket & Technician Dispatch</td>
+                  <td>Your Emergency Repair Ticket & Technician Dispatch</td>
                   <td><span class="status-pill state-secured-luxury">Confirmation Mail</span></td>
                   <td>10 mins ago</td>
                 </tr>
                 <tr>
                   <td><strong>m.chang@healthmail.com</strong></td>
-                  <td>Emergency Appointment Confirmation - Tomorrow 9:00 AM</td>
+                  <td>Emergency Dental Appointment Confirmation - Tomorrow 9:00 AM</td>
                   <td><span class="status-pill state-sent-luxury">Rescheduling Mail</span></td>
                   <td>42 mins ago</td>
                 </tr>
@@ -340,19 +346,20 @@
         </div>
       </div>
 
-      <!-- ==================== TAB 6: MESH CONNECTORS (Unverified Security Tags Purged) ==================== -->
+      <!-- ==================== TAB 6: MESH CONNECTORS ==================== -->
       <div id="view-integrations" class="tab-view">
         <div class="dash-panel luxury-panel">
           <div class="panel-header-flex">
             <div>
-              <h4 class="luxury-panel-title-large">Integration Connectors</h4>
+              <h4 class="luxury-panel-title-large">Integration Mesh Connectors</h4>
               <p class="sub-card-desc">Live pipeline links connecting Voice AI to your CRM, Webhooks, and Spreadsheets.</p>
             </div>
+            <span class="hud-code-luxury">SECURITY: ENCRYPTED TRANSIT</span>
           </div>
           <div class="integration-list" style="margin-top: 20px;">
             <div class="integ-item luxury-integ">
               <div class="integ-info">
-                <strong class="text-espresso">Live Voice Answering</strong>
+                <strong class="text-espresso">Live Voice Listener Gateway</strong>
                 <span>Sub-Second Response Pipeline</span>
               </div>
               <span class="status-pill state-secured-luxury">ACTIVE</span>
@@ -360,7 +367,7 @@
             <div class="integ-item luxury-integ">
               <div class="integ-info">
                 <strong class="text-espresso">WhatsApp Business API</strong>
-                <span>Direct Confirmation Delivery</span>
+                <span>Direct Interactive Message Bridge</span>
               </div>
               <span class="status-pill state-secured-luxury">ACTIVE</span>
             </div>
@@ -412,7 +419,7 @@
         window.location.href = 'index.html';
       });
 
-      // Tab Switching
+      // ================= IN-PAGE MULTI-TAB SWITCHING LOGIC =================
       const sidebarLinks = document.querySelectorAll('.sidebar-menu .sidebar-item');
       const tabViews = document.querySelectorAll('.tab-view');
       const viewTitle = document.getElementById('view-title');
@@ -423,7 +430,7 @@
         'view-whatsapp': 'WhatsApp Dispatch Logs',
         'view-email': 'Automated Email Sequences',
         'view-subscription': 'Subscription & Tier Oversight',
-        'view-integrations': 'Integration Connectors'
+        'view-integrations': 'Mesh Connector Integrations'
       };
 
       sidebarLinks.forEach(link => {
@@ -450,7 +457,7 @@
         });
       });
 
-      // Animated Counters
+      // Dynamic Counter Animation
       const counters = document.querySelectorAll('.count-up');
       counters.forEach(counter => {
         const target = parseFloat(counter.dataset.value);
