@@ -104,7 +104,7 @@
           <div class="metric-card luxury-card">
             <span class="m-label">Inquiries Intercepted</span>
             <span class="m-value count-up" data-value="189">0</span>
-            <span class="m-sub text-espresso">100% Sub-8s Latency</span>
+            <span class="m-sub text-espresso">100% Sub-Second Response</span>
           </div>
           <div class="metric-card luxury-card">
             <span class="m-label">WhatsApp Dispatched</span>
@@ -124,7 +124,7 @@
           <div class="dash-panel luxury-panel">
             <div class="panel-header-flex">
               <h4 class="luxury-panel-title">Recent Intercept Stream</h4>
-              <span class="hud-code-luxury">GATEWAY: OMNI_CHANNEL_EAST</span>
+              <span class="hud-code-luxury">CHANNEL: LIVE MULTI-ROUTE</span>
             </div>
             <div class="table-container">
               <table class="dash-table luxury-table">
@@ -137,7 +137,7 @@
                   </tr>
                 </thead>
                 <tbody id="intercept-log-tbody">
-                  <!-- Dynamic Supabase rows will render here -->
+                  <!-- Dynamic Supabase/Backend rows render here -->
                 </tbody>
               </table>
             </div>
@@ -147,13 +147,13 @@
           <div class="dash-panel luxury-panel">
             <div class="panel-header-flex">
               <h4 class="luxury-panel-title">Active Mesh Connections</h4>
-              <span class="hud-code-luxury">ENCRYPTION: AES-256</span>
+              <span class="hud-code-luxury">SECURITY: VERIFIED BRIDGE</span>
             </div>
             <div class="integration-list">
               <div class="integ-item luxury-integ">
                 <div class="integ-info">
-                  <strong class="text-espresso">Omni-Channel Listener Mesh</strong>
-                  <span>Sub-Second Gateway</span>
+                  <strong class="text-espresso">Live Voice Listener Gateway</strong>
+                  <span>Sub-Second Response Pipeline</span>
                 </div>
                 <span class="status-pill state-secured-luxury">ACTIVE</span>
               </div>
@@ -184,7 +184,7 @@
               <h4 class="luxury-panel-title-large">Voice AI Call Intercept Logs</h4>
               <p class="sub-card-desc">Detailed breakdown of inbound calls intercepted and converted by Voice AI.</p>
             </div>
-            <span class="hud-code-luxury">PROTOCOL: VOICE_AI_CALL_STREAM</span>
+            <span class="hud-code-luxury">CHANNEL: VOICE_CALL_STREAM</span>
           </div>
           <div class="table-container" style="margin-top: 20px;">
             <table class="dash-table luxury-table">
@@ -233,7 +233,7 @@
               <h4 class="luxury-panel-title-large">WhatsApp Interactive Dispatch Logs</h4>
               <p class="sub-card-desc">Real-time confirmation dispatches & automated interactive messages sent to callers.</p>
             </div>
-            <span class="hud-code-luxury">GATEWAY: WA_BUSINESS_API_V2</span>
+            <span class="hud-code-luxury">GATEWAY: WA_BUSINESS_DIRECT</span>
           </div>
           <div class="table-container" style="margin-top: 20px;">
             <table class="dash-table luxury-table">
@@ -278,7 +278,7 @@
               <h4 class="luxury-panel-title-large">Automated Email Sequence Logs</h4>
               <p class="sub-card-desc">Follow-up confirmations, PDF estimates, and intake summary reports sent to leads.</p>
             </div>
-            <span class="hud-code-luxury">SERVER: SMTP_EXECUTIVE_RELAY</span>
+            <span class="hud-code-luxury">SERVER: EMAIL_AUTOMATION_RELAY</span>
           </div>
           <div class="table-container" style="margin-top: 20px;">
             <table class="dash-table luxury-table">
@@ -321,7 +321,7 @@
           <div class="panel-header-flex">
             <div>
               <h4 class="luxury-panel-title-large">Subscription &amp; Tier Oversight</h4>
-              <p class="sub-card-desc">Active Allocation: <strong class="text-espresso" id="sub-plan">Enterprise Unlimited Mesh</strong></p>
+              <p class="sub-card-desc">Active Allocation: <strong class="text-espresso" id="sub-plan">Enterprise Multi-Route Plan</strong></p>
             </div>
             <button class="btn btn-luxury-outline btn-sm" onclick="alert('Redirecting to secure billing portal...');">Manage Plan &amp; Invoices</button>
           </div>
@@ -354,13 +354,13 @@
               <h4 class="luxury-panel-title-large">Integration Mesh Connectors</h4>
               <p class="sub-card-desc">Live pipeline links connecting Voice AI to your CRM, Webhooks, and Spreadsheets.</p>
             </div>
-            <span class="hud-code-luxury">ENCRYPTION: AES-256</span>
+            <span class="hud-code-luxury">SECURITY: ENCRYPTED TRANSIT</span>
           </div>
           <div class="integration-list" style="margin-top: 20px;">
             <div class="integ-item luxury-integ">
               <div class="integ-info">
-                <strong class="text-espresso">Omni-Channel Listener Mesh</strong>
-                <span>Sub-Second Gateway (Twilio / Vapi)</span>
+                <strong class="text-espresso">Live Voice Listener Gateway</strong>
+                <span>Sub-Second Response Pipeline</span>
               </div>
               <span class="status-pill state-secured-luxury">ACTIVE</span>
             </div>
@@ -470,6 +470,7 @@
         function updateCount(currentTime) {
           const elapsed = currentTime - startTime;
           const progress = Math.min(elapsed / duration, 1);
+          
           const easeProgress = 1 - Math.pow(1 - progress, 4);
           const currentValue = (easeProgress * target).toFixed(decimals);
 
@@ -485,8 +486,8 @@
         requestAnimationFrame(updateCount);
       });
     });
-</script>
-<script src="api-config.js"></script>
-<script src="script.js"></script>
+  </script>
+  <script src="api-config.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
