@@ -632,7 +632,6 @@ function initReactionGame() {
 
 // ============================================================================
 // MAX-INTELLIGENCE UPGRADED RaSH ASSISTANT ENGINE
-// (Full NLP Intent Engine, Conversational Memory, Sarcasm, Jokes & Founders Lore)
 // ============================================================================
 function initRaSHChatbot() {
   const toggleBtn = document.getElementById('ai-chat-toggle');
@@ -698,7 +697,7 @@ function initRaSHChatbot() {
     if (q.includes('lawyer') || q.includes('legal') || q.includes('attorney')) memory.businessType = 'Legal Firm';
     if (q.includes('banquet') || q.includes('event') || q.includes('wedding')) memory.businessType = 'Venue/Banquets';
 
-    // 3. Founders & Creator Lore
+    // 3. Founders Lore
     if (q.includes('founder') || q.includes('who made') || q.includes('who built') || q.includes('rangesh') || q.includes('shubham') || q.includes('creator') || q.includes('owner')) {
       return {
         tag: "RaSH 👑",
@@ -1529,6 +1528,7 @@ async function initLiveDashboard() {
     const data = await response.json();
 
     if (data) {
+      // 1. Subscription Overview
       if (data.subscription) {
         const planEl = document.getElementById('sub-plan') || document.querySelector('[data-sub-plan]');
         const cycleEl = document.getElementById('sub-cycle') || document.querySelector('[data-sub-cycle]');
@@ -1547,6 +1547,21 @@ async function initLiveDashboard() {
         if (sidebarDaysEl) sidebarDaysEl.textContent = `${data.subscription.days_remaining} Days Remaining`;
       }
 
+      // 2. Real-Time Credit Balance Rendering
+      const creditVal = data.creditsBalance ?? (data.subscription ? data.subscription.credits_balance : 5000);
+      
+      const navCreditEl = document.getElementById('nav-credit-balance');
+      const metricCreditEl = document.getElementById('metric-credit-balance');
+
+      if (navCreditEl) navCreditEl.textContent = Number(creditVal).toLocaleString();
+      if (metricCreditEl) {
+        metricCreditEl.dataset.value = creditVal;
+        metricCreditEl.dataset.started = "false";
+        metricCreditEl.textContent = Number(creditVal).toLocaleString();
+        animateCounter(metricCreditEl);
+      }
+
+      // 3. Metric Cards Update
       const cards = document.querySelectorAll('.metric-card');
       const interceptsList = (Array.isArray(data.recentIntercepts) && data.recentIntercepts.length > 0)
         ? data.recentIntercepts
@@ -1558,7 +1573,7 @@ async function initLiveDashboard() {
       const updateCardCount = (card, value) => {
         if (!card) return;
         const countEl = card.querySelector('.count-up') || card.querySelector('h2, h3, .metric-value, div');
-        if (countEl) {
+        if (countEl && countEl.id !== 'metric-credit-balance') {
           countEl.dataset.value = value;
           countEl.dataset.started = "false";
           countEl.textContent = value;
@@ -1566,15 +1581,16 @@ async function initLiveDashboard() {
         }
       };
 
-      updateCardCount(cards[0], totalLeadsCount);
-      updateCardCount(cards[1], activeCallsCount);
-      updateCardCount(cards[2], activeCallsCount);
+      // Match remaining 4 KPI cards
+      const otherCards = Array.from(cards).filter(c => !c.classList.contains('credit-balance-card'));
+      if (otherCards[0]) updateCardCount(otherCards[0], totalLeadsCount);
+      if (otherCards[1]) updateCardCount(otherCards[1], activeCallsCount);
+      if (otherCards[2]) updateCardCount(otherCards[2], activeCallsCount);
 
-      if (cards[3]) {
-        const pipelineValEl = cards[3].querySelector('.count-up') || cards[3].querySelector('h2, h3, .metric-value, div');
+      if (otherCards[3]) {
+        const pipelineValEl = otherCards[3].querySelector('.count-up') || otherCards[3].querySelector('h2, h3, .metric-value, div');
         if (pipelineValEl) {
           const livePipelineValue = 0;
-
           pipelineValEl.dataset.prefix = "$";
           pipelineValEl.dataset.value = livePipelineValue;
           pipelineValEl.dataset.started = "false";
@@ -1583,6 +1599,7 @@ async function initLiveDashboard() {
         }
       }
 
+      // 4. Intercepts Log Table
       const logTbody = document.getElementById('intercept-log-tbody');
       if (logTbody) {
         if (interceptsList.length > 0) {
@@ -1616,6 +1633,37 @@ async function initLiveDashboard() {
         }
       }
 
+      // 5. Populate Passbook Transaction History Table
+      const ledgerTbody = document.getElementById('credits-ledger-tbody');
+      if (ledgerTbody) {
+        const transList = Array.isArray(data.creditTransactions) ? data.creditTransactions : [];
+        if (transList.length > 0) {
+          ledgerTbody.innerHTML = transList.map(tx => {
+            const timeStr = tx.created_at 
+              ? new Date(tx.created_at).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' }) 
+              : 'Recent';
+
+            return `
+              <tr>
+                <td>${timeStr}</td>
+                <td><strong>${tx.action_type || 'USAGE'}</strong></td>
+                <td>${tx.description || 'Service Execution'}</td>
+                <td><strong style="color: #c59b27;">${tx.amount} Credits</strong></td>
+              </tr>
+            `;
+          }).join('');
+        } else {
+          ledgerTbody.innerHTML = `
+            <tr>
+              <td colspan="4" style="text-align: center; color: #7a5c43; padding: 20px;">
+                <em>No credit deductions recorded yet for this billing cycle.</em>
+              </td>
+            </tr>
+          `;
+        }
+      }
+
+      // 6. Activity Feed Preview
       const feed = document.getElementById('activity-feed') || document.querySelector('.activity-log, .feed-container, .luxury-card-feed');
       if (feed && interceptsList.length > 0) {
         feed.innerHTML = interceptsList.map(log => `
