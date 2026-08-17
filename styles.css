@@ -13,8 +13,8 @@
   --red-accent: #f43f5e;
   --gold-accent: #fbbf24;
   
-  --text-primary: #f8fafc;
-  --text-muted: #d8e2ee;
+  --text-primary: #ffffff;
+  --text-muted: #e2e8f0;
   
   --font-main: 'Plus Jakarta Sans', sans-serif;
   --font-heading: 'Space Grotesk', sans-serif;
@@ -190,7 +190,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 8%;
+  padding: 18px 5%;
   position: fixed;
   top: 0;
   width: 100%;
@@ -198,23 +198,25 @@ body {
   background: rgba(2, 4, 10, 0.85);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 24px;
 }
 
 /* ENLARGED PROMINENT LOGO (DESKTOP) */
 .logo {
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 1.3rem;
-  letter-spacing: 1.5px;
+  font-size: 1.25rem;
+  letter-spacing: 0.8px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
   flex-shrink: 0;
 }
 
 .logo-knot-svg {
-  width: 60px;
-  height: 60px;
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -224,17 +226,19 @@ body {
 
 .nav-links {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   align-items: center;
+  flex-wrap: nowrap;
 }
 
 .nav-links a {
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 500;
   transition: color 0.3s;
   text-align: center;
+  white-space: nowrap;
 }
 
 .nav-links a:hover { color: var(--text-primary); }
@@ -245,7 +249,7 @@ body {
   justify-content: center;
   text-align: center;
   gap: 8px;
-  padding: 8px 22px;
+  padding: 8px 18px;
 }
 
 .login-nav-btn {
@@ -411,9 +415,10 @@ h1 {
 
 .hero-subtext {
   font-size: 1.2rem;
-  color: var(--text-muted);
+  color: #f1f5f9;
   line-height: 1.6;
   margin-bottom: 40px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
 }
 
 .hero-actions {
@@ -431,14 +436,46 @@ section { position: relative; z-index: 2; background: transparent; width: 100%; 
   margin: 0 auto 60px auto;
 }
 
+.header-status-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
 .section-tag {
   color: var(--cyan-accent);
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  font-weight: 600;
-  display: block;
-  margin-bottom: 8px;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.auto-play-indicator {
+  font-size: 0.75rem;
+  color: #ffffff;
+  background: rgba(0, 240, 255, 0.15);
+  border: 1px solid var(--cyan-accent);
+  padding: 3px 10px;
+  border-radius: 12px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+.mini-pulse {
+  width: 6px;
+  height: 6px;
+  background: var(--cyan-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--cyan-accent);
+  animation: pulse 1.5s infinite;
 }
 
 .section-header h2 {
@@ -2283,8 +2320,11 @@ footer {
     display: none !important;
   }
 
-  .hero { padding: 100px 4% 60px 4% !important; }
-  section { padding: 50px 4% !important; }
+  .hero { 
+    padding: 76px 4% 40px 4% !important; 
+    min-height: auto !important;
+  }
+  section { padding: 45px 4% !important; }
   
   .workflow-layout, .industry-shell, .customizer-shell, .game-card, .switcher-shell, .calc-card, .card-grid, .why-grid-3d, .dashboard-shell, .pricing-placeholder-card, .cta-card, .voice-card-container, .faq-accordion {
     max-width: 100vw !important;
@@ -2309,14 +2349,17 @@ footer {
     font-size: 0.7rem !important;
   }
   
-  .navbar { padding: 12px 4% !important; }
+  .navbar { 
+    padding: 10px 4% !important; 
+    gap: 10px !important;
+  }
   .logo-knot-svg { width: 34px !important; height: 34px !important; }
-  .logo-text { font-size: 1rem !important; }
+  .logo-text { font-size: 0.95rem !important; letter-spacing: 0.5px !important; }
   .mobile-menu-btn { display: flex; }
   
   .nav-links {
     position: fixed;
-    top: 64px;
+    top: 56px;
     left: 0;
     width: 100%;
     background: rgba(2, 4, 10, 0.98);
@@ -2337,12 +2380,19 @@ footer {
     pointer-events: auto;
   }
 
+  .hero-badge {
+    margin-bottom: 12px !important;
+    padding: 4px 12px !important;
+    font-size: 0.75rem !important;
+  }
+
   h1 { font-size: 1.4rem !important; letter-spacing: -0.5px !important; margin-bottom: 10px !important; line-height: 1.2 !important; }
   .hero-subtext { 
     font-size: 0.75rem !important; 
     margin-bottom: 16px !important; 
-    color: #e2e8f0 !important;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
   }
   
   .time-banner { 
@@ -2351,33 +2401,39 @@ footer {
     line-height: 1.3 !important; 
     text-align: left;
     white-space: normal;
+    margin-bottom: 12px !important;
   }
   
   .section-header h2 { font-size: 1.1rem !important; margin-bottom: 6px !important; line-height: 1.2 !important; }
   .section-header p { 
     font-size: 0.65rem !important; 
-    color: #cbd5e1 !important;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+    color: #f1f5f9 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+  }
+
+  .auto-play-indicator {
+    font-size: 0.55rem !important;
+    padding: 2px 6px !important;
   }
   
   .glass-card { padding: 10px !important; border-radius: 12px !important; }
   .glass-card h3 { font-size: 0.7rem !important; margin-bottom: 4px !important; }
-  .glass-card p { font-size: 0.55rem !important; line-height: 1.3 !important; margin-bottom: 8px !important;}
+  .glass-card p { font-size: 0.55rem !important; line-height: 1.3 !important; margin-bottom: 8px !important; color: #e2e8f0 !important; }
   .card-icon { font-size: 1rem !important; }
   .card-status-bar { font-size: 0.5rem !important; padding-top: 6px !important; }
 
   .step-card { padding: 12px !important; border-radius: 12px !important;}
   .step-id { font-size: 0.9rem !important; }
   .step-card h3 { font-size: 0.8rem !important; }
-  .step-card p { font-size: 0.6rem !important; margin-bottom: 6px !important; }
+  .step-card p { font-size: 0.6rem !important; margin-bottom: 6px !important; color: #e2e8f0 !important; }
   .step-hud { font-size: 0.55rem !important; }
 
   .industry-display-card { padding: 12px !important; border-radius: 12px !important; }
   .ind-display-card h3 { font-size: 0.9rem !important; }
-  .ind-desc { font-size: 0.65rem !important; margin-bottom: 12px !important; }
+  .ind-desc { font-size: 0.65rem !important; margin-bottom: 12px !important; color: #f1f5f9 !important; }
   .ind-preview-grid { grid-template-columns: 1fr 1fr !important; gap: 8px !important; padding-top: 8px !important;}
   .ind-box { padding: 8px !important; }
-  .ind-box p { font-size: 0.55rem !important; line-height: 1.3 !important; }
+  .ind-box p { font-size: 0.55rem !important; line-height: 1.3 !important; color: #ffffff !important; }
   .ind-box-label { font-size: 0.55rem !important; }
   .ind-tab { font-size: 0.65rem !important; padding: 6px 10px !important; }
 
@@ -2414,7 +2470,7 @@ footer {
   }
   .stat-glass-card { padding: 12px !important; }
   .stat-glass-card .stat-number { font-size: 1.1rem !important; margin-bottom: 4px !important; }
-  .stat-glass-card .stat-label { font-size: 0.55rem !important; line-height: 1.2 !important; }
+  .stat-glass-card .stat-label { font-size: 0.55rem !important; line-height: 1.2 !important; color: #cbd5e1 !important; }
 
   .game-card { padding: 12px !important; }
   .game-top-bar {
