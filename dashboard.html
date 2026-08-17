@@ -52,8 +52,20 @@
       <span class="logo-text luxury-brand-text">AFTERHOURS <span class="bronze-accent">EXECUTIVE</span></span>
     </div>
 
-    <!-- User Controls with Expanded Spacing -->
+    <!-- User Controls with 3D Flipping Coin Badge -->
     <div class="dash-user-controls">
+      <div class="luxury-coin-badge-container">
+        <div class="ah-coin-scene">
+          <div class="ah-coin">
+            <div class="coin-face coin-front">A</div>
+            <div class="coin-face coin-back">H</div>
+          </div>
+        </div>
+        <div class="credit-badge-text">
+          <strong id="nav-credit-balance">5,000</strong> <span>Credits</span>
+        </div>
+      </div>
+
       <div class="luxury-session-badge">
         <span class="bronze-dot"></span>
         <span id="user-display-email" class="luxury-email">admin@enterprise.com</span>
@@ -95,7 +107,20 @@
       <!-- ==================== TAB 1: EXECUTIVE OVERVIEW ==================== -->
       <div id="view-overview" class="tab-view active-view">
         <!-- Metric Tiles Grid -->
-        <div class="dash-metrics">
+        <div class="dash-metrics" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+          <div class="metric-card luxury-card credit-balance-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="m-label" style="margin-bottom: 0;">AH Available Credits</span>
+              <div class="ah-coin-scene" style="width: 26px; height: 26px;">
+                <div class="ah-coin">
+                  <div class="coin-face coin-front" style="font-size: 0.85rem;">A</div>
+                  <div class="coin-face coin-back" style="font-size: 0.85rem;">H</div>
+                </div>
+              </div>
+            </div>
+            <span class="m-value text-espresso count-up" id="metric-credit-balance" data-value="5000">5000</span>
+            <span class="m-sub text-bronze">● Real-Time Deduction Active</span>
+          </div>
           <div class="metric-card luxury-card">
             <span class="m-label">Leads Recovered</span>
             <span class="m-value text-espresso count-up" data-value="142">0</span>
@@ -342,6 +367,36 @@
               <span class="sub-label">Active Capacity</span>
               <strong class="sub-val" id="sub-capacity">Unlimited Multi-Channel Routes</strong>
             </div>
+          </div>
+        </div>
+
+        <!-- Credits Passbook Transaction History -->
+        <div class="dash-panel luxury-panel" style="margin-top: 24px;">
+          <div class="panel-header-flex">
+            <div>
+              <h4 class="luxury-panel-title-large">Credit Deduction Passbook</h4>
+              <p class="sub-card-desc">Real-time ledger of Voice AI and WhatsApp credits consumed.</p>
+            </div>
+            <span class="hud-code-luxury">PASSBOOK: ATOMIC_LEDGER</span>
+          </div>
+          <div class="table-container" style="margin-top: 16px;">
+            <table class="dash-table luxury-table">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Activity Type</th>
+                  <th>Description</th>
+                  <th>Credits Deducted</th>
+                </tr>
+              </thead>
+              <tbody id="credits-ledger-tbody">
+                <tr>
+                  <td colspan="4" style="text-align: center; color: #8c5319; padding: 18px;">
+                    <em>Loading credit history...</em>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
