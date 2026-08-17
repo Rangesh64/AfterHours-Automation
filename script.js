@@ -501,10 +501,10 @@ function initAudioVoicePlayer() {
           v.name.toLowerCase().includes('female') || 
           v.name.toLowerCase().includes('zira') || 
           v.name.toLowerCase().includes('samantha') || 
-          v.name.toLowerCase().includes('victoria') ||
+          v.name.toLowerCase().includes('victoria') || 
           v.name.toLowerCase().includes('karen') || 
-          v.name.toLowerCase().includes('fiona') ||
-          v.name.toLowerCase().includes('google us english') ||
+          v.name.toLowerCase().includes('fiona') || 
+          v.name.toLowerCase().includes('google us english') || 
           v.name.toLowerCase().includes('natural')
         )
       );
