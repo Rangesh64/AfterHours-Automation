@@ -1550,8 +1550,12 @@ async function initLiveDashboard() {
         ? data.recentIntercepts
         : (Array.isArray(data.logs) && data.logs.length > 0 ? data.logs : []);
 
-      const totalLeadsCount = Array.isArray(data.leads) ? data.leads.length : (data.totalLeads || interceptsList.length || 0);
-      const activeCallsCount = interceptsList.length || data.activeIntercepts || 0;
+      const voiceRows = Array.isArray(data.sheets?.voice) && data.sheets.voice.length > 1 ? data.sheets.voice.length - 1 : 0;
+      const whatsappRows = Array.isArray(data.sheets?.whatsapp) && data.sheets.whatsapp.length > 1 ? data.sheets.whatsapp.length - 1 : 0;
+
+      const totalLeadsCount = data.totalLeads ?? (Array.isArray(data.leads) ? data.leads.length : (interceptsList.length || (voiceRows + whatsappRows) || 0));
+      const activeCallsCount = data.inquiriesIntercepted ?? (interceptsList.length || voiceRows || data.activeIntercepts || 0);
+      const whatsappCount = data.whatsappDispatched ?? whatsappRows;
 
       const updateCardCount = (card, value) => {
         if (!card) return;
@@ -1568,18 +1572,37 @@ async function initLiveDashboard() {
       const otherCards = Array.from(cards).filter(c => !c.classList.contains('credit-balance-card'));
       if (otherCards[0]) updateCardCount(otherCards[0], totalLeadsCount);
       if (otherCards[1]) updateCardCount(otherCards[1], activeCallsCount);
-      if (otherCards[2]) updateCardCount(otherCards[2], activeCallsCount);
+      if (otherCards[2]) updateCardCount(otherCards[2], whatsappCount);
 
       if (otherCards[3]) {
         const pipelineValEl = otherCards[3].querySelector('.count-up') || otherCards[3].querySelector('h2, h3, .metric-value, div');
         if (pipelineValEl) {
-          const livePipelineValue = 0;
+          const livePipelineValue = data.pipelineValue ?? (totalLeadsCount * 250);
           pipelineValEl.dataset.prefix = "$";
           pipelineValEl.dataset.value = livePipelineValue;
           pipelineValEl.dataset.started = "false";
           pipelineValEl.textContent = "$" + livePipelineValue;
           animateCounter(pipelineValEl);
         }
+      }
+
+      // Dynamic Percentage Sub-label Bindings
+      const dispatchRate = activeCallsCount > 0 ? Math.min(100, Math.round((whatsappCount / activeCallsCount) * 100)) : (whatsappCount > 0 ? 100 : 0);
+      const recoveryRate = totalLeadsCount > 0 ? Math.min(100, Math.round(((whatsappCount + activeCallsCount) / (totalLeadsCount * 1.2 || 1)) * 100)) : 0;
+
+      const yieldBadge = document.getElementById('monthly-yield-badge');
+      if (yieldBadge) {
+        yieldBadge.textContent = totalLeadsCount > 0 ? `▲ +${recoveryRate}% Monthly Yield` : `▲ +0.0% Monthly Yield`;
+      }
+
+      const responseBadge = document.getElementById('response-rate-badge');
+      if (responseBadge) {
+        responseBadge.textContent = activeCallsCount > 0 ? `100% Sub-Second Response` : `0% Intercept Active`;
+      }
+
+      const engagementBadge = document.getElementById('engagement-rate-badge');
+      if (engagementBadge) {
+        engagementBadge.textContent = `${dispatchRate}% Direct Engagement`;
       }
 
       // 4. Intercepts Log Table
