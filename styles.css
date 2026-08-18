@@ -2389,11 +2389,37 @@ footer {
 .footer-link-highlight { color: var(--cyan-accent); text-decoration: none; font-weight: 600; transition: color 0.3s; }
 .footer-link-highlight:hover { color: #ffffff; text-decoration: underline; }
 /* DESKTOP AUTO-SCALE NORMALIZER */
+/* DESKTOP VIEWPORT AUTO-FIT (Fixes vertical clipping on 125%/150% scaled displays) */
 @media screen and (min-width: 1024px) {
-  body {
-    zoom: 0.88;
-    -moz-transform: scale(0.88);
-    -moz-transform-origin: top center;
+  .hero {
+    min-height: 100vh;
+    padding: clamp(90px, 12vh, 130px) 8% clamp(40px, 6vh, 80px) 8%;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-content {
+    max-width: clamp(580px, 50vw, 740px);
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 3.8vw, 4.2rem);
+    line-height: 1.1;
+    margin-bottom: clamp(12px, 2vh, 22px);
+  }
+
+  .hero-subtext {
+    font-size: clamp(0.95rem, 1.1vw, 1.15rem);
+    line-height: 1.5;
+    margin-bottom: clamp(18px, 3vh, 34px);
+  }
+
+  .hero-badge, .time-banner {
+    margin-bottom: clamp(10px, 1.6vh, 20px);
+  }
+
+  .hero-actions {
+    gap: 14px;
   }
 }
 /* DEDICATED EXTREME-MOBILE SCALING */
