@@ -714,7 +714,48 @@ function initRaSHChatbot() {
       };
     }
 
-    // 5. Emotional Roasts & Banter
+    // 5. WhatsApp Automation Query
+    if (q.includes('whatsapp')) {
+      return {
+        tag: "RaSH 💬",
+        text: "**WhatsApp Interactive Dispatch** triggers within seconds after any phone call concludes! It sends the caller an instant branded WhatsApp confirmation featuring their scheduled booking time, service summary, intake confirmation, and interactive links or Google Maps location pins—retaining 98.2% of high-intent leads."
+      };
+    }
+
+    // 6. Email Automation Query
+    if (q.includes('email') || q.includes('sequence')) {
+      return {
+        tag: "RaSH ✉️",
+        text: "**Automated Email Sequences** handle post-call follow-ups without manual staff effort. It automatically dispatches detailed confirmation reports, PDF price estimates, intake receipts, and custom calendar invites directly to the customer's inbox the second the call wraps."
+      };
+    }
+
+    // 7. CRM Sync Query
+    if (q.includes('crm') || q.includes('sync') || q.includes('salesforce') || q.includes('hubspot') || q.includes('gohighlevel')) {
+      return {
+        tag: "RaSH 🔄",
+        text: "**Real-Time CRM Mesh Sync** connects directly with Salesforce, HubSpot, GoHighLevel, Jobber, Housecall Pro, and Google Sheets. The moment Voice AI collects caller name, phone number, address, and intake urgency, it creates and updates the lead pipeline record instantaneously."
+      };
+    }
+
+    // 8. Plans & Pricing Query
+    if (q.includes('price') || q.includes('pricing') || q.includes('cost') || q.includes('plan') || q.includes('subscription') || q.includes('retainer')) {
+      return {
+        tag: "RaSH 💰",
+        text: "We provide tailored **Monthly & Enterprise Retainer Plans** designed around your monthly inbound call volume and CRM channels. Every plan includes 24/7 Voice AI answering, instant WhatsApp & Email triggers, and real-time CRM ingestion. Click **'Book Demo'** to receive a custom quote and live voice test for your business!"
+      };
+    }
+
+    // 9. Voice AI Speed & Capabilities
+    if (q.includes('how it works') || q.includes('pickup') || q.includes('voice') || q.includes('latency') || q.includes('call') || q.includes('agent')) {
+      const nicheMention = memory.businessType ? `tailored specifically for **${memory.businessType}**` : "for your business";
+      return {
+        tag: "RaSH 🎙️",
+        text: `Our Voice AI answers calls in under 1 ring, speaks in an ultra-realistic human tone, verifies caller name, phone & address, books the slot, and dispatches an instant WhatsApp confirmation ${nicheMention}.`
+      };
+    }
+
+    // 10. Emotional Roasts & Banter
     if (q.includes('dumb') || q.includes('stupid') || q.includes('idiot') || q.includes('useless') || q.includes('hate you')) {
       return {
         tag: "RaSH 😤",
@@ -731,7 +772,7 @@ function initRaSHChatbot() {
       };
     }
 
-    // 6. Name Greeting Response
+    // 11. Name Greeting Response
     if (nameMatch && nameMatch[1]) {
       return {
         tag: "RaSH 😎",
@@ -739,38 +780,7 @@ function initRaSHChatbot() {
       };
     }
 
-    // 7. Pricing & Demo Routing
-    if (q.includes('price') || q.includes('cost') || q.includes('subscription') || q.includes('how much') || q.includes('plan')) {
-      return {
-        tag: "RaSH 💰",
-        text: "We provide tailored Monthly & Enterprise Retainers based on your inbound call volume and CRM workflows. Click **'Book Demo'** above to schedule a live call test and receive your custom quote!"
-      };
-    }
-
-    // 8. Technical Capabilities & Voice Speed
-    if (q.includes('how it works') || q.includes('pickup') || q.includes('voice') || q.includes('latency') || q.includes('call')) {
-      const nicheMention = memory.businessType ? `tailored specifically for **${memory.businessType}**` : "for your business";
-      return {
-        tag: "RaSH 🎙️",
-        text: `Our Voice AI answers calls in under 1 ring, speaks in an ultra-realistic human tone, verifies caller name, phone & address, books the slot, and dispatches an instant WhatsApp confirmation ${nicheMention}.`
-      };
-    }
-
-    if (q.includes('whatsapp') || q.includes('email') || q.includes('sms')) {
-      return {
-        tag: "RaSH 💬",
-        text: "Every caller immediately gets a structured WhatsApp & Email summary with their confirmed booking slot, address confirmation, and Google Maps pin—completely automated!"
-      };
-    }
-
-    if (q.includes('crm') || q.includes('salesforce') || q.includes('hubspot') || q.includes('sheets') || q.includes('integrate')) {
-      return {
-        tag: "RaSH 🔄",
-        text: "We sync directly into Salesforce, HubSpot, GoHighLevel, Jobber, Housecall Pro, and Google Sheets in real time. Zero manual data entry required."
-      };
-    }
-
-    // 9. Standard Casual Greetings
+    // 12. Standard Casual Greetings
     if (q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('good morning') || q.includes('good evening')) {
       const greetingName = memory.userName ? ` ${memory.userName}` : "";
       return {
@@ -779,7 +789,7 @@ function initRaSHChatbot() {
       };
     }
 
-    // 10. Intelligent General Fallback
+    // 13. Intelligent General Fallback
     const fallbackList = [
       `"${rawText}" is a great point! While my neural engine analyzes that, how many missed calls does your business experience each week?`,
       `I hear you! Whether it's complex call triage or booking appointments, our Voice AI handles it 24/7. Want to test a simulated call above?`,
