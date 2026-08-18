@@ -449,18 +449,16 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const sessionData = JSON.parse(localStorage.getItem('afterhours_session') || '{}');
+     const sessionData = JSON.parse(localStorage.getItem('afterhours_session') || '{}');
+      const token = localStorage.getItem('token') || sessionData.token;
       const emailDisplay = document.getElementById('user-display-email');
-      
-      const allowedEmails = [
-        "rangeshmishra9@gmail.com",
-        "mahmiasubham@gmail.com",
-        "afterhoursautomation714@gmail.com"
-      ];
 
-      if (!sessionData.authenticated || !allowedEmails.includes((sessionData.email || '').toLowerCase().trim())) {
-        alert("Access Denied. Unauthorized session.");
+      // Verify JWT authentication existence
+      if (!sessionData.authenticated || !token) {
+        alert("Access Denied. Please log in.");
         localStorage.removeItem('afterhours_session');
+        localStorage.removeItem('token');
+        localStorage.removeItem('userEmail');
         window.location.href = 'index.html';
         return;
       }
