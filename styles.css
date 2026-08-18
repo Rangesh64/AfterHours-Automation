@@ -2388,7 +2388,14 @@ footer {
 }
 .footer-link-highlight { color: var(--cyan-accent); text-decoration: none; font-weight: 600; transition: color 0.3s; }
 .footer-link-highlight:hover { color: #ffffff; text-decoration: underline; }
-
+/* DESKTOP AUTO-SCALE NORMALIZER */
+@media screen and (min-width: 1024px) {
+  body {
+    zoom: 0.88;
+    -moz-transform: scale(0.88);
+    -moz-transform-origin: top center;
+  }
+}
 /* DEDICATED EXTREME-MOBILE SCALING */
 @media (max-width: 900px) {
   * { cursor: auto !important; }
