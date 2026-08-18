@@ -2391,83 +2391,68 @@ footer {
 /* DESKTOP AUTO-SCALE NORMALIZER */
 /* DESKTOP VIEWPORT AUTO-FIT (Fixes vertical clipping on 125%/150% scaled displays) */
 /* DESKTOP VIEWPORT CLEAN ALIGNMENT */
-@media screen and (min-width: 1024px) {
+/* ==========================================================================
+   DESKTOP RESOLUTION & FIT NORMALIZER (Universal Laptop Fit)
+   ========================================================================== */
+@media screen and (min-width: 901px) {
   .hero {
-    min-height: 100vh;
-    padding: 75px 8% 30px 8% !important;
+    min-height: calc(100vh - 70px);
+    height: auto;
+    padding-top: 110px !important;
+    padding-bottom: 60px !important;
+    padding-left: 8% !important;
+    padding-right: 8% !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: flex-start !important;
-    align-items: flex-start !important;
-    position: relative !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
   }
 
   .hero-content {
-    max-width: 720px;
+    max-width: 760px !important;
     margin-top: 0 !important;
   }
 
   .hero-badge {
-    margin-top: 4px !important;
-    margin-bottom: 8px !important;
+    margin-top: 0 !important;
+    margin-bottom: 14px !important;
+    display: inline-flex !important;
+    font-size: 0.85rem !important;
+    padding: 6px 18px !important;
   }
 
   .time-banner {
-    margin-bottom: 12px !important;
+    margin-bottom: 18px !important;
+    display: inline-flex !important;
+    font-size: 0.85rem !important;
+    padding: 8px 20px !important;
   }
 
   h1 {
-    font-size: 3.4rem !important;
-    line-height: 1.08 !important;
-    margin-bottom: 12px !important;
+    font-size: clamp(2.9rem, 3.6vw, 4.2rem) !important;
+    line-height: 1.12 !important;
+    margin-bottom: 18px !important;
+    letter-spacing: -1.5px !important;
   }
 
   .hero-subtext {
-    font-size: 1rem !important;
-    line-height: 1.45 !important;
-    margin-bottom: 18px !important;
+    font-size: clamp(1.0rem, 1.1vw, 1.18rem) !important;
+    line-height: 1.55 !important;
+    margin-bottom: 26px !important;
+    color: #f1f5f9 !important;
   }
 
   .hero-actions {
-    display: flex;
-    gap: 12px;
-  }
-}
-
-/* OLDER / SHORT-HEIGHT LAPTOP RESOLUTION FIX */
-@media screen and (min-width: 1024px) and (max-height: 820px) {
-  .hero {
-    padding: 70px 8% 20px 8% !important;
-  }
-
-  .hero-badge {
-    margin-top: 2px !important;
-    margin-bottom: 6px !important;
-    padding: 4px 12px !important;
-    font-size: 0.75rem !important;
-  }
-
-  .time-banner {
-    margin-bottom: 8px !important;
-    padding: 5px 12px !important;
-    font-size: 0.75rem !important;
-  }
-
-  h1 {
-    font-size: 2.6rem !important;
-    line-height: 1.06 !important;
-    margin-bottom: 8px !important;
-  }
-
-  .hero-subtext {
-    font-size: 0.88rem !important;
-    line-height: 1.38 !important;
-    margin-bottom: 14px !important;
+    display: flex !important;
+    gap: 16px !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    margin-bottom: 10px !important;
   }
 
   .hero-actions .btn {
-    padding: 9px 20px !important;
-    font-size: 0.82rem !important;
+    padding: 13px 28px !important;
+    font-size: 0.92rem !important;
   }
 }
 /* DEDICATED EXTREME-MOBILE SCALING */
