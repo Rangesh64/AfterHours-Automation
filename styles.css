@@ -2390,54 +2390,84 @@ footer {
 .footer-link-highlight:hover { color: #ffffff; text-decoration: underline; }
 /* DESKTOP AUTO-SCALE NORMALIZER */
 /* DESKTOP VIEWPORT AUTO-FIT (Fixes vertical clipping on 125%/150% scaled displays) */
-/* DESKTOP VIEWPORT AUTO-FIT */
-/* DESKTOP VIEWPORT AUTO-FIT (Locks Hero to exactly 1 screen without bleeding) */
+/* DESKTOP VIEWPORT CLEAN ALIGNMENT */
 @media screen and (min-width: 1024px) {
   .hero {
-    height: 100vh !important;
-    min-height: 560px !important;
-    max-height: 100vh !important;
-    padding: 85px 8% 20px 8% !important;
+    min-height: 100vh;
+    padding: 75px 8% 30px 8% !important;
     display: flex !important;
-    align-items: center !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
     position: relative !important;
-    overflow: hidden !important;
   }
 
   .hero-content {
     max-width: 720px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    margin-top: 0 !important;
+  }
+
+  .hero-badge {
+    margin-top: 4px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .time-banner {
+    margin-bottom: 12px !important;
   }
 
   h1 {
-    font-size: clamp(2.3rem, 3.4vw, 3.8rem) !important;
-    line-height: 1.1 !important;
-    margin-bottom: clamp(10px, 1.8vh, 18px) !important;
+    font-size: 3.4rem !important;
+    line-height: 1.08 !important;
+    margin-bottom: 12px !important;
   }
 
   .hero-subtext {
-    font-size: clamp(0.88rem, 1vw, 1.05rem) !important;
+    font-size: 1rem !important;
     line-height: 1.45 !important;
-    margin-bottom: clamp(14px, 2.2vh, 26px) !important;
-  }
-
-  .hero-badge, .time-banner {
-    margin-bottom: clamp(8px, 1.4vh, 14px) !important;
-    padding: 5px 14px !important;
-    font-size: 0.8rem !important;
+    margin-bottom: 18px !important;
   }
 
   .hero-actions {
     display: flex;
     gap: 12px;
-    align-items: center;
+  }
+}
+
+/* OLDER / SHORT-HEIGHT LAPTOP RESOLUTION FIX */
+@media screen and (min-width: 1024px) and (max-height: 820px) {
+  .hero {
+    padding: 70px 8% 20px 8% !important;
+  }
+
+  .hero-badge {
+    margin-top: 2px !important;
+    margin-bottom: 6px !important;
+    padding: 4px 12px !important;
+    font-size: 0.75rem !important;
+  }
+
+  .time-banner {
+    margin-bottom: 8px !important;
+    padding: 5px 12px !important;
+    font-size: 0.75rem !important;
+  }
+
+  h1 {
+    font-size: 2.6rem !important;
+    line-height: 1.06 !important;
+    margin-bottom: 8px !important;
+  }
+
+  .hero-subtext {
+    font-size: 0.88rem !important;
+    line-height: 1.38 !important;
+    margin-bottom: 14px !important;
   }
 
   .hero-actions .btn {
-    padding: 10px 22px !important;
-    font-size: 0.85rem !important;
+    padding: 9px 20px !important;
+    font-size: 0.82rem !important;
   }
 }
 /* DEDICATED EXTREME-MOBILE SCALING */
