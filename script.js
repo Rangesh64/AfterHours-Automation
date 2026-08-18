@@ -1646,7 +1646,53 @@ async function initLiveDashboard() {
         }
       }
 
-      // 6. Activity Feed Preview
+      // 6. Dynamic Google Sheets Rendering
+      if (data.sheets) {
+        // Tab 2: Voice AI Call Intercept Logs
+        const voiceTbody = document.getElementById('voice-logs-tbody');
+        if (voiceTbody && Array.isArray(data.sheets.voice) && data.sheets.voice.length > 1) {
+          const rows = data.sheets.voice.slice(1);
+          voiceTbody.innerHTML = rows.map(r => `
+            <tr>
+              <td><strong>${r[0] || '+1 (555) 000-0000'}</strong></td>
+              <td>${r[1] || '1m 00s'}</td>
+              <td>${r[2] || 'Call summary intake logged'}</td>
+              <td>${r[3] || 'Recently'}</td>
+              <td><span class="status-pill state-secured-luxury">${r[4] || 'COMPLETED'}</span></td>
+            </tr>
+          `).join('');
+        }
+
+        // Tab 3: WhatsApp Interactive Dispatch Logs
+        const waTbody = document.getElementById('whatsapp-logs-tbody');
+        if (waTbody && Array.isArray(data.sheets.whatsapp) && data.sheets.whatsapp.length > 1) {
+          const rows = data.sheets.whatsapp.slice(1);
+          waTbody.innerHTML = rows.map(r => `
+            <tr>
+              <td><strong>${r[0] || '+1 (555) 000-0000'}</strong></td>
+              <td>${r[1] || 'Booking Confirmation & Location Pin'}</td>
+              <td>${r[2] || 'Just now'}</td>
+              <td>${r[3] || 'Recently'}</td>
+            </tr>
+          `).join('');
+        }
+
+        // Tab 4: Automated Email Sequence Logs
+        const emailTbody = document.getElementById('email-logs-tbody');
+        if (emailTbody && Array.isArray(data.sheets.email) && data.sheets.email.length > 1) {
+          const rows = data.sheets.email.slice(1);
+          emailTbody.innerHTML = rows.map(r => `
+            <tr>
+              <td><strong>${r[0] || 'lead@domain.com'}</strong></td>
+              <td>${r[1] || 'Appointment Booking Confirmation'}</td>
+              <td><span class="status-pill state-secured-luxury">${r[2] || 'Confirmation Mail'}</span></td>
+              <td>${r[3] || 'Just now'}</td>
+            </tr>
+          `).join('');
+        }
+      }
+
+      // 7. Activity Feed Preview
       const feed = document.getElementById('activity-feed') || document.querySelector('.activity-log, .feed-container, .luxury-card-feed');
       if (feed && interceptsList.length > 0) {
         feed.innerHTML = interceptsList.map(log => `
