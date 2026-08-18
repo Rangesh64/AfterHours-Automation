@@ -222,7 +222,7 @@
                   <th>Call Status</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="voice-logs-tbody">
                 <tr>
                   <td><strong>+1 (555) 234-8901</strong></td>
                   <td>1m 42s</td>
@@ -270,7 +270,7 @@
                   <th>Last Message Time</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="whatsapp-logs-tbody">
                 <tr>
                   <td><strong>+1 (555) 234-8901</strong></td>
                   <td>"Appointment Booking Confirmation & Location Pin"</td>
@@ -315,7 +315,7 @@
                   <th>Time Dispatched</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="email-logs-tbody">
                 <tr>
                   <td><strong>sarah.connor@domain.com</strong></td>
                   <td>Your Emergency Repair Ticket & Technician Dispatch</td>
@@ -449,7 +449,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-     const sessionData = JSON.parse(localStorage.getItem('afterhours_session') || '{}');
+      const sessionData = JSON.parse(localStorage.getItem('afterhours_session') || '{}');
       const token = localStorage.getItem('token') || sessionData.token;
       const emailDisplay = document.getElementById('user-display-email');
 
