@@ -20,14 +20,6 @@ const currencyRates = { USD: 1, EUR: 0.92, INR: 83.5 };
 
 const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth < 768;
 
-// Authorized Executive Emails & Temporary Authentication
-const AUTHORIZED_EMAILS = [
-  "rangeshmishra9@gmail.com",
-  "mahmiasubham@gmail.com",
-  "afterhoursautomation714@gmail.com"
-];
-const TEMP_PORTAL_PASSWORD = "after hours 2026";
-
 // Desktop Smart Mailto Handler (Gmail Web Compose Fallback for Desktop)
 function initMailtoFallback() {
   const mailtoLinks = document.querySelectorAll('a[href^="mailto:"]');
@@ -1375,7 +1367,7 @@ function initLoginModal() {
         submitBtn.disabled = true;
       }
 
-      // 1. Live Render Backend API
+      // Live Render Backend API Authentication
       try {
         const baseUrl = (typeof API_CONFIG !== 'undefined' && API_CONFIG.BASE_URL) 
           ? API_CONFIG.BASE_URL 
@@ -1388,47 +1380,38 @@ function initLoginModal() {
         });
 
         const data = await res.json();
+        const realToken = data.token || data.session?.token || data.access_token;
 
-        if (res.ok && (data.token || data.session?.token)) {
-          const realToken = data.token || data.session.token;
+        if (res.ok && realToken) {
+          const userEmail = data.user?.email || data.email || emailVal;
 
           localStorage.setItem('token', realToken);
-          localStorage.setItem('userEmail', emailVal);
+          localStorage.setItem('userEmail', userEmail);
           localStorage.setItem('afterhours_session', JSON.stringify({
-            email: emailVal,
+            email: userEmail,
             authenticated: true,
             token: realToken
           }));
 
           window.location.href = 'dashboard.html';
           return;
+        } else {
+          if (errorMsg) {
+            errorMsg.textContent = data.message || data.error || "Login Error: Invalid credentials.";
+            errorMsg.classList.remove('hidden');
+          }
         }
       } catch (err) {
-        console.warn('[AUTH] Live API login error:', err.message);
-      }
-
-      // 2. Whitelisted Authorized Fallback
-      if (AUTHORIZED_EMAILS.includes(emailVal) && passwordVal === TEMP_PORTAL_PASSWORD) {
-        localStorage.setItem('token', '4f71586a-3099-4c02-ab9f-2e917e64563c');
-        localStorage.setItem('userEmail', emailVal);
-        localStorage.setItem('afterhours_session', JSON.stringify({
-          email: emailVal,
-          authenticated: true,
-          token: '4f71586a-3099-4c02-ab9f-2e917e64563c'
-        }));
-
-        window.location.href = 'dashboard.html';
-        return;
-      }
-
-      // 3. Error Handling
-      if (errorMsg) {
-        errorMsg.textContent = "Login Error: Invalid authorized email or password.";
-        errorMsg.classList.remove('hidden');
-      }
-      if (submitBtn) {
-        submitBtn.textContent = 'Login';
-        submitBtn.disabled = false;
+        console.error('[AUTH ERROR]', err);
+        if (errorMsg) {
+          errorMsg.textContent = "Unable to connect to authentication server. Please try again.";
+          errorMsg.classList.remove('hidden');
+        }
+      } finally {
+        if (submitBtn) {
+          submitBtn.textContent = 'Authenticate & Launch';
+          submitBtn.disabled = false;
+        }
       }
     });
   }
