@@ -2288,6 +2288,84 @@ input[type=range] {
 .integ-info strong { display: block; font-size: 0.9rem; }
 .integ-info span { font-size: 0.78rem; color: #7a5c43; }
 
+/* 3D CONTINUOUS FLIPPING COIN & AH CREDIT WIDGET STYLING (DESKTOP) */
+.credit-balance-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 254, 250, 0.98) 0%, rgba(248, 244, 236, 0.95) 100%);
+  border: 1.5px solid rgba(197, 155, 39, 0.35) !important;
+  box-shadow: 0 10px 30px rgba(140, 83, 25, 0.08) !important;
+}
+
+.luxury-coin-badge-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(140, 83, 25, 0.06);
+  border: 1px solid rgba(140, 83, 25, 0.2);
+  padding: 6px 16px;
+  border-radius: 24px;
+}
+
+/* 3D Coin Flip Scene */
+.ah-coin-scene {
+  width: 32px;
+  height: 32px;
+  perspective: 600px;
+  display: inline-block;
+}
+
+.ah-coin {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: continuousCoinFlip 3.2s linear infinite;
+}
+
+@keyframes continuousCoinFlip {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+.coin-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #fdfbf7 55%, #ecdcc8 100%);
+  color: #8c5319;
+  border: 1.8px solid #c59b27;
+  box-shadow: 0 0 10px rgba(197, 155, 39, 0.4), inset 0 0 4px rgba(140, 83, 25, 0.25);
+}
+
+.coin-front {
+  transform: rotateY(0deg);
+}
+
+.coin-back {
+  transform: rotateY(180deg);
+}
+
+.credit-badge-text {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #21150c;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.credit-badge-text span {
+  color: #8c5319;
+}
+
 /* FOOTER */
 footer { 
   text-align: center; 
@@ -2311,7 +2389,7 @@ footer {
 .footer-link-highlight { color: var(--cyan-accent); text-decoration: none; font-weight: 600; transition: color 0.3s; }
 .footer-link-highlight:hover { color: #ffffff; text-decoration: underline; }
 
-/* DEDICATED EXTREME-MOBILE SCALING (PRESERVES DESKTOP COMPLETELY) */
+/* DEDICATED EXTREME-MOBILE SCALING */
 @media (max-width: 900px) {
   * { cursor: auto !important; }
   .cursor-dot, .cursor-ring { display: none; }
@@ -2390,8 +2468,8 @@ footer {
   .hero-subtext { 
     font-size: 0.75rem !important; 
     margin-bottom: 16px !important; 
-    color: #ffffff !important;
-    font-weight: 500 !important;
+    color: #ffffff !important; 
+    font-weight: 500 !important; 
     text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
   }
   
@@ -2407,7 +2485,7 @@ footer {
   .section-header h2 { font-size: 1.1rem !important; margin-bottom: 6px !important; line-height: 1.2 !important; }
   .section-header p { 
     font-size: 0.65rem !important; 
-    color: #f1f5f9 !important;
+    color: #f1f5f9 !important; 
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
   }
 
@@ -2500,10 +2578,6 @@ footer {
   .dashboard-shell { padding: 12px !important; }
   .dash-panel { padding: 10px !important; border-radius: 10px !important; }
   .dash-panel h4 { font-size: 0.65rem !important; margin-bottom: 8px !important; }
-  .dash-metrics { grid-template-columns: repeat(2, 1fr) !important; gap: 6px !important; margin-bottom: 12px !important; }
-  .metric-card { padding: 8px !important; border-radius: 8px !important; }
-  .m-label { font-size: 0.5rem !important; margin-bottom: 2px !important;}
-  .m-value { font-size: 0.9rem !important; }
   
   .dash-main-split { display: flex !important; flex-direction: column !important; gap: 10px !important; }
   .activity-feed .feed-row { font-size: 0.55rem !important; padding: 4px !important; }
@@ -2570,28 +2644,71 @@ footer {
   }
   
   .luxury-dash-nav { 
-    padding: 14px 4% !important; 
+    padding: 10px 4% !important; 
     flex-direction: column !important; 
     align-items: flex-start !important; 
     justify-content: center !important; 
-    gap: 12px !important; 
+    gap: 8px !important; 
   }
+
+  /* MOBILE CONTROLS HEADER BAR & SIGN OUT VISIBILITY FIX */
   .dash-user-controls { 
     display: flex !important; 
     flex-direction: row !important; 
+    flex-wrap: nowrap !important;
     width: 100% !important; 
-    justify-content: flex-start !important; 
-    gap: 12px !important; 
+    justify-content: space-between !important; 
+    gap: 4px !important; 
     align-items: center !important; 
   }
-  .luxury-session-badge { 
-    padding: 6px 10px !important; 
-    font-size: 0.6rem !important; 
+
+  .luxury-coin-badge-container {
+    padding: 3px 6px !important;
+    gap: 4px !important;
+    border-radius: 12px !important;
+    flex-shrink: 0 !important;
   }
+
+  .ah-coin-scene {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .coin-face {
+    font-size: 0.55rem !important;
+    border-width: 1px !important;
+  }
+
+  .credit-badge-text {
+    font-size: 0.6rem !important;
+    gap: 2px !important;
+  }
+
+  .luxury-session-badge { 
+    padding: 3px 6px !important; 
+    font-size: 0.55rem !important; 
+    max-width: 120px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    flex-shrink: 1 !important;
+  }
+
+  .luxury-email {
+    display: inline-block !important;
+    max-width: 90px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    vertical-align: middle !important;
+  }
+
   .btn-luxury-outline { 
-    padding: 6px 12px !important; 
-    font-size: 0.6rem !important; 
+    padding: 3px 8px !important; 
+    font-size: 0.55rem !important; 
     width: auto !important; 
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
   }
 
   .luxury-sidebar { 
@@ -2626,8 +2743,41 @@ footer {
   .luxury-tag { font-size: 0.55rem !important; display: block !important; margin-bottom: 4px !important; }
   .status-chip-luxury { font-size: 0.55rem !important; padding: 4px 10px !important; }
   
-  .luxury-card { padding: 12px !important; border-radius: 10px !important; }
-  .m-sub { font-size: 0.55rem !important; }
+  /* MOBILE METRICS 2-COLUMN BALANCED TILES */
+  .dash-metrics { 
+    grid-template-columns: repeat(2, 1fr) !important; 
+    gap: 6px !important; 
+    margin-bottom: 12px !important; 
+  }
+
+  .metric-card { 
+    padding: 8px !important; 
+    border-radius: 8px !important; 
+  }
+  .metric-card .m-label { 
+    font-size: 0.5rem !important; 
+    line-height: 1.2 !important;
+    margin-bottom: 2px !important;
+  }
+  .metric-card .m-value { 
+    font-size: 0.9rem !important; 
+    line-height: 1.2 !important;
+    margin-bottom: 2px !important;
+  }
+  .metric-card .m-sub { 
+    font-size: 0.48rem !important; 
+    line-height: 1.2 !important;
+    display: block !important;
+  }
+
+  .credit-balance-card .ah-coin-scene {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  .credit-balance-card .coin-face {
+    font-size: 0.5rem !important;
+  }
   
   .luxury-panel { padding: 14px !important; border-radius: 12px !important; margin-bottom: 16px !important; }
   
@@ -2705,87 +2855,6 @@ footer {
     bottom: 58px !important;
     right: 0 !important;
   }
-}
-/* ==========================================================================
-   3D CONTINUOUS FLIPPING COIN & AH CREDIT WIDGET STYLING
-   ========================================================================== */
-
-.credit-balance-card {
-  position: relative;
-  background: linear-gradient(135deg, rgba(255, 254, 250, 0.98) 0%, rgba(248, 244, 236, 0.95) 100%);
-  border: 1.5px solid rgba(197, 155, 39, 0.35) !important;
-  box-shadow: 0 10px 30px rgba(140, 83, 25, 0.08) !important;
-}
-
-.luxury-coin-badge-container {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(140, 83, 25, 0.06);
-  border: 1px solid rgba(140, 83, 25, 0.2);
-  padding: 6px 16px;
-  border-radius: 24px;
-}
-
-/* 3D Coin Flip Scene */
-.ah-coin-scene {
-  width: 32px;
-  height: 32px;
-  perspective: 600px;
-  display: inline-block;
-}
-
-.ah-coin {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  animation: continuousCoinFlip 3.2s linear infinite;
-}
-
-@keyframes continuousCoinFlip {
-  0% { transform: rotateY(0deg); }
-  100% { transform: rotateY(360deg); }
-}
-
-.coin-face {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  backface-visibility: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  font-size: 1.05rem;
-  /* Whitish base face with brownish rim and warm metallic highlight */
-  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #fdfbf7 55%, #ecdcc8 100%);
-  color: #8c5319;
-  border: 1.8px solid #c59b27;
-  box-shadow: 0 0 10px rgba(197, 155, 39, 0.4), inset 0 0 4px rgba(140, 83, 25, 0.25);
-}
-
-.coin-front {
-  transform: rotateY(0deg);
-}
-
-.coin-back {
-  transform: rotateY(180deg);
-}
-
-.credit-badge-text {
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: #21150c;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.credit-badge-text span {
-  color: #8c5319;
 }
 
 @media prefers-reduced-motion: reduce {
