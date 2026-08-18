@@ -2388,62 +2388,18 @@ footer {
 }
 .footer-link-highlight { color: var(--cyan-accent); text-decoration: none; font-weight: 600; transition: color 0.3s; }
 .footer-link-highlight:hover { color: #ffffff; text-decoration: underline; }
-/* DESKTOP AUTO-SCALE NORMALIZER */
-/* DESKTOP VIEWPORT AUTO-FIT (Fixes vertical clipping on 125%/150% scaled displays) */
-/* DESKTOP VIEWPORT CLEAN ALIGNMENT */
+
 /* ==========================================================================
-   DESKTOP VIEWPORT HEIGHT FIT (Maintains Original Left Layout & Right 3D Knot)
+   OLDER SCREEN RESOLUTION ADAPTER (Applies ONLY to smaller/older laptop displays)
    ========================================================================== */
-@media screen and (min-width: 901px) {
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 120px 8% 80px 8%;
-    position: relative;
-    z-index: 2;
-    background: transparent;
-  }
-
-  .hero-content {
-    max-width: 720px;
-    text-align: left;
+@media screen and (min-width: 901px) and (max-width: 1400px), screen and (min-width: 901px) and (max-height: 800px) {
+  body {
+    zoom: 0.85;
+    -moz-transform: scale(0.85);
+    -moz-transform-origin: top center;
   }
 }
 
-/* Specific Height Normalizer for 768p Screens & 125% Windows Scale */
-@media screen and (min-width: 901px) and (max-height: 850px) {
-  .hero {
-    min-height: 100vh;
-    padding: 100px 8% 60px 8% !important;
-  }
-
-  .hero-badge {
-    margin-bottom: 12px !important;
-  }
-
-  .time-banner {
-    margin-bottom: 14px !important;
-  }
-
-  h1 {
-    font-size: 3.4rem !important;
-    line-height: 1.08 !important;
-    margin-bottom: 14px !important;
-  }
-
-  .hero-subtext {
-    font-size: 1.02rem !important;
-    line-height: 1.5 !important;
-    margin-bottom: 20px !important;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 16px;
-    flex-wrap: nowrap;
-  }
-}
 /* DEDICATED EXTREME-MOBILE SCALING */
 @media (max-width: 900px) {
   * { cursor: auto !important; }
@@ -2710,7 +2666,7 @@ footer {
   .dash-user-controls { 
     display: flex !important; 
     flex-direction: row !important; 
-    flex-wrap: nowrap !important;
+    flex-wrap: nowrap !important; 
     width: 100% !important; 
     justify-content: space-between !important; 
     gap: 4px !important; 
@@ -2742,28 +2698,28 @@ footer {
   .luxury-session-badge { 
     padding: 3px 6px !important; 
     font-size: 0.55rem !important; 
-    max-width: 120px !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    white-space: nowrap !important;
-    flex-shrink: 1 !important;
+    max-width: 120px !important; 
+    overflow: hidden !important; 
+    text-overflow: ellipsis !important; 
+    white-space: nowrap !important; 
+    flex-shrink: 1 !important; 
   }
 
   .luxury-email {
-    display: inline-block !important;
-    max-width: 90px !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    white-space: nowrap !important;
-    vertical-align: middle !important;
+    display: inline-block !important; 
+    max-width: 90px !important; 
+    overflow: hidden !important; 
+    text-overflow: ellipsis !important; 
+    white-space: nowrap !important; 
+    vertical-align: middle !important; 
   }
 
   .btn-luxury-outline { 
     padding: 3px 8px !important; 
     font-size: 0.55rem !important; 
     width: auto !important; 
-    flex-shrink: 0 !important;
-    white-space: nowrap !important;
+    flex-shrink: 0 !important; 
+    white-space: nowrap !important; 
   }
 
   .luxury-sidebar { 
@@ -2811,27 +2767,27 @@ footer {
   }
   .metric-card .m-label { 
     font-size: 0.5rem !important; 
-    line-height: 1.2 !important;
-    margin-bottom: 2px !important;
+    line-height: 1.2 !important; 
+    margin-bottom: 2px !important; 
   }
   .metric-card .m-value { 
     font-size: 0.9rem !important; 
-    line-height: 1.2 !important;
-    margin-bottom: 2px !important;
+    line-height: 1.2 !important; 
+    margin-bottom: 2px !important; 
   }
   .metric-card .m-sub { 
     font-size: 0.48rem !important; 
-    line-height: 1.2 !important;
-    display: block !important;
+    line-height: 1.2 !important; 
+    display: block !important; 
   }
 
   .credit-balance-card .ah-coin-scene {
-    width: 14px !important;
-    height: 14px !important;
+    width: 14px !important; 
+    height: 14px !important; 
   }
 
   .credit-balance-card .coin-face {
-    font-size: 0.5rem !important;
+    font-size: 0.5rem !important; 
   }
   
   .luxury-panel { padding: 14px !important; border-radius: 12px !important; margin-bottom: 16px !important; }
