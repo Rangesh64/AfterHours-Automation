@@ -2857,9 +2857,10 @@ footer {
     right: 0 !important;
   }
 }
-/* --- 3D Monogram Logo Exact Navbar Fit --- */
-/* --- Seamless 3D Monogram Integration --- */
-.logo-3d-raw {
+/* =========================================================
+   1. MAIN WEBSITE LOGO & NAVBAR (index.html ONLY)
+   ========================================================= */
+body:not(.luxury-theme) .logo-3d-raw {
   width: 44px;
   height: 44px;
   min-width: 44px;
@@ -2868,56 +2869,95 @@ footer {
   display: inline-block;
   vertical-align: middle;
   flex-shrink: 0;
-
-  /* 1. Blend Mode to discard black */
   mix-blend-mode: screen;
-
-  /* 2. Color clamp: Crushes dark compression artifacts to pure black, removing all boundary edges */
   filter: contrast(135%) brightness(110%);
-
-  /* 3. Smooth transition without a localized jump */
   transition: transform 0.3s ease;
   pointer-events: auto;
   user-select: none;
 }
 
-/* Remove isolated box glow on logo hover */
-.logo:hover .logo-3d-raw {
+body:not(.luxury-theme) .logo:hover .logo-3d-raw {
   transform: scale(1.04);
 }
 
-.logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-}
-
-/* --- Apply dark navbar styling ONLY to main site --- */
-body:not(.luxury-theme) .navbar:not(.luxury-dash-nav) {
+body:not(.luxury-theme) .navbar {
   background: rgba(2, 4, 10, 0.85);
   border-bottom: 1px solid rgba(0, 240, 255, 0.12);
   backdrop-filter: blur(16px);
   transition: border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-body:not(.luxury-theme) .navbar:not(.luxury-dash-nav):hover {
+body:not(.luxury-theme) .navbar:hover {
   border-bottom: 1px solid rgba(0, 240, 255, 0.4);
   box-shadow: 0 4px 30px rgba(0, 240, 255, 0.18), inset 0 -1px 0 rgba(0, 240, 255, 0.2);
 }
 
-/* Explicit fallback restore for the luxury dashboard navbar */
-.luxury-dash-nav {
-  background: #ffffff !important;
-  border-bottom: 1px solid #e2d9cc !important;
-  box-shadow: 0 4px 20px rgba(140, 83, 25, 0.05) !important;
+/* =========================================================
+   2. EXECUTIVE DASHBOARD 100% ORIGINAL RESTORATION (dashboard.html)
+   ========================================================= */
+.luxury-theme,
+body.luxury-theme {
+  background-color: #fdfbf7 !important;
+  color: #2b1d0c !important;
 }
+
+/* Restores exact warm marble background, height, and gold-brown border */
+.luxury-dash-nav,
+body.luxury-theme .navbar {
+  background: rgba(253, 251, 247, 0.92) !important;
+  background-color: #fdfbf7 !important;
+  border-bottom: 1px solid #e8dfd3 !important;
+  box-shadow: 0 4px 20px rgba(140, 83, 25, 0.05) !important;
+  backdrop-filter: blur(12px) !important;
+  height: 68px !important;
+  min-height: 68px !important;
+  max-height: 68px !important;
+  padding: 0 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+/* Restores visibility to Executive title and text */
+body.luxury-theme .logo-text,
+body.luxury-theme .brand-title,
+body.luxury-theme .nav-brand,
+.luxury-dash-nav .logo {
+  color: #2b1d0c !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+body.luxury-theme .logo-text span,
+body.luxury-theme .brand-subtitle {
+  color: #8c5319 !important;
+  font-weight: 600 !important;
+}
+
+/* Restores original gold knot SVG in dashboard navbar */
+body.luxury-theme .logo-knot-svg {
+  width: 40px !important;
+  height: 40px !important;
+  flex-shrink: 0 !important;
+  display: block !important;
+}
+
+/* =========================================================
+   3. MOBILE RESPONSIVE
+   ========================================================= */
 @media (max-width: 900px) {
-  .logo-3d-raw {
+  body:not(.luxury-theme) .logo-3d-raw {
     width: 34px;
     height: 34px;
     min-width: 34px;
     min-height: 34px;
+  }
+  .luxury-dash-nav,
+  body.luxury-theme .navbar {
+    height: 60px !important;
+    min-height: 60px !important;
+    padding: 0 16px !important;
   }
 }
 @media prefers-reduced-motion: reduce {
