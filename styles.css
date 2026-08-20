@@ -2867,7 +2867,7 @@ footer {
     right: 0 !important;
   }
 }
-/* Isolated 3D Logo for index.html (Seamless Blending & Glow) */
+/* --- 3D PNG Logo for index.html --- */
 .logo-3d-raw {
   width: 44px;
   height: 44px;
@@ -2877,36 +2877,25 @@ footer {
   display: inline-block;
   vertical-align: middle;
   flex-shrink: 0;
-
-  /* 1. Complete Black Knockout */
-  mix-blend-mode: screen;
-
-  /* 2. Enhanced contrast clamp to eliminate compression gray borders */
-  filter: contrast(160%) brightness(100%) drop-shadow(0 0 12px rgba(0, 240, 255, 0.65));
-
-  /* 3. Perimeter feather to remove any hard rectangular image boundary */
-  -webkit-mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
-  mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
-
+  filter: drop-shadow(0 0 14px rgba(0, 240, 255, 0.6));
   transition: transform 0.3s ease, filter 0.3s ease;
   pointer-events: auto;
   user-select: none;
 }
 
-/* Subtle Interactive Glow Expansion on Hover */
 .logo:hover .logo-3d-raw {
   transform: scale(1.05);
-  filter: contrast(160%) brightness(105%) drop-shadow(0 0 20px rgba(0, 240, 255, 0.95));
+  filter: drop-shadow(0 0 22px rgba(0, 240, 255, 0.95));
 }
 
-/* Scaling for smaller screens, tablets, and mobile displays */
+/* Responsive scaling for mobile and smaller screens */
 @media (max-width: 900px) {
   .logo-3d-raw {
     width: 34px;
     height: 34px;
     min-width: 34px;
     min-height: 34px;
-    filter: contrast(160%) brightness(100%) drop-shadow(0 0 8px rgba(0, 240, 255, 0.55));
+    filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.5));
   }
 }
 @media prefers-reduced-motion: reduce {
