@@ -1,4 +1,3 @@
-
 :root {
   --bg-dark: #02040a;
   --card-bg: rgba(8, 15, 32, 0.75);
@@ -211,6 +210,17 @@ body {
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
+}
+
+.logo-knot-svg {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logo:hover .logo-knot-svg {
+  transform: rotate(180deg) scale(1.1);
 }
 
 .nav-links {
@@ -2857,10 +2867,8 @@ footer {
     right: 0 !important;
   }
 }
-/* =========================================================
-   1. MAIN WEBSITE LOGO & NAVBAR (index.html ONLY)
-   ========================================================= */
-body:not(.luxury-theme) .logo-3d-raw {
+/* Isolated 3D Logo for index.html (Responsive for all screen sizes) */
+.logo-3d-raw {
   width: 44px;
   height: 44px;
   min-width: 44px;
@@ -2876,88 +2884,13 @@ body:not(.luxury-theme) .logo-3d-raw {
   user-select: none;
 }
 
-body:not(.luxury-theme) .logo:hover .logo-3d-raw {
-  transform: scale(1.04);
-}
-
-body:not(.luxury-theme) .navbar {
-  background: rgba(2, 4, 10, 0.85);
-  border-bottom: 1px solid rgba(0, 240, 255, 0.12);
-  backdrop-filter: blur(16px);
-  transition: border-color 0.4s ease, box-shadow 0.4s ease;
-}
-
-body:not(.luxury-theme) .navbar:hover {
-  border-bottom: 1px solid rgba(0, 240, 255, 0.4);
-  box-shadow: 0 4px 30px rgba(0, 240, 255, 0.18), inset 0 -1px 0 rgba(0, 240, 255, 0.2);
-}
-
-/* =========================================================
-   2. EXECUTIVE DASHBOARD 100% ORIGINAL RESTORATION (dashboard.html)
-   ========================================================= */
-.luxury-theme,
-body.luxury-theme {
-  background-color: #fdfbf7 !important;
-  color: #2b1d0c !important;
-}
-
-/* Restores exact warm marble background, height, and gold-brown border */
-.luxury-dash-nav,
-body.luxury-theme .navbar {
-  background: rgba(253, 251, 247, 0.92) !important;
-  background-color: #fdfbf7 !important;
-  border-bottom: 1px solid #e8dfd3 !important;
-  box-shadow: 0 4px 20px rgba(140, 83, 25, 0.05) !important;
-  backdrop-filter: blur(12px) !important;
-  height: 68px !important;
-  min-height: 68px !important;
-  max-height: 68px !important;
-  padding: 0 32px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-}
-
-/* Restores visibility to Executive title and text */
-body.luxury-theme .logo-text,
-body.luxury-theme .brand-title,
-body.luxury-theme .nav-brand,
-.luxury-dash-nav .logo {
-  color: #2b1d0c !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 12px !important;
-}
-
-body.luxury-theme .logo-text span,
-body.luxury-theme .brand-subtitle {
-  color: #8c5319 !important;
-  font-weight: 600 !important;
-}
-
-/* Restores original gold knot SVG in dashboard navbar */
-body.luxury-theme .logo-knot-svg {
-  width: 40px !important;
-  height: 40px !important;
-  flex-shrink: 0 !important;
-  display: block !important;
-}
-
-/* =========================================================
-   3. MOBILE RESPONSIVE
-   ========================================================= */
+/* Scaling for smaller screens, tablets, and mobile displays */
 @media (max-width: 900px) {
-  body:not(.luxury-theme) .logo-3d-raw {
+  .logo-3d-raw {
     width: 34px;
     height: 34px;
     min-width: 34px;
     min-height: 34px;
-  }
-  .luxury-dash-nav,
-  body.luxury-theme .navbar {
-    height: 60px !important;
-    min-height: 60px !important;
-    padding: 0 16px !important;
   }
 }
 @media prefers-reduced-motion: reduce {
