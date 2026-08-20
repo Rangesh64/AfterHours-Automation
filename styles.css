@@ -2867,18 +2867,21 @@ footer {
     right: 0 !important;
   }
 }
-/* --- 3D Monogram Zoom Crop & Prominent Display --- */
+/* --- Refined 44px 3D Monogram with Core Bloom --- */
 .logo-crop-wrapper {
-  width: 46px;
-  height: 46px;
-  min-width: 46px;
-  min-height: 46px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   position: relative;
   flex-shrink: 0;
+
+  /* Ambient core glow directly behind the monogram */
+  background: radial-gradient(circle at center, rgba(0, 240, 255, 0.3) 0%, rgba(59, 130, 246, 0.1) 45%, transparent 75%);
 }
 
 .logo-crop-wrapper .logo-3d-raw {
@@ -2886,33 +2889,37 @@ footer {
   height: 100%;
   object-fit: contain;
 
-  /* Zooms 2.2x directly into the 3D 'ah' monogram, removing the dead border area */
-  transform: scale(2.25);
+  /* Natural crop: Fills the 44px box without spilling over */
+  transform: scale(1.8);
 
-  /* Eliminates dark background cleanly */
+  /* Transparent black knockout */
   mix-blend-mode: screen;
 
-  /* Sharp contrast boost so chrome silver and neon blue pop crisply */
-  filter: contrast(140%) brightness(125%) saturate(1.2);
+  /* High-definition chrome & neon pop */
+  filter: contrast(150%) brightness(135%) saturate(1.3);
 
   pointer-events: none;
   user-select: none;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
 }
 
-/* Hover Interaction: Expands subtly and brightens */
+/* Hover effect: Subtle illumination surge */
+.logo:hover .logo-crop-wrapper {
+  background: radial-gradient(circle at center, rgba(0, 240, 255, 0.5) 0%, rgba(59, 130, 246, 0.25) 55%, transparent 80%);
+}
+
 .logo:hover .logo-3d-raw {
-  transform: scale(2.4);
-  filter: contrast(145%) brightness(140%) saturate(1.3);
+  transform: scale(1.9);
+  filter: contrast(155%) brightness(145%) saturate(1.4);
 }
 
 /* Mobile responsive sizing */
 @media (max-width: 900px) {
   .logo-crop-wrapper {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
-    min-height: 36px;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    min-height: 34px;
   }
 }
 @media prefers-reduced-motion: reduce {
