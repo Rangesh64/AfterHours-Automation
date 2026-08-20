@@ -2867,7 +2867,7 @@ footer {
     right: 0 !important;
   }
 }
-/* --- 3D PNG Logo for index.html --- */
+/* --- 3D Logo Seamless Integration (No Square Border Glow) --- */
 .logo-3d-raw {
   width: 44px;
   height: 44px;
@@ -2877,25 +2877,32 @@ footer {
   display: inline-block;
   vertical-align: middle;
   flex-shrink: 0;
-  filter: drop-shadow(0 0 14px rgba(0, 240, 255, 0.6));
+
+  /* Knocks out the black box completely */
+  mix-blend-mode: screen;
+
+  /* Brightens the monogram cleanly without creating a square border */
+  filter: contrast(130%) brightness(120%);
+
+  /* Clean transition without outline glow */
   transition: transform 0.3s ease, filter 0.3s ease;
   pointer-events: auto;
   user-select: none;
 }
 
+/* Slight scale on hover without adding any outer edge glow */
 .logo:hover .logo-3d-raw {
   transform: scale(1.05);
-  filter: drop-shadow(0 0 22px rgba(0, 240, 255, 0.95));
+  filter: contrast(135%) brightness(130%);
 }
 
-/* Responsive scaling for mobile and smaller screens */
+/* Mobile responsive scaling */
 @media (max-width: 900px) {
   .logo-3d-raw {
     width: 34px;
     height: 34px;
     min-width: 34px;
     min-height: 34px;
-    filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.5));
   }
 }
 @media prefers-reduced-motion: reduce {
