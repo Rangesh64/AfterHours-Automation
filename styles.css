@@ -2893,21 +2893,25 @@ footer {
   text-decoration: none;
 }
 
-/* --- Entire Navbar Ambient Glow on Hover --- */
-.navbar {
-  /* Match the deep black tone of the logo */
-  background: rgba(2, 4, 10, 0.85) !important;
-  border-bottom: 1px solid rgba(0, 240, 255, 0.12) !important;
+/* --- Apply dark navbar styling ONLY to main site --- */
+body:not(.luxury-theme) .navbar:not(.luxury-dash-nav) {
+  background: rgba(2, 4, 10, 0.85);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.12);
   backdrop-filter: blur(16px);
-  transition: border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* Lights up the entire navigation bar together */
-.navbar:hover {
-  border-bottom: 1px solid rgba(0, 240, 255, 0.4) !important;
+body:not(.luxury-theme) .navbar:not(.luxury-dash-nav):hover {
+  border-bottom: 1px solid rgba(0, 240, 255, 0.4);
   box-shadow: 0 4px 30px rgba(0, 240, 255, 0.18), inset 0 -1px 0 rgba(0, 240, 255, 0.2);
 }
 
+/* Explicit fallback restore for the luxury dashboard navbar */
+.luxury-dash-nav {
+  background: #ffffff !important;
+  border-bottom: 1px solid #e2d9cc !important;
+  box-shadow: 0 4px 20px rgba(140, 83, 25, 0.05) !important;
+}
 @media (max-width: 900px) {
   .logo-3d-raw {
     width: 34px;
