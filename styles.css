@@ -212,17 +212,6 @@ body {
   flex-shrink: 0;
 }
 
-.logo-knot-svg {
-  width: 54px;
-  height: 54px;
-  flex-shrink: 0;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.logo:hover .logo-knot-svg {
-  transform: rotate(180deg) scale(1.1);
-}
-
 .nav-links {
   display: flex;
   gap: 16px;
@@ -2867,7 +2856,51 @@ footer {
     right: 0 !important;
   }
 }
+/* --- 3D Monogram Logo Exact Navbar Fit --- */
+.logo-3d-raw {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
 
+  /* Eliminates the black box completely */
+  mix-blend-mode: screen;
+
+  /* Glow that matches your theme without overflowing */
+  filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.45));
+
+  /* Smooth scaling animation */
+  transition: transform 0.3s ease, filter 0.3s ease;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.logo:hover .logo-3d-raw {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.8));
+}
+
+/* Fix navbar container alignment so text never overlaps */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+/* Mobile responsive scaling */
+@media (max-width: 900px) {
+  .logo-3d-raw {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    min-height: 34px;
+  }
+}
 @media prefers-reduced-motion: reduce {
   * { animation: none !important; transition: none !important; }
 }
