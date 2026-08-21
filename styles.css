@@ -2867,12 +2867,12 @@ footer {
     right: 0 !important;
   }
 }
-/* --- High-Definition Luminous Monogram (Zero Box / Radiant AH) --- */
+/* --- High-Impact Cyber Platinum Monogram --- */
 .logo-crop-wrapper {
-  width: 52px;
-  height: 42px;
-  min-width: 52px;
-  min-height: 42px;
+  width: 50px;
+  height: 40px;
+  min-width: 50px;
+  min-height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2881,9 +2881,9 @@ footer {
   flex-shrink: 0;
   background: transparent !important;
 
-  /* Feathered oval mask completely dissolves any outer square image edges */
-  -webkit-mask-image: radial-gradient(ellipse at center, black 60%, transparent 95%);
-  mask-image: radial-gradient(ellipse at center, black 60%, transparent 95%);
+  /* Strict boundary clip that permanently destroys any rectangular edges */
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 60%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 60%, transparent 100%);
 }
 
 .logo-crop-wrapper .logo-3d-raw {
@@ -2892,45 +2892,35 @@ footer {
   object-fit: contain;
   transform: scale(1.5);
 
-  /* Transparent black knockout */
+  /* Absolute black extraction */
   mix-blend-mode: screen;
 
   /* 
-     1. High contrast forces all background greys to absolute zero #000000.
-     2. Triple-layer neon glow locked strictly to the AH metallic letters.
+     Color-grade pipeline:
+     1. Crushes all dark compression noise directly into pitch black.
+     2. Brightens the brushed metal specular highlights.
+     3. Boosts the cyan energy core along the curves.
   */
-  filter: 
-    contrast(220%) 
-    brightness(165%) 
-    saturate(1.5)
-    drop-shadow(0 0 1px #00f0ff)
-    drop-shadow(0 0 5px rgba(0, 240, 255, 0.95))
-    drop-shadow(0 0 12px rgba(59, 130, 246, 0.85));
+  filter: contrast(240%) brightness(170%) saturate(1.8);
 
   pointer-events: none;
   user-select: none;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
 }
 
-/* Hover Interaction: Smooth Zoom + Supercharged Glow */
+/* Hover State: Sleek expansion and energy flare */
 .logo:hover .logo-3d-raw {
   transform: scale(1.62);
-  filter: 
-    contrast(230%) 
-    brightness(180%) 
-    saturate(1.6)
-    drop-shadow(0 0 2px #00f0ff)
-    drop-shadow(0 0 8px rgba(0, 240, 255, 1))
-    drop-shadow(0 0 18px rgba(0, 240, 255, 0.9));
+  filter: contrast(250%) brightness(195%) saturate(2.1);
 }
 
-/* Mobile responsive scaling */
+/* Mobile viewport refinement */
 @media (max-width: 900px) {
   .logo-crop-wrapper {
-    width: 40px;
-    height: 34px;
-    min-width: 40px;
-    min-height: 34px;
+    width: 38px;
+    height: 32px;
+    min-width: 38px;
+    min-height: 32px;
   }
 }
 @media prefers-reduced-motion: reduce {
