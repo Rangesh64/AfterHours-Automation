@@ -2867,12 +2867,12 @@ footer {
     right: 0 !important;
   }
 }
-/* --- High-Impact Cyber Platinum Monogram --- */
+/* --- High-End Wide Monogram & Soundwave Emblem --- */
 .logo-crop-wrapper {
-  width: 50px;
-  height: 40px;
-  min-width: 50px;
-  min-height: 40px;
+  width: 58px;
+  height: 38px;
+  min-width: 58px;
+  min-height: 38px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2881,46 +2881,43 @@ footer {
   flex-shrink: 0;
   background: transparent !important;
 
-  /* Strict boundary clip that permanently destroys any rectangular edges */
-  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 60%, transparent 100%);
-  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 60%, transparent 100%);
+  /* Feathered perimeter that cleanly dissolves all rectangular edges */
+  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, #000 65%, transparent 100%);
+  mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, #000 65%, transparent 100%);
 }
 
 .logo-crop-wrapper .logo-3d-raw {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transform: scale(1.5);
 
-  /* Absolute black extraction */
+  /* Natural framing: Displays both the sharp 'A' peak and sound bars */
+  transform: scale(1.22);
+
+  /* Transparent black knockout */
   mix-blend-mode: screen;
 
-  /* 
-     Color-grade pipeline:
-     1. Crushes all dark compression noise directly into pitch black.
-     2. Brightens the brushed metal specular highlights.
-     3. Boosts the cyan energy core along the curves.
-  */
-  filter: contrast(240%) brightness(170%) saturate(1.8);
+  /* Polished metallic grade: Crushes background noise and highlights cyan rim */
+  filter: contrast(220%) brightness(155%) saturate(1.4);
 
   pointer-events: none;
   user-select: none;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
 }
 
-/* Hover State: Sleek expansion and energy flare */
+/* Hover State: Subtle expansion and luminous lift */
 .logo:hover .logo-3d-raw {
-  transform: scale(1.62);
-  filter: contrast(250%) brightness(195%) saturate(2.1);
+  transform: scale(1.3);
+  filter: contrast(230%) brightness(175%) saturate(1.6);
 }
 
-/* Mobile viewport refinement */
+/* Mobile responsive scaling */
 @media (max-width: 900px) {
   .logo-crop-wrapper {
-    width: 38px;
-    height: 32px;
-    min-width: 38px;
-    min-height: 32px;
+    width: 44px;
+    height: 28px;
+    min-width: 44px;
+    min-height: 28px;
   }
 }
 @media prefers-reduced-motion: reduce {
