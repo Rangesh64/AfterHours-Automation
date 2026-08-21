@@ -2867,19 +2867,18 @@ footer {
     right: 0 !important;
   }
 }
-/* --- High-End 3D Monogram with Precision Edge Tracing --- */
+/* --- High-End Platinum & Cyan 3D 'AH' Monogram --- */
 .logo-crop-wrapper {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
+  width: 48px;
+  height: 40px;
+  min-width: 48px;
+  min-height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   position: relative;
   flex-shrink: 0;
-  /* Removed the background circle completely to eliminate all box/blob shapes */
   background: transparent !important;
 }
 
@@ -2887,45 +2886,47 @@ footer {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transform: scale(1.95);
 
-  /* Transparent black knockout */
+  /* Optimal zoom factor to frame the wide 'AH' crest completely */
+  transform: scale(1.48);
+
+  /* Knocks out the black background completely */
   mix-blend-mode: screen;
 
   /* 
-     1. High contrast/brightness knocks out all dark background noise completely.
-     2. Multi-layered drop-shadow traces ONLY the luminous 3D contours of the letters.
+     1. High contrast + brightness to bring out the brushed platinum finish.
+     2. Dual precision drop-shadow to illuminate the electric-blue neon edge accents.
   */
   filter: 
-    contrast(180%) 
-    brightness(140%) 
-    saturate(1.35)
+    contrast(170%) 
+    brightness(130%) 
+    saturate(1.2)
     drop-shadow(0 0 1px #00f0ff)
-    drop-shadow(0 0 6px rgba(0, 240, 255, 0.75));
+    drop-shadow(0 0 6px rgba(0, 240, 255, 0.65));
 
   pointer-events: none;
   user-select: none;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
 }
 
-/* Hover Interaction: Intensifies the contour rim lighting */
+/* Hover Interaction: Premium metallic glow pulse */
 .logo:hover .logo-3d-raw {
-  transform: scale(2.05);
+  transform: scale(1.58);
   filter: 
-    contrast(185%) 
-    brightness(150%) 
-    saturate(1.45)
+    contrast(175%) 
+    brightness(145%) 
+    saturate(1.3)
     drop-shadow(0 0 2px #00f0ff)
-    drop-shadow(0 0 10px rgba(0, 240, 255, 0.95));
+    drop-shadow(0 0 12px rgba(0, 240, 255, 0.9));
 }
 
-/* Mobile responsive sizing */
+/* Mobile responsive scaling */
 @media (max-width: 900px) {
   .logo-crop-wrapper {
-    width: 34px;
-    height: 34px;
-    min-width: 34px;
-    min-height: 34px;
+    width: 38px;
+    height: 32px;
+    min-width: 38px;
+    min-height: 32px;
   }
 }
 @media prefers-reduced-motion: reduce {
