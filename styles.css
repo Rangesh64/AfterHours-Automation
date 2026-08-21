@@ -2867,56 +2867,60 @@ footer {
     right: 0 !important;
   }
 }
-/* --- High-End Wide Monogram & Soundwave Emblem --- */
+/* --- High-Definition Seamless Monogram (No Black Box on Mobile) --- */
 .logo-crop-wrapper {
-  width: 58px;
-  height: 38px;
-  min-width: 58px;
-  min-height: 38px;
+  width: 54px;
+  height: 36px;
+  min-width: 54px;
+  min-height: 36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
   position: relative;
   flex-shrink: 0;
   background: transparent !important;
-
-  /* Feathered perimeter that cleanly dissolves all rectangular edges */
-  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, #000 65%, transparent 100%);
-  mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, #000 65%, transparent 100%);
+  /* Removed overflow:hidden to allow mobile GPU hardware blend-mode pass-through */
+  overflow: visible !important;
 }
 
 .logo-crop-wrapper .logo-3d-raw {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  transform: scale(1.18);
 
-  /* Natural framing: Displays both the sharp 'A' peak and sound bars */
-  transform: scale(1.22);
+  /* Force GPU rendering layer for mobile blend accuracy */
+  -webkit-transform: scale(1.18) translateZ(0);
+  transform: scale(1.18) translateZ(0);
 
-  /* Transparent black knockout */
-  mix-blend-mode: screen;
+  /* 100% black knockout across iOS, Android, and Desktop */
+  mix-blend-mode: screen !important;
+  isolation: auto !important;
 
-  /* Polished metallic grade: Crushes background noise and highlights cyan rim */
-  filter: contrast(220%) brightness(155%) saturate(1.4);
+  /* 
+     High-threshold contrast forces any dark grey compression noise 
+     directly to 0,0,0 pure black so the screen blend leaves zero edge artifacts.
+  */
+  filter: contrast(300%) brightness(140%) saturate(1.3);
 
   pointer-events: none;
   user-select: none;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
 }
 
-/* Hover State: Subtle expansion and luminous lift */
+/* Hover Interaction: Smooth lift */
 .logo:hover .logo-3d-raw {
-  transform: scale(1.3);
-  filter: contrast(230%) brightness(175%) saturate(1.6);
+  transform: scale(1.26) translateZ(0);
+  -webkit-transform: scale(1.26) translateZ(0);
+  filter: contrast(310%) brightness(160%) saturate(1.5);
 }
 
 /* Mobile responsive scaling */
 @media (max-width: 900px) {
   .logo-crop-wrapper {
-    width: 44px;
+    width: 42px;
     height: 28px;
-    min-width: 44px;
+    min-width: 42px;
     min-height: 28px;
   }
 }
