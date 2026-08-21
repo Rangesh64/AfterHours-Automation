@@ -2867,7 +2867,7 @@ footer {
     right: 0 !important;
   }
 }
-/* --- Radiant Electric Monogram (Edge-Contour Glow) --- */
+/* --- High-Definition Luminous Monogram (Zero Box / Radiant AH) --- */
 .logo-crop-wrapper {
   width: 52px;
   height: 42px;
@@ -2880,6 +2880,10 @@ footer {
   position: relative;
   flex-shrink: 0;
   background: transparent !important;
+
+  /* Feathered oval mask completely dissolves any outer square image edges */
+  -webkit-mask-image: radial-gradient(ellipse at center, black 60%, transparent 95%);
+  mask-image: radial-gradient(ellipse at center, black 60%, transparent 95%);
 }
 
 .logo-crop-wrapper .logo-3d-raw {
@@ -2892,34 +2896,32 @@ footer {
   mix-blend-mode: screen;
 
   /* 
-     Multi-layer radiant glow traced strictly to the AH letterforms:
-     1. Sharp neon-cyan laser rim along the letter contours
-     2. Medium electric cyan/blue radiant aura
-     3. Soft atmospheric back-glow
+     1. High contrast forces all background greys to absolute zero #000000.
+     2. Triple-layer neon glow locked strictly to the AH metallic letters.
   */
   filter: 
-    contrast(175%) 
-    brightness(140%) 
-    saturate(1.4)
-    drop-shadow(0 0 2px #00f0ff)
-    drop-shadow(0 0 8px rgba(0, 240, 255, 0.9))
-    drop-shadow(0 0 16px rgba(59, 130, 246, 0.7));
+    contrast(220%) 
+    brightness(165%) 
+    saturate(1.5)
+    drop-shadow(0 0 1px #00f0ff)
+    drop-shadow(0 0 5px rgba(0, 240, 255, 0.95))
+    drop-shadow(0 0 12px rgba(59, 130, 246, 0.85));
 
   pointer-events: none;
   user-select: none;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
 }
 
-/* Hover Interaction: Supercharges the radiant letter glow */
+/* Hover Interaction: Smooth Zoom + Supercharged Glow */
 .logo:hover .logo-3d-raw {
-  transform: scale(1.58);
+  transform: scale(1.62);
   filter: 
-    contrast(180%) 
-    brightness(155%) 
-    saturate(1.5)
-    drop-shadow(0 0 3px #00f0ff)
-    drop-shadow(0 0 12px rgba(0, 240, 255, 1))
-    drop-shadow(0 0 24px rgba(59, 130, 246, 0.9));
+    contrast(230%) 
+    brightness(180%) 
+    saturate(1.6)
+    drop-shadow(0 0 2px #00f0ff)
+    drop-shadow(0 0 8px rgba(0, 240, 255, 1))
+    drop-shadow(0 0 18px rgba(0, 240, 255, 0.9));
 }
 
 /* Mobile responsive scaling */
