@@ -2867,12 +2867,12 @@ footer {
     right: 0 !important;
   }
 }
-/* --- High-End Platinum & Cyan 3D 'AH' Monogram --- */
+/* --- Radiant Electric Monogram (Edge-Contour Glow) --- */
 .logo-crop-wrapper {
-  width: 48px;
-  height: 40px;
-  min-width: 48px;
-  min-height: 40px;
+  width: 52px;
+  height: 42px;
+  min-width: 52px;
+  min-height: 42px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2886,47 +2886,49 @@ footer {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  transform: scale(1.5);
 
-  /* Optimal zoom factor to frame the wide 'AH' crest completely */
-  transform: scale(1.48);
-
-  /* Knocks out the black background completely */
+  /* Transparent black knockout */
   mix-blend-mode: screen;
 
   /* 
-     1. High contrast + brightness to bring out the brushed platinum finish.
-     2. Dual precision drop-shadow to illuminate the electric-blue neon edge accents.
+     Multi-layer radiant glow traced strictly to the AH letterforms:
+     1. Sharp neon-cyan laser rim along the letter contours
+     2. Medium electric cyan/blue radiant aura
+     3. Soft atmospheric back-glow
   */
   filter: 
-    contrast(170%) 
-    brightness(130%) 
-    saturate(1.2)
-    drop-shadow(0 0 1px #00f0ff)
-    drop-shadow(0 0 6px rgba(0, 240, 255, 0.65));
+    contrast(175%) 
+    brightness(140%) 
+    saturate(1.4)
+    drop-shadow(0 0 2px #00f0ff)
+    drop-shadow(0 0 8px rgba(0, 240, 255, 0.9))
+    drop-shadow(0 0 16px rgba(59, 130, 246, 0.7));
 
   pointer-events: none;
   user-select: none;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
 }
 
-/* Hover Interaction: Premium metallic glow pulse */
+/* Hover Interaction: Supercharges the radiant letter glow */
 .logo:hover .logo-3d-raw {
   transform: scale(1.58);
   filter: 
-    contrast(175%) 
-    brightness(145%) 
-    saturate(1.3)
-    drop-shadow(0 0 2px #00f0ff)
-    drop-shadow(0 0 12px rgba(0, 240, 255, 0.9));
+    contrast(180%) 
+    brightness(155%) 
+    saturate(1.5)
+    drop-shadow(0 0 3px #00f0ff)
+    drop-shadow(0 0 12px rgba(0, 240, 255, 1))
+    drop-shadow(0 0 24px rgba(59, 130, 246, 0.9));
 }
 
 /* Mobile responsive scaling */
 @media (max-width: 900px) {
   .logo-crop-wrapper {
-    width: 38px;
-    height: 32px;
-    min-width: 38px;
-    min-height: 32px;
+    width: 40px;
+    height: 34px;
+    min-width: 40px;
+    min-height: 34px;
   }
 }
 @media prefers-reduced-motion: reduce {
