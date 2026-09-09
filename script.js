@@ -1784,3 +1784,144 @@ document.addEventListener('DOMContentLoaded', () => {
   initDashboardSimulator();
   initLiveDashboard();
 });
+/* ==========================================================================
+   INTERACTIVE PRICING, MAGNETIC BUTTONS & RASH AI KNOWLEDGE ENGINE
+   ========================================================================== */
+
+/**
+ * 1. DYNAMIC CHECKOUT & CONVENIENCE FEE DISPATCHER
+ * Applies the 2% gateway charge only at the time of click.
+ */
+function initPricingCheckout() {
+  const buyButtons = document.querySelectorAll('.pricing-buy-btn, .topup-buy-btn');
+  if (!buyButtons.length) return;
+
+  buyButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const sku = btn.dataset.sku;
+      const baseAmount = parseFloat(btn.dataset.base || '0');
+
+      // Calculate 2% payment gateway convenience charge
+      const convenienceFee = Math.round(baseAmount * 0.02);
+      const totalPayable = baseAmount + convenienceFee;
+
+      console.log(`[CHECKOUT DISPATCH] SKU: ${sku} | Base: ₹${baseAmount} | Fee: ₹${convenienceFee} | Total: ₹${totalPayable}`);
+
+      // Razorpay direct checkout or smooth mailto fallback
+      if (typeof window.Razorpay !== 'undefined' && window.RAZORPAY_KEY_ID) {
+        const options = {
+          key: window.RAZORPAY_KEY_ID,
+          amount: totalPayable * 100, // Amount in paise
+          currency: "INR",
+          name: "AfterHours Automation",
+          description: `Provisioning & Deployment - ${sku}`,
+          theme: { color: "#00f0ff" },
+          handler: function (response) {
+            alert(`Payment Successful! Reference: ${response.razorpay_payment_id}`);
+          }
+        };
+        const rzp = new Razorpay(options);
+        rzp.open();
+      } else {
+        const subject = encodeURIComponent(`Deployment Initiation: ${sku}`);
+        const body = encodeURIComponent(
+          `Hi AfterHours Team,\n\nI want to deploy the following tier/pack:\n` +
+          `Selection: ${sku}\n` +
+          `Base Investment: ₹${baseAmount.toLocaleString('en-IN')}\n` +
+          `Processing & Convenience Fee (2%): ₹${convenienceFee.toLocaleString('en-IN')}\n` +
+          `Total Payable: ₹${totalPayable.toLocaleString('en-IN')}\n\n` +
+          `Please provide the direct Razorpay payment link.`
+        );
+        window.location.href = `mailto:afterhoursautomation714@gmail.com?subject=${subject}&body=${body}`;
+      }
+    });
+  });
+}
+
+/**
+ * 2. MAGNETIC MICRO-INTERACTION (DESKTOP ONLY)
+ * Pulls buttons gently toward the cursor when nearby.
+ */
+function initMagneticButtons() {
+  // Completely skip on touchscreens to ensure 60fps mobile scrolling
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  const magneticTargets = document.querySelectorAll('.pricing-buy-btn, .topup-buy-btn, .btn-shimmer-trigger');
+
+  magneticTargets.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      // Subtle hardware-accelerated magnetic pull (max 4px translation)
+      btn.style.transform = `translate3d(${x * 0.15}px, ${y * 0.15}px, 0)`;
+      btn.style.transition = 'transform 0.1s ease-out';
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate3d(0, 0, 0)';
+      btn.style.transition = 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
+    });
+  });
+}
+
+/**
+ * 3. CARD SPOTLIGHT MOUSE-FOLLOW (HARDWARE-ACCELERATED)
+ * Dynamically tracks cursor coordinates across glass borders.
+ */
+function initCardSpotlights() {
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  const cards = document.querySelectorAll('.pricing-card, .topup-card');
+
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+}
+
+/**
+ * 4. RASH AI KNOWLEDGE BASE & SUGGESTION CHIP ENGINE
+ * Expands RaSH AI with real-time answers for the 3 tiers.
+ */
+function initRaSHPricingEngine() {
+  // If the RaSH suggestion container exists, inject the 3 plan chips
+  const suggestionContainer = document.querySelector('.rash-suggestions, .chat-suggestions');
+  if (suggestionContainer) {
+    const pricingChipsHTML = `
+      <button class="chip-btn" data-query="Tell me about the Starter Tier">⚡ Starter Plan</button>
+      <button class="chip-btn" data-query="Tell me about the Growth Pipeline">🔥 Growth Plan</button>
+      <button class="chip-btn" data-query="Tell me about Enterprise Mesh">💎 Enterprise Plan</button>
+      <button class="chip-btn" data-query="How does credit deduction work?">📊 Credit Logic</button>
+    `;
+    suggestionContainer.insertAdjacentHTML('beforeend', pricingChipsHTML);
+
+    suggestionContainer.querySelectorAll('.chip-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const query = btn.dataset.query;
+        const inputField = document.querySelector('.rash-input, #chatInput');
+        const sendBtn = document.querySelector('.rash-send-btn, #chatSendBtn');
+        if (inputField && sendBtn) {
+          inputField.value = query;
+          sendBtn.click();
+        }
+      });
+    });
+  }
+}
+
+// Hook into DOM Ready
+document.addEventListener('DOMContentLoaded', () => {
+  initPricingCheckout();
+  initMagneticButtons();
+  initCardSpotlights();
+  initRaSHPricingEngine();
+});
