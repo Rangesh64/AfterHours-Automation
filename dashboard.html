@@ -590,6 +590,31 @@
 
         requestAnimationFrame(updateCount);
       });
+      // Dashboard Top-Up Checkout Handler with 2% Convenience Fee
+      document.querySelectorAll('.dash-topup-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const sku = btn.dataset.sku;
+          const base = parseFloat(btn.dataset.base || '0');
+          const fee = Math.round(base * 0.02);
+          const total = base + fee;
+          const userEmail = sessionData?.email || 'admin@enterprise.com';
+
+          console.log(`[DASHBOARD TOPUP] SKU: ${sku} | Base: ₹${base} | Fee: ₹${fee} | Total: ₹${total}`);
+
+          const subject = encodeURIComponent(`Wallet Recharge Request - ${sku}`);
+          const body = encodeURIComponent(
+            `Hi AfterHours Billing Team,\n\nI would like to top up credits for my active account:\n` +
+            `- Account Email: ${userEmail}\n` +
+            `- Selected Pack: ${sku}\n` +
+            `- Base Price: ₹${base.toLocaleString('en-IN')}\n` +
+            `- Gateway Fee (2%): ₹${fee.toLocaleString('en-IN')}\n` +
+            `- Total Payable: ₹${total.toLocaleString('en-IN')}\n\n` +
+            `Please share the direct payment link to recharge my balance immediately.`
+          );
+          window.location.href = `mailto:afterhoursautomation714@gmail.com?subject=${subject}&body=${body}`;
+        });
+      });
     });
   </script>
   <script src="api-config.js"></script>
