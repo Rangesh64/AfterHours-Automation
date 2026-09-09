@@ -738,11 +738,46 @@ function initRaSHChatbot() {
       };
     }
 
-    // 8. Plans & Pricing Query
+    // 8. Plans & Pricing Query Engine (3 Tiers + Top-Ups + Credit Logic)
+    if (q.includes('starter')) {
+      return {
+        tag: "RaSH ⚡",
+        text: "The **Starter Setup** is ₹5,000/mo + ₹3,000 one-time deployment. It includes **5,000 shared credits** (~200 mins of Voice AI calls, up to 1,000 quick triage calls ≤20s, or 500 WhatsApp automations) with instant Google Sheets & webhook sync."
+      };
+    }
+
+    if (q.includes('growth')) {
+      return {
+        tag: "RaSH 🔥",
+        text: "The **Growth Pipeline** (Most Popular) is ₹10,000/mo + ₹6,000 one-time deployment. It includes **10,000 shared credits** (~400 voice minutes, up to 2,000 calls ≤20s, or 1,000 WhatsApp booking flows), priority neural voice tuning, and full CRM extraction."
+      };
+    }
+
+    if (q.includes('enterprise')) {
+      return {
+        tag: "RaSH 💎",
+        text: "The **Enterprise Mesh** is ₹20,000/mo + ₹8,000 dedicated engineering. Designed for high volume with **20,000 shared credits** (~800 voice minutes, up to 4,000 quick calls), custom brand voice cloning, concurrent line routing, and 24/7 priority engineering support."
+      };
+    }
+
+    if (q.includes('credit') || q.includes('deduction') || q.includes('rate') || q.includes('lockout')) {
+      return {
+        tag: "RaSH 📊",
+        text: "Our wallet deductions are straightforward:\n• Calls ≤ 20s: **5 credits**\n• Calls > 20s: **25 credits / min**\n• WhatsApp Flows: **10 credits / flow**\n• Safety lockout triggers at **≤ 20 credits** to ensure zero mid-call drops."
+      };
+    }
+
+    if (q.includes('top up') || q.includes('topup') || q.includes('recharge') || q.includes('refill')) {
+      return {
+        tag: "RaSH 🔋",
+        text: "We offer 3 instant top-up packs that inject directly into your wallet:\n• **Micro Refill:** ₹1,000 (1,000 credits)\n• **Surge Booster:** ₹2,500 (2,500 credits)\n• **High Surge:** ₹5,000 (5,500 credits with 10% bonus)"
+      };
+    }
+
     if (q.includes('price') || q.includes('pricing') || q.includes('cost') || q.includes('plan') || q.includes('subscription') || q.includes('retainer')) {
       return {
         tag: "RaSH 💰",
-        text: "We provide tailored **Monthly & Enterprise Retainer Plans** designed around your monthly inbound call volume and CRM channels. Every plan includes 24/7 Voice AI answering, instant WhatsApp & Email triggers, and real-time CRM ingestion. Click **'Book Demo'** to receive a custom quote and live voice test for your business!"
+        text: "We offer 3 operational tiers:\n1. **Starter Setup:** ₹5,000/mo (+ ₹3k setup) • 5,000 Credits\n2. **Growth Pipeline:** ₹10,000/mo (+ ₹6k setup) • 10,000 Credits\n3. **Enterprise Mesh:** ₹20,000/mo (+ ₹8k setup) • 20,000 Credits\n\nClick any plan chip below or ask me about **Starter**, **Growth**, or **Enterprise** for full details!"
       };
     }
 
