@@ -596,7 +596,7 @@
           e.preventDefault();
           const sku = btn.dataset.sku;
           const base = parseFloat(btn.dataset.base || '0');
-          const fee = Math.round(base * 0.02);
+          const fee = Math.round(base * 0.024);
           const total = base + fee;
           const userEmail = sessionData?.email || 'admin@enterprise.com';
 
@@ -608,7 +608,7 @@
             `- Account Email: ${userEmail}\n` +
             `- Selected Pack: ${sku}\n` +
             `- Base Price: ₹${base.toLocaleString('en-IN')}\n` +
-            `- Gateway Fee (2%): ₹${fee.toLocaleString('en-IN')}\n` +
+            `- Gateway Fee (2.40%): ₹${fee.toLocaleString('en-IN')}\n` +
             `- Total Payable: ₹${total.toLocaleString('en-IN')}\n\n` +
             `Please share the direct payment link to recharge my balance immediately.`
           );
