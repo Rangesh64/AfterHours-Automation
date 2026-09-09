@@ -811,19 +811,197 @@
     </section>
 
     <!-- PLANS & PRICING CONTAINER -->
+   <!-- PLANS & PRICING CONTAINER -->
     <section class="pricing-section" id="pricing">
       <div class="section-header reveal-on-scroll">
-        <span class="section-tag">Investment Tiers</span>
-        <h2 class="shimmer-text">Plans & Pricing Tiers</h2>
-        <p>Choose the operational scale that fits your monthly prospect call and outreach volume.</p>
+        <span class="section-tag">Autonomous Capacity Tiers</span>
+        <h2 class="shimmer-text">Select Your Automation Scale</h2>
+        <p>Shared credit wallets engineered for 24/7 Voice AI answering, instant WhatsApp dispatch, and CRM sync.</p>
       </div>
 
-      <div class="pricing-placeholder-card tilt-card reveal-on-scroll">
-        <div class="pricing-placeholder-inner">
-          <span class="pricing-tag-gold">TIER CONFIGURATION READY</span>
-          <h3>Custom Subscription Plans</h3>
-          <p>Monthly and Annual Voice AI plans are available tailored to your exact monthly call volume.</p>
-          <a href="#contact" class="btn btn-shimmer-trigger btn-sm">Request Pricing Details</a>
+      <!-- 3 MAIN SUBSCRIPTION TIERS -->
+      <div class="pricing-cards-grid reveal-on-scroll">
+        
+        <!-- TIER 1: STARTER SETUP -->
+        <div class="pricing-card tilt-card" data-plan="starter">
+          <div class="pricing-card-header">
+            <span class="pricing-plan-badge">ESSENTIAL DISPATCH</span>
+            <h3 class="pricing-plan-name">Starter Setup</h3>
+            <div class="pricing-price-wrap">
+              <span class="pricing-currency">₹</span>
+              <span class="pricing-amount">5,000</span>
+              <span class="pricing-period">/ mo</span>
+            </div>
+            <span class="pricing-setup-fee">+ ₹3,000 One-Time Engineering &amp; Deployment</span>
+          </div>
+
+          <div class="pricing-credit-highlight">
+            <div class="credit-metric-row">
+              <span class="credit-num">5,000</span>
+              <span class="credit-unit">Credits / Mo</span>
+            </div>
+            <span class="credit-label">Shared Voice &amp; WhatsApp Wallet</span>
+          </div>
+
+          <ul class="pricing-features">
+            <li><span class="feat-check">✔</span> <span><strong>~200 Mins</strong> Voice AI (&gt;20s at 25 creds/min)</span></li>
+            <li><span class="feat-check">✔</span> <span><strong>Up to 1,000 Inbound Calls</strong> (&le; 20s at 5 creds)</span></li>
+            <li><span class="feat-check">✔</span> <span><strong>500 WhatsApp Flows</strong> (10 creds/flow)</span></li>
+            <li><span class="feat-check">✔</span> <span><strong>&lt; 1s Call Pickup</strong> (Human conversational tone)</span></li>
+            <li><span class="feat-check">✔</span> <span><strong>Google Sheets &amp; Webhook Mesh Sync</strong></span></li>
+            <li><span class="feat-check">✔</span> <span><strong>Sub-20 Safety Lockout Guard</strong> (Zero mid-call drops)</span></li>
+          </ul>
+
+          <div class="pricing-cta-wrap">
+            <button class="btn btn-secondary pricing-buy-btn" data-sku="sub_starter" data-base="8000">
+              <span class="btn-text">Deploy Starter Tier</span>
+              <span class="btn-arrow">→</span>
+            </button>
+            <span class="billing-clarity-note">Billed at checkout • Deployment + Month 1</span>
+          </div>
+        </div>
+
+        <!-- TIER 2: GROWTH PIPELINE (MOST POPULAR) -->
+        <div class="pricing-card tilt-card featured-plan" data-plan="growth">
+          <div class="popular-ribbon">
+            <span class="ribbon-glow-dot"></span> MOST POPULAR PIPELINE
+          </div>
+          <div class="pricing-card-header">
+            <span class="pricing-plan-badge gold">GROWTH ACCELERATOR</span>
+            <h3 class="pricing-plan-name">Growth Pipeline</h3>
+            <div class="pricing-price-wrap">
+              <span class="pricing-currency text-cyan">₹</span>
+              <span class="pricing-amount text-cyan">10,000</span>
+              <span class="pricing-period">/ mo</span>
+            </div>
+            <span class="pricing-setup-fee">+ ₹6,000 One-Time Engineering &amp; Deployment</span>
+          </div>
+
+          <div class="pricing-credit-highlight featured-credit">
+            <div class="credit-metric-row">
+              <span class="credit-num text-cyan">10,000</span>
+              <span class="credit-unit text-cyan">Credits / Mo</span>
+            </div>
+            <span class="credit-label">High-Volume Operational Wallet</span>
+          </div>
+
+          <ul class="pricing-features">
+            <li><span class="feat-check text-cyan">✔</span> <span><strong>~400 Mins</strong> Voice AI (&gt;20s at 25 creds/min)</span></li>
+            <li><span class="feat-check text-cyan">✔</span> <span><strong>Up to 2,000 Inbound Calls</strong> (&le; 20s at 5 creds)</span></li>
+            <li><span class="feat-check text-cyan">✔</span> <span><strong>1,000 WhatsApp Booking Flows</strong> (10 creds/flow)</span></li>
+            <li><span class="feat-check text-cyan">✔</span> <span><strong>Structured Intake Extraction</strong> (Address, Urgency, Slot)</span></li>
+            <li><span class="feat-check text-cyan">✔</span> <span><strong>Priority Neural Voice Latency Tuning</strong></span></li>
+            <li><span class="feat-check text-cyan">✔</span> <span><strong>Bi-Directional CRM &amp; Sheets Live Bridge</strong></span></li>
+            <li><span class="feat-check text-cyan">✔</span> <span><strong>Sub-20 Safety Lockout Guard Active</strong></span></li>
+          </ul>
+
+          <div class="pricing-cta-wrap">
+            <button class="btn btn-shimmer-trigger pricing-buy-btn" data-sku="sub_growth" data-base="16000">
+              <span class="btn-text">Deploy Growth Pipeline</span>
+              <span class="btn-arrow">→</span>
+            </button>
+            <span class="billing-clarity-note">Billed at checkout • Deployment + Month 1</span>
+          </div>
+        </div>
+
+        <!-- TIER 3: ENTERPRISE MESH -->
+        <div class="pricing-card tilt-card" data-plan="enterprise">
+          <div class="pricing-card-header">
+            <span class="pricing-plan-badge">ENTERPRISE SCALE</span>
+            <h3 class="pricing-plan-name">Enterprise Mesh</h3>
+            <div class="pricing-price-wrap">
+              <span class="pricing-currency">₹</span>
+              <span class="pricing-amount">20,000</span>
+              <span class="pricing-period">/ mo</span>
+            </div>
+            <span class="pricing-setup-fee">+ ₹8,000 Dedicated Engineering Architecture</span>
+          </div>
+
+          <div class="pricing-credit-highlight">
+            <div class="credit-metric-row">
+              <span class="credit-num">20,000</span>
+              <span class="credit-unit">Credits / Mo</span>
+            </div>
+            <span class="credit-label">Enterprise Concurrency Reserve</span>
+          </div>
+
+          <ul class="pricing-features">
+            <li><span class="feat-check">✔</span> <span><strong>~800 Mins</strong> Voice AI (&gt;20s at 25 creds/min)</span></li>
+            <li><span class="feat-check">✔</span> <span><strong>Up to 4,000 Inbound Calls</strong> (&le; 20s at 5 creds)</span></li>
+            <li><span class="feat-check">✔</span> <span><strong>2,000 WhatsApp Rich Intake Flows</strong> (10 creds/flow)</span></li>
+            <li><span class="feat-check">✔</span> <span><strong>Custom Brand Voice Accent &amp; Tone Cloning</strong></span></li>
+            <li><span class="feat-check">✔</span> <span><strong>High-Volume Concurrent Line Routing</strong></span></li>
+            <li><span class="feat-check">✔</span> <span><strong>Custom Multi-Agent CRM Hand-off Webhooks</strong></span></li>
+            <li><span class="feat-check">✔</span> <span><strong>Dedicated 24/7 Priority Tech Support</strong></span></li>
+          </ul>
+
+          <div class="pricing-cta-wrap">
+            <button class="btn btn-secondary pricing-buy-btn" data-sku="sub_enterprise" data-base="28000">
+              <span class="btn-text">Deploy Enterprise Mesh</span>
+              <span class="btn-arrow">→</span>
+            </button>
+            <span class="billing-clarity-note">Billed at checkout • Deployment + Month 1</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ON-DEMAND CREDIT TOP-UP SECTION -->
+      <div class="topup-wrapper reveal-on-scroll">
+        <div class="topup-header">
+          <span class="topup-badge">ON-DEMAND RUNTIME INJECTION</span>
+          <h3 class="shimmer-text">Instant Credit Top-Up Packs</h3>
+          <p>Never run dry. Top-up packs inject instant credits directly into your live shared wallet balance.</p>
+        </div>
+
+        <div class="topup-grid">
+          <!-- TOPUP 1 -->
+          <div class="topup-card tilt-card">
+            <div class="topup-pill">MICRO BUFFER</div>
+            <div class="topup-price-box">
+              <span class="t-curr">₹</span>
+              <span class="t-val">1,000</span>
+            </div>
+            <div class="topup-credits">
+              <strong>1,000</strong> Credits
+            </div>
+            <p class="topup-subtext">~40 Voice Mins or 100 WhatsApp Flows. Ideal buffer to avoid the 20-credit safety lockout.</p>
+            <button class="btn btn-secondary topup-buy-btn" data-sku="topup_1k" data-base="1000">
+              Top Up ₹1,000
+            </button>
+          </div>
+
+          <!-- TOPUP 2 -->
+          <div class="topup-card tilt-card featured-topup">
+            <div class="topup-pill gold">SURGE BOOSTER</div>
+            <div class="topup-price-box">
+              <span class="t-curr text-cyan">₹</span>
+              <span class="t-val text-cyan">2,500</span>
+            </div>
+            <div class="topup-credits">
+              <strong class="text-cyan">2,500</strong> Credits
+            </div>
+            <p class="topup-subtext">~100 Voice Mins or 250 WhatsApp Flows. Perfect for seasonal traffic spikes and weekend coverage.</p>
+            <button class="btn btn-shimmer-trigger topup-buy-btn" data-sku="topup_2k5" data-base="2500">
+              Top Up ₹2,500
+            </button>
+          </div>
+
+          <!-- TOPUP 3 -->
+          <div class="topup-card tilt-card">
+            <div class="topup-pill">HIGH SURGE • +10% BONUS</div>
+            <div class="topup-price-box">
+              <span class="t-curr">₹</span>
+              <span class="t-val">5,000</span>
+            </div>
+            <div class="topup-credits">
+              <strong>5,500</strong> Credits
+            </div>
+            <p class="topup-subtext">~220 Voice Mins or 550 WhatsApp Flows. Includes 500 bonus credits for heavy dispatch pipelines.</p>
+            <button class="btn btn-secondary topup-buy-btn" data-sku="topup_5k" data-base="5000">
+              Top Up ₹5,000
+            </button>
+          </div>
         </div>
       </div>
     </section>
