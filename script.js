@@ -1837,8 +1837,8 @@ function initPricingCheckout() {
       const sku = btn.dataset.sku;
       const baseAmount = parseFloat(btn.dataset.base || '0');
 
-      // Calculate 2% payment gateway convenience charge
-      const convenienceFee = Math.round(baseAmount * 0.02);
+      // Calculate 2.4% payment gateway convenience charge
+      const convenienceFee = Math.round(baseAmount * 0.024);
       const totalPayable = baseAmount + convenienceFee;
 
       console.log(`[CHECKOUT DISPATCH] SKU: ${sku} | Base: ₹${baseAmount} | Fee: ₹${convenienceFee} | Total: ₹${totalPayable}`);
@@ -1864,7 +1864,7 @@ function initPricingCheckout() {
           `Hi AfterHours Team,\n\nI want to deploy the following tier/pack:\n` +
           `Selection: ${sku}\n` +
           `Base Investment: ₹${baseAmount.toLocaleString('en-IN')}\n` +
-          `Processing & Convenience Fee (2%): ₹${convenienceFee.toLocaleString('en-IN')}\n` +
+          `Processing & Convenience Fee (2.40%): ₹${convenienceFee.toLocaleString('en-IN')}\n` +
           `Total Payable: ₹${totalPayable.toLocaleString('en-IN')}\n\n` +
           `Please provide the direct Razorpay payment link.`
         );
