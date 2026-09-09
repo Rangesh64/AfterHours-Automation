@@ -3340,6 +3340,104 @@ footer {
     padding: 18px 14px !important;
   }
 }
+/* ==========================================================================
+   DASHBOARD TOP-UP MODULE (SHARED STYLESHEET RULES)
+   ========================================================================== */
+.dash-topup-panel {
+  margin-top: 24px;
+}
+
+.dash-topup-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.dash-topup-card {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(197, 155, 39, 0.2);
+  border-radius: 14px;
+  padding: 20px 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.dash-topup-card:hover {
+  transform: translateY(-3px);
+  border-color: #c59b27;
+}
+
+.dash-topup-card.featured {
+  background: rgba(197, 155, 39, 0.08);
+  border-color: #c59b27;
+  box-shadow: 0 0 20px rgba(197, 155, 39, 0.15);
+}
+
+.dash-topup-card-body {
+  margin-bottom: 16px;
+}
+
+.dash-topup-badge {
+  font-size: 0.72rem;
+  color: #c59b27;
+  font-weight: 700;
+  letter-spacing: 1px;
+  display: inline-block;
+}
+
+.dash-topup-badge.gold {
+  font-weight: 800;
+}
+
+.dash-topup-price {
+  font-family: var(--font-heading, inherit);
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 8px 0 4px 0;
+}
+
+.dash-topup-price.gold {
+  color: #c59b27;
+}
+
+.dash-topup-credits {
+  font-size: 0.95rem;
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.dash-topup-credits.gold {
+  color: #c59b27;
+  font-weight: 700;
+}
+
+.dash-topup-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted, #94a3b8);
+  margin: 8px 0 0 0;
+  line-height: 1.4;
+}
+
+.dash-topup-btn {
+  width: 100%;
+}
+
+.dash-topup-btn.featured-btn {
+  border-color: #c59b27;
+  color: #c59b27;
+}
+
+@media (max-width: 768px) {
+  .dash-topup-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
 @media prefers-reduced-motion: reduce {
   * { animation: none !important; transition: none !important; }
 }
