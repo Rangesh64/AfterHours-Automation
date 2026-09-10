@@ -1,7 +1,7 @@
 /**
  * AfterHours Automation - Interactive WebGL 3D Engine, Max-Intelligence RaSH Assistant & Live Console Bridge
  */
-
+window.RAZORPAY_KEY_ID = "rzp_live_TaO8Lf925G4J84";
 let scene, camera, renderer, coreGroup, coreMesh, waveRing, particleSystem, nodeGroup, connectionLines;
 let targetStage = 1;
 let mouseX = 0, mouseY = 0;
