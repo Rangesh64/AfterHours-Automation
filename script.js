@@ -1845,31 +1845,26 @@ function initPricingCheckout() {
 
       // Razorpay direct checkout or smooth mailto fallback
       if (typeof window.Razorpay !== 'undefined' && window.RAZORPAY_KEY_ID) {
-        const options = {
-          key: window.RAZORPAY_KEY_ID,
-          amount: totalPayable * 100, // Amount in paise
-          currency: "INR",
-          name: "AfterHours Automation",
-          description: `Provisioning & Deployment - ${sku}`,
-          theme: { color: "#00f0ff" },
-          handler: function (response) {
-            alert(`Payment Successful! Reference: ${response.razorpay_payment_id}`);
-          }
-        };
-        const rzp = new Razorpay(options);
-        rzp.open();
-      } else {
-        const subject = encodeURIComponent(`Deployment Initiation: ${sku}`);
-        const body = encodeURIComponent(
-          `Hi AfterHours Team,\n\nI want to deploy the following tier/pack:\n` +
-          `Selection: ${sku}\n` +
-          `Base Investment: ₹${baseAmount.toLocaleString('en-IN')}\n` +
-          `Processing & Convenience Fee (2.40%): ₹${convenienceFee.toLocaleString('en-IN')}\n` +
-          `Total Payable: ₹${totalPayable.toLocaleString('en-IN')}\n\n` +
-          `Please provide the direct Razorpay payment link.`
-        );
-        window.location.href = `mailto:afterhoursautomation714@gmail.com?subject=${subject}&body=${body}`;
-      }
+     const options = {
+       key: window.RAZORPAY_KEY_ID,
+       amount: totalPayable * 100, // Amount in paise (includes 2.40% fee)
+       currency: "INR",
+       name: "AfterHours Automation",
+       description: `Deployment & Provisioning - ${sku}`,
+       image: "https://afterhours-automation.vercel.app/favicon.ico",
+       handler: function (response) {
+         alert(`Payment Successful! Transaction ID: ${response.razorpay_payment_id}`);
+         console.log("[RAZORPAY SUCCESS]", response);
+       },
+       theme: {
+         color: "#c59b27"
+       }
+     };
+     const rzp = new Razorpay(options);
+     rzp.open();
+   } else {
+     alert("Razorpay SDK not loaded. Please check your internet connection.");
+   }
     });
   });
 }
