@@ -2867,57 +2867,69 @@ footer {
     right: 0 !important;
   }
 }
-/* --- High-Definition Complete AH Monogram (Full Legs & Structure) --- */
+/* --- Seamless White-Gold Monogram (Contour Glow & Screen Blend) --- */
 .logo-crop-wrapper {
-  width: 54px;
-  height: 36px;
-  min-width: 54px;
-  min-height: 36px;
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  min-height: 46px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   position: relative;
   flex-shrink: 0;
   background: transparent !important;
-  overflow: visible !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .logo-crop-wrapper .logo-3d-raw {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transform: scale(1.15) translateZ(0);
-  -webkit-transform: scale(1.15) translateZ(0);
+  transform: scale(1.04) translateZ(0);
+  -webkit-transform: scale(1.04) translateZ(0);
 
-  /* Transparent black knockout */
+  /* 1. Pure black elimination: seamlessly melts image black into the header */
   mix-blend-mode: screen !important;
   isolation: auto !important;
 
   /* 
-     Balanced contrast preserves dark-shaded metallic legs of H
-     while keeping the background clean.
+     2. Pure emblem lighting:
+     - brightness(1.22): brings out metallic reflections
+     - saturate(0.5): tones down deep brass into an elegant white-gold
+     - drop-shadow: casts light strictly along the geometric emblem lines, avoiding any box border
   */
-  filter: contrast(125%) brightness(140%) saturate(1.25);
+  filter: brightness(1.22) saturate(0.5) contrast(1.18)
+          drop-shadow(0 0 6px rgba(255, 255, 255, 0.4))
+          drop-shadow(0 0 12px rgba(0, 240, 255, 0.25));
 
   pointer-events: none;
   user-select: none;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
 }
 
-/* Hover Interaction */
+/* Hover dynamic shimmer along the letter lines */
 .logo:hover .logo-3d-raw {
-  transform: scale(1.22) translateZ(0);
-  -webkit-transform: scale(1.22) translateZ(0);
-  filter: contrast(130%) brightness(155%) saturate(1.35);
+  transform: scale(1.1) translateZ(0);
+  -webkit-transform: scale(1.1) translateZ(0);
+  filter: brightness(1.38) saturate(0.6) contrast(1.25)
+          drop-shadow(0 0 8px rgba(255, 255, 255, 0.75))
+          drop-shadow(0 0 18px rgba(0, 240, 255, 0.5));
 }
 
-/* Mobile responsive scaling */
+/* Mobile viewport adjustments: scales cleanly beside the mobile title & menu */
 @media (max-width: 900px) {
   .logo-crop-wrapper {
-    width: 42px;
-    height: 28px;
-    min-width: 42px;
-    min-height: 28px;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+  }
+
+  .logo-crop-wrapper .logo-3d-raw {
+    filter: brightness(1.2) saturate(0.5) contrast(1.15)
+            drop-shadow(0 0 4px rgba(255, 255, 255, 0.45));
   }
 }
 /* ==========================================================================
