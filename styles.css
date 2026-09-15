@@ -2868,11 +2868,12 @@ footer {
   }
 }
 /* --- Seamless White-Gold Monogram (Contour Glow & Screen Blend) --- */
+/* --- Completely Invisible Box Monogram --- */
 .logo-crop-wrapper {
-  width: 46px;
-  height: 46px;
-  min-width: 46px;
-  min-height: 46px;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2887,49 +2888,35 @@ footer {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transform: scale(1.04) translateZ(0);
-  -webkit-transform: scale(1.04) translateZ(0);
 
-  /* 1. Pure black elimination: seamlessly melts image black into the header */
+  /* Screen blending: turns true black 100% see-through */
   mix-blend-mode: screen !important;
-  isolation: auto !important;
 
   /* 
-     2. Pure emblem lighting:
-     - brightness(1.22): brings out metallic reflections
-     - saturate(0.5): tones down deep brass into an elegant white-gold
-     - drop-shadow: casts light strictly along the geometric emblem lines, avoiding any box border
+     High contrast crushes all near-black noise to pure 0,0,0 black.
+     Lower saturation tones down the brass to clean white-gold.
+     Zero drop-shadow so no box or halo can ever form around the edges.
   */
-  filter: brightness(1.22) saturate(0.5) contrast(1.18)
-          drop-shadow(0 0 6px rgba(255, 255, 255, 0.4))
-          drop-shadow(0 0 12px rgba(0, 240, 255, 0.25));
+  filter: contrast(170%) brightness(1.1) saturate(0.55);
 
   pointer-events: none;
   user-select: none;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-/* Hover dynamic shimmer along the letter lines */
+/* Subtle brighten on the emblem on hover */
 .logo:hover .logo-3d-raw {
-  transform: scale(1.1) translateZ(0);
-  -webkit-transform: scale(1.1) translateZ(0);
-  filter: brightness(1.38) saturate(0.6) contrast(1.25)
-          drop-shadow(0 0 8px rgba(255, 255, 255, 0.75))
-          drop-shadow(0 0 18px rgba(0, 240, 255, 0.5));
+  transform: scale(1.08);
+  filter: contrast(180%) brightness(1.25) saturate(0.65);
 }
 
-/* Mobile viewport adjustments: scales cleanly beside the mobile title & menu */
+/* Mobile sizing */
 @media (max-width: 900px) {
   .logo-crop-wrapper {
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
-    min-height: 32px;
-  }
-
-  .logo-crop-wrapper .logo-3d-raw {
-    filter: brightness(1.2) saturate(0.5) contrast(1.15)
-            drop-shadow(0 0 4px rgba(255, 255, 255, 0.45));
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    min-height: 30px;
   }
 }
 /* ==========================================================================
